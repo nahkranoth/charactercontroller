@@ -1,0 +1,18 @@
+{
+    "name": "NPC",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1e98252b48cc2e14fa7d5fccefffeadc",
+        "GUID:ec6d75381ad11a447936c5a252c62d43",
+        "GUID:879876906176fef4d8759f5b42edb635"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

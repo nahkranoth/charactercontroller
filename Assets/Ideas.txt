@@ -1,0 +1,29 @@
+generative to the bone
+every character acts out of their personality, lives their lifes, etc.
+(What if someone dies?)
+(Do new people get born?)
+(You have to frame it within a context to limit it)
+
+The Hivemind
+[drive] Expand
+[drive] Maintain
+
+NPC description
+[body ] Your everyday bodily functions
+[body ] Mood (What is your mood?)
+[drive] Occupation (What do I do within this community?)
+[drive] Ego (What are my needs?)
+[drive] Talents (What am I naturally good at?)
+[reach] Relations (Who do I know, and how?)
+[reach] Ownage (What do I own?)
+[reach] Needs (What do I need?)
+[plan ] Long Term Plan (Put my [Ego] into realisation)
+[plan ] Reach (What is within reach?)
+[plan ] Your everyday stuff (body, Ego, Occupation, space for Long Term Planning)
+
+[Ownage]
+- Items and their properties
+- 
+
+(How to define long term needs towards short term needs?)
+(How to define the struggle of will - your EGO vs your 
