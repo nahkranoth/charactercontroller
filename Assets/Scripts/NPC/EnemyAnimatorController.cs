@@ -11,6 +11,11 @@ public class EnemyAnimatorController : MonoBehaviour
         animator.SetInteger("DirectionY", dirY);
     }
 
+    public void SetDie()
+    {
+        animator.SetTrigger("Die");
+    }
+
     public void Damage()
     {
         animator.SetTrigger("Damage");

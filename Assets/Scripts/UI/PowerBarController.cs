@@ -4,12 +4,13 @@ using UnityEngine.UI;
 public class PowerBarController : MonoBehaviour
 {
     public Text powerReadyTxt;
-    public PlayerAttackController PlayerAttackController;
+    private PlayerAttackController playerAttackController;
 
     private void Start()
     {
-        PlayerAttackController.UpdateReadyAttack -= UpdatePowerReadyText;
-        PlayerAttackController.UpdateReadyAttack += UpdatePowerReadyText;
+        playerAttackController = WorldGraph.Retrieve(typeof(PlayerAttackController)) as PlayerAttackController;
+        playerAttackController.UpdateReadyAttack -= UpdatePowerReadyText;
+        playerAttackController.UpdateReadyAttack += UpdatePowerReadyText;
     }
 
     private void UpdatePowerReadyText(int amount)

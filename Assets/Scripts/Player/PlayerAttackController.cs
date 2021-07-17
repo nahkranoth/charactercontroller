@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class PlayerAttackController: MonoBehaviour
 {
@@ -15,11 +14,19 @@ public class PlayerAttackController: MonoBehaviour
     private Coroutine attackTiming;
     private Coroutine attackReadyTiming;
     private bool fullAttackReady = true;
-    
+
+    private AudioController audioController;
+
+    private void Awake()
+    {
+        WorldGraph.Subscribe(this, typeof(PlayerAttackController));
+    }
+
     private void Start()
     {
         input.AttackSlash -= OnAttackSlash;
         input.AttackSlash += OnAttackSlash;
+        audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
     }
     
     private void OnWeaponTrigger(Collider2D other)
@@ -32,6 +39,7 @@ public class PlayerAttackController: MonoBehaviour
     private void OnAttackSlash()
     {
         animator.AttackSlash();
+        audioController.PlaySound(AudioController.AudioClipName.PlayerSwing);
         if(attackTiming != null) StopCoroutine(attackTiming);
         attackTiming = StartCoroutine(AttackTiming());
     }

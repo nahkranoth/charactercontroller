@@ -5,22 +5,23 @@ using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
     public Text healthText;
-    public PlayerController player;
+    private PlayerController player;
 
     private void Start()
     {
-        SetHealth(player.Health);
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        SetHealth(player.Health, player.CurrentHealth);
         player.OnDamage -= OnDamage;
         player.OnDamage += OnDamage;
     }
 
     private void OnDamage(int damage)
     {
-        SetHealth(player.Health - damage);
+        SetHealth(player.CurrentHealth - damage, player.Health);
     }
     
-    public void SetHealth(int health)
+    public void SetHealth(int currentHealth, int health)
     {
-        healthText.text = health.ToString();
+        healthText.text = $"{currentHealth}/{health}";
     }
 }

@@ -8,5 +8,6 @@ public interface INPCStateNetwork
     string GetStartNode();
     string GetDamagedNode();
     string GetDamageFinishedNode();
+    string GetDieNode();
 
 }

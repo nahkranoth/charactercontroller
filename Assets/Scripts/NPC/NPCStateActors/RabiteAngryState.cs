@@ -31,6 +31,8 @@ public class RabiteAngryState: AbstractEnemyState
 
     public override void Execute()
     {
+        WithinStrikingDistance();
+
         if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
         {
             if (Parent.npcPathController.NextNode())

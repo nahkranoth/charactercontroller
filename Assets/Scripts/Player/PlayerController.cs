@@ -13,8 +13,11 @@ public class PlayerController : MonoBehaviour
    public PlayerSettings settings;
    private Vector3 myScale = new Vector3(1, 1, 1);
 
+   private AudioController audioController;
+   
    private float walkSpeed = 14f;
    private int health = 50;
+   private int currentHealth = 50;
    private bool invincible = false;
 
    public Action<int> OnDamage;
@@ -23,10 +26,17 @@ public class PlayerController : MonoBehaviour
    {
       get { return health; }
    }
+   
+   public int CurrentHealth
+   {
+      get { return currentHealth; }
+   }
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
       walkSpeed = settings.walkSpeed;
+      currentHealth = settings.startHealth;
+      health = settings.startHealth;
    }
 
    private void Start()
@@ -39,6 +49,9 @@ public class PlayerController : MonoBehaviour
       attackController.OnWeaponHitSomething += OnWeaponHitSomething;
       attackController.chargingPowerAttack -= OnChargingPowerAttack;
       attackController.chargingPowerAttack += OnChargingPowerAttack;
+      
+      audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
+
    }
 
    private void OnChargingPowerAttack(bool charging)
@@ -69,7 +82,8 @@ public class PlayerController : MonoBehaviour
    public void Damage(int damage)
    {
       if (invincible) return;
-      health -= damage;
+      audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
+      currentHealth -= damage;
       animator.SetDamage();
       OnDamage?.Invoke(damage);
       walkSpeed = 0;

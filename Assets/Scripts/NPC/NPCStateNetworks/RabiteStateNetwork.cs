@@ -12,7 +12,8 @@ public class RabiteStateNetwork:INPCStateNetwork
             {"idle", new ZombieIdleState()},
             {"roam", new ZombieRoamState(settings.maxRoamDistance, settings.walkSpeed, settings.roamChance)},
             {"knockback", new KnockbackHitState(settings.knockbackAmount)},
-            {"angry", new RabiteAngryState(settings)}
+            {"angry", new RabiteAngryState(settings)},
+            {"die", new ZombieDieState()}
         };
         
         foreach (var abstractEnemyState in dict)
@@ -36,5 +37,10 @@ public class RabiteStateNetwork:INPCStateNetwork
     public string GetDamageFinishedNode()
     {
         return "angry";
+    }
+
+    public string GetDieNode()
+    {
+        return "die";
     }
 }

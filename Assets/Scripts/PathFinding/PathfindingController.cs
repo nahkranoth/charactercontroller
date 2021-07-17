@@ -23,7 +23,7 @@ public class PathfindingController : MonoBehaviour
     public GridController gridController;
     
     private PlayerController player;
-    private List<CellData> cellMap;
+    private Dictionary<Vector3Int, CellData> cellMap;
     List<CellData> openList = new List<CellData>();
     List<CellData> closeList = new List<CellData>();
     private bool DEBUG = false;
@@ -53,9 +53,9 @@ public class PathfindingController : MonoBehaviour
         // }
     }
 
-    private List<CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision)
+    private Dictionary<Vector3Int, CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision)
     {
-        var cellMap = new List<CellData>();
+        var cellMap = new Dictionary<Vector3Int, CellData>();
         for (var x = tilemap.cellBounds.min.x; x < tilemap.cellBounds.max.x; x++)
         {
             for (var y = tilemap.cellBounds.min.y; y < tilemap.cellBounds.max.y; y++)
@@ -65,12 +65,12 @@ public class PathfindingController : MonoBehaviour
                 var collTile = collision.GetTile(pos);
                 if (tile)
                 {
-                    cellMap.Add(new CellData
+                    cellMap[pos] = new CellData
                     {
                         worldPos = gridController.mainMap.GetCellCenterWorld(pos),
                         walkable = collTile == null, 
                         position = pos
-                    });
+                    };
                 }
             } 
         }
@@ -128,11 +128,11 @@ public class PathfindingController : MonoBehaviour
                     return ConstructPath(neighbour, depth);
                 }
                 
-                var neighbour_neighbours = GetCellNeighbours(bestCell);
+                //var neighbour_neighbours = GetCellNeighbours(bestCell);
                 
                 float extra_cost = 0;
                 
-                if (neighbour_neighbours.Any(x => x.walkable == false)) extra_cost = 1f;
+                //if (neighbour_neighbours.Any(x => x.walkable == false)) extra_cost = 1f;
                 
                 var g = bestCell.cost + extra_cost + (neighbour.position - bestCell.position).magnitude;
                 var h = (finishCell.position - neighbour.position).magnitude;
@@ -180,9 +180,9 @@ public class PathfindingController : MonoBehaviour
     {
         foreach (var cell in cellMap)
         {
-            cell.parent = null;
-            cell.cost = 0;
-            cell.heuristics = 0;
+            cell.Value.parent = null;
+            cell.Value.cost = 0;
+            cell.Value.heuristics = 0;
         }
     }
     private List<CellData> ConstructPath(CellData destination, int depth)
@@ -210,12 +210,16 @@ public class PathfindingController : MonoBehaviour
     
     private CellData GetFromCellMapByPos(Vector3Int pos)
     {
-        return cellMap.Find(x => { return x.position == pos; });
+        CellData c;
+        cellMap.TryGetValue(pos, out c);
+        return c;
     }
     
     public CellData GetFromCellMapByWorldPos(Vector3 pos)
     {
-        return cellMap.Find(x => { return x.position == gridController.mainMap.WorldToCell(pos); });
+        CellData c;
+        cellMap.TryGetValue(gridController.collision.WorldToCell(pos), out c);
+        return c;
     }
 
     private List<CellData> GetCellNeighbours(CellData cell)

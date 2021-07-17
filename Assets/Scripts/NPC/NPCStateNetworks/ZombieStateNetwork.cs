@@ -12,7 +12,8 @@ public class ZombieStateNetwork:INPCStateNetwork
             {"idle", new ZombieIdleState()},
             {"roam", new ZombieRoamState(settings.maxRoamDistance, settings.walkSpeed, settings.roamChance)},
             {"knockback", new KnockbackHitState(settings.knockbackAmount)},
-            {"angry", new ZombieAngryState(settings)}
+            {"angry", new ZombieAngryState(settings)},
+            {"die", new ZombieDieState()}
         };
         
         foreach (var abstractEnemyState in dict)
@@ -37,5 +38,9 @@ public class ZombieStateNetwork:INPCStateNetwork
     {
         return "angry";
     }
-    
+
+    public string GetDieNode()
+    {
+        return "die";
+    }
 }

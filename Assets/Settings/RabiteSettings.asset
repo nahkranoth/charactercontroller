@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a2890dba34489cad325b60ee11d025, type: 3}
   m_Name: RabiteSettings
   m_EditorClassIdentifier: 
-  health: 20
+  health: 4
   damage: 2
   walkSpeed: 0.1
   roamChance: 0.01

@@ -17,8 +17,11 @@ public class EnemyController : MonoBehaviour
     private INPCStateNetwork stateNetwork;
     private Dictionary<string, AbstractEnemyState> stateDictionary;
     private AbstractEnemyState activeState;
+    private WorldController worldController;
+    private AudioController audioController;
     [HideInInspector] public PathfindingController pathfinding;
     [HideInInspector] public NPCPathfindingController npcPathController;
+    
     
     private int health = 30;
     private int damage = 5;
@@ -46,8 +49,11 @@ public class EnemyController : MonoBehaviour
         player.attackController.OnWeaponHitSomething += OnPossibleWeaponHit;
         stateNetwork = (INPCStateNetwork)Activator.CreateInstance(settings.GetStateNetworkType());
         
-        pathfinding = WorldGraph.Retrieve(typeof(PathfindingController)) as PathfindingController;;
+        worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController; 
+        
+        pathfinding = WorldGraph.Retrieve(typeof(PathfindingController)) as PathfindingController;
         npcPathController = new NPCPathfindingController();
+        audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
         
         stateDictionary = stateNetwork.GetStateNetwork(this, settings);
         
@@ -94,6 +100,7 @@ public class EnemyController : MonoBehaviour
     private void Damage(Transform origin, int amount)
     {
         if (damageRecovering) return;
+        audioController.PlaySound(AudioController.AudioClipName.ZombieHurt);
         damageRecovering = true;
         damageOrigin = origin;
         health -= amount;
@@ -109,13 +116,24 @@ public class EnemyController : MonoBehaviour
         {
             Die();
         }
-        yield return new WaitForSeconds(2);
-        damageRecovering = false;
-        SetState(stateNetwork.GetDamageFinishedNode());
+        else
+        {
+            yield return new WaitForSeconds(2);
+            damageRecovering = false;
+            SetState(stateNetwork.GetDamageFinishedNode());
+        }
     }
 
     private void Die()
     {
-        gameObject.SetActive(false);
+        StopAllCoroutines();
+        SetState(stateNetwork.GetDieNode());
+        worldController.SpawnChest(transform.position);
+    }
+
+    public void Destroy()
+    {
+        Debug.Log("Destroy Me");
+        DestroyImmediate(gameObject);
     }
 }
