@@ -20,7 +20,7 @@ public class ZombieRoamState: AbstractEnemyState
 
     public override void Activate()
     {
-        var newPath = Parent.pathfinding.FindPathToRandomPosByWorldPos(Parent.transform.position);
+        var newPath = Parent.pathfinding.FindPathToRandomPosByWorldPos(Parent.transform.position, settings.maxRoam);
         Parent.npcPathController.InitializePath(newPath);
         Parent.npcPathController.NextNode();
         Debug.Log("Init Path");
@@ -32,12 +32,12 @@ public class ZombieRoamState: AbstractEnemyState
 
     public override void Execute()
     {
-        // if (Vector3.Distance(player.transform.position, Parent.transform.position) < 1f)
-        // {
-        //     Parent.SetState("angry");
-        // }
+        if (Vector3.Distance(player.transform.position, Parent.transform.position) < 1f)
+        {
+            Parent.SetState("angry");
+        }
         
-        if (Helpers.InRange(Parent.transform.position, roamTarget, .1f))
+        if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
         {
             if (Parent.npcPathController.NextNode())
             {

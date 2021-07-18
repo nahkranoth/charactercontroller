@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   damage: 5
-  roamWalkSpeed: 0.2
+  roamWalkSpeed: 0.9
   attackWalkSpeed: 0.4
   strikeDistance: 0.3
-  roamChance: {x: 2, y: 5}
+  roamChance: {x: 0.1, y: 0.5}
   maxRoam: 10
   knockbackAmount: 0.2

@@ -18,6 +18,7 @@ public class ZombieAngryState: AbstractEnemyState
     
     public override void Activate()
     {
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         InitializePath();
     }
 
@@ -32,6 +33,11 @@ public class ZombieAngryState: AbstractEnemyState
     public override void Execute()
     {
         WithinStrikingDistance();
+        
+        if (Vector3.Distance(player.transform.position, Parent.transform.position) > 2f)
+        {
+            Parent.SetState("idle");
+        }
         
         if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
         {

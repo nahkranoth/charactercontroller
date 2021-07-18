@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.Tilemaps;
 
 public static class ADJACENTCELLS
@@ -85,15 +83,15 @@ public class PathfindingController : MonoBehaviour
         return new Vector3(cellsize.x / 2 * scale.x, cellsize.y / 2 * scale.y, 0);
     }
 
-    public List<CellData> FindPathToRandomPosByWorldPos(Vector3 worldPos)
+    public List<CellData> FindPathToRandomPosByWorldPos(Vector3 worldPos, int depth=-1)
     {
         var startCell = GetFromCellMapByWorldPos(worldPos);
-        var finishCell = GetFromCellMapByPos(gridController.GetRandomCellPosition(gridController.mainMap));
+        var finishCell = GetRandomCell();
         if (startCell != null && finishCell != null)
         {
-            return FindPath(startCell, finishCell);
+            return FindPath(startCell, finishCell, depth);
         }
-        Debug.LogWarning("Could not find Path");
+        Debug.LogWarning($"Could not find Path: Start {startCell} Finish {finishCell}");
         return null;
     }
     
@@ -132,7 +130,7 @@ public class PathfindingController : MonoBehaviour
                 
                 float extra_cost = 0;
                 
-                if (neighbour_neighbours.Any(x => x.walkable == false)) extra_cost = 2f;
+                if (neighbour_neighbours.Any(x => x.walkable == false)) extra_cost = 1f;
                 
                 var g = bestCell.cost + extra_cost + (neighbour.position - bestCell.position).magnitude;
                 var h = (finishCell.position - neighbour.position).magnitude;
@@ -215,6 +213,23 @@ public class PathfindingController : MonoBehaviour
         return c;
     }
     
+    private CellData GetRandomCell()
+    {
+        var index = Random.Range(0, cellMap.Count - 8);
+        int cntr = 0;
+        foreach (var cell in cellMap)
+        {
+            cntr++;
+            if (cntr >= index && cell.Value.walkable)
+            {
+                return cell.Value;
+            }
+        }
+        Debug.LogError("Could not Find Walkable Random Tile");
+        return null;
+        
+    }
+    
     public CellData GetFromCellMapByWorldPos(Vector3 pos)
     {
         CellData c;
@@ -233,11 +248,5 @@ public class PathfindingController : MonoBehaviour
 
         return result;
     }
-   
-    public Vector3Int FindPlayerCellPos()
-    {
-        return gridController.grid.WorldToCell(player.transform.position);
-    }
-
   
 }
