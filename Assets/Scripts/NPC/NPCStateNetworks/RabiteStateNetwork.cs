@@ -9,10 +9,10 @@ public class RabiteStateNetwork:INPCStateNetwork
         
         var dict = new Dictionary<string, AbstractEnemyState>()
         {
-            {"idle", new ZombieIdleState()},
-            {"roam", new ZombieRoamState(settings.maxRoamDistance, settings.walkSpeed, settings.roamChance)},
+            {"idle", new ZombieIdleState(settings)},
+            {"roam", new ZombieRoamState(settings)},
             {"knockback", new KnockbackHitState(settings.knockbackAmount)},
-            {"angry", new RabiteAngryState(settings)},
+            {"angry", new ZombieAngryState(settings)},
             {"die", new ZombieDieState()}
         };
         

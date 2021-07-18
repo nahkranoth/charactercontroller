@@ -4,25 +4,27 @@ using Vector3 = UnityEngine.Vector3;
 
 public class ZombieRoamState: AbstractEnemyState
 {
-    public float maxRoamDistance = 2f;
-    public float walkSpeed = 0.01f;
-    private float roamChance = 0.1f;
     private bool moving = false;
     private Vector3 roamTarget;
     private PlayerController player;
     private RandomController random;
 
-    public ZombieRoamState(float _maxRoamDistance, float _walkSpeed, float _roamChance)
+    private INPCSettings settings;
+    
+    public ZombieRoamState(INPCSettings _settings)
     {
-        maxRoamDistance = _maxRoamDistance;
-        walkSpeed = _walkSpeed;
-        roamChance = _roamChance;
+        settings = _settings;
         random = WorldGraph.Retrieve(typeof(RandomController)) as RandomController;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
 
     public override void Activate()
     {
+        var newPath = Parent.pathfinding.FindPathToRandomPosByWorldPos(Parent.transform.position);
+        Parent.npcPathController.InitializePath(newPath);
+        Parent.npcPathController.NextNode();
+        Debug.Log("Init Path");
+        
         moving = false;
         Parent.rigidBody.velocity = Vector2.zero;
         roamTarget = Parent.npcPathController.GetTarget();
@@ -30,12 +32,12 @@ public class ZombieRoamState: AbstractEnemyState
 
     public override void Execute()
     {
-        if (Vector3.Distance(player.transform.position, Parent.transform.position) < 1f)
-        {
-            Parent.SetState("angry");
-        }
+        // if (Vector3.Distance(player.transform.position, Parent.transform.position) < 1f)
+        // {
+        //     Parent.SetState("angry");
+        // }
         
-        if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
+        if (Helpers.InRange(Parent.transform.position, roamTarget, .1f))
         {
             if (Parent.npcPathController.NextNode())
             {
@@ -53,7 +55,7 @@ public class ZombieRoamState: AbstractEnemyState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * walkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.roamWalkSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
     }
     

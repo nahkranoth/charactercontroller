@@ -22,7 +22,6 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public PathfindingController pathfinding;
     [HideInInspector] public NPCPathfindingController npcPathController;
     
-    
     private int health = 30;
     private int damage = 5;
     private bool alive = true;

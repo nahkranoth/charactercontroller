@@ -6,12 +6,12 @@ public class ZombieAngryState: AbstractEnemyState
     private PlayerController player;
     private float currentWalkSpeed = 0.1f;
     private bool attacking;
-    private ZombieSettings settings;
+    private INPCSettings settings;
     private Vector3 roamTarget;
     private Vector3 walkDirections;
 
     private bool refindPathAllowed = true;
-    public ZombieAngryState(ZombieSettings _settings)
+    public ZombieAngryState(INPCSettings _settings)
     {
         settings = _settings;
     }
@@ -51,14 +51,14 @@ public class ZombieAngryState: AbstractEnemyState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.walkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.attackWalkSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
     }
     
     private void WithinStrikingDistance()
     {
         var val = Random.value;
-        if (!attacking && val >= settings.strikingChance)
+        if (!attacking && val >= settings.strikeDistance)
         {
             attacking = true;
             Parent.attacking = true;
@@ -76,7 +76,7 @@ public class ZombieAngryState: AbstractEnemyState
     IEnumerator ResetAttack()
     {
         yield return new WaitForSeconds(.2f);
-        currentWalkSpeed = settings.walkSpeed;
+        currentWalkSpeed = settings.roamWalkSpeed;
         yield return new WaitForSeconds(4f);
         attacking = false;
     }
