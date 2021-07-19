@@ -7,6 +7,7 @@ public class InputController : MonoBehaviour
     public Action StopDirections;
     public Action AttackSlash;
     public Action OpenMenu;
+    public Action Select;
     
     private int vert, hor = 0;
     private Vector2 directions;
@@ -19,7 +20,8 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) AttackSlash?.Invoke();
-        if (Input.GetKeyDown(KeyCode.I)) OpenMenu?.Invoke();
+        if (Input.GetKeyDown(KeyCode.Q)) OpenMenu?.Invoke();
+        if (Input.GetKeyDown(KeyCode.E)) Select?.Invoke();
     }
 
     void FixedUpdate()
@@ -34,7 +36,7 @@ public class InputController : MonoBehaviour
         
         if (directions.magnitude == 0)
         { 
-            StopDirections.Invoke();
+            StopDirections?.Invoke();
             return;
         }
         

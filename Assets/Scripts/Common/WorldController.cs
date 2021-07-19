@@ -10,7 +10,6 @@ public class WorldController : MonoBehaviour
     public bool playerActive = true;
     private InputController input;
     
-    
     public Action<bool> OnToggleMenu;
     
     private void Awake()
@@ -31,7 +30,6 @@ public class WorldController : MonoBehaviour
         menuActive = !menuActive;
         playerActive = !menuActive;
         npcActive = !menuActive;
-        menuWheelController.SetActive(menuActive);
         OnToggleMenu?.Invoke(menuActive);
     }
     

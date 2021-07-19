@@ -1,9 +1,8 @@
 {
-    "name": "Inventory",
+    "name": "Items",
     "rootNamespace": "",
     "references": [
-        "GUID:ec6d75381ad11a447936c5a252c62d43",
-        "GUID:83fb7030a64dfd740a194b1a3a7376e2"
+        "GUID:ec6d75381ad11a447936c5a252c62d43"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

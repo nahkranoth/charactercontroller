@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 6761164967045977113, guid: c2373f223dfc417489f3926b168f0510, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -88,3 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e882ff5455e44511a84d7e73fbca75cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img: {fileID: 6138851452705378888}
+  localStartAngle: 0
+  currentAngle: 0

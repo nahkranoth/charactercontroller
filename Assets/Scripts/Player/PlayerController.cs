@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
    public Transform spriteHolder;
    public Transform weaponSpriteHolder;
    public PlayerSettings settings;
+   
    private Vector3 myScale = new Vector3(1, 1, 1);
 
    private AudioController audioController;
@@ -19,11 +21,13 @@ public class PlayerController : MonoBehaviour
    private int health = 50;
    private int currentHealth = 50;
    private bool invincible = false;
-
    private WorldController worldController;
 
-   public Action<int> OnDamage;
-
+   public ItemCollectionDescription itemDescriptions;
+   public List<Item> items;
+   
+   public Action<int> OnHealthChange;
+   
    public int Health
    {
       get { return health; }
@@ -39,6 +43,7 @@ public class PlayerController : MonoBehaviour
       walkSpeed = settings.walkSpeed;
       currentHealth = settings.startHealth;
       health = settings.startHealth;
+
    }
 
    private void Start()
@@ -54,6 +59,30 @@ public class PlayerController : MonoBehaviour
       
       audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
       worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
+      
+      foreach (var description in itemDescriptions.collection.descriptions)
+      {
+         items.Add(new Item
+         {
+            behaviour = description.item.behaviour,
+            menuName = description.item.menuName,
+            menuSprite = description.item.menuSprite
+         });
+      }
+      
+   }
+
+   public bool TakeItem(Item item)
+   {
+      var itm = items.Find(x => x == item);
+      if (itm == null) return false;
+      itm.amount--;
+      if (itm.amount == 0)
+      {
+         items.Remove(itm);
+         return true;//IS EMPTY
+      }
+      return false;
    }
 
    private void OnChargingPowerAttack(bool charging)
@@ -88,13 +117,20 @@ public class PlayerController : MonoBehaviour
       animator.SetWalk(0, 0);
    }
 
+
+   public void AddHealth(int heal)
+   {
+      currentHealth += heal;
+      OnHealthChange?.Invoke(currentHealth);
+   }
+   
    public void Damage(int damage)
    {
       if (invincible) return;
       audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
       currentHealth -= damage;
       animator.SetDamage();
-      OnDamage?.Invoke(damage);
+      OnHealthChange?.Invoke(currentHealth);
       walkSpeed = 0;
       invincible = true;
       StartCoroutine(ResetDamageState());
