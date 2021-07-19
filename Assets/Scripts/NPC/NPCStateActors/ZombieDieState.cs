@@ -11,6 +11,7 @@ public class ZombieDieState: AbstractEnemyState
     {
         Parent.animatorController.SetWalk(0,0);
         Parent.animatorController.SetDie();
+        Parent.mainHitbox.enabled = false;
         Parent.StartCoroutine(StartRemovalSequence());
     }
 

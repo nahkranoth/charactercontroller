@@ -34,7 +34,7 @@ public class ZombieAngryState: AbstractEnemyState
     {
         WithinStrikingDistance();
         
-        if (Vector3.Distance(player.transform.position, Parent.transform.position) > 2f)
+        if (Vector3.Distance(player.transform.position, Parent.transform.position) > settings.loseDistance)
         {
             Parent.SetState("idle");
         }

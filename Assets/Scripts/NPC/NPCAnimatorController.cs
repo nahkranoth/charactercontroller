@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemyAnimatorController : MonoBehaviour
+public class NPCAnimatorController : MonoBehaviour
 {
     public Animator animator;
 

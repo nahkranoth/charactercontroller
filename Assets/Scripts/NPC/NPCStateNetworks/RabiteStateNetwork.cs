@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class RabiteStateNetwork:INPCStateNetwork
 {
-    public Dictionary<string, AbstractEnemyState> GetStateNetwork(EnemyController parent, Object rawSettings)
+    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController parent, Object rawSettings)
     {
         RabiteSettings settings = rawSettings as RabiteSettings;
         

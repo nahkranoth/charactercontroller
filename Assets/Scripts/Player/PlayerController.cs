@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
    private int currentHealth = 50;
    private bool invincible = false;
 
+   private WorldController worldController;
+
    public Action<int> OnDamage;
 
    public int Health
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
       attackController.chargingPowerAttack += OnChargingPowerAttack;
       
       audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
-
+      worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
    }
 
    private void OnChargingPowerAttack(bool charging)
@@ -67,6 +69,13 @@ public class PlayerController : MonoBehaviour
 
    private void OnDirections(Vector2 directions)
    {
+      if (!worldController.playerActive)
+      {
+         rigid.velocity = Vector2.zero;
+         animator.SetWalk(0,0);
+         return;
+      }
+      
       rigid.AddForce(directions * walkSpeed);
       myScale.x = directions.x == 0 ? 1: directions.x;
       spriteHolder.localScale = myScale;

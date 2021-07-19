@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = System.Object;
 
-public class EnemyController : MonoBehaviour
+public class NPCController : MonoBehaviour
 {
-    public EnemyAnimatorController animatorController;
-    public EnemyDamageController damageController;
+    public NPCAnimatorController animatorController;
+    public NPCDamageIndicator damageIndicator;
     public TriggerBox mainHitbox;
     public INPCSettings settings;
     public Rigidbody2D rigidBody;
@@ -24,24 +24,17 @@ public class EnemyController : MonoBehaviour
     
     private int health = 30;
     private int damage = 5;
-    private bool alive = true;
     private bool damageRecovering = false;
     [HideInInspector] public bool attacking = false;
 
     private PlayerController player;
-    
-    public int Health
-    {
-        get
-        {
-            return health;
-        }
-    }
-    
+
     void Start()
     {
         health = settings.GetHealth();
         damage = settings.GetDamage();
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         player.attackController.OnWeaponHitSomething -= OnPossibleWeaponHit;
@@ -66,7 +59,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnPossibleWeaponHit(Collider2D collider, int damage)
     {
-        EnemyController target = collider.GetComponent<EnemyController>();
+        NPCController target = collider.GetComponent<NPCController>();
         if (target == this)
         {
             attacking = false;
@@ -86,7 +79,11 @@ public class EnemyController : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (!alive) return;
+        if (!worldController.npcActive)
+        {
+            rigidBody.velocity = Vector2.zero;
+            return;
+        }
         activeState.Execute();
     }
 
@@ -103,7 +100,7 @@ public class EnemyController : MonoBehaviour
         damageRecovering = true;
         damageOrigin = origin;
         health -= amount;
-        damageController.ShowDamage(amount);
+        damageIndicator.ShowDamage(amount);
         SetState(stateNetwork.GetDamagedNode());
         animatorController.Damage();
         StartCoroutine(DamageFinished());

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ZombieStateNetwork:INPCStateNetwork
 {
-    public Dictionary<string, AbstractEnemyState> GetStateNetwork(EnemyController parent, Object rawSettings)
+    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController parent, Object rawSettings)
     {
         ZombieSettings settings = rawSettings as ZombieSettings;//TODO Can now also be RabiteSettings FIX
         

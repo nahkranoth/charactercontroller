@@ -1,13 +1,13 @@
 ﻿public abstract class AbstractEnemyState
 {
-    private EnemyController parent;
+    private NPCController parent;
 
-    public EnemyController Parent
+    public NPCController Parent
     {
         get { return parent; }
     }
     
-    public void Init(EnemyController _parent)
+    public void Init(NPCController _parent)
     {
         parent = _parent;
     }

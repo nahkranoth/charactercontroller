@@ -130,8 +130,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.18}
-  m_Size: {x: 0.34, y: 0.36}
+  m_Offset: {x: 0, y: 0.08}
+  m_Size: {x: 0.14, y: 0.14}
   m_Direction: 0
 --- !u!1 &3346189936536267975
 GameObject:
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609788694563188546}
-  - component: {fileID: 875243794916335995}
+  - component: {fileID: 1508321373613435700}
   m_Layer: 0
   m_Name: EnemyDamage
   m_TagString: Untagged
@@ -280,7 +280,7 @@ Transform:
   m_Father: {fileID: 7298023909677291208}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &875243794916335995
+--- !u!114 &1508321373613435700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3468269142547867760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1239c73c5374e9b4696741067a231881, type: 3}
+  m_Script: {fileID: 11500000, guid: dda71c5ba8176bb42bfc7faefa107990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 1969562860213309753}
@@ -303,10 +303,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7298023909677291208}
-  - component: {fileID: 4563957055267418316}
   - component: {fileID: 1560541654}
   - component: {fileID: 311156503394006411}
   - component: {fileID: 130948380630421378}
+  - component: {fileID: 3077980416311639410}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -330,25 +330,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4563957055267418316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6964395274029536394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05a7c6d13ad55d24bb8e74fa024a1cbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animatorController: {fileID: 886973081}
-  damageController: {fileID: 875243794916335995}
-  mainHitbox: {fileID: 311156503394006411}
-  settings: {fileID: 11400000, guid: 6c491cb2d9c37ab42bf94087aeb90db0, type: 2}
-  rigidBody: {fileID: 130948380630421378}
-  damageOrigin: {fileID: 0}
-  attacking: 0
 --- !u!61 &1560541654
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -408,3 +389,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3077980416311639410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964395274029536394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc34457ada234942a189ff2091855d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 886973081}
+  damageIndicator: {fileID: 1508321373613435700}
+  mainHitbox: {fileID: 311156503394006411}
+  settings: {fileID: 11400000, guid: 6c491cb2d9c37ab42bf94087aeb90db0, type: 2}
+  rigidBody: {fileID: 130948380630421378}
+  damageOrigin: {fileID: 0}
+  pathfinding: {fileID: 0}
+  attacking: 0

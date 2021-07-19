@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyDamageController : MonoBehaviour
+public class NPCDamageIndicator : MonoBehaviour
 {
     public TextMesh damageText;
     public Animator damageAnimation;

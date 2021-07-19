@@ -16,7 +16,9 @@ MonoBehaviour:
   damage: 5
   roamWalkSpeed: 0.9
   attackWalkSpeed: 0.4
-  strikeDistance: 0.3
+  strikeDistance: 0.06
   roamChance: {x: 0.1, y: 0.5}
+  detectDistance: 1.2
+  loseDistance: 1.6
   maxRoam: 10
   knockbackAmount: 0.2

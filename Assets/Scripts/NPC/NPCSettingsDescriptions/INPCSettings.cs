@@ -10,7 +10,8 @@ public abstract class INPCSettings:ScriptableObject
     public float strikeDistance = 0.3f;
 
     public Vector2 roamChance = new Vector2(0.5f,2);
-    
+    public float detectDistance = 1f;
+    public float loseDistance = 1.4f;
     public int maxRoam = 10;
     
     public abstract int GetHealth();
