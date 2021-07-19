@@ -4,10 +4,15 @@ using UnityEngine;
 public class WorldController : MonoBehaviour
 {
     public GameObject chestPrefab;
-
+    public GameObject menuWheelController;
+    public bool menuActive = false;
     public bool npcActive = true;
     public bool playerActive = true;
     private InputController input;
+    
+    
+    public Action<bool> OnToggleMenu;
+    
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(WorldController));
@@ -17,21 +22,17 @@ public class WorldController : MonoBehaviour
     {
         input = WorldGraph.Retrieve(typeof(InputController)) as InputController;
         
-        input.OpenMenu -= ToggleNPCState;
-        input.OpenMenu += ToggleNPCState;
-        input.OpenMenu -= TogglePlayerState;
-        input.OpenMenu += TogglePlayerState;
-        
+        input.OpenMenu -= ToggleMenu;
+        input.OpenMenu += ToggleMenu;
     }
 
-    public void TogglePlayerState()
+    public void ToggleMenu()
     {
-        playerActive = !playerActive;
-    }
-
-    public void ToggleNPCState()
-    {
-        npcActive = !npcActive;
+        menuActive = !menuActive;
+        playerActive = !menuActive;
+        npcActive = !menuActive;
+        menuWheelController.SetActive(menuActive);
+        OnToggleMenu?.Invoke(menuActive);
     }
     
     public void SpawnChest(Vector3 position)

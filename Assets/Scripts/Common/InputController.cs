@@ -19,7 +19,7 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) AttackSlash?.Invoke();
-        if (Input.GetKeyDown(KeyCode.I))OpenMenu?.Invoke();
+        if (Input.GetKeyDown(KeyCode.I)) OpenMenu?.Invoke();
     }
 
     void FixedUpdate()

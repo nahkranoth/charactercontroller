@@ -11,4 +11,12 @@ public static class Helpers
     {
         return Vector3.Distance(a, b) < range;
     }
+
+    public static int CycleConstraint(int max, int min, int index)
+    {
+        int result = index % (max+1);
+        if (result < min) result = max;
+        return result;
+    }
+    
 }

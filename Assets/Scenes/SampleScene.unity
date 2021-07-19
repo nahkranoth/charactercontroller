@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 6964395274029536394, guid: 515dd585ae0c4be46b763886980375d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7298023909677291208, guid: 515dd585ae0c4be46b763886980375d3, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -684,7 +688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1711379612
 RectTransform:
   m_ObjectHideFlags: 0
@@ -716,9 +720,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804a36b5d93518c479711e731d7092f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 1
+  amount: 12
   growFactor: 3
   radius: 112
+  rotateSpeed: 320
   wheelItemPrefab: {fileID: 802467989356697460, guid: 22924fbe2fc495144ad20fbbb23a8e62, type: 3}
 --- !u!222 &1711379614
 CanvasRenderer:
@@ -2241,6 +2246,10 @@ PrefabInstance:
       propertyPath: gridController
       value: 
       objectReference: {fileID: 1046466006}
+    - target: {fileID: 5285509983681587749, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
+      propertyPath: menuWheelController
+      value: 
+      objectReference: {fileID: 1711379611}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
 --- !u!1001 &3836800762888928226
