@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
    public Rigidbody2D rigid;
    public PlayerAnimatorController animator;
    public PlayerAttackController attackController;
+   public PlayerWeaponController weaponController;
    public Transform spriteHolder;
    public Transform weaponSpriteHolder;
    public PlayerSettings settings;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
    private Vector3 myScale = new Vector3(1, 1, 1);
 
    private AudioController audioController;
+   private ItemBehaviourController itemBehaviourController;
    
    private float walkSpeed = 14f;
    private int health = 50;
@@ -59,6 +61,10 @@ public class PlayerController : MonoBehaviour
       
       audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
       worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
+      itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
+
+      itemBehaviourController.Equip -= EquipItem;
+      itemBehaviourController.Equip += EquipItem;
       
       foreach (var description in itemDescriptions.collection.descriptions)
       {
@@ -66,10 +72,18 @@ public class PlayerController : MonoBehaviour
          {
             behaviour = description.item.behaviour,
             menuName = description.item.menuName,
-            menuSprite = description.item.menuSprite
+            menuSprite = description.item.menuSprite,
+            equipedSprite = description.item.equipedSprite,
+            consumable = description.item.consumable,
          });
       }
-      
+   }
+
+   public void EquipItem(ItemBehaviourStates.Behaviours behaviour)
+   {
+      var itm = items.Find(x => x.behaviour == behaviour);
+      Debug.Log("Equip Item:"+itm.menuName);
+      weaponController.Equip(itm.equipedSprite);
    }
 
    public bool TakeItem(Item item)

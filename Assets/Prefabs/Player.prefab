@@ -51,6 +51,7 @@ MonoBehaviour:
   rigid: {fileID: 3490643704792580732}
   animator: {fileID: 3995198645062540489}
   attackController: {fileID: 7482345195232766880}
+  weaponController: {fileID: 2106564544172682518}
   spriteHolder: {fileID: 7224929123394807414}
   weaponSpriteHolder: {fileID: 553563042785767798}
   settings: {fileID: 11400000, guid: 5dcbb97dac4cdfc4ea93d93fd5e70059, type: 2}

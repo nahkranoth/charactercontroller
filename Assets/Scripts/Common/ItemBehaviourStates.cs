@@ -3,6 +3,8 @@
     public enum Behaviours
     {
         None,
-        Candy
+        Candy,
+        Sword,
+        Axe
     }
 }

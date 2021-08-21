@@ -41,23 +41,18 @@ public class MenuWheelController : MonoBehaviour
         
         worldController.OnToggleMenu -= SetMyState;
         worldController.OnToggleMenu += SetMyState;
-        inputController.Select -= Select;
-        inputController.Select += Select;
+        
     }
 
     public void Select()
     {
-        itemBehaviourController.Execute(itemList[selectionStep].currentItem.behaviour);
-        Debug.Log($"Take Item {itemList[selectionStep].currentItem.menuName}");
-        if (playerController.TakeItem(itemList[selectionStep].currentItem))
+        if (currentItems.Count == 0) return;
+        var cItem = itemList[selectionStep].currentItem;
+        itemBehaviourController.Execute(cItem.behaviour);
+        Debug.Log($"Take Item {cItem.menuName}");
+        if (cItem.consumable && playerController.TakeItem(cItem))
         {
             currentItems = playerController.items;
-            if (currentItems.Count <= 0)
-            {
-                Debug.Log("List Empty");
-                return;
-            }
-
             spinStep = 0;
             selectionStep = 0;
             MakeWheel();
@@ -69,7 +64,7 @@ public class MenuWheelController : MonoBehaviour
         if (state)
         {
             Initialize();
-            return;;
+            return;
         }
         Hide();
     }
@@ -79,6 +74,10 @@ public class MenuWheelController : MonoBehaviour
         wheelHolder.gameObject.SetActive(true);
         inputController.Directions -= OnDirections;
         inputController.Directions += OnDirections;
+        inputController.Select -= Select;
+        inputController.Select += Select;
+        spinStep = 0;
+        selectionStep = 0;
         MakeWheel();
     }
     
@@ -86,6 +85,7 @@ public class MenuWheelController : MonoBehaviour
     {
         wheelHolder.gameObject.SetActive(false);
         inputController.Directions -= OnDirections;
+        inputController.Select -= Select;
     }
 
     private void SetSpinStep(int dir)
@@ -102,7 +102,7 @@ public class MenuWheelController : MonoBehaviour
     private void OnDirections(Vector2 _direction)
     {
         if (spinning || _direction.x == 0 || currentItems.Count <= 0) return;
-        direction = _direction;
+        direction = -_direction;
         spinCounter = 0;
         SetSpinStep((int)direction.x);
         SetSelectionStep((int)direction.x);

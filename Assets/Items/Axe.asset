@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   item:
-    playerWieldName: axe
     menuName: axe
     menuSprite: {fileID: -5557420877203330147, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
+    equipedSprite: {fileID: -5557420877203330147, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
+    behaviour: 3
+    consumable: 0
+    amount: 1

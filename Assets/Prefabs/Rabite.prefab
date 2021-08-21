@@ -46,15 +46,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 683834771004767112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05a7c6d13ad55d24bb8e74fa024a1cbc, type: 3}
+  m_Script: {fileID: 11500000, guid: dc34457ada234942a189ff2091855d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 7627963637988199835}
-  damageController: {fileID: 7349457995927277177}
+  damageIndicator: {fileID: 7349457995927277177}
   mainHitbox: {fileID: 7893274899369040521}
   settings: {fileID: 11400000, guid: 1d9d4beea6f828546a64f31192ec9de5, type: 2}
   rigidBody: {fileID: 572130592}
   damageOrigin: {fileID: 0}
+  pathfinding: {fileID: 0}
   attacking: 0
 --- !u!61 &7627963639437186772
 BoxCollider2D:
@@ -287,7 +288,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6483561595686324082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1239c73c5374e9b4696741067a231881, type: 3}
+  m_Script: {fileID: 11500000, guid: dda71c5ba8176bb42bfc7faefa107990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 8254731429186715195}

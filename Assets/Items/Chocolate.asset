@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Chocolate
   m_EditorClassIdentifier: 
   item:
-    playerWieldName: 
     menuName: chocolate
     menuSprite: {fileID: -8033723429876189661, guid: c2373f223dfc417489f3926b168f0510, type: 3}
+    equipedSprite: {fileID: 0}
+    behaviour: 0
+    consumable: 1
+    amount: 1

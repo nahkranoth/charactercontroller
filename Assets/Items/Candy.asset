@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Candy
   m_EditorClassIdentifier: 
   item:
-    playerWieldName: 
     menuName: candy
     menuSprite: {fileID: 7977443681283346765, guid: c2373f223dfc417489f3926b168f0510, type: 3}
+    equipedSprite: {fileID: 0}
     behaviour: 1
+    consumable: 1
+    amount: 1
