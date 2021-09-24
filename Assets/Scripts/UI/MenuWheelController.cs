@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -10,6 +11,7 @@ public class MenuWheelController : MonoBehaviour
     public float rotateSpeed = 10f;
     public Transform wheelHolder;
     public GameObject wheelItemPrefab;
+    public TextMeshProUGUI selectedItemTxt;
     
     private float degreeFract;
     private InputController inputController;
@@ -33,14 +35,21 @@ public class MenuWheelController : MonoBehaviour
         inputController = WorldGraph.Retrieve(typeof(InputController)) as InputController;
         worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
         playerController = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+
+        Hide();
         
-        wheelHolder.gameObject.SetActive(false);
         currentItems = playerController.inventory.storage;
         itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
         
         worldController.OnToggleMenu -= SetMyState;
         worldController.OnToggleMenu += SetMyState;
-        
+        SetText();
+    }
+
+    private void Show()
+    {
+        wheelHolder.gameObject.SetActive(true);
+        selectedItemTxt.gameObject.SetActive(true);
     }
 
     public void Select()
@@ -56,6 +65,7 @@ public class MenuWheelController : MonoBehaviour
             selectionStep = 0;
             MakeWheel();
         };
+        SetText();
     }
 
     public void SetMyState(bool state)
@@ -70,7 +80,7 @@ public class MenuWheelController : MonoBehaviour
 
     public void Initialize()
     {
-        wheelHolder.gameObject.SetActive(true);
+        Show();
         inputController.Directions -= OnDirections;
         inputController.Directions += OnDirections;
         inputController.Select -= Select;
@@ -83,6 +93,7 @@ public class MenuWheelController : MonoBehaviour
     public void Hide()
     {
         wheelHolder.gameObject.SetActive(false);
+        selectedItemTxt.gameObject.SetActive(false);
         inputController.Directions -= OnDirections;
         inputController.Select -= Select;
     }
@@ -96,6 +107,17 @@ public class MenuWheelController : MonoBehaviour
     private void SetSelectionStep(int dir){
         selectionStep = selectionStep-dir;
         selectionStep = Helpers.CycleConstraint(currentItems.Count-1, 0, selectionStep);
+        SetText();
+    }
+
+    private void SetText()
+    {
+        if (!currentItems[selectionStep].consumable)
+        {
+            selectedItemTxt.text = $"{currentItems[selectionStep].menuName}";
+            return;
+        }
+        selectedItemTxt.text = $"{currentItems[selectionStep].amount}x {currentItems[selectionStep].menuName}";
     }
     
     private void OnDirections(Vector2 _direction)

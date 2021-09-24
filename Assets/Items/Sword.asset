@@ -16,6 +16,6 @@ MonoBehaviour:
     menuName: sword
     menuSprite: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
     equipedSprite: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
-    behaviour: 3
+    behaviour: 2
     consumable: 0
     amount: 1
