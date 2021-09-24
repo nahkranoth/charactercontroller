@@ -21,6 +21,11 @@ public class InteractionDamageTaker : MonoBehaviour
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
     }
 
+    private void OnDestroy()
+    {
+        interaction.OnInteraction -= TakeDamage;
+    }
+
     public void TakeDamage(int damage)
     {
         if (damageRecovering) return;

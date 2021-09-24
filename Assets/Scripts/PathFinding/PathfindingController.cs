@@ -24,7 +24,7 @@ public class PathfindingController : MonoBehaviour
     private Dictionary<Vector3Int, CellData> cellMap;
     List<CellData> openList = new List<CellData>();
     List<CellData> closeList = new List<CellData>();
-    private bool DEBUG = true;
+    public bool DEBUG = true;
 
     private void Awake()
     {

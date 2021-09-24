@@ -8,8 +8,4 @@ public class ItemCollectionDescription : ScriptableObject
 {
     public ItemCollection collection;
 
-    public int Count
-    {
-        get{return collection.descriptions.Count;}
-    }
 }

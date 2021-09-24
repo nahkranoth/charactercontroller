@@ -5,23 +5,22 @@ using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
     public Text healthText;
-    private PlayerController player;
+    public Health health;
 
     private void Start()
     {
-        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        SetHealth(player.Health, player.CurrentHealth);
-        player.OnHealthChange -= SetHealth;
-        player.OnHealthChange += SetHealth;
+        SetHealth(health.Amount, health.MaxAmount);
+        health.OnChange -= SetHealth;
+        health.OnChange += SetHealth;
     }
 
-    private void SetHealth(int health)
+    private void SetHealth(int amount)
     {
-        SetHealth(health, player.Health);
+        SetHealth(amount, health.MaxAmount);
     }
     
-    public void SetHealth(int currentHealth, int health)
+    public void SetHealth(int currentHealth, int maxHealth)
     {
-        healthText.text = $"{currentHealth}/{health}";
+        healthText.text = $"{currentHealth}/{maxHealth}";
     }
 }

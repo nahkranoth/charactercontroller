@@ -26,7 +26,7 @@ public class NPCController : MonoBehaviour
 
     private PlayerController player;
 
-    private bool initialized = false;
+    private bool initialized;
     
     void Start()
     {
@@ -95,7 +95,7 @@ public class NPCController : MonoBehaviour
     {
         attacking = false;
         myHealth.Modify(-amount);
-        if (myHealth.IsDeath())
+        if (myHealth.IsDead())
         {
             Die();
             return;
@@ -106,19 +106,22 @@ public class NPCController : MonoBehaviour
 
     private void DamageFinished()
     {
-        if(!myHealth.IsDeath()) SetState(stateNetwork.GetDamageFinishedNode());
+        if(!myHealth.IsDead()) SetState(stateNetwork.GetDamageFinishedNode());
     }
 
     private void Die()
     {
         StopAllCoroutines();
         SetState(stateNetwork.GetDieNode());
+        mainHitbox.OnTriggerStay -= OnTrigger;
+        damageTaker.OnTakeDamage -= Damage;
+        Destroy(damageTaker);
         worldController.SpawnChest(transform.position);
     }
 
     public void Destroy()
     {
-        Debug.Log("Destroy Me");
+        damageTaker.OnDamageFinished -= DamageFinished;
         DestroyImmediate(gameObject);
     }
 }

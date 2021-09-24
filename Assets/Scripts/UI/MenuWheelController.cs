@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Inventory;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -36,7 +35,7 @@ public class MenuWheelController : MonoBehaviour
         playerController = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         
         wheelHolder.gameObject.SetActive(false);
-        currentItems = playerController.items;
+        currentItems = playerController.inventory.storage;
         itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
         
         worldController.OnToggleMenu -= SetMyState;
@@ -50,9 +49,9 @@ public class MenuWheelController : MonoBehaviour
         var cItem = itemList[selectionStep].currentItem;
         itemBehaviourController.Execute(cItem.behaviour);
         Debug.Log($"Take Item {cItem.menuName}");
-        if (cItem.consumable && playerController.TakeItem(cItem))
+        if (cItem.consumable && playerController.inventory.TakeItem(cItem))
         {
-            currentItems = playerController.items;
+            currentItems = playerController.inventory.storage;
             spinStep = 0;
             selectionStep = 0;
             MakeWheel();

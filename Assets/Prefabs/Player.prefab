@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1655262374592594938}
   - component: {fileID: 722555852}
-  - component: {fileID: 12076989510762094}
   - component: {fileID: 3490643704792580732}
   - component: {fileID: 7482345195232766880}
   - component: {fileID: 9058590136681751550}
+  - component: {fileID: 1521678023464578071}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -52,24 +52,12 @@ MonoBehaviour:
   rigid: {fileID: 3490643704792580732}
   animator: {fileID: 3995198645062540489}
   attackController: {fileID: 7482345195232766880}
-  weaponController: {fileID: 2106564544172682518}
+  equipController: {fileID: 2106564544172682518}
   spriteHolder: {fileID: 7224929123394807414}
   weaponSpriteHolder: {fileID: 553563042785767798}
   settings: {fileID: 11400000, guid: 5dcbb97dac4cdfc4ea93d93fd5e70059, type: 2}
+  myHealth: {fileID: 1521678023464578071}
   itemDescriptions: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
-  items: []
---- !u!114 &12076989510762094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655262374592594940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db3d727b0b1a4bddb5dcaef77f6ad931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &3490643704792580732
 Rigidbody2D:
   serializedVersion: 4
@@ -132,6 +120,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18402189, y: 0.31033564}
   m_EdgeRadius: 0
+--- !u!114 &1521678023464578071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655262374592594940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa76f847dac46d397c6e70d8bdc4f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4097235929450552897
 GameObject:
   m_ObjectHideFlags: 0

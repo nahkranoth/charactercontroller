@@ -139,7 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerReadyTxt: {fileID: 50194574}
-  PlayerAttackController: {fileID: 0}
 --- !u!114 &2296872005813631376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 5673054679751480185}
-  player: {fileID: 0}
+  health: {fileID: 0}
 --- !u!1 &3836800764134920229
 GameObject:
   m_ObjectHideFlags: 0

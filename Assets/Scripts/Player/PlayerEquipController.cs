@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerWeaponController : MonoBehaviour
+public class PlayerEquipController : MonoBehaviour
 {
     public SpriteRenderer weaponSprite;
 
@@ -9,7 +9,7 @@ public class PlayerWeaponController : MonoBehaviour
     
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(PlayerWeaponController));
+        WorldGraph.Subscribe(this, typeof(PlayerEquipController));
     }
 
     private void Start()

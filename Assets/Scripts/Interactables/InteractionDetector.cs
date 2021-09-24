@@ -11,7 +11,12 @@ public class InteractionDetector : MonoBehaviour
         player.attackController.OnWeaponHitSomething -= OnPossibleInteraction;
         player.attackController.OnWeaponHitSomething += OnPossibleInteraction;
     }
-    
+
+    private void OnDestroy()
+    {
+        player.attackController.OnWeaponHitSomething -= OnPossibleInteraction;
+    }
+
     private void OnPossibleInteraction(Collider2D collider, int force)
     {
         InteractionDetector target = collider.GetComponent<InteractionDetector>();
