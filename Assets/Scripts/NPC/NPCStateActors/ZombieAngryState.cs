@@ -36,7 +36,9 @@ public class ZombieAngryState: AbstractEnemyState
         
         if (Vector3.Distance(player.transform.position, Parent.transform.position) > settings.loseDistance)
         {
+            Parent.animatorController.SetWalk(0, 0);
             Parent.SetState("idle");
+            return;
         }
         
         if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
@@ -63,15 +65,14 @@ public class ZombieAngryState: AbstractEnemyState
     
     private void WithinStrikingDistance()
     {
-        var val = Random.value;
-        if (!attacking && val >= settings.strikeDistance)
+        if (!attacking && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
         {
             attacking = true;
             Parent.attacking = true;
             Attack();
         }
     }
-
+    
     private void Attack()
     {
         Parent.animatorController.Attack();

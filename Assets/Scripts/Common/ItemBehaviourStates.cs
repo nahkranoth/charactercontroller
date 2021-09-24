@@ -5,6 +5,7 @@
         None,
         Candy,
         Sword,
-        Axe
+        Axe,
+        Chocolate
     }
 }

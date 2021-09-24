@@ -261,10 +261,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabite
       objectReference: {fileID: 0}
-    - target: {fileID: 683834771004767112, guid: 8a96610202f4f6f43a9d7000db0b7d40, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 908656852829698506, guid: 8a96610202f4f6f43a9d7000db0b7d40, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2023,6 +2019,10 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[302].second.m_TileObjectToInstantiateIndex
       value: 65535
       objectReference: {fileID: 0}
+    - target: {fileID: 859288266440331707, guid: 690df5655893a0f4eabcb87ef221af88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1985302480267241371, guid: 690df5655893a0f4eabcb87ef221af88, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -2078,6 +2078,10 @@ PrefabInstance:
     - target: {fileID: 3838578916402028841, guid: 690df5655893a0f4eabcb87ef221af88, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924445931859554293, guid: 690df5655893a0f4eabcb87ef221af88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5486016769037787784, guid: 690df5655893a0f4eabcb87ef221af88, type: 3}
       propertyPath: m_Layer
@@ -2259,7 +2263,8 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 706521977}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 12076989510762094, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
 --- !u!1001 &1665035448326075396
 PrefabInstance:

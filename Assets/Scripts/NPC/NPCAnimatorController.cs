@@ -25,5 +25,10 @@ public class NPCAnimatorController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+    
+    public void TelegraphAttack()
+    {
+        animator.SetTrigger("Telegraph");
+    }
 
 }

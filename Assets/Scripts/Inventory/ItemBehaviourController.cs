@@ -6,7 +6,7 @@ public class ItemBehaviourController:MonoBehaviour
 {
     private Dictionary<ItemBehaviourStates.Behaviours, Action> behaviourToActionMap;
     public Action<ItemBehaviourStates.Behaviours> Equip;
-    public Action<ItemBehaviourStates.Behaviours> Consume;
+    public Action<int> ChangeHealth;
     private void Awake()
     {
         behaviourToActionMap = new Dictionary<ItemBehaviourStates.Behaviours, Action>();
@@ -18,7 +18,11 @@ public class ItemBehaviourController:MonoBehaviour
         behaviourToActionMap[ItemBehaviourStates.Behaviours.None] = () => { Debug.Log("Do nothing");};
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Candy] = () =>
         {
-            Debug.Log("Candy");
+            ChangeHealth?.Invoke(20);
+        };
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.Chocolate] = () =>
+        {
+            ChangeHealth?.Invoke(50);
         };
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Axe] = () =>
         {

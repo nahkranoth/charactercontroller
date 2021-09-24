@@ -7,14 +7,12 @@ public class ZombieRoamState: AbstractEnemyState
     private bool moving = false;
     private Vector3 roamTarget;
     private PlayerController player;
-    private RandomController random;
 
     private INPCSettings settings;
     
     public ZombieRoamState(INPCSettings _settings)
     {
         settings = _settings;
-        random = WorldGraph.Retrieve(typeof(RandomController)) as RandomController;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
 
@@ -27,6 +25,7 @@ public class ZombieRoamState: AbstractEnemyState
         moving = false;
         Parent.rigidBody.velocity = Vector2.zero;
         roamTarget = Parent.npcPathController.GetTarget();
+        
     }
 
     public override void Execute()
@@ -45,7 +44,9 @@ public class ZombieRoamState: AbstractEnemyState
             else
             {
                 Parent.rigidBody.velocity = Vector3.zero;
+                Parent.animatorController.SetWalk(0, 0);
                 Parent.SetState("idle");
+                return;
             }
         }
         SetVelocity();

@@ -1,76 +1,71 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = System.Object;
 
 public class NPCController : MonoBehaviour
 {
     public NPCAnimatorController animatorController;
-    public NPCDamageIndicator damageIndicator;
     public TriggerBox mainHitbox;
     public INPCSettings settings;
     public Rigidbody2D rigidBody;
+    public CharacterDebugController charDebug;
+    public bool characterDebug;
     
-    [HideInInspector] public Transform damageOrigin;
-
     private INPCStateNetwork stateNetwork;
     private Dictionary<string, AbstractEnemyState> stateDictionary;
     private AbstractEnemyState activeState;
     private WorldController worldController;
-    private AudioController audioController;
     [HideInInspector] public PathfindingController pathfinding;
-    [HideInInspector] public NPCPathfindingController npcPathController;
+    public NPCPathfindingController npcPathController;
+    public InteractionDamageTaker damageTaker;
+
+    public Health myHealth;
     
-    private int health = 30;
     private int damage = 5;
-    private bool damageRecovering = false;
     [HideInInspector] public bool attacking = false;
 
     private PlayerController player;
 
+    private bool initialized = false;
+    
     void Start()
     {
-        health = settings.GetHealth();
+        myHealth.Set(settings.GetHealth());
+        
         damage = settings.GetDamage();
-
+        
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         
-        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        player.attackController.OnWeaponHitSomething -= OnPossibleWeaponHit;
-        player.attackController.OnWeaponHitSomething += OnPossibleWeaponHit;
         stateNetwork = (INPCStateNetwork)Activator.CreateInstance(settings.GetStateNetworkType());
         
-        worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController; 
+        worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
+        
+        if(characterDebug) charDebug.Init(settings);
+        charDebug.gameObject.SetActive(characterDebug);
         
         pathfinding = WorldGraph.Retrieve(typeof(PathfindingController)) as PathfindingController;
         npcPathController = new NPCPathfindingController();
-        audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
         
         stateDictionary = stateNetwork.GetStateNetwork(this, settings);
         
-        activeState = stateDictionary[stateNetwork.GetStartNode()];
-        activeState.Activate();
+        SetState(stateNetwork.GetStartNode());
+        charDebug.SetStateText(stateNetwork.GetStartNode());
         
         mainHitbox.OnTriggerStay -= OnTrigger;
         mainHitbox.OnTriggerStay += OnTrigger;
-        
-    }
 
-    private void OnPossibleWeaponHit(Collider2D collider, int damage)
-    {
-        NPCController target = collider.GetComponent<NPCController>();
-        if (target == this)
-        {
-            attacking = false;
-            Damage(player.transform, damage);
-        }
+        damageTaker.OnTakeDamage -= Damage;
+        damageTaker.OnTakeDamage += Damage;
+        damageTaker.OnDamageFinished -= DamageFinished;
+        damageTaker.OnDamageFinished += DamageFinished;
+
+        initialized = true;
     }
 
     public void OnTrigger(Collider2D collider)
     {
         PlayerController target = collider.GetComponent<PlayerController>();
-        if (target && attacking && !damageRecovering)
+        if (target && attacking && !damageTaker.damageRecovering)
         {
             target.Damage(damage);
             attacking = false;
@@ -79,6 +74,8 @@ public class NPCController : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (!initialized) return;
+        
         if (!worldController.npcActive)
         {
             rigidBody.velocity = Vector2.zero;
@@ -91,33 +88,25 @@ public class NPCController : MonoBehaviour
     {
         activeState = stateDictionary[name];
         activeState.Activate();
+        if(characterDebug) charDebug.SetStateText(name);
     }
 
-    private void Damage(Transform origin, int amount)
+    private void Damage(int amount)
     {
-        if (damageRecovering) return;
-        audioController.PlaySound(AudioController.AudioClipName.ZombieHurt);
-        damageRecovering = true;
-        damageOrigin = origin;
-        health -= amount;
-        damageIndicator.ShowDamage(amount);
-        SetState(stateNetwork.GetDamagedNode());
-        animatorController.Damage();
-        StartCoroutine(DamageFinished());
-    }
-    
-    IEnumerator DamageFinished()
-    {
-        if (health <= 0)
+        attacking = false;
+        myHealth.Modify(-amount);
+        if (myHealth.IsDeath())
         {
             Die();
+            return;
         }
-        else
-        {
-            yield return new WaitForSeconds(2);
-            damageRecovering = false;
-            SetState(stateNetwork.GetDamageFinishedNode());
-        }
+        SetState(stateNetwork.GetDamagedNode());
+        animatorController.Damage();
+    }
+
+    private void DamageFinished()
+    {
+        if(!myHealth.IsDeath()) SetState(stateNetwork.GetDamageFinishedNode());
     }
 
     private void Die()

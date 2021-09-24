@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
    
    private float walkSpeed = 14f;
    private int health = 50;
+   private int maxHealth = 50;
    private int currentHealth = 50;
    private bool invincible = false;
    private WorldController worldController;
@@ -44,8 +45,8 @@ public class PlayerController : MonoBehaviour
       WorldGraph.Subscribe(this, typeof(PlayerController));
       walkSpeed = settings.walkSpeed;
       currentHealth = settings.startHealth;
+      maxHealth = settings.startHealth;
       health = settings.startHealth;
-
    }
 
    private void Start()
@@ -65,6 +66,9 @@ public class PlayerController : MonoBehaviour
 
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
+
+      itemBehaviourController.ChangeHealth -= AddHealth;
+      itemBehaviourController.ChangeHealth += AddHealth;
       
       foreach (var description in itemDescriptions.collection.descriptions)
       {
@@ -131,10 +135,10 @@ public class PlayerController : MonoBehaviour
       animator.SetWalk(0, 0);
    }
 
-
    public void AddHealth(int heal)
    {
       currentHealth += heal;
+      if (currentHealth > maxHealth) currentHealth = maxHealth;
       OnHealthChange?.Invoke(currentHealth);
    }
    

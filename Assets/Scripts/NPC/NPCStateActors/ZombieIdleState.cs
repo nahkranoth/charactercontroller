@@ -10,10 +10,13 @@ public class ZombieIdleState: AbstractEnemyState
     
     private INPCSettings settings;
     private Coroutine idleWaitTimer;
+    
+    private PlayerController player;
 
     public ZombieIdleState(INPCSettings _settings)
     {
         settings = _settings;
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
 
     public override void Activate()
@@ -26,6 +29,11 @@ public class ZombieIdleState: AbstractEnemyState
     {
         Parent.rigidBody.velocity = Vector2.zero;
         Parent.rigidBody.Sleep();
+        if (Vector3.Distance(player.transform.position, Parent.transform.position) < settings.detectDistance)
+        {
+            Parent.StopCoroutine(WaitToRoamAgain());
+            Parent.SetState("angry");
+        }
     }
 
     IEnumerator WaitToRoamAgain()
