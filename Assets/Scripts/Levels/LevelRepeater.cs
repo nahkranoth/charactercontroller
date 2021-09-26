@@ -16,14 +16,14 @@ public class LevelRepeater : MonoBehaviour
     {
         var tg = GetLowest();
         tg.Generate();
-        tg.tilemap.transform.localPosition = new Vector3(0, tg.tilemap.transform.localPosition.y + tg.tilemap.size.y, 0);
+        tg.tilemap.transform.localPosition = new Vector3(0, tg.tilemap.transform.localPosition.y + tg.tilemap.size.y * 2, 0);
     }
     
     public void Decrease()
     {
         var tg = GetHighest();
         tg.Generate();
-        tg.tilemap.transform.localPosition = new Vector3(0, tg.tilemap.transform.localPosition.y - tg.tilemap.size.y, 0);
+        tg.tilemap.transform.localPosition = new Vector3(0, tg.tilemap.transform.localPosition.y - tg.tilemap.size.y * 2, 0);
     }
 
     public TilemapGenerator GetLowest()
