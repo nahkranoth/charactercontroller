@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa103634998794478b2f184e87a0415, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  walkSpeed: 14
+  startHealth: 50
+  walkSpeed: 222
+  chargeWalkSpeed: 3
