@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class LevelRepeater : MonoBehaviour
 {
-    public TilemapGenerator tilemapGenOne;
-    public TilemapGenerator tilemapGenTwo;
+    public TilemapBackgroundGenerator tilemapBackgroundGenOne;
+    public TilemapBackgroundGenerator tilemapBackgroundGenTwo;
 
     public bool increase;
 
@@ -16,25 +16,25 @@ public class LevelRepeater : MonoBehaviour
     {
         var tg = GetLowest();
         tg.Generate();
-        tg.tilemap.transform.localPosition = new Vector3(0, tg.tilemap.transform.localPosition.y + tg.tilemap.size.y * 2, 0);
+        tg.SetPosition(new Vector3(0, tg.tilemap.transform.localPosition.y + tg.tilemap.size.y * 2, 0));
     }
     
     public void Decrease()
     {
         var tg = GetHighest();
         tg.Generate();
-        tg.tilemap.transform.localPosition = new Vector3(0, tg.tilemap.transform.localPosition.y - tg.tilemap.size.y * 2, 0);
+        tg.SetPosition(new Vector3(0, tg.tilemap.transform.localPosition.y - tg.tilemap.size.y * 2, 0));
     }
 
-    public TilemapGenerator GetLowest()
+    public TilemapBackgroundGenerator GetLowest()
     {
-        if (tilemapGenOne.tilemap.transform.position.y > tilemapGenTwo.tilemap.transform.position.y) return tilemapGenTwo;
-        return tilemapGenOne;
+        if (tilemapBackgroundGenOne.GetY() > tilemapBackgroundGenTwo.GetY()) return tilemapBackgroundGenTwo;
+        return tilemapBackgroundGenOne;
     }
     
-    public TilemapGenerator GetHighest()
+    public TilemapBackgroundGenerator GetHighest()
     {
-        if (tilemapGenOne.tilemap.transform.position.y < tilemapGenTwo.tilemap.transform.position.y) return tilemapGenTwo;
-        return tilemapGenOne;
+        if (tilemapBackgroundGenOne.GetY() < tilemapBackgroundGenTwo.GetY()) return tilemapBackgroundGenTwo;
+        return tilemapBackgroundGenOne;
     }
 }
