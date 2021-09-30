@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class LevelRepeater : MonoBehaviour
 {
-    public TilemapBackgroundGenerator tilemapBackgroundGenOne;
-    public TilemapBackgroundGenerator tilemapBackgroundGenTwo;
+    public TilemapBackgroundGenerator bgTmTick;
+    public TilemapBackgroundGenerator bgTmTack;
 
     public void Increase()
     {
@@ -21,13 +21,13 @@ public class LevelRepeater : MonoBehaviour
 
     public TilemapBackgroundGenerator GetLowest()
     {
-        if (tilemapBackgroundGenOne.GetY() > tilemapBackgroundGenTwo.GetY()) return tilemapBackgroundGenTwo;
-        return tilemapBackgroundGenOne;
+        if (bgTmTick.GetY() > bgTmTack.GetY()) return bgTmTack;
+        return bgTmTick;
     }
     
     public TilemapBackgroundGenerator GetHighest()
     {
-        if (tilemapBackgroundGenOne.GetY() < tilemapBackgroundGenTwo.GetY()) return tilemapBackgroundGenTwo;
-        return tilemapBackgroundGenOne;
+        if (bgTmTick.GetY() < bgTmTack.GetY()) return bgTmTack;
+        return bgTmTick;
     }
 }
