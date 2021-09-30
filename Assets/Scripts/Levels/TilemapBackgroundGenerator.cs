@@ -1,6 +1,4 @@
-﻿using Levels;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class TilemapBackgroundGenerator : TilemapGenerator
@@ -15,16 +13,6 @@ public class TilemapBackgroundGenerator : TilemapGenerator
         tileBaseMap.Add(1, grass);
         tileBaseMap.Add(2, road);
         Generate();
-    }
-
-    public void SetPosition(Vector3 pos)
-    {
-        tilemap.transform.localPosition = pos;
-    }
-
-    public float GetY()
-    {
-        return tilemap.transform.position.y;
     }
 
     public void Generate()

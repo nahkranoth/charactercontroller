@@ -12,13 +12,13 @@ public class LevelRepeatDetector : MonoBehaviour
     {
         var highest = repeater.GetHighest();
         var lowest = repeater.GetLowest();
-        if (camera.transform.position.y > highest.transform.position.y + incOffset)
+        if (camera.transform.position.y > highest.GetY() + incOffset)
         {
             repeater.Increase();
             return;
         }
 
-        if (camera.transform.position.y < lowest.transform.position.y - decOffset)
+        if (camera.transform.position.y < lowest.GetY() - decOffset)
         {
             repeater.Decrease();
         }

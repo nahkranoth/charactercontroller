@@ -5,13 +5,6 @@ public class LevelRepeater : MonoBehaviour
     public TilemapBackgroundGenerator tilemapBackgroundGenOne;
     public TilemapBackgroundGenerator tilemapBackgroundGenTwo;
 
-    public bool increase;
-
-    private void OnValidate()
-    {
-        Increase();
-    }
-
     public void Increase()
     {
         var tg = GetLowest();
