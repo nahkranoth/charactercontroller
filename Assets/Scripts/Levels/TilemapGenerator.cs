@@ -7,6 +7,8 @@ public abstract class TilemapGenerator : MonoBehaviour
 {
     public Vector2Int size;
     public Tilemap tilemap;
+    public TileBase grass;
+    
     internal Dictionary<int, TileBase> tileBaseMap = new Dictionary<int, TileBase>();
     
     public Action<Tilemap> OnDoneInit;
@@ -21,23 +23,21 @@ public abstract class TilemapGenerator : MonoBehaviour
         return tilemap.transform.position.y;
     }
     
-    internal void InitBlueprint(ref int[,] map)
+    internal void InitBlueprint(ref TileBase[,] map)
     {
         for (int x = 0; x < size.x; x++)
         for (int y = 0; y < size.y; y++)
-            map[x, y] = 1;
+            map[x, y] = grass;
     }
     
-    internal void BuildMap(int[,] map)
+    internal void BuildMap(TileBase[,] map)
     {
         tilemap.ClearAllTiles();
-        TileBase tb;
         for (int x = 0; x < map.GetUpperBound(0); x++)
         {
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                tileBaseMap.TryGetValue(map[x, y], out tb);
-                tilemap.SetTile(new Vector3Int(x - size.x/2, y - size.y/2, 0), tb);
+                tilemap.SetTile(new Vector3Int(x - size.x/2, y - size.y/2, 0), map[x,y]);
             }
         }
         OnDoneInit?.Invoke(tilemap);

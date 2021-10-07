@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
+  m_Name: House1
+  m_EditorClassIdentifier: 
+  map:
+  - position: {x: 0, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: e240ad5904d944345ae5d1ba11aae510, type: 2}
+  - position: {x: 0, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 8a7e6645747604d47a65738c0f9af824, type: 2}
+  - position: {x: 0, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 12a2d0e4298141740aae1886a94eb78c, type: 2}
+  - position: {x: 0, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 261d9af9e6920c3439a75b4545838013, type: 2}
+  - position: {x: 0, y: 4, z: 0}
+    tile: {fileID: 11400000, guid: e53f9012a2d96314c99b0f18ff594500, type: 2}
+  - position: {x: 1, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: e123d60d672f094499ab128f80ad91da, type: 2}
+  - position: {x: 1, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 550aaa50b0ac0594985e6dccd9f97c8c, type: 2}
+  - position: {x: 1, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: c36f3ad797e20634d81d64d56f6faf74, type: 2}
+  - position: {x: 1, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 6f66628abceea1a4ebad627ee57e2d1a, type: 2}
+  - position: {x: 1, y: 4, z: 0}
+    tile: {fileID: 11400000, guid: 2ba7bb4f8f4d74648a74e9035b33c011, type: 2}
+  - position: {x: 2, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 1262dc171cb2efa4794b5bdc44b74c8e, type: 2}
+  - position: {x: 2, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: dbaba802c42277d468203281c4f8f1a0, type: 2}
+  - position: {x: 2, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 5e7be44dfdd922c48827da24f45129f9, type: 2}
+  - position: {x: 2, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: db8b385a4446eaf4897a13844536e531, type: 2}
+  - position: {x: 2, y: 4, z: 0}
+    tile: {fileID: 11400000, guid: 93c1af6023bc2d648938094e59ad0ff5, type: 2}
+  - position: {x: 3, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 06dfaa21d0fbe6c4192c67faf041c0d3, type: 2}
+  - position: {x: 3, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 5333b8ce12cccfa4e9a980ac973e7f5e, type: 2}
+  - position: {x: 3, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: d9dfdc7217f30ad4aaa6efadbb3eebc3, type: 2}
+  - position: {x: 3, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 819ceec8af3bc234ba638df9c54d43cc, type: 2}
+  - position: {x: 3, y: 4, z: 0}
+    tile: {fileID: 11400000, guid: da3733cfb14bff04188ebb8e212d7e4f, type: 2}
+  - position: {x: 4, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: b5d33d0168c00e042b82da4fc3b02671, type: 2}
+  - position: {x: 4, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 2f1e095e0fb2ede4ca2dfa759a39da5f, type: 2}
+  - position: {x: 4, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 7b9229dff00d70c40b28117126538de1, type: 2}
+  - position: {x: 4, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: a3db71dd45a60f042a449a2878d58d94, type: 2}
+  - position: {x: 4, y: 4, z: 0}
+    tile: {fileID: 11400000, guid: 8836801c46c85a444a275d6ba0ac3bb2, type: 2}
+  - position: {x: 5, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 28dd66dc1cdf6dc479f4a2bc214126d0, type: 2}
+  - position: {x: 5, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 2c1dcfd7afe7224489ccbe64ef3fad5e, type: 2}
+  - position: {x: 5, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 74ca85e5c12a2544e868c8725c7dd912, type: 2}
+  - position: {x: 5, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 92968018d618fc7459df6c218a9794d8, type: 2}
+  - position: {x: 5, y: 4, z: 0}
+    tile: {fileID: 11400000, guid: 8c5ea15c6e92b994888b4ddbe7e43060, type: 2}
+  xSize: 10
+  ySize: 8
