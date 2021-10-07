@@ -4,9 +4,7 @@ using Random = UnityEngine.Random;
 
 public class TilemapBackgroundGenerator : TilemapGenerator
 {
-    public TileBase road;
-
-    public TileConstruct construct;
+    public TileConstructCollection buildings;
     
     private TileBase[,] blueprint;
 
@@ -20,12 +18,15 @@ public class TilemapBackgroundGenerator : TilemapGenerator
         blueprint = new TileBase[size.x,size.y];
         InitBlueprint(ref blueprint);
         AddRoad(ref blueprint);
-        AddConstruct(ref blueprint, construct, new Vector3Int(0, 0, 0));
+        AddConstruct(ref blueprint, buildings, new Vector3Int(12, 12, 0));
         BuildMap(blueprint);
     }
 
-    public void AddConstruct(ref TileBase[,] map, TileConstruct construct, Vector3Int position)
+    public void AddConstruct(ref TileBase[,] map, TileConstructCollection constructs, Vector3Int offset)
     {
+        int randomIndex = Random.Range(0, constructs.collection.Count);
+        var construct = constructs.collection[0];
+        
         foreach (var tile in construct.map)
         {
             map[tile.position.x, tile.position.y] = tile.tile;
@@ -38,7 +39,7 @@ public class TilemapBackgroundGenerator : TilemapGenerator
         int currentX = xSize / 2;
         int ySize = map.GetUpperBound(1);
         int halfY = ySize / 2;
-        
+        var road = library.GetTile(TileLibraryKey.Road);
         for (int y = 0; y < halfY+1; y++)
         {
             if(currentX > 0 && currentX < xSize) map[currentX, y] = road;

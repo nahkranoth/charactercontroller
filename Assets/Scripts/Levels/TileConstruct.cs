@@ -4,6 +4,7 @@ using UnityEngine;
 
 [Serializable]
 public class TileConstruct:ScriptableObject
-{ 
+{
+    public string name;
     public List<TileWrapper> map;
 }

@@ -7,8 +7,8 @@ public abstract class TilemapGenerator : MonoBehaviour
 {
     public Vector2Int size;
     public Tilemap tilemap;
-    public TileBase grass;
-    
+    public TileLibrary library;
+
     internal Dictionary<int, TileBase> tileBaseMap = new Dictionary<int, TileBase>();
     
     public Action<Tilemap> OnDoneInit;
@@ -27,7 +27,7 @@ public abstract class TilemapGenerator : MonoBehaviour
     {
         for (int x = 0; x < size.x; x++)
         for (int y = 0; y < size.y; y++)
-            map[x, y] = grass;
+            map[x, y] = library.GetTile(TileLibraryKey.Grass);
     }
     
     internal void BuildMap(TileBase[,] map)

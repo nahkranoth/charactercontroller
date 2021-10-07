@@ -6,10 +6,16 @@ using UnityEngine.Tilemaps;
 [CustomEditor(typeof(Tilemap))]
 public class TileMapExtender:Editor
 {
+    private string filename = "Settings/Constructs/Name";
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        if (GUILayout.Button("Save as template"))
+        GUILayout.Space(30);
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Construct Filename");
+        filename = GUILayout.TextField(filename);
+        GUILayout.EndHorizontal();
+        if (GUILayout.Button("Save"))
         {
             var tm = target as Tilemap;
             TileConstruct tc = CreateInstance<TileConstruct>();
@@ -20,11 +26,12 @@ public class TileMapExtender:Editor
                 {
                     var t = tm.GetTile(new Vector3Int(x, y, 0)) as Tile;
                     if(t == null) continue;
-                    nMap.Add(new TileWrapper(){position = new Vector3Int(x,y,0), tile = t});
+                    var pixels = t.sprite.texture.GetPixels();
+                    if (pixels[0].grayscale != 0) nMap.Add(new TileWrapper{position = new Vector3Int(x,y,0), tile = t});
                 }
             }
             tc.map = nMap;
-            AssetDatabase.CreateAsset(tc, "Assets/New2.asset");
+            AssetDatabase.CreateAsset(tc, $"Assets/{filename}.asset");
             AssetDatabase.SaveAssets();
         }
     }
