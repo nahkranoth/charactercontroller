@@ -2,6 +2,6 @@
 
 public class CollisionTilemapData
 {
-    public Vector3Int[] constructPositions;
+    public Bounds[] constructBounds;
     
 }

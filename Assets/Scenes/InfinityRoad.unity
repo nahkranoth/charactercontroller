@@ -141,6 +141,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1517900154}
     m_Modifications:
+    - target: {fileID: 838070208642224976, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3530391785398088930, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_Name
       value: TilemapContainerTack
@@ -188,14 +192,6 @@ PrefabInstance:
     - target: {fileID: 3530391785398088931, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
-      propertyPath: tilemapSize.x
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
-      propertyPath: tilemapSize.y
-      value: 63
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
@@ -452,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scale: 1
   color: {r: 1, g: 0.9104993, b: 0, a: 1}
+  running: 0
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scale: 1
   color: {r: 1, g: 0, b: 0, a: 1}
+  running: 0
 --- !u!114 &706521977 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1665035447890616189, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
@@ -1237,6 +1235,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1517900154}
     m_Modifications:
+    - target: {fileID: 838070208642224976, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+      propertyPath: scale
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 838070208642224976, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3530391785398088930, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_Name
       value: TilemapContainerTick
@@ -1284,14 +1290,6 @@ PrefabInstance:
     - target: {fileID: 3530391785398088931, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
-      propertyPath: tilemapSize.x
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
-      propertyPath: tilemapSize.y
-      value: 63
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb75eae928247e428cf46d225134f9b, type: 3}

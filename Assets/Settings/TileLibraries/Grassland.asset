@@ -17,3 +17,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: ab0be4b1f084608439c87238b212b437, type: 2}
   - key: 1
     tile: {fileID: 11400000, guid: 98182602bc1727a479b3d92f46b7fc27, type: 2}
+  - key: 2
+    tile: {fileID: 11400000, guid: e5bdd0b8d1450a840ae2ea448faf76c2, type: 2}
+  - key: 3
+    tile: {fileID: 11400000, guid: 024d8bd08a2607d41a02478cee04c103, type: 2}

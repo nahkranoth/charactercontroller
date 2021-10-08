@@ -14,12 +14,13 @@ public abstract class TilemapGenerator : MonoBehaviour
     internal Dictionary<int, TileBase> tileBaseMap = new Dictionary<int, TileBase>();
     
     public Action<Tilemap> OnDoneInit;
-    
-    public void SetPosition(Vector3 pos)
-    {
-        tilemap.transform.localPosition = pos;
-    }
 
+    public Vector3 Position
+    {
+        get { return tilemap.transform.localPosition; }
+        set{ tilemap.transform.localPosition = value; }
+    }
+    
     public float GetY()
     {
         return tilemap.transform.position.y;
@@ -39,7 +40,7 @@ public abstract class TilemapGenerator : MonoBehaviour
         {
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                tilemap.SetTile(new Vector3Int(x - size.x/2, y - size.y/2, 0), map[x,y]);
+                tilemap.SetTile(new Vector3Int(x, y, 0), map[x,y]);
             }
         }
         OnDoneInit?.Invoke(tilemap);
