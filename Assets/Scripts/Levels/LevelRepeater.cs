@@ -2,32 +2,32 @@ using UnityEngine;
 
 public class LevelRepeater : MonoBehaviour
 {
-    public TilemapBackgroundGenerator bgTmTick;
-    public TilemapBackgroundGenerator bgTmTack;
+    public MetaTilemapGenerator metaTilemapTick;
+    public MetaTilemapGenerator metaTilemapTack;
 
     public void Increase()
     {
         var tg = GetLowest();
         tg.Generate();
-        tg.SetPosition(new Vector3(0, tg.tilemap.transform.localPosition.y + tg.tilemap.size.y * 2, 0));
+        tg.SetPosition(new Vector3(0, tg.background.tilemap.transform.localPosition.y + (tg.tilemapSize.y-1) * 2, 0));
     }
     
     public void Decrease()
     {
         var tg = GetHighest();
         tg.Generate();
-        tg.SetPosition(new Vector3(0, tg.tilemap.transform.localPosition.y - tg.tilemap.size.y * 2, 0));
+        tg.SetPosition(new Vector3(0, tg.background.tilemap.transform.localPosition.y - tg.background.tilemap.size.y * 2, 0));
     }
 
-    public TilemapBackgroundGenerator GetLowest()
+    public MetaTilemapGenerator GetLowest()
     {
-        if (bgTmTick.GetY() > bgTmTack.GetY()) return bgTmTack;
-        return bgTmTick;
+        if (metaTilemapTick.GetY() > metaTilemapTack.GetY()) return metaTilemapTack;
+        return metaTilemapTick;
     }
     
-    public TilemapBackgroundGenerator GetHighest()
+    public MetaTilemapGenerator GetHighest()
     {
-        if (bgTmTick.GetY() < bgTmTack.GetY()) return bgTmTack;
-        return bgTmTick;
+        if (metaTilemapTick.GetY() < metaTilemapTack.GetY()) return metaTilemapTack;
+        return metaTilemapTick;
     }
 }

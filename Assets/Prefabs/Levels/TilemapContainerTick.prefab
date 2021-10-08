@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3530391785209153640}
   - component: {fileID: 3530391785209153641}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: TilemapBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,8 +129,9 @@ GameObject:
   - component: {fileID: 3530391785229653855}
   - component: {fileID: 3530391785229653826}
   - component: {fileID: 3530391785229653853}
+  - component: {fileID: 2108735619574152315}
   m_Layer: 0
-  m_Name: TilemapFG
+  m_Name: TilemapCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +228,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -236,6 +237,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!19719996 &2108735619574152315
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3530391785229653854}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &3530391785398088930
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,8 +262,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3530391785398088931}
+  - component: {fileID: 7107603378791404076}
   - component: {fileID: 3530391785398088928}
-  - component: {fileID: 5848206656593949412}
+  - component: {fileID: 5635896799117020292}
   m_Layer: 0
   m_Name: TilemapContainerTick
   m_TagString: Untagged
@@ -270,6 +288,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7107603378791404076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3530391785398088930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4acb4ea7ca45458aa75f4d62497d3cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 3530391785398088928}
+  collision: {fileID: 5635896799117020292}
 --- !u!114 &3530391785398088928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,9 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 63, y: 63}
   tilemap: {fileID: 3530391785209153640}
-  grass: {fileID: 11400000, guid: ab0be4b1f084608439c87238b212b437, type: 2}
-  road: {fileID: 11400000, guid: 5a494dfb224fb7a48bee2cea61dff32a, type: 2}
---- !u!114 &5848206656593949412
+  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
+--- !u!114 &5635896799117020292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,8 +326,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3530391785398088930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b0aca517114862911271aa31b8504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c28d1ad3cad4783a761a17883708e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 63, y: 63}
   tilemap: {fileID: 3530391785229653826}
+  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
+  buildings: {fileID: 11400000, guid: 6299839228d0b7f4f8d6cd34db609296, type: 2}

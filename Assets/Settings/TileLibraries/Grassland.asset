@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c680e6e3e2c3b4e958ec139d296c98, type: 3}
   m_Name: Grassland
   m_EditorClassIdentifier: 
+  library:
+  - key: 0
+    tile: {fileID: 11400000, guid: ab0be4b1f084608439c87238b212b437, type: 2}
+  - key: 1
+    tile: {fileID: 11400000, guid: 98182602bc1727a479b3d92f46b7fc27, type: 2}

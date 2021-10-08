@@ -24,6 +24,6 @@ public struct TileLibraryItem
 
 public enum TileLibraryKey
 {
-    Grass,
+    Floor,
     Road
 }
