@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class BinarySpaceTree
 {
-    public static Bounds[] Generate(Bounds full, int depth)
+    public static Bounds[] Generate(Bounds[] seeds, int depth)
     {
-        List<Bounds> result = new List<Bounds>();
-        result.Add(full);
+        List<Bounds> result = seeds.ToList();
         
         for(var j=0;j<depth;j++){
             List<Bounds> tempStorage = new List<Bounds>();

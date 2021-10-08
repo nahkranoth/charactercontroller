@@ -20,14 +20,18 @@ public class MetaTilemapGenerator:MonoBehaviour
         CollisionTilemapData collisionData = new CollisionTilemapData();
         BackgroundTilemapData backgroundData = new BackgroundTilemapData();
 
-
         var trimmedWidth = tilemapSize.x - 52;//trim value
-        var collPos = new Vector3Int(tilemapSize.x/2, tilemapSize.y/2, 0);
+        var trimmedHeight = tilemapSize.y - 8;//trim value
         
-        var sourceBounds = new Bounds(collPos, new Vector3Int(trimmedWidth/2, tilemapSize.y, 0));
+        var collPosLeft = new Vector3Int(tilemapSize.x/4, tilemapSize.y/2, 0);
+        var sourceBoundsLeft = new Bounds(collPosLeft, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
         
-        collisionData.constructBounds = BinarySpaceTree.Generate(sourceBounds, 4);
-        backgroundData.floorPatternBounds = BinarySpaceTree.Generate(sourceBounds, 4);
+        var collPosRight = new Vector3Int(tilemapSize.x - tilemapSize.x/4, tilemapSize.y/2, 0);
+        var sourceBoundsRight = new Bounds(collPosRight, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
+        var levelPlan = BinarySpaceTree.Generate(new []{sourceBoundsRight, sourceBoundsLeft}, 4);
+        
+        collisionData.constructBounds = levelPlan;
+        backgroundData.floorPatternBounds = levelPlan;
         debugDraw.SetBounds(backgroundData.floorPatternBounds, transform.localPosition);
 
         background.Generate(backgroundData, tilemapSize);
