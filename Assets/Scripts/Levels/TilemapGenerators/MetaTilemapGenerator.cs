@@ -10,10 +10,6 @@ public class MetaTilemapGenerator:MonoBehaviour
 
     public DebugDrawBounds debugDraw;
     public int boundsAreaSearchDepth;
-    public void Start()
-    {
-        Generate();
-    }
 
     public void Generate()
     {
@@ -31,7 +27,6 @@ public class MetaTilemapGenerator:MonoBehaviour
         
         generateData.planBounds = levelPlan;
         debugDraw.SetBounds(generateData.planBounds, transform.localPosition);
-
         background.Generate(generateData, tilemapSize);
         collision.Generate(generateData, tilemapSize);
     }
