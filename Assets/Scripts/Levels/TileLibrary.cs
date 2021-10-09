@@ -28,4 +28,5 @@ public enum TileLibraryKey
     Road,
     DimFloor,
     SolidFloor,
+    Foliage
 }

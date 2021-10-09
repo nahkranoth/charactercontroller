@@ -26,11 +26,15 @@ public class TileMapExtender:Editor
                 {
                     var t = tm.GetTile(new Vector3Int(x, y, 0)) as Tile;
                     if(t == null) continue;
-                    var pixels = t.sprite.texture.GetPixels();
-                    if (pixels[0].grayscale != 0) nMap.Add(new TileWrapper{position = new Vector3Int(x,y,0), tile = t});
+                    nMap.Add(new TileWrapper
+                    {
+                        position = new Vector3Int(x,y,0), 
+                        tile = t
+                    });
                 }
             }
             tc.map = nMap;
+            tc.size = new Vector2Int(tm.size.x, tm.size.y);
             AssetDatabase.CreateAsset(tc, $"Assets/{filename}.asset");
             AssetDatabase.SaveAssets();
         }

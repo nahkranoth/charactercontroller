@@ -25,9 +25,9 @@ public class MetaTilemapGenerator:MonoBehaviour
         
         var collPosLeft = new Vector3Int(tilemapSize.x/4, tilemapSize.y/2, 0);
         var sourceBoundsLeft = new Bounds(collPosLeft, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
-        
         var collPosRight = new Vector3Int(tilemapSize.x - tilemapSize.x/4, tilemapSize.y/2, 0);
         var sourceBoundsRight = new Bounds(collPosRight, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
+        
         var levelPlan = BinarySpaceTree.Generate(new []{sourceBoundsRight, sourceBoundsLeft}, 4);
         
         collisionData.constructBounds = levelPlan;

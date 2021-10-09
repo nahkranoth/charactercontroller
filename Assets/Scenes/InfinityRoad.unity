@@ -141,10 +141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1517900154}
     m_Modifications:
-    - target: {fileID: 838070208642224976, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3530391785398088930, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_Name
       value: TilemapContainerTack
@@ -841,7 +837,7 @@ MonoBehaviour:
   camera: {fileID: 519420033}
   repeater: {fileID: 1517900158}
   incOffset: 2
-  decOffset: 1
+  decOffset: -2
 --- !u!114 &1517900158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,11 +1099,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1655262374592594938, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1655262374592594938, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1655262374592594938, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1242,6 +1238,14 @@ PrefabInstance:
     - target: {fileID: 838070208642224976, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530391785209153641, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530391785229653853, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3530391785398088930, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_Name

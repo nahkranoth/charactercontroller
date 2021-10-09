@@ -94,3 +94,4 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 9aa44bb911c0da3439425eb8ded5569a, type: 2}
   - position: {x: 5, y: 5, z: 0}
     tile: {fileID: 11400000, guid: d53f3a46acaf8bb4e8000343c13b3ee4, type: 2}
+  size: {x: 6, y: 7}
