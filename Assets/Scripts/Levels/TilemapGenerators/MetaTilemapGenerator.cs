@@ -9,7 +9,7 @@ public class MetaTilemapGenerator:MonoBehaviour
     public CollisionTilemapGenerator collision;
 
     public DebugDrawBounds debugDraw;
-    
+    public int boundsAreaSearchDepth;
     public void Start()
     {
         Generate();
@@ -17,8 +17,7 @@ public class MetaTilemapGenerator:MonoBehaviour
 
     public void Generate()
     {
-        CollisionTilemapData collisionData = new CollisionTilemapData();
-        BackgroundTilemapData backgroundData = new BackgroundTilemapData();
+        GenerateTilemapData generateData = new GenerateTilemapData();
 
         var trimmedWidth = tilemapSize.x - 52;//trim value
         var trimmedHeight = tilemapSize.y - 8;//trim value
@@ -28,14 +27,13 @@ public class MetaTilemapGenerator:MonoBehaviour
         var collPosRight = new Vector3Int(tilemapSize.x - tilemapSize.x/4, tilemapSize.y/2, 0);
         var sourceBoundsRight = new Bounds(collPosRight, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
         
-        var levelPlan = BinarySpaceTree.Generate(new []{sourceBoundsRight, sourceBoundsLeft}, 4);
+        var levelPlan = BinarySpaceTree.Generate(new []{sourceBoundsRight, sourceBoundsLeft}, boundsAreaSearchDepth);
         
-        collisionData.constructBounds = levelPlan;
-        backgroundData.floorPatternBounds = levelPlan;
-        debugDraw.SetBounds(backgroundData.floorPatternBounds, transform.localPosition);
+        generateData.planBounds = levelPlan;
+        debugDraw.SetBounds(generateData.planBounds, transform.localPosition);
 
-        background.Generate(backgroundData, tilemapSize);
-        collision.Generate(collisionData, tilemapSize);
+        background.Generate(generateData, tilemapSize);
+        collision.Generate(generateData, tilemapSize);
     }
 
     public float GetY()

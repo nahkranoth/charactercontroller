@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 [CreateAssetMenu(fileName = "ConstructCollection", menuName = "Custom/ConstructCollection", order = 1)]
@@ -10,8 +9,9 @@ public class TileConstructCollection : ScriptableObject
 
     public TileConstruct GetByBounds(Bounds bounds)
     {
-        // int randomIndex = Random.Range(0, collection.Count);
-        var candidate = collection.Find(x => x.size.x <= bounds.size.x && x.size.y <= bounds.size.y);
-        return candidate;
+        var candidates = collection.FindAll(x => x.size.x <= bounds.size.x && x.size.y <= bounds.size.y);
+        if (candidates.Count == 0) return null;
+        int randomIndex = Random.Range(0, candidates.Count);
+        return candidates[randomIndex];
     }
 }

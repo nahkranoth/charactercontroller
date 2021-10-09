@@ -76,35 +76,9 @@ public abstract class TilemapGenerator : MonoBehaviour
 
             for (var x = 0; x < edgeDiff; x++)
             {
-                if(offstCurrentX > 0 && offstCurrentX+x < xSize) map[offstCurrentX+x, y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, y] = road;
                 //mirror
-                if(offstCurrentX > 0 && offstCurrentX+x < xSize) map[offstCurrentX+x, ySize-1-y] = road;
-            }
-          
-            currentX += Random.Range(-1, 2);
-        }
-    }
-    
-    internal void AddVerticalDrunkFillWest(ref TileBase[,] map, TileLibraryKey tile, int offsetX)
-    {
-        int xSize = map.GetUpperBound(0);
-        int currentX = xSize / 2;
-        int ySize = map.GetUpperBound(1);
-        int halfY = ySize / 2;
-        var road = library.GetTile(tile);
-
-        var offstCurrentX = 0;
-        for (int y = 0; y < halfY+1; y++)
-        {
-            offstCurrentX = currentX + offsetX;
-
-            int edgeDiff = offstCurrentX;
-
-            for (var x = 0; x < edgeDiff; x++)
-            {
-                if(offstCurrentX > 0 && offstCurrentX+x < xSize) map[offstCurrentX+x, y] = road;
-                //mirror
-                if(offstCurrentX > 0 && offstCurrentX+x < xSize) map[offstCurrentX+x, ySize-1-y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, ySize-1-y] = road;
             }
           
             currentX += Random.Range(-1, 2);
@@ -126,16 +100,16 @@ public abstract class TilemapGenerator : MonoBehaviour
 
             for (int x = -thickness/2; x < thickness/2; x++)
             {
-                if(offstCurrentX > 0 && offstCurrentX+x < xSize) map[offstCurrentX+x, y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, y] = road;
                 //mirror
-                if(offstCurrentX > 0 && offstCurrentX+x < xSize) map[offstCurrentX+x, ySize-1-y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, ySize-1-y] = road;
             }
           
             currentX += Random.Range(-1, 2);
         }
     }
     
-    internal void DrawBounds(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey)
+    internal void FillBounds(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey)
     {
         int xSize = map.GetUpperBound(0);
         int ySize = map.GetUpperBound(1);
@@ -148,15 +122,69 @@ public abstract class TilemapGenerator : MonoBehaviour
             int extentX = (int) patternBounds.extents.x;
             int extentY = (int) patternBounds.extents.y;
             
-            for (var x = -extentX-1; x < extentX+1; x++)
+            for (var x = -extentX; x < extentX+1; x++)
             {
                 for (var y = -extentY; y < extentY+1; y++)
                 {
                     var newX = centerX + x;
                     var newY = centerY + y;
-                    if(newX >= 0 && newX <= xSize && newY >= 0 && newY <= ySize) map[newX, newY] = library.GetTile(tileKey);
+                    if(WithinTilemap(newX, xSize, newY, ySize)) map[newX, newY] = library.GetTile(tileKey);
                 }
             }
         }
+    }
+    
+    internal void DrawBoundsOutline(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey)
+    {
+        int xSize = map.GetUpperBound(0);
+        int ySize = map.GetUpperBound(1);
+        
+        foreach (var patternBounds in bounds)
+        {
+            int centerX = (int) patternBounds.center.x;
+            int centerY = (int) patternBounds.center.y;
+            
+            int extentX = (int) patternBounds.extents.x;
+            int extentY = (int) patternBounds.extents.y;
+            
+            for (var x = -extentX; x < extentX + 1; x++)
+            {
+                var newX = centerX + x;
+                if(WithinTilemap(newX,xSize, centerY+extentY, ySize)) map[newX, centerY+extentY] = library.GetTile(tileKey);
+                if(WithinTilemap(newX,xSize, centerY-extentY, ySize)) map[newX, centerY-extentY] = library.GetTile(tileKey);
+            }
+            
+            for (var y = -extentY; y < extentY; y++)
+            {
+                var newY = centerY + y;
+                if(WithinTilemap(centerX+extentX-1,xSize, newY, ySize)) map[centerX+extentX, newY] = library.GetTile(tileKey);
+                if(WithinTilemap(centerX+extentX,xSize, newY, ySize)) map[centerX-extentX, newY] = library.GetTile(tileKey);
+            }
+            
+        }
+    }
+
+    private bool WithinTilemap(int val, int max)
+    {
+        return val >= 0 && val <= max;
+    }
+    
+    private bool WithinTilemap(int valX, int maxX, int valY,  int maxY)
+    {
+        return valX >= 0 && valX <= maxX && valY >= 0 && valY <= maxY;
+    }
+
+    internal void DrawSpray(ref TileBase[,] map, int density, TileLibraryKey tileKey)
+    {
+        int xSize = map.GetUpperBound(0);
+        int ySize = map.GetUpperBound(1);
+
+        for (int i = 0; i < density; i++)
+        {
+            var xRange = Random.Range(0, xSize);
+            var yRange = Random.Range(0, ySize);
+            map[xRange, yRange] = library.GetTile(tileKey);
+        }
+        
     }
 }

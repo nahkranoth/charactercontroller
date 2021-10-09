@@ -305,6 +305,7 @@ MonoBehaviour:
   background: {fileID: 3530391785398088928}
   collision: {fileID: 5635896799117020292}
   debugDraw: {fileID: 838070208642224976}
+  boundsAreaSearchDepth: 3
 --- !u!114 &3530391785398088928
 MonoBehaviour:
   m_ObjectHideFlags: 0

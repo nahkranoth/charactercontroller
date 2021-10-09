@@ -23,3 +23,11 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 024d8bd08a2607d41a02478cee04c103, type: 2}
   - key: 4
     tile: {fileID: 11400000, guid: 65e3e0de1aab35142aea42c2c3b7e896, type: 2}
+  - key: 5
+    tile: {fileID: 11400000, guid: 1659a050476836a448a347cada606f11, type: 2}
+  - key: 6
+    tile: {fileID: 11400000, guid: 5808b24132a1f1b4fab99ac876e7e127, type: 2}
+  - key: 7
+    tile: {fileID: 11400000, guid: aa171761994463a4cad9738e5020d714, type: 2}
+  - key: 8
+    tile: {fileID: 11400000, guid: b435371f26a94764db1184d3f25226c0, type: 2}
