@@ -11,9 +11,8 @@ public abstract class TilemapGenerator : MonoBehaviour
     [HideInInspector] public Vector2Int size;
     public Tilemap tilemap;
     public TileLibrary library;
+    public TileBase[,] blueprint;
 
-    internal Dictionary<int, TileBase> tileBaseMap = new Dictionary<int, TileBase>();
-    
     public Action<Tilemap> OnDoneInit;
 
     public Vector3 Position
@@ -186,5 +185,28 @@ public abstract class TilemapGenerator : MonoBehaviour
             map[xRange, yRange] = library.GetTile(tileKey);
         }
         
+    }
+
+    public List<Vector3> GetAllTilesOfKey(TileLibraryKey key)
+    {
+        List<Vector3> result = new List<Vector3>();
+        var search = library.GetTile(key);
+
+        for (int x = 0; x < blueprint.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y < blueprint.GetUpperBound(1); y++)
+            {
+                if (blueprint[x,y]?.name == search.name)
+                {
+                    result.Add(new Vector3(x,y,0));
+                }
+            }
+        }
+        return result;
+    }
+
+    public bool IsEmpty(Vector3 position)
+    {
+        return blueprint[(int)position.x, (int)position.y] == null;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class InteractionCollectable : MonoBehaviour
 {
    public InteractionDetector interaction;
-   public ItemDescription collectableItem;
+   public ItemCollectionDescription collectableItems;
    private PlayerController player;
    private MessageController message;
    private void Start()
@@ -23,8 +23,10 @@ public class InteractionCollectable : MonoBehaviour
 
    private void OnCollect(int force)
    {
-      message.QueMessage($"Found {collectableItem.item.menuName}");
-      player.inventory.AddByDescription(collectableItem);
+      var randI = Random.Range(0, collectableItems.collection.descriptions.Count);
+      var chosen = collectableItems.collection.descriptions[randI];
+      message.QueMessage($"Found {chosen.item.menuName}");
+      player.inventory.AddByDescription(chosen);
       interaction.OnInteraction -= OnCollect;
       Destroy(gameObject);
    }

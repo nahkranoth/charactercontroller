@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -12,6 +13,7 @@ public class MenuWheelController : MonoBehaviour
     public Transform wheelHolder;
     public GameObject wheelItemPrefab;
     public TextMeshProUGUI selectedItemTxt;
+    public Vector3 offset;
     
     private float degreeFract;
     private InputController inputController;
@@ -87,6 +89,7 @@ public class MenuWheelController : MonoBehaviour
         inputController.Select += Select;
         spinStep = 0;
         selectionStep = 0;
+        
         MakeWheel();
     }
     
@@ -150,6 +153,7 @@ public class MenuWheelController : MonoBehaviour
                spinning = false;
            }
         }
+        transform.position = Camera.main.WorldToScreenPoint(playerController.transform.position) + offset;
     }
 
     private void MakeWheel()

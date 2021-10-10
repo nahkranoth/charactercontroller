@@ -13,6 +13,11 @@ public class TileLibrary : ScriptableObject
     {
         return library.First(x => x.key == key).tile;
     }
+    
+    public TileLibraryKey GetKey(TileBase item)
+    {
+        return library.First(x => x.tile == item).key;
+    }
 }
 
 [Serializable]

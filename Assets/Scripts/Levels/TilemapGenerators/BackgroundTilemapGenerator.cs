@@ -4,8 +4,6 @@ using UnityEngine.Tilemaps;
 
 public class BackgroundTilemapGenerator : TilemapGenerator
 {
-    private TileBase[,] blueprint;
-
     private GenerateTilemapData data;
 
     public void Generate(GenerateTilemapData _data, Vector2Int mapSize)

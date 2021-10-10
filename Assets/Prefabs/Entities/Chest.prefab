@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interaction: {fileID: 6229022770132458746}
-  collectableItem: {fileID: 11400000, guid: cc2be87551b2f1a4a96a4488ad13d22d, type: 2}
+  collectableItems: {fileID: 11400000, guid: a1ca212bda75b6445aa9b28537c7890b, type: 2}
 --- !u!114 &7752340893086441693
 MonoBehaviour:
   m_ObjectHideFlags: 0

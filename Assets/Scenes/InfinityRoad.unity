@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3a036d20189344a816dfda9d86ab3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420033}
+  player: {fileID: 1313533426}
   repeater: {fileID: 1517900158}
   incOffset: 2
   decOffset: -2
@@ -1121,6 +1121,10 @@ PrefabInstance:
     - target: {fileID: 1500617377939766276, guid: 89b141d49fce83c458d1fc37cd4fbb32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500617377939766277, guid: 89b141d49fce83c458d1fc37cd4fbb32, type: 3}
+      propertyPath: offset.y
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 4350587324380756355, guid: 89b141d49fce83c458d1fc37cd4fbb32, type: 3}
       propertyPath: m_fontAsset

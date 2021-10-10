@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MetaLevelEntityPlacer : MonoBehaviour
 {
@@ -19,11 +21,20 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     
     public void Generate(LevelEntityPlacer placer, MetaTilemapGenerator generator)
     {
-        var center = generator.GetWorldPosition() + new Vector3(
-            generator.tilemapSize.x/2 * transform.localScale.x, 
-            generator.tilemapSize.y/2 * transform.localScale.y, 
-            0);
+        var possiblePlaces = generator.background.GetAllTilesOfKey(TileLibraryKey.Floor);
+        Vector3 center;
         
-        placer.GenerateContainer(containerEntities.collection[0], center);
+        placer.ClearContainers();
+        for (int i = 0; i < 5; i++)
+        {
+            var ranI = Random.Range(0, possiblePlaces.Count);
+            var place = possiblePlaces[ranI];
+            if (generator.collision.IsEmpty(place))
+            {
+                center = generator.GetWorldPosition() + place * transform.localScale.x;
+                placer.GenerateContainer(containerEntities.collection[0], center);
+            }
+        }
+        
     }
 }

@@ -4,9 +4,6 @@ using UnityEngine.Tilemaps;
 public class CollisionTilemapGenerator : TilemapGenerator
 {
     public TileConstructCollection buildings;
-    
-    private TileBase[,] blueprint;
-
     private GenerateTilemapData data;
 
     public void Generate(GenerateTilemapData _data, Vector2Int mapSize)
