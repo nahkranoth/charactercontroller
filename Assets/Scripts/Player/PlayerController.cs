@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
    private ItemBehaviourController itemBehaviourController;
    
    private float walkSpeed = 14f;
+   private Vector2 directions;
 
    public Health myHealth;
 
@@ -29,6 +30,13 @@ public class PlayerController : MonoBehaviour
    public ItemCollectionDescription itemDescriptions;
 
    public ItemStorage inventory = new ItemStorage();
+
+   public Vector2 Directions
+   {
+      get => directions;
+      set => directions = value;
+   }
+   
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
@@ -76,8 +84,9 @@ public class PlayerController : MonoBehaviour
       StartCoroutine(ResetDamageState());
    }
 
-   private void OnDirections(Vector2 directions)
+   private void OnDirections(Vector2 direct)
    {
+      directions = direct;
       if (!worldController.playerActive)
       {
          rigid.velocity = Vector2.zero;
