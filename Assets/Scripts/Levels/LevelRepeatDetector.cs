@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LevelRepeatDetector : MonoBehaviour
 {
-    public CameraFollow camera;
+    public PlayerController player;
     public LevelRepeater repeater;
 
     public int incOffset;
@@ -10,15 +10,15 @@ public class LevelRepeatDetector : MonoBehaviour
     
     private void Update()
     {
-        var highest = repeater.GetHighest();
-        var lowest = repeater.GetLowest();
-        if (camera.transform.position.y > highest.GetY() + incOffset)
+        var highest = repeater.GetHighestTilemap();
+        var lowest = repeater.GetLowestTilemap();
+        if (player.transform.position.y > highest.GetY() + incOffset)
         {
             repeater.Increase();
             return;
         }
 
-        if (camera.transform.position.y < lowest.GetY() - decOffset)
+        if (player.transform.position.y < lowest.GetY() - decOffset)
         {
             repeater.Decrease();
         }

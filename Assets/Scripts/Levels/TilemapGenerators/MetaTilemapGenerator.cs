@@ -42,4 +42,14 @@ public class MetaTilemapGenerator:MonoBehaviour
         background.Position = pos;
         collision.Position = pos;
     }
+    
+    public Vector3 GetPosition()
+    {
+        return background.Position;
+    }
+    
+    public Vector3 GetWorldPosition()
+    {
+        return background.tilemap.transform.position;
+    }
 }
