@@ -21,20 +21,20 @@ public class LevelRepeater : MonoBehaviour
     
     public void Increase()
     {
-        var tg = GetLowest();
+        var lowestTilemapGenerator = GetLowest();
         OnIncrease?.Invoke();
-        tg.Generate();
-        var yPos = tg.background.tilemap.transform.localPosition.y + (tg.tilemapSize.y - 1) * 2;
-        tg.SetPosition(new Vector3(0, yPos, 0));
+        lowestTilemapGenerator.Generate();
+        var yPos = lowestTilemapGenerator.background.Position.y + (lowestTilemapGenerator.tilemapSize.y - 1) * 2;
+        lowestTilemapGenerator.SetPosition(new Vector3(0, yPos, 0));
     }
     
     public void Decrease()
     {
-        var tg = GetHighest();
+        var highestTilemapGenerator = GetHighest();
         OnDecrease?.Invoke();
-        tg.Generate();
-        var yPos = tg.background.tilemap.transform.localPosition.y - tg.background.tilemap.size.y * 2;
-        tg.SetPosition(new Vector3(0, yPos, 0));
+        highestTilemapGenerator.Generate();
+        var yPos = highestTilemapGenerator.background.tilemap.transform.localPosition.y - highestTilemapGenerator.background.tilemap.size.y * 2;
+        highestTilemapGenerator.SetPosition(new Vector3(0, yPos, 0));
     }
 
     public MetaTilemapGenerator GetLowest()

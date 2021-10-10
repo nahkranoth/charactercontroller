@@ -6,8 +6,6 @@ public class LevelProgress : MonoBehaviour
     public int startSeed;
     public int currentStep;
     public LevelRepeater repeater;
-
-    public int prev_direction = 0;
     private void Start()
     {
         repeater.OnIncrease -= OnIncreaseLevel;
@@ -20,23 +18,20 @@ public class LevelProgress : MonoBehaviour
         currentStep++;
         UpdateSeed();
         repeater.InitTack();
-        currentStep--;
     }
-
+    
+    //TODO There is an error in here with the start state actually loading in two states putting the currentstep on 1
+    
     private void OnIncreaseLevel()
     {
         currentStep++;
-        if (prev_direction == -1) currentStep++;
         UpdateSeed();
-        prev_direction = 1;
     }
     
     private void OnDecreaseLevel()
     {
         currentStep--;
-        if (prev_direction == 1) currentStep--;
         UpdateSeed();
-        prev_direction = -1;
     }
     
     private void UpdateSeed()

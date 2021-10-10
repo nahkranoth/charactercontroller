@@ -22,11 +22,11 @@ public class DebugDrawBounds : MonoBehaviour
     private DebugDrawSquare[] drawSquares;
     public bool running;
 
-    private Vector3 offsetPosition;
+    private Vector3 position;
 
-    public void SetBounds(Bounds[] set, Vector3 offset)
+    public void SetBounds(Bounds[] set, Vector3 pos)
     {
-        offsetPosition = offset;
+        position = pos;
         bounds = set;
         CalcPositions();
         running = true;
@@ -50,14 +50,14 @@ public class DebugDrawBounds : MonoBehaviour
         for (var i=0;i < bounds.Length;i++)
         {
             var bound = bounds[i];
-            drawSquares[i].p1 = (new Vector3(bound.max.x, bound.min.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p2 = (new Vector3(bound.max.x, bound.max.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p3 = (new Vector3(bound.min.x, bound.min.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p4 = (new Vector3(bound.min.x, bound.max.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p5 = (new Vector3(bound.max.x, bound.min.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p6 = (new Vector3(bound.min.x, bound.min.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p7 = (new Vector3(bound.max.x, bound.max.y, 1) + offsetPosition) * scale;
-            drawSquares[i].p8 = (new Vector3(bound.min.x, bound.max.y, 1) + offsetPosition) * scale;
+            drawSquares[i].p1 = (new Vector3(bound.max.x, bound.min.y, 1) + position) * scale;
+            drawSquares[i].p2 = (new Vector3(bound.max.x, bound.max.y, 1) + position) * scale;
+            drawSquares[i].p3 = (new Vector3(bound.min.x, bound.min.y, 1) + position) * scale;
+            drawSquares[i].p4 = (new Vector3(bound.min.x, bound.max.y, 1) + position) * scale;
+            drawSquares[i].p5 = (new Vector3(bound.max.x, bound.min.y, 1) + position) * scale;
+            drawSquares[i].p6 = (new Vector3(bound.min.x, bound.min.y, 1) + position) * scale;
+            drawSquares[i].p7 = (new Vector3(bound.max.x, bound.max.y, 1) + position) * scale;
+            drawSquares[i].p8 = (new Vector3(bound.min.x, bound.max.y, 1) + position) * scale;
         }
     }
 }

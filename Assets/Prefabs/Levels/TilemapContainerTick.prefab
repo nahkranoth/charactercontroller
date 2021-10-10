@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7107603378791404076}
   - component: {fileID: 3530391785398088928}
   - component: {fileID: 5635896799117020292}
-  - component: {fileID: 838070208642224976}
+  - component: {fileID: 2414587273026665772}
   m_Layer: 0
   m_Name: TilemapContainerTick
   m_TagString: Untagged
@@ -304,7 +304,7 @@ MonoBehaviour:
   tilemapSize: {x: 126, y: 63}
   background: {fileID: 3530391785398088928}
   collision: {fileID: 5635896799117020292}
-  debugDraw: {fileID: 838070208642224976}
+  debugDraw: {fileID: 2414587273026665772}
   boundsAreaSearchDepth: 3
 --- !u!114 &3530391785398088928
 MonoBehaviour:
@@ -337,7 +337,7 @@ MonoBehaviour:
   tilemap: {fileID: 3530391785229653826}
   library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
   buildings: {fileID: 11400000, guid: 6299839228d0b7f4f8d6cd34db609296, type: 2}
---- !u!114 &838070208642224976
+--- !u!114 &2414587273026665772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
