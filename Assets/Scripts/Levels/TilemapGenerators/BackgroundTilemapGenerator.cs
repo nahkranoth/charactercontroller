@@ -6,7 +6,7 @@ public class BackgroundTilemapGenerator : TilemapGenerator
 {
     private GenerateTilemapData data;
 
-    public void Generate(GenerateTilemapData _data, Vector2Int mapSize)
+    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize)
     {
         size = mapSize;
         data = _data;
@@ -26,8 +26,6 @@ public class BackgroundTilemapGenerator : TilemapGenerator
         
         data.planBounds = data.planBounds.Except(boundsGroup).ToArray();
         
-        BuildMap(blueprint);
+        return blueprint;
     }
-    
-    
 }

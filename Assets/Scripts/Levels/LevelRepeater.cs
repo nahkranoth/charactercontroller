@@ -1,86 +1,73 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LevelRepeater : MonoBehaviour
 {
-    public MetaTilemapGenerator metaTilemapTick;
-    public MetaTilemapGenerator metaTilemapTack;
+    public MetaTilemapGenerator metaTilemapGenerator;
     public MetaLevelEntityPlacer metaEntityPlacer;
-
-    public Action OnInit;
-    public Action OnIncrease;
-    public Action OnDecrease;
+    public Tilemap backgroundTilemap;
+    public Tilemap collisionTilemap;
+    
+    private GenerateTilemapData tickBlueprint;
+    private int highestStep;
+    private int lowestStep;
 
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(LevelRepeater));
     }
 
-    public void AfterInitTickTack()
+    public void OnInit()
     {
-        OnInit?.Invoke();
+        lowestStep = 0;
+        highestStep = 0;
+        GenerateAtRoot(lowestStep);
     }
 
-    public void InitTick()
+    private void GenerateAtRoot(int step)
     {
-        metaTilemapTick.Generate();
-        metaEntityPlacer.GenerateTick(metaTilemapTick);
+        tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0));
+        backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
+        collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
+
+        RemoveAt();
+    }
+
+    public void RemoveAt()
+    {
+        List<Vector3Int> remove = new List<Vector3Int>();
+        for (int x = 0; x < metaTilemapGenerator.tilemapSize.x; x++)
+        {
+            for (int y = 0; y < metaTilemapGenerator.tilemapSize.y; y++)
+            {
+                remove.Add(new Vector3Int(x, y, 0));
+            } 
+        }
+        backgroundTilemap.SetTiles(remove.ToArray(), new TileBase[remove.Count]);
+    }
+    public int GetHighestGeneratePoint()
+    {
+        return highestStep;
     }
     
-    public void InitTack()
+    public int GetLowestGeneratePoint()
     {
-        metaTilemapTack.Generate();
-        metaEntityPlacer.GenerateTack(metaTilemapTack);
+        return lowestStep;
     }
     
     public void Increase()
     {
-        var lowestTilemapGenerator = GetLowestTilemap();
-        var lowestEntitySpawner = GetLowestEntitySpawner();
-
-        OnIncrease?.Invoke();
-        lowestTilemapGenerator.Generate();
-        var yPos = lowestTilemapGenerator.background.Position.y + (lowestTilemapGenerator.tilemapSize.y - 1) * 2;
-        lowestTilemapGenerator.SetPosition(new Vector3(0, yPos, 0));
-        
-        metaEntityPlacer.Generate(lowestEntitySpawner, lowestTilemapGenerator);
+        highestStep += metaTilemapGenerator.tilemapSize.y-1;
+        GenerateAtRoot(highestStep);
+        // metaEntityPlacer.Generate(lowestEntitySpawner, lowestTilemapGenerator);
     }
-    
     public void Decrease()
     {
-        var highestTilemapGenerator = GetHighestTilemap();
-        var highestEntitySpawner = GetHighestEntitySpawner();
-
-        OnDecrease?.Invoke();
-        highestTilemapGenerator.Generate();
-        var yPos = highestTilemapGenerator.background.tilemap.transform.localPosition.y - highestTilemapGenerator.background.tilemap.size.y * 2;
-        highestTilemapGenerator.SetPosition(new Vector3(0, yPos, 0));
-
-        metaEntityPlacer.Generate(highestEntitySpawner, highestTilemapGenerator);
+        Debug.Log("Decrease");
+        lowestStep -= metaTilemapGenerator.tilemapSize.y-1;
+        GenerateAtRoot(lowestStep);
+        // metaEntityPlacer.Generate(highestEntitySpawner, highestTilemapGenerator);
     }
-
-    public MetaTilemapGenerator GetLowestTilemap()
-    {
-        if (metaTilemapTick.GetY() > metaTilemapTack.GetY()) return metaTilemapTack;
-        return metaTilemapTick;
-    }
-    
-    public MetaTilemapGenerator GetHighestTilemap()
-    {
-        if (metaTilemapTick.GetY() < metaTilemapTack.GetY()) return metaTilemapTack;
-        return metaTilemapTick;
-    }
-    
-    public LevelEntityPlacer GetLowestEntitySpawner()
-    {
-        if (metaTilemapTick.GetY() > metaTilemapTack.GetY()) return metaEntityPlacer.entityPlacerTack;
-        return metaEntityPlacer.entityPlacerTick;
-    }
-    
-    public LevelEntityPlacer GetHighestEntitySpawner()
-    {
-        if (metaTilemapTick.GetY() < metaTilemapTack.GetY()) return metaEntityPlacer.entityPlacerTack;
-        return metaEntityPlacer.entityPlacerTick;
-    }
-
+   
 }

@@ -6,7 +6,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
     public TileConstructCollection buildings;
     private GenerateTilemapData data;
 
-    public void Generate(GenerateTilemapData _data, Vector2Int mapSize)
+    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize)
     {
         size = mapSize;
         data = _data;
@@ -29,8 +29,8 @@ public class CollisionTilemapGenerator : TilemapGenerator
                 DrawBoundsOutline(ref blueprint, new []{constructPosition}, TileLibraryKey.Fence);
             };
         }
-        
-        BuildMap(blueprint);
+
+        return blueprint;
     }
 
     public TileConstruct AddConstruct(ref TileBase[,] map, TileConstructCollection constructs, Bounds bounds)

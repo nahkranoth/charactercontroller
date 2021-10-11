@@ -20,8 +20,6 @@ public static class ADJACENTCELLS
 
 public class PathfindingController : MonoBehaviour
 {
-    public GridController gridController;
-    
     private PlayerController player;
     private Dictionary<Vector3Int, CellData> cellMapTick;
     private Dictionary<Vector3Int, CellData> cellMapTack;
@@ -39,27 +37,25 @@ public class PathfindingController : MonoBehaviour
     private void Start()
     {
         repeater = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
-        repeater.OnInit -= Generate;
-        repeater.OnInit += Generate;
     }
 
     public void Generate()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         
-        cellMapTick = GetTilemapAsCellmap(
-            gridController.tickGenerator.background.tilemap,
-            gridController.tickGenerator.collision.tilemap,
-            gridController.tickGenerator.GetPosition(),
-            true
-            );
-        
-        cellMapTack = GetTilemapAsCellmap(
-            gridController.tackGenerator.background.tilemap,
-            gridController.tackGenerator.collision.tilemap,
-            gridController.tackGenerator.GetPositionAsInt(),
-            false
-            );
+        // cellMapTick = GetTilemapAsCellmap(
+        //     gridController.tickGenerator.background.tilemap,
+        //     gridController.tickGenerator.collision.tilemap,
+        //     gridController.tickGenerator.GetPosition(),
+        //     true
+        //     );
+        //
+        // cellMapTack = GetTilemapAsCellmap(
+        //     gridController.tackGenerator.background.tilemap,
+        //     gridController.tackGenerator.collision.tilemap,
+        //     gridController.tackGenerator.GetPositionAsInt(),
+        //     false
+        //     );
 
         completeCellMap = cellMapTick;
         foreach (var cell in cellMapTack)
@@ -214,7 +210,7 @@ public class PathfindingController : MonoBehaviour
             }
             current = current.parent;
             path.Add(current);
-            if(DEBUG) gridController.ColorTileAtCell(current.position, gridController.tickGenerator.background.tilemap, Color.yellow);
+            // if(DEBUG) gridController.ColorTileAtCell(current.position, gridController.tickGenerator.background.tilemap, Color.yellow);
         }
 
         path.Reverse();
@@ -263,15 +259,16 @@ public class PathfindingController : MonoBehaviour
     
     public CellData GetFromCellMapByWorldPos(Vector3 pos)
     {
-        CellData c;
-        var posTick = gridController.tickGenerator.background.tilemap.WorldToCell(pos);
-        completeCellMap.TryGetValue(posTick, out c);
-        if (c == null)
-        {
-            var posTack = gridController.tackGenerator.background.tilemap.WorldToCell(pos);
-            completeCellMap.TryGetValue(posTack, out c);
-        }
-        return c;
+        // CellData c;
+        // var posTick = gridController.tickGenerator.background.tilemap.WorldToCell(pos);
+        // completeCellMap.TryGetValue(posTick, out c);
+        // if (c == null)
+        // {
+        //     var posTack = gridController.tackGenerator.background.tilemap.WorldToCell(pos);
+        //     completeCellMap.TryGetValue(posTack, out c);
+        // }
+        // return c;
+        return null;
     }
 
     private List<CellData> GetCellNeighbours(CellData cell)

@@ -10,15 +10,15 @@ public class LevelRepeatDetector : MonoBehaviour
     
     private void Update()
     {
-        var highest = repeater.GetHighestTilemap();
-        var lowest = repeater.GetLowestTilemap();
-        if (player.transform.position.y > highest.GetY() + incOffset)
+        var highest = repeater.GetHighestGeneratePoint();
+        var lowest = repeater.GetLowestGeneratePoint();
+        if (player.transform.localPosition.y > highest - incOffset)
         {
             repeater.Increase();
             return;
         }
-
-        if (player.transform.position.y < lowest.GetY() - decOffset)
+        
+        if (player.transform.localPosition.y < lowest + decOffset)
         {
             repeater.Decrease();
         }

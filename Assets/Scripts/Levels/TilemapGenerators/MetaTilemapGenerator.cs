@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Levels.TilemapGenerators;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MetaTilemapGenerator:MonoBehaviour
 {
-    
     public Vector2Int tilemapSize;
     
     public BackgroundTilemapGenerator background;
@@ -11,7 +16,7 @@ public class MetaTilemapGenerator:MonoBehaviour
     public DebugDrawBounds debugDraw;
     public int boundsAreaSearchDepth;
 
-    public void Generate()
+    public GenerateTilemapData Generate(Vector3Int root)
     {
         GenerateTilemapData generateData = new GenerateTilemapData();
 
@@ -27,35 +32,27 @@ public class MetaTilemapGenerator:MonoBehaviour
         var levelPlan = BinarySpaceTree.Generate(new []{sourceBoundsRight, sourceBoundsLeft}, boundsAreaSearchDepth);
         
         generateData.planBounds = levelPlan;
-        background.Generate(generateData, tilemapSize);
-        collision.Generate(generateData, tilemapSize);
-        debugDraw.SetBounds(generateData.planBounds, background.Position * 16);
+        generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize), root);
+        generateData.collision = ParseBlueprint(collision.Generate(generateData, tilemapSize), root);
+        
+        // debugDraw.SetBounds(generateData.planBounds, background.Position * 16);
+        
+        return generateData;
     }
 
-    public float GetY()
+    private GenerateTilemapPair ParseBlueprint(TileBase[,] blueprint, Vector3Int offset)
     {
-        return background.GetY();
-    }
-    
-    public void SetPosition(Vector3 pos)
-    {
-        background.Position = pos;
-        collision.Position = pos;
-    }
-    
-    public Vector3 GetPosition()
-    {
-        return background.Position;
-    }
-    
-    public Vector3Int GetPositionAsInt()
-    {
-        return new Vector3Int((int) transform.localPosition.x, (int) transform.localPosition.y, 0);
-    }
-    
-    public Vector3 GetWorldPosition()
-    {
-        return background.tilemap.transform.position;
+        GenerateTilemapPair result = new GenerateTilemapPair();
+
+        for (int x = 0; x < blueprint.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y < blueprint.GetUpperBound(1); y++)
+            {
+                result.tiles.Add(blueprint[x, y]);
+                result.positions.Add(new Vector3Int(x+offset.x,y+offset.y,0));
+            }
+        }
+        return result;
     }
   
 }
