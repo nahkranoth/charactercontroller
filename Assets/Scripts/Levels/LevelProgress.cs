@@ -12,12 +12,13 @@ public class LevelProgress : MonoBehaviour
         repeater.OnIncrease += OnIncreaseLevel;
         repeater.OnDecrease -= OnDecreaseLevel;
         repeater.OnDecrease += OnDecreaseLevel;
-        
+
         UpdateSeed();
         repeater.InitTick();
         currentStep++;
         UpdateSeed();
         repeater.InitTack();
+        repeater.AfterInitTickTack();
     }
     
     //TODO There is an error in here with the start state actually loading in two states putting the currentstep on 1

@@ -6,9 +6,20 @@ public class LevelRepeater : MonoBehaviour
     public MetaTilemapGenerator metaTilemapTick;
     public MetaTilemapGenerator metaTilemapTack;
     public MetaLevelEntityPlacer metaEntityPlacer;
-    
+
+    public Action OnInit;
     public Action OnIncrease;
     public Action OnDecrease;
+
+    private void Awake()
+    {
+        WorldGraph.Subscribe(this, typeof(LevelRepeater));
+    }
+
+    public void AfterInitTickTack()
+    {
+        OnInit?.Invoke();
+    }
 
     public void InitTick()
     {

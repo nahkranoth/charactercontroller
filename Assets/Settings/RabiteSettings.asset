@@ -20,5 +20,5 @@ MonoBehaviour:
   roamChance: {x: 2, y: 5}
   detectDistance: 0.4
   loseDistance: 2
-  maxRoam: 5
+  maxRoam: 15
   knockbackAmount: 0.2

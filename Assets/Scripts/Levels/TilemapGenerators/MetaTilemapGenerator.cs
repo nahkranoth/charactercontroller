@@ -48,6 +48,11 @@ public class MetaTilemapGenerator:MonoBehaviour
         return background.Position;
     }
     
+    public Vector3Int GetPositionAsInt()
+    {
+        return new Vector3Int((int) transform.localPosition.x, (int) transform.localPosition.y, 0);
+    }
+    
     public Vector3 GetWorldPosition()
     {
         return background.tilemap.transform.position;

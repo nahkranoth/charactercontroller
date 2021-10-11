@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public static class ADJACENTCELLS
 {
@@ -21,7 +23,10 @@ public class PathfindingController : MonoBehaviour
     public GridController gridController;
     
     private PlayerController player;
-    private Dictionary<Vector3Int, CellData> cellMap;
+    private Dictionary<Vector3Int, CellData> cellMapTick;
+    private Dictionary<Vector3Int, CellData> cellMapTack;
+    private Dictionary<Vector3Int, CellData> completeCellMap;
+    private LevelRepeater repeater;
     List<CellData> openList = new List<CellData>();
     List<CellData> closeList = new List<CellData>();
     public bool DEBUG = true;
@@ -33,27 +38,40 @@ public class PathfindingController : MonoBehaviour
 
     private void Start()
     {
-        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        cellMap = GetTilemapAsCellmap(gridController.mainMap, gridController.collision);
-    }
-    
-    private void Update()
-    {
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //     pos.z = 0;
-        //     var own = gridController.grid.WorldToCell(pos);
-        //     if(DEBUG) gridController.ColorTileAtCell(own, gridController.mainMap, Color.green);
-        //     var target = FindPlayerCellPos();
-        //     if(DEBUG) gridController.ColorTileAtCell(target, gridController.mainMap, Color.red);
-        //     var path = FindPath(GetFromCellMapByPos(own), GetFromCellMapByPos(target));
-        // }
+        repeater = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
+        repeater.OnInit -= Generate;
+        repeater.OnInit += Generate;
     }
 
-    private Dictionary<Vector3Int, CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision)
+    public void Generate()
+    {
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        
+        cellMapTick = GetTilemapAsCellmap(
+            gridController.tickGenerator.background.tilemap,
+            gridController.tickGenerator.collision.tilemap,
+            gridController.tickGenerator.GetPosition(),
+            true
+            );
+        
+        cellMapTack = GetTilemapAsCellmap(
+            gridController.tackGenerator.background.tilemap,
+            gridController.tackGenerator.collision.tilemap,
+            gridController.tackGenerator.GetPositionAsInt(),
+            false
+            );
+
+        completeCellMap = cellMapTick;
+        foreach (var cell in cellMapTack)
+        {
+            completeCellMap[cell.Key] = cell.Value;
+        }
+    }
+
+    private Dictionary<Vector3Int, CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision, Vector3 offsetPos, bool isTick)
     {
         var cellMap = new Dictionary<Vector3Int, CellData>();
+
         for (var x = tilemap.cellBounds.min.x; x < tilemap.cellBounds.max.x; x++)
         {
             for (var y = tilemap.cellBounds.min.y; y < tilemap.cellBounds.max.y; y++)
@@ -65,9 +83,9 @@ public class PathfindingController : MonoBehaviour
                 {
                     cellMap[pos] = new CellData
                     {
-                        worldPos = gridController.mainMap.GetCellCenterWorld(pos),
+                        worldPos = tilemap.GetCellCenterWorld(pos),
                         walkable = collTile == null, 
-                        position = pos
+                        position = pos,
                     };
                 }
             } 
@@ -75,14 +93,6 @@ public class PathfindingController : MonoBehaviour
 
         return cellMap;
     }
-
-    private Vector3 GetGridOffset()
-    {
-        var scale = gridController.transform.localScale;
-        var cellsize = gridController.grid.cellSize;
-        return new Vector3(cellsize.x / 2 * scale.x, cellsize.y / 2 * scale.y, 0);
-    }
-
     public List<CellData> FindPathToRandomPosByWorldPos(Vector3 worldPos, int depth=-1)
     {
         var startCell = GetFromCellMapByWorldPos(worldPos);
@@ -176,7 +186,13 @@ public class PathfindingController : MonoBehaviour
 
     private void ClearPath()
     {
-        foreach (var cell in cellMap)
+        foreach (var cell in cellMapTick)
+        {
+            cell.Value.parent = null;
+            cell.Value.cost = 0;
+            cell.Value.heuristics = 0;
+        }
+        foreach (var cell in cellMapTack)
         {
             cell.Value.parent = null;
             cell.Value.cost = 0;
@@ -198,7 +214,7 @@ public class PathfindingController : MonoBehaviour
             }
             current = current.parent;
             path.Add(current);
-            if(DEBUG) gridController.ColorTileAtCell(current.position, gridController.mainMap, Color.yellow);
+            if(DEBUG) gridController.ColorTileAtCell(current.position, gridController.tickGenerator.background.tilemap, Color.yellow);
         }
 
         path.Reverse();
@@ -209,31 +225,52 @@ public class PathfindingController : MonoBehaviour
     private CellData GetFromCellMapByPos(Vector3Int pos)
     {
         CellData c;
-        cellMap.TryGetValue(pos, out c);
+        completeCellMap.TryGetValue(pos, out c);
         return c;
     }
     
     private CellData GetRandomCell()
     {
-        var index = Random.Range(0, cellMap.Count - 8);
         int cntr = 0;
-        foreach (var cell in cellMap)
+        var cellmapList = completeCellMap.ToArray();
+        while (true)
         {
             cntr++;
-            if (cntr >= index && cell.Value.walkable)
-            {
-                return cell.Value;
-            }
+            var randId = Random.Range(0, completeCellMap.Count);
+            var cell = cellmapList[randId];
+            if(cell.Value.walkable) return cell.Value;
+            if (cntr >= 100) break;
         }
+        
         Debug.LogError("Could not Find Walkable Random Tile");
         return null;
         
     }
     
+    private void Update()
+    {
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //     pos.z = 0;
+        //     var own = gridController.grid.WorldToCell(pos);
+        //     if(DEBUG) gridController.ColorTileAtCell(own, gridController.mainMap, Color.green);
+        //     var target = FindPlayerCellPos();
+        //     if(DEBUG) gridController.ColorTileAtCell(target, gridController.mainMap, Color.red);
+        //     var path = FindPath(GetFromCellMapByPos(own), GetFromCellMapByPos(target));
+        // }
+    }
+    
     public CellData GetFromCellMapByWorldPos(Vector3 pos)
     {
         CellData c;
-        cellMap.TryGetValue(gridController.collision.WorldToCell(pos), out c);
+        var posTick = gridController.tickGenerator.background.tilemap.WorldToCell(pos);
+        completeCellMap.TryGetValue(posTick, out c);
+        if (c == null)
+        {
+            var posTack = gridController.tackGenerator.background.tilemap.WorldToCell(pos);
+            completeCellMap.TryGetValue(posTack, out c);
+        }
         return c;
     }
 

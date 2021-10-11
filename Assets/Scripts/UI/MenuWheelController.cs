@@ -40,16 +40,15 @@ public class MenuWheelController : MonoBehaviour
 
         Hide();
         
-        currentItems = playerController.inventory.storage;
         itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
         
         worldController.OnToggleMenu -= SetMyState;
         worldController.OnToggleMenu += SetMyState;
-        SetText();
     }
 
     private void Show()
     {
+        currentItems = playerController.inventory.storage;
         wheelHolder.gameObject.SetActive(true);
         selectedItemTxt.gameObject.SetActive(true);
     }

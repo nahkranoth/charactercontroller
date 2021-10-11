@@ -35,7 +35,6 @@ public class WorldController : MonoBehaviour
     
     public void SpawnChest(Vector3 position)
     {
-        //Debug.Log("Spawn Chest");
         Instantiate(chestPrefab, position, Quaternion.identity);
     }
     
