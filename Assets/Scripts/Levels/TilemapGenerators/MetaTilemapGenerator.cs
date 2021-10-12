@@ -5,6 +5,7 @@ using System.Linq;
 using Levels.TilemapGenerators;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class MetaTilemapGenerator:MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class MetaTilemapGenerator:MonoBehaviour
 
     public GenerateTilemapData Generate(Vector3Int root)
     {
+        Random.InitState(root.y);
+        
         GenerateTilemapData generateData = new GenerateTilemapData();
 
         var trimmedWidth = tilemapSize.x - 52;//trim value

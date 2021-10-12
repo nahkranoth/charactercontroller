@@ -12,13 +12,13 @@ public class LevelRepeatDetector : MonoBehaviour
     {
         var highest = repeater.GetHighestGeneratePoint();
         var lowest = repeater.GetLowestGeneratePoint();
-        if (player.transform.localPosition.y > highest - incOffset)
+        if (player.Directions.y > 0 && player.transform.localPosition.y > highest - incOffset)
         {
             repeater.Increase();
             return;
         }
         
-        if (player.transform.localPosition.y < lowest + decOffset)
+        if (player.Directions.y < 0 && player.transform.localPosition.y < lowest + decOffset)
         {
             repeater.Decrease();
         }

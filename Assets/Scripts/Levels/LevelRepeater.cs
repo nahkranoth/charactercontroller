@@ -8,6 +8,7 @@ public class LevelRepeater : MonoBehaviour
     public MetaLevelEntityPlacer metaEntityPlacer;
     public Tilemap backgroundTilemap;
     public Tilemap collisionTilemap;
+    public int keepLoaded;
     
     private GenerateTilemapData tickBlueprint;
     private int highestStep;
@@ -30,25 +31,24 @@ public class LevelRepeater : MonoBehaviour
         tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0));
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
-
-        RemoveAt();
     }
 
-    public void RemoveAt()
+    public void RemoveAt(int yPos)
     {
         List<Vector3Int> remove = new List<Vector3Int>();
         for (int x = 0; x < metaTilemapGenerator.tilemapSize.x; x++)
         {
             for (int y = 0; y < metaTilemapGenerator.tilemapSize.y; y++)
             {
-                remove.Add(new Vector3Int(x, y, 0));
+                remove.Add(new Vector3Int(x, y+yPos, 0));
             } 
         }
         backgroundTilemap.SetTiles(remove.ToArray(), new TileBase[remove.Count]);
+        collisionTilemap.SetTiles(remove.ToArray(), new TileBase[remove.Count]);
     }
     public int GetHighestGeneratePoint()
     {
-        return highestStep;
+        return highestStep + metaTilemapGenerator.tilemapSize.y-1;
     }
     
     public int GetLowestGeneratePoint()
@@ -58,15 +58,22 @@ public class LevelRepeater : MonoBehaviour
     
     public void Increase()
     {
-        highestStep += metaTilemapGenerator.tilemapSize.y-1;
+        Debug.Log("Increase");
+        var step = metaTilemapGenerator.tilemapSize.y-1;
+        highestStep += step;
         GenerateAtRoot(highestStep);
+        RemoveAt(lowestStep - step);
+        lowestStep += step;
         // metaEntityPlacer.Generate(lowestEntitySpawner, lowestTilemapGenerator);
     }
     public void Decrease()
     {
         Debug.Log("Decrease");
-        lowestStep -= metaTilemapGenerator.tilemapSize.y-1;
+        var step = metaTilemapGenerator.tilemapSize.y-1;
+        lowestStep -= step;
         GenerateAtRoot(lowestStep);
+        RemoveAt(highestStep + step);
+        highestStep -= step;
         // metaEntityPlacer.Generate(highestEntitySpawner, highestTilemapGenerator);
     }
    
