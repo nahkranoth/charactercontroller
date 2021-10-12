@@ -713,7 +713,6 @@ GameObject:
   - component: {fileID: 1517900155}
   - component: {fileID: 1517900158}
   - component: {fileID: 1517900157}
-  - component: {fileID: 1517900159}
   - component: {fileID: 1517900160}
   m_Layer: 0
   m_Name: Level
@@ -782,22 +781,6 @@ MonoBehaviour:
   metaEntityPlacer: {fileID: 1517900160}
   backgroundTilemap: {fileID: 1528139976}
   collisionTilemap: {fileID: 788604936}
-  keepLoaded: 3
---- !u!114 &1517900159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517900153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22cf736e68fa4edc9029c70fd18b36d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSeed: 0
-  currentStep: 0
-  repeater: {fileID: 1517900158}
 --- !u!114 &1517900160
 MonoBehaviour:
   m_ObjectHideFlags: 0

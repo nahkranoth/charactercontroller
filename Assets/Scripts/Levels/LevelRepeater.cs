@@ -10,20 +10,19 @@ public class LevelRepeater : MonoBehaviour
     public Tilemap collisionTilemap;
     public int keepLoaded;
     
+    
     private GenerateTilemapData tickBlueprint;
-    private int highestStep;
-    private int lowestStep;
+    private int currentStep;
 
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(LevelRepeater));
     }
 
-    public void OnInit()
+    public void Start()
     {
-        lowestStep = 0;
-        highestStep = 0;
-        GenerateAtRoot(lowestStep);
+        currentStep = 0;
+        GenerateAtRoot(currentStep);
     }
 
     private void GenerateAtRoot(int step)
@@ -48,32 +47,35 @@ public class LevelRepeater : MonoBehaviour
     }
     public int GetHighestGeneratePoint()
     {
-        return highestStep + metaTilemapGenerator.tilemapSize.y-1;
+        return currentStep + StepSize();
     }
     
     public int GetLowestGeneratePoint()
     {
-        return lowestStep;
+        return currentStep;
+    }
+
+    private int StepSize()
+    {
+        return metaTilemapGenerator.tilemapSize.y - 1;
     }
     
     public void Increase()
     {
         Debug.Log("Increase");
-        var step = metaTilemapGenerator.tilemapSize.y-1;
-        highestStep += step;
-        GenerateAtRoot(highestStep);
-        RemoveAt(lowestStep - step);
-        lowestStep += step;
+        var newStep = currentStep + StepSize();
+        GenerateAtRoot(newStep);
+        RemoveAt(currentStep - (StepSize() * keepLoaded));
+        currentStep += StepSize();
         // metaEntityPlacer.Generate(lowestEntitySpawner, lowestTilemapGenerator);
     }
     public void Decrease()
     {
         Debug.Log("Decrease");
-        var step = metaTilemapGenerator.tilemapSize.y-1;
-        lowestStep -= step;
-        GenerateAtRoot(lowestStep);
-        RemoveAt(highestStep + step);
-        highestStep -= step;
+        var newStep = currentStep - StepSize();
+        GenerateAtRoot(newStep);
+        RemoveAt(currentStep + (StepSize() * keepLoaded));
+        currentStep -= StepSize();
         // metaEntityPlacer.Generate(highestEntitySpawner, highestTilemapGenerator);
     }
    
