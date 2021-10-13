@@ -27,7 +27,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
             {
                 var vecToInt = generator.background.tilemap.CellToLocal(place);
                 spawnPos = new Vector3Int((int)vecToInt.x, (int)vecToInt.y, (int)vecToInt.z) + root;
-                entityPlacer.GenerateCollectable(containerEntities.collection[0], spawnPos);
+                entityPlacer.GenerateCollectable(containerEntities.GetRandom(), spawnPos);
             }
         }
     }

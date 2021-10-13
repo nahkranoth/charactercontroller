@@ -5,4 +5,9 @@ using UnityEngine;
 public class EntityCollection : ScriptableObject
 {
     public List<GameObject> collection;
+
+    public GameObject GetRandom()
+    {
+        return collection[Random.Range(0, collection.Count)];
+    }
 }
