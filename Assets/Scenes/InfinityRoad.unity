@@ -781,7 +781,7 @@ MonoBehaviour:
   metaEntityPlacer: {fileID: 1517900160}
   backgroundTilemap: {fileID: 1528139976}
   collisionTilemap: {fileID: 788604936}
-  keepLoaded: 3
+  keepLoaded: 2
 --- !u!114 &1517900160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1239,6 +1239,10 @@ PrefabInstance:
     - target: {fileID: 3530391785398088931, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+      propertyPath: boundsAreaSearchDepth
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb75eae928247e428cf46d225134f9b, type: 3}

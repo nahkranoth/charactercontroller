@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InteractionCollectable : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class InteractionCollectable : MonoBehaviour
    public ItemCollectionDescription collectableItems;
    private PlayerController player;
    private MessageController message;
+
+   public Action<InteractionCollectable> OnRemove;
    private void Start()
    {
       player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
@@ -28,7 +32,7 @@ public class InteractionCollectable : MonoBehaviour
       message.QueMessage($"Found {chosen.item.menuName}");
       player.inventory.AddByDescription(chosen);
       interaction.OnInteraction -= OnCollect;
-      Destroy(gameObject);
+      OnRemove?.Invoke(this);
    }
    
 }

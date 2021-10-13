@@ -10,7 +10,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
 
     public void RemoveAt(Vector3Int position)
     {
-        entityPlacer.RemoveAt(position);
+        entityPlacer.RemoveCollectableAt(position);
     }
     
     public void Generate(MetaTilemapGenerator generator, Vector3Int root)
@@ -27,9 +27,8 @@ public class MetaLevelEntityPlacer : MonoBehaviour
             {
                 var vecToInt = generator.background.tilemap.CellToLocal(place);
                 spawnPos = new Vector3Int((int)vecToInt.x, (int)vecToInt.y, (int)vecToInt.z) + root;
-                entityPlacer.GenerateContainer(containerEntities.collection[0], spawnPos);
+                entityPlacer.GenerateCollectable(containerEntities.collection[0], spawnPos);
             }
         }
-        
     }
 }

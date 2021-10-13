@@ -1,25 +1,43 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelEntityPlacer : MonoBehaviour
 {
-    public Dictionary<Vector3Int, GameObject> containerPool = new Dictionary<Vector3Int, GameObject>();
+    public Dictionary<Vector3Int, InteractionCollectable> collectablePool = new Dictionary<Vector3Int, InteractionCollectable>();
+    public Dictionary<Vector3Int, InteractionCollectable> ignorePool = new Dictionary<Vector3Int, InteractionCollectable>();
     
     //Naive approach; no pooling
-    public void RemoveAt(Vector3Int position)
+    public void RemoveCollectableAt(Vector3Int position)
     {
-        GameObject target;
-        if (containerPool.TryGetValue(position, out target))
+        InteractionCollectable target;
+        if (collectablePool.TryGetValue(position, out target))
         {
-            Destroy(target);
-            containerPool[position] = null;
+            target.OnRemove -= CollectCollectable;
+            Destroy(target.gameObject);
+            collectablePool.Remove(position);
+        }
+    }
+
+    private void CollectCollectable(InteractionCollectable collectable)
+    {
+        if (collectablePool.ContainsValue(collectable))
+        {
+            var result = collectablePool.First(x => x.Value == collectable);
+            RemoveCollectableAt(result.Key);
+            ignorePool.Add(result.Key, result.Value);
         }
     }
     
-    public void GenerateContainer(GameObject obj, Vector3Int position)
+    public void GenerateCollectable(GameObject obj, Vector3Int position)
     {
+        if (collectablePool.ContainsKey(position)) return;//is already active
+        if (ignorePool.ContainsKey(position)) return;//is already collected
         var container = Instantiate(obj, transform);
+        var collectable = container.GetComponent(typeof(InteractionCollectable)) as InteractionCollectable;
         container.transform.localPosition = position;
-        containerPool[position] = container;
+        collectablePool[position] = collectable;
+        collectable.OnRemove -= CollectCollectable;
+        collectable.OnRemove += CollectCollectable;
     }
 }
