@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
   m_Name: Hill
   m_EditorClassIdentifier: 
-  name: 
   map:
   - position: {x: 0, y: 1, z: 0}
     tile: {fileID: 11400000, guid: 38123984213f7294a9856cebd92e4b72, type: 2}
@@ -136,3 +135,4 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: bb6a8618811233142969fbb1f43b35c2, type: 2}
   size: {x: 7, y: 9}
   type: 2
+  rarity: 50

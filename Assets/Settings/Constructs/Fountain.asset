@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
+  m_Name: Fountain
+  m_EditorClassIdentifier: 
+  map:
+  - position: {x: 0, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: cca123ed6fcc89e42b51ec29e7749b56, type: 2}
+  - position: {x: 0, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 862e23dd3a66a6f40a6082d55c547886, type: 2}
+  - position: {x: 0, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 9432d60c0aa48774d9ac946661b74c8a, type: 2}
+  - position: {x: 1, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 524c1759b25cd8d4e946f06e54696aa1, type: 2}
+  - position: {x: 1, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 4963daa0c892ee743a093f52e876b969, type: 2}
+  - position: {x: 1, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 8f63e2b53d88af24db97e486eea2c276, type: 2}
+  - position: {x: 2, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 0784b9eaa3faba64093100d498156199, type: 2}
+  - position: {x: 2, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 96f5b23ffb17095459617afdc3687c59, type: 2}
+  - position: {x: 2, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 179f964ee42e6874b95d5e11654f7862, type: 2}
+  size: {x: 3, y: 3}
+  type: 3
+  rarity: 10

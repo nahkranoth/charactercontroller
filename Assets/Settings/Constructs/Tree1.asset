@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
   m_Name: Tree1
   m_EditorClassIdentifier: 
-  name: 
   map:
   - position: {x: 0, y: 3, z: 0}
     tile: {fileID: 11400000, guid: fd88f3615a1358d459bc1a9f09513fdc, type: 2}
@@ -96,3 +95,4 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 7de0d5b478440ce499ec34e8b3791aba, type: 2}
   size: {x: 8, y: 7}
   type: 1
+  rarity: 20

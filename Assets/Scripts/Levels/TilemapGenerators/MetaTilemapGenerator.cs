@@ -32,13 +32,14 @@ public class MetaTilemapGenerator:MonoBehaviour
         var collPosRight = new Vector3Int(tilemapSize.x - tilemapSize.x/4, tilemapSize.y/2, 0);
         var sourceBoundsRight = new Bounds(collPosRight, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
         
-        var levelPlan = BinarySpaceTree.Generate(new []{sourceBoundsRight, sourceBoundsLeft}, boundsAreaSearchDepth);
+        var levelPlanLeft = BinarySpaceTree.Generate(sourceBoundsLeft, boundsAreaSearchDepth);
+        var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, boundsAreaSearchDepth);
         
-        generateData.planBounds = levelPlan;
+        generateData.planBounds = levelPlanLeft.Concat(levelPlanRight).ToArray();
         generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize), root);
         generateData.collision = ParseBlueprint(collision.Generate(generateData, tilemapSize), root);
         
-        // debugDraw.SetBounds(generateData.planBounds, background.Position * 16);
+        debugDraw.SetBounds(generateData.planBounds, root);
         
         return generateData;
     }

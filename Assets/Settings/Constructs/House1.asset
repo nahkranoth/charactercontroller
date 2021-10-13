@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
   m_Name: House1
   m_EditorClassIdentifier: 
-  name: 
   map:
   - position: {x: 0, y: 0, z: 0}
     tile: {fileID: 11400000, guid: 2bd999bbeddfc5e4b9c34e2b689fcf12, type: 2}
@@ -95,3 +94,5 @@ MonoBehaviour:
   - position: {x: 5, y: 5, z: 0}
     tile: {fileID: 11400000, guid: d53f3a46acaf8bb4e8000343c13b3ee4, type: 2}
   size: {x: 6, y: 7}
+  type: 0
+  rarity: 70

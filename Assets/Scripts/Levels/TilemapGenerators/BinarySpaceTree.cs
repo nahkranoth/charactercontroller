@@ -4,12 +4,12 @@ using UnityEngine;
 
 public static class BinarySpaceTree
 {
-    public static Bounds[] Generate(Bounds[] seeds, int depth)
+    public static Bounds[] Generate(Bounds source, int depth)
     {
-        List<Bounds> result = seeds.ToList();
+        List<BinaryTreeNode> result = new List<BinaryTreeNode>{new BinaryTreeNode{bounds=source}};
         
         for(var j=0;j<depth;j++){
-            List<Bounds> tempStorage = new List<Bounds>();
+            List<BinaryTreeNode> tempStorage = new List<BinaryTreeNode>();
             for (var i = 0; i < result.Count; i++)
             {
                 if (Random.Range(0, 2) == 0)
@@ -22,33 +22,34 @@ public static class BinarySpaceTree
                 }
                 tempStorage.Remove(result[i]);
             }
-            result = new List<Bounds>();
+            result = new List<BinaryTreeNode>();
             result.AddRange(tempStorage);
         }
-        
-        Debug.Log(result.Count);
-        return result.ToArray();
+
+        return result.Select(x => x.bounds).ToArray();
     }
 
-    private static Bounds[] SplitHorizontal(Bounds full)
+    private static BinaryTreeNode[] SplitHorizontal(BinaryTreeNode node)
     {
-        Bounds[] result = new Bounds[2];
-        Vector3 firstCenter = new Vector3(full.center.x, full.center.y + full.extents.y / 2, 0) ;
-        Vector3 size = new Vector3(full.size.x, full.extents.y, 0) ;
-        result[0] = new Bounds(firstCenter, size);
-        Vector3 secondCenter = new Vector3(full.center.x, full.center.y - full.extents.y / 2, 0) ;
-        result[1] = new Bounds(secondCenter, size);
+        var bounds = node.bounds;
+        BinaryTreeNode[] result = new BinaryTreeNode[2];
+        Vector3 firstCenter = new Vector3(bounds.center.x, bounds.center.y + bounds.extents.y / 2, 0) ;
+        Vector3 size = new Vector3(bounds.size.x, bounds.extents.y, 0) ;
+        result[0] = new BinaryTreeNode {bounds = new Bounds(firstCenter, size)};
+        Vector3 secondCenter = new Vector3(bounds.center.x, bounds.center.y - bounds.extents.y / 2, 0) ;
+        result[1] = new BinaryTreeNode {bounds = new Bounds(secondCenter, size)};
         return result;
     }
     
-    private static Bounds[] SplitVertical(Bounds full)
+    private static BinaryTreeNode[] SplitVertical(BinaryTreeNode node)
     {
-        Bounds[] result = new Bounds[2];
-        Vector3 firstCenter = new Vector3(full.center.x + full.extents.x / 2, full.center.y, 0) ;
-        Vector3 size = new Vector3(full.extents.x, full.size.y, 0) ;
-        result[0] = new Bounds(firstCenter, size);
-        Vector3 secondCenter = new Vector3(full.center.x - full.extents.x / 2, full.center.y, 0) ;
-        result[1] = new Bounds(secondCenter, size);
+        var bounds = node.bounds;
+        BinaryTreeNode[] result = new BinaryTreeNode[2];
+        Vector3 firstCenter = new Vector3(bounds.center.x + bounds.extents.x / 2, bounds.center.y, 0) ;
+        Vector3 size = new Vector3(bounds.extents.x, bounds.size.y, 0) ;
+        result[0] = new BinaryTreeNode {bounds = new Bounds(firstCenter, size)};
+        Vector3 secondCenter = new Vector3(bounds.center.x - bounds.extents.x / 2, bounds.center.y, 0) ;
+        result[1] = new BinaryTreeNode {bounds = new Bounds(secondCenter, size)};
         return result;
     }
 }

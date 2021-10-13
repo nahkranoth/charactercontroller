@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
+  m_Name: SmallTree
+  m_EditorClassIdentifier: 
+  map:
+  - position: {x: 0, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: f23199d9f49cb4c48a163579525d36ce, type: 2}
+  - position: {x: 0, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 0e0b279a34e4a124794e72d929054827, type: 2}
+  - position: {x: 0, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 01f21e14589a9604bb57d0b171369225, type: 2}
+  - position: {x: 0, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 832d5ca0985c91742ba9c14118abb04f, type: 2}
+  - position: {x: 1, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 169d5f693f55964419b9c846d21aec9d, type: 2}
+  - position: {x: 1, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: d85175fc69ddae243af574a48fce89f9, type: 2}
+  - position: {x: 1, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 2c6fb2aa93f077d4cba5b950d84d5c38, type: 2}
+  - position: {x: 1, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: d4992506f44febf4a9158746be4862ec, type: 2}
+  size: {x: 2, y: 4}
+  type: 1
+  rarity: 50
