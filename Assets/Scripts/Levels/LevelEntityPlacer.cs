@@ -1,23 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using UnityEngine;
 
 public class LevelEntityPlacer : MonoBehaviour
 {
-    public List<GameObject> containerPool;
+    public Dictionary<Vector3Int, GameObject> containerPool = new Dictionary<Vector3Int, GameObject>();
     
     //Naive approach; no pooling
-    public void ClearContainers()
+    public void RemoveAt(Vector3Int position)
     {
-        foreach (var container in containerPool) Destroy(container);
-        containerPool = new List<GameObject>();
+        GameObject target;
+        if (containerPool.TryGetValue(position, out target))
+        {
+            Destroy(target);
+            containerPool[position] = null;
+        }
     }
     
-    public void GenerateContainer(GameObject obj, Vector3 position)
+    public void GenerateContainer(GameObject obj, Vector3Int position)
     {
         var container = Instantiate(obj, transform);
-        container.transform.position = position;
-        containerPool.Add(container);
+        container.transform.localPosition = position;
+        containerPool[position] = container;
     }
 }

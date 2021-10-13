@@ -8,22 +8,28 @@ public class MetaLevelEntityPlacer : MonoBehaviour
 
     public EntityCollection containerEntities;
 
-    public void Generate(LevelEntityPlacer placer, MetaTilemapGenerator generator)
+    public void RemoveAt(Vector3Int position)
     {
-        // var possiblePlaces = generator.background.GetAllTilesOfKey(TileLibraryKey.Floor);
-        // Vector3 center;
-        //
-        // placer.ClearContainers();
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     var ranI = Random.Range(0, possiblePlaces.Count);
-        //     var place = possiblePlaces[ranI];
-        //     if (generator.collision.IsEmpty(place))
-        //     {
-        //         center = generator.GetWorldPosition() + place * transform.localScale.x;
-        //         placer.GenerateContainer(containerEntities.collection[0], center);
-        //     }
-        // }
-        //
+        entityPlacer.RemoveAt(position);
+    }
+    
+    public void Generate(MetaTilemapGenerator generator, Vector3Int root)
+    {
+        var possiblePlaces = generator.background.GetAllTilesOfKey(TileLibraryKey.Floor);
+
+        Vector3Int spawnPos;
+
+        for (int i = 0; i < 5; i++)
+        {
+            var ranI = Random.Range(0, possiblePlaces.Count);
+            var place = possiblePlaces[ranI];
+            if (generator.collision.IsEmpty(place))
+            {
+                var vecToInt = generator.background.tilemap.CellToLocal(place);
+                spawnPos = new Vector3Int((int)vecToInt.x, (int)vecToInt.y, (int)vecToInt.z) + root;
+                entityPlacer.GenerateContainer(containerEntities.collection[0], spawnPos);
+            }
+        }
+        
     }
 }

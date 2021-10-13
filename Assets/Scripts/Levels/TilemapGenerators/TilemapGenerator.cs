@@ -187,9 +187,9 @@ public abstract class TilemapGenerator : MonoBehaviour
         
     }
 
-    public List<Vector3> GetAllTilesOfKey(TileLibraryKey key)
+    public List<Vector3Int> GetAllTilesOfKey(TileLibraryKey key)
     {
-        List<Vector3> result = new List<Vector3>();
+        List<Vector3Int> result = new List<Vector3Int>();
         var search = library.GetTile(key);
 
         for (int x = 0; x < blueprint.GetUpperBound(0); x++)
@@ -198,7 +198,7 @@ public abstract class TilemapGenerator : MonoBehaviour
             {
                 if (blueprint[x,y]?.name == search.name)
                 {
-                    result.Add(new Vector3(x,y,0));
+                    result.Add(new Vector3Int(x,y,0));
                 }
             }
         }

@@ -10,7 +10,6 @@ public class LevelRepeater : MonoBehaviour
     public Tilemap collisionTilemap;
     public int keepLoaded;
     
-    
     private GenerateTilemapData tickBlueprint;
     private int currentStep;
 
@@ -30,6 +29,8 @@ public class LevelRepeater : MonoBehaviour
         tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0));
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
+        
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0));
     }
 
     public void RemoveAt(int yPos)
@@ -39,11 +40,15 @@ public class LevelRepeater : MonoBehaviour
         {
             for (int y = 0; y < metaTilemapGenerator.tilemapSize.y; y++)
             {
-                remove.Add(new Vector3Int(x, y+yPos, 0));
+                var pos = new Vector3Int(x, y + yPos, 0);
+                metaEntityPlacer.RemoveAt(pos);
+                remove.Add(pos);
             } 
         }
-        backgroundTilemap.SetTiles(remove.ToArray(), new TileBase[remove.Count]);
-        collisionTilemap.SetTiles(remove.ToArray(), new TileBase[remove.Count]);
+
+        var rmTileBase = new TileBase[remove.Count];
+        backgroundTilemap.SetTiles(remove.ToArray(), rmTileBase);
+        collisionTilemap.SetTiles(remove.ToArray(), rmTileBase);
     }
     public int GetHighestGeneratePoint()
     {
@@ -62,21 +67,19 @@ public class LevelRepeater : MonoBehaviour
     
     public void Increase()
     {
-        Debug.Log("Increase");
         var newStep = currentStep + StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(currentStep - (StepSize() * keepLoaded));
+        RemoveAt(currentStep - StepSize() * keepLoaded);
         currentStep += StepSize();
-        // metaEntityPlacer.Generate(lowestEntitySpawner, lowestTilemapGenerator);
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0));
     }
     public void Decrease()
     {
-        Debug.Log("Decrease");
         var newStep = currentStep - StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(currentStep + (StepSize() * keepLoaded));
+        RemoveAt(currentStep + StepSize() * keepLoaded);
         currentStep -= StepSize();
-        // metaEntityPlacer.Generate(highestEntitySpawner, highestTilemapGenerator);
+        // metaEntityPlacer.Generate(metaEntityPlacer.entityPlacer, metaTilemapGenerator, new Vector3Int(0,newStep,0));
     }
    
 }

@@ -781,6 +781,7 @@ MonoBehaviour:
   metaEntityPlacer: {fileID: 1517900160}
   backgroundTilemap: {fileID: 1528139976}
   collisionTilemap: {fileID: 788604936}
+  keepLoaded: 3
 --- !u!114 &1517900160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f93305bf3173b4f9e5889b09f4cfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityPlacer: {fileID: 0}
+  entityPlacer: {fileID: 3530391785043385971}
   containerEntities: {fileID: 11400000, guid: 3da112b3b2cba7d4a905bf33f5d19bd2, type: 2}
 --- !u!1839735485 &1528139976 stripped
 Tilemap:
@@ -1241,6 +1242,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+--- !u!114 &3530391785043385971 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1602880415845970945, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
+  m_PrefabInstance: {fileID: 3530391785043385970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5240360e37da444409638f1ee14f75dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3836800762888928226
 PrefabInstance:
   m_ObjectHideFlags: 0
