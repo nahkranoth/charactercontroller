@@ -81,7 +81,8 @@ public class NPCController : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             return;
         }
-        // activeState.Execute();
+        //TODO: Optimize, only run when player is nearby (control that check from the players side)
+        activeState.Execute();
     }
 
     public void SetState(string name)

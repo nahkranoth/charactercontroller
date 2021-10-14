@@ -35,7 +35,7 @@ public class ZombieIdleState: AbstractEnemyState
         if (waitingToRoam)
         {
             idleWaitTimer++;
-            if (idleWaitTimer > roamChance)
+            if (idleWaitTimer > roamChance*100)
             {
                 Parent.SetState("roam");
                 waitingToRoam =false;

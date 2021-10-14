@@ -32,10 +32,6 @@ public class PathfindingController : MonoBehaviour
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(PathfindingController));
-    }
-
-    private void Start()
-    {
         repeater = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
         repeater.OnGenerate -= Generate;
         repeater.OnGenerate += Generate;
@@ -191,7 +187,7 @@ public class PathfindingController : MonoBehaviour
             }
             current = current.parent;
             path.Add(current);
-            if(DEBUG) bgGenerator.ColorTileAtCell(current.position, bgGenerator.tilemap, Color.red);
+            // if(DEBUG) bgGenerator.ColorTileAtCell(current.position, bgGenerator.tilemap, Color.red);
         }
 
         path.Reverse();
@@ -206,7 +202,7 @@ public class PathfindingController : MonoBehaviour
         return c;
     }
     
-    private CellData GetRandomCell()
+    private CellData GetRandomCell()//TODO: optimize restrict this to a smaller area
     {
         int cntr = 0;
         var cellmapList = cellMap.ToArray();

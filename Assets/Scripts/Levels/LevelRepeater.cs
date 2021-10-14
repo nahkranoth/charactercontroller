@@ -32,9 +32,8 @@ public class LevelRepeater : MonoBehaviour
         tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0));
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
-        
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0));
         OnGenerate?.Invoke();
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0));
     }
 
     public void RemoveAt(int yPos)
@@ -83,7 +82,7 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(newStep);
         RemoveAt(currentStep + StepSize() * keepLoaded);
         currentStep -= StepSize();
-        // metaEntityPlacer.Generate(metaEntityPlacer.entityPlacer, metaTilemapGenerator, new Vector3Int(0,newStep,0));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0));
     }
    
 }
