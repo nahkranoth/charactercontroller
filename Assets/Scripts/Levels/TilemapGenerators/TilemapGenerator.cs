@@ -13,39 +13,12 @@ public abstract class TilemapGenerator : MonoBehaviour
     public TileLibrary library;
     public TileBase[,] blueprint;
 
-    public Action<Tilemap> OnDoneInit;
-
-    public Vector3 Position
-    {
-        get { return tilemap.transform.localPosition; }
-        set{ tilemap.transform.localPosition = value; }
-    }
-    
-    public float GetY()
-    {
-        return tilemap.transform.position.y;
-    }
-    
     internal void Fill(ref TileBase[,] map, TileLibraryKey key)
     {
         for (int x = 0; x < size.x; x++)
         for (int y = 0; y < size.y; y++)
             map[x, y] = library.GetTile(key);
     }
-    
-    internal void BuildMap(TileBase[,] map)
-    {
-        tilemap.ClearAllTiles();
-        for (int x = 0; x < map.GetUpperBound(0); x++)
-        {
-            for (int y = 0; y < map.GetUpperBound(1); y++)
-            {
-                tilemap.SetTile(new Vector3Int(x, y, 0), map[x,y]);
-            }
-        }
-        OnDoneInit?.Invoke(tilemap);
-    }
-    
     internal Bounds[] PullRandomGroup(Bounds[] full, int amount)
     {
         Bounds[] result = new Bounds[amount];
@@ -227,5 +200,11 @@ public abstract class TilemapGenerator : MonoBehaviour
     public bool IsEmpty(Vector3 position)
     {
         return blueprint[(int)position.x, (int)position.y] == null;
+    }
+
+    public void ColorTileAtCell(Vector3Int position, Tilemap tilemap, Color color)
+    {
+        tilemap.SetTileFlags(position, TileFlags.None);
+        tilemap.SetColor(position, color);
     }
 }

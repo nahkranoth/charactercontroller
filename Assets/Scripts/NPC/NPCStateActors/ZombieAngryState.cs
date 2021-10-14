@@ -37,7 +37,7 @@ public class ZombieAngryState: AbstractEnemyState
         if (Vector3.Distance(player.transform.position, Parent.transform.position) > settings.loseDistance)
         {
             Parent.animatorController.SetWalk(0, 0);
-            // Parent.SetState("idle");
+            Parent.SetState("idle");
             return;
         }
         

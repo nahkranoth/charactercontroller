@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -9,6 +10,8 @@ public class LevelRepeater : MonoBehaviour
     public Tilemap backgroundTilemap;
     public Tilemap collisionTilemap;
     public int keepLoaded;
+
+    public Action OnGenerate;
     
     private GenerateTilemapData tickBlueprint;
     private int currentStep;
@@ -31,6 +34,7 @@ public class LevelRepeater : MonoBehaviour
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
         
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0));
+        OnGenerate?.Invoke();
     }
 
     public void RemoveAt(int yPos)

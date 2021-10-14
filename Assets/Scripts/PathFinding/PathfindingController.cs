@@ -21,9 +21,9 @@ public static class ADJACENTCELLS
 public class PathfindingController : MonoBehaviour
 {
     private PlayerController player;
-    private Dictionary<Vector3Int, CellData> cellMapTick;
-    private Dictionary<Vector3Int, CellData> cellMapTack;
-    private Dictionary<Vector3Int, CellData> completeCellMap;
+    private Dictionary<Vector3Int, CellData> cellMap;
+    public BackgroundTilemapGenerator bgGenerator;
+    public CollisionTilemapGenerator collGenerator;
     private LevelRepeater repeater;
     List<CellData> openList = new List<CellData>();
     List<CellData> closeList = new List<CellData>();
@@ -37,34 +37,21 @@ public class PathfindingController : MonoBehaviour
     private void Start()
     {
         repeater = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
+        repeater.OnGenerate -= Generate;
+        repeater.OnGenerate += Generate;
     }
 
     public void Generate()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         
-        // cellMapTick = GetTilemapAsCellmap(
-        //     gridController.tickGenerator.background.tilemap,
-        //     gridController.tickGenerator.collision.tilemap,
-        //     gridController.tickGenerator.GetPosition(),
-        //     true
-        //     );
-        //
-        // cellMapTack = GetTilemapAsCellmap(
-        //     gridController.tackGenerator.background.tilemap,
-        //     gridController.tackGenerator.collision.tilemap,
-        //     gridController.tackGenerator.GetPositionAsInt(),
-        //     false
-        //     );
-
-        completeCellMap = cellMapTick;
-        foreach (var cell in cellMapTack)
-        {
-            completeCellMap[cell.Key] = cell.Value;
-        }
+        cellMap = GetTilemapAsCellmap(
+            bgGenerator.tilemap,
+            collGenerator.tilemap
+        );
     }
 
-    private Dictionary<Vector3Int, CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision, Vector3 offsetPos, bool isTick)
+    private Dictionary<Vector3Int, CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision)
     {
         var cellMap = new Dictionary<Vector3Int, CellData>();
 
@@ -182,13 +169,7 @@ public class PathfindingController : MonoBehaviour
 
     private void ClearPath()
     {
-        foreach (var cell in cellMapTick)
-        {
-            cell.Value.parent = null;
-            cell.Value.cost = 0;
-            cell.Value.heuristics = 0;
-        }
-        foreach (var cell in cellMapTack)
+        foreach (var cell in cellMap)
         {
             cell.Value.parent = null;
             cell.Value.cost = 0;
@@ -210,7 +191,7 @@ public class PathfindingController : MonoBehaviour
             }
             current = current.parent;
             path.Add(current);
-            // if(DEBUG) gridController.ColorTileAtCell(current.position, gridController.tickGenerator.background.tilemap, Color.yellow);
+            if(DEBUG) bgGenerator.ColorTileAtCell(current.position, bgGenerator.tilemap, Color.red);
         }
 
         path.Reverse();
@@ -221,21 +202,20 @@ public class PathfindingController : MonoBehaviour
     private CellData GetFromCellMapByPos(Vector3Int pos)
     {
         CellData c;
-        completeCellMap.TryGetValue(pos, out c);
+        cellMap.TryGetValue(pos, out c);
         return c;
     }
     
     private CellData GetRandomCell()
     {
         int cntr = 0;
-        var cellmapList = completeCellMap.ToArray();
-        while (true)
+        var cellmapList = cellMap.ToArray();
+        while (cntr <= 100)
         {
             cntr++;
-            var randId = Random.Range(0, completeCellMap.Count);
+            var randId = Random.Range(0, cellMap.Count);
             var cell = cellmapList[randId];
             if(cell.Value.walkable) return cell.Value;
-            if (cntr >= 100) break;
         }
         
         Debug.LogError("Could not Find Walkable Random Tile");
@@ -259,16 +239,10 @@ public class PathfindingController : MonoBehaviour
     
     public CellData GetFromCellMapByWorldPos(Vector3 pos)
     {
-        // CellData c;
-        // var posTick = gridController.tickGenerator.background.tilemap.WorldToCell(pos);
-        // completeCellMap.TryGetValue(posTick, out c);
-        // if (c == null)
-        // {
-        //     var posTack = gridController.tackGenerator.background.tilemap.WorldToCell(pos);
-        //     completeCellMap.TryGetValue(posTack, out c);
-        // }
-        // return c;
-        return null;
+        CellData c;
+        var position = bgGenerator.tilemap.WorldToCell(pos);
+        cellMap.TryGetValue(position, out c);
+        return c;
     }
 
     private List<CellData> GetCellNeighbours(CellData cell)

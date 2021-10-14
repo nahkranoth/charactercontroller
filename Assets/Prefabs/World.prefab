@@ -253,8 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6024b22119835be4b975dba44cd92e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridController: {fileID: 0}
-  DEBUG: 0
+  bgGenerator: {fileID: 0}
+  collGenerator: {fileID: 0}
+  DEBUG: 1
 --- !u!114 &4846639749944643822
 MonoBehaviour:
   m_ObjectHideFlags: 0

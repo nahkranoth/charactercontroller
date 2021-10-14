@@ -17,7 +17,7 @@ public class CharacterDebugController : MonoBehaviour
     public void Init(INPCSettings settings)
     {
         var detect = settings.detectDistance * 2;
-        var lose = settings.loseDistance;
+        var lose = settings.loseDistance * 2;
         debugDetectCircle.localScale = new Vector3(detect,detect,1);
         debugLoseCircle.localScale = new Vector3(lose,lose,1);
     }
