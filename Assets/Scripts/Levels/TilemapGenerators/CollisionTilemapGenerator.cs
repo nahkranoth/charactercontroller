@@ -29,6 +29,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
                 DrawBoundsOutline(ref blueprint, new []{constructPosition}, TileLibraryKey.Fence, .1f);
             }
         }
+       
         return blueprint;
     }
 

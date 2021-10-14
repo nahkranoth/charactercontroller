@@ -8,10 +8,11 @@ public class TileConstruct:ScriptableObject, IRarity
     public List<TileWrapper> map;
     public Vector2Int size;
     public TileConstructType type;
+    public int rarity;
     public int Rarity
     {
-        get;
-        set;
+        get { return rarity;}
+        set { rarity = value; }
     }
 }
 

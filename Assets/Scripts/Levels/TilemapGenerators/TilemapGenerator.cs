@@ -49,6 +49,7 @@ public abstract class TilemapGenerator : MonoBehaviour
     internal Bounds[] PullRandomGroup(Bounds[] full, int amount)
     {
         Bounds[] result = new Bounds[amount];
+        if (full.Length == 0) return new Bounds[0];
         for (int i = 0; i < amount; i++)
         {
             var randID = Random.Range(0, full.Length);

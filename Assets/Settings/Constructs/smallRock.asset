@@ -27,4 +27,4 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: be689f22f17ba6d4b8b1abcaaa96b68f, type: 2}
   size: {x: 2, y: 3}
   type: 1
-  rarity: 10
+  rarity: 40
