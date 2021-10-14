@@ -26,10 +26,9 @@ public class CollisionTilemapGenerator : TilemapGenerator
         {
             if (AddConstruct(ref blueprint, buildings, constructPosition)?.type == TileConstructType.House)
             {
-                DrawBoundsOutline(ref blueprint, new []{constructPosition}, TileLibraryKey.Fence);
-            };
+                DrawBoundsOutline(ref blueprint, new []{constructPosition}, TileLibraryKey.Fence, .1f);
+            }
         }
-
         return blueprint;
     }
 

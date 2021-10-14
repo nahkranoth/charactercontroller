@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
+  m_Name: smallStatue
+  m_EditorClassIdentifier: 
+  map:
+  - position: {x: 0, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 5d7fa5a806a13494aa96e1715cf8dc30, type: 2}
+  - position: {x: 0, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 5a9c6d52701e9bd4f8a9ba697de5b91c, type: 2}
+  size: {x: 1, y: 2}
+  type: 3
+  rarity: 10

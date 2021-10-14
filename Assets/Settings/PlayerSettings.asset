@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   startHealth: 50
-  walkSpeed: 22
+  walkSpeed: 23
   chargeWalkSpeed: 3

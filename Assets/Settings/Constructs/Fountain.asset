@@ -33,4 +33,4 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 179f964ee42e6874b95d5e11654f7862, type: 2}
   size: {x: 3, y: 3}
   type: 3
-  rarity: 10
+  rarity: 5

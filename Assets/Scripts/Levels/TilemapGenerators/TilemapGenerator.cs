@@ -133,7 +133,7 @@ public abstract class TilemapGenerator : MonoBehaviour
         }
     }
     
-    internal void DrawBoundsOutline(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey)
+    internal void DrawBoundsOutline(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey, float breakup = 0f)
     {
         int xSize = map.GetUpperBound(0);
         int ySize = map.GetUpperBound(1);
@@ -149,15 +149,33 @@ public abstract class TilemapGenerator : MonoBehaviour
             for (var x = -extentX; x < extentX + 1; x++)
             {
                 var newX = centerX + x;
-                if(WithinTilemap(newX,xSize, centerY+extentY, ySize)) map[newX, centerY+extentY] = library.GetTile(tileKey);
-                if(WithinTilemap(newX,xSize, centerY-extentY, ySize)) map[newX, centerY-extentY] = library.GetTile(tileKey);
+                if (WithinTilemap(newX, xSize, centerY + extentY, ySize))
+                {
+                    if(Random.Range(0f, 1f) <= breakup) continue;
+                    map[newX, centerY+extentY] = library.GetTile(tileKey);
+                }
+
+                if (WithinTilemap(newX, xSize, centerY - extentY, ySize))
+                {
+                    if(Random.Range(0f, 1f) <= breakup) continue;
+                    map[newX, centerY-extentY] = library.GetTile(tileKey);
+                }
             }
             
             for (var y = -extentY; y < extentY; y++)
             {
                 var newY = centerY + y;
-                if(WithinTilemap(centerX+extentX-1,xSize, newY, ySize)) map[centerX+extentX, newY] = library.GetTile(tileKey);
-                if(WithinTilemap(centerX+extentX,xSize, newY, ySize)) map[centerX-extentX, newY] = library.GetTile(tileKey);
+                if (WithinTilemap(centerX + extentX - 1, xSize, newY, ySize))
+                {
+                    if(Random.Range(0f, 1f) <= breakup) continue;
+                    map[centerX+extentX, newY] = library.GetTile(tileKey);
+                }
+
+                if (WithinTilemap(centerX + extentX, xSize, newY, ySize))
+                {
+                    if(Random.Range(0f, 1f) <= breakup) continue;
+                    map[centerX-extentX, newY] = library.GetTile(tileKey);
+                }
             }
             
         }

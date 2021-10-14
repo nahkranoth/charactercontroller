@@ -17,12 +17,12 @@ public class BackgroundTilemapGenerator : TilemapGenerator
         DrawSpray(ref blueprint, 55, TileLibraryKey.FloorFoliage2);
         DrawSpray(ref blueprint, 12, TileLibraryKey.FloorFoliage3);
         
-        AddVerticalDrunk(ref blueprint, TileLibraryKey.Path, 0, 5); //make road
+        AddVerticalDrunk(ref blueprint, TileLibraryKey.Road, 0, 5); //make road
         
         var boundsGroup = PullRandomGroup(data.planBounds, 4);
         FillBounds(ref blueprint, boundsGroup, TileLibraryKey.Foliage); //flower beds
 
-        DrawBoundsOutline(ref blueprint, boundsGroup, TileLibraryKey.Road);
+        DrawBoundsOutline(ref blueprint, boundsGroup, TileLibraryKey.Path);
         
         data.planBounds = data.planBounds.Except(boundsGroup).ToArray();
         
