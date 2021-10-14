@@ -5,7 +5,10 @@ using UnityEngine;
 public class LevelEntityPlacer : MonoBehaviour
 {
     public Dictionary<Vector3Int, InteractionCollectable> collectablePool = new Dictionary<Vector3Int, InteractionCollectable>();
-    public Dictionary<Vector3Int, InteractionCollectable> ignorePool = new Dictionary<Vector3Int, InteractionCollectable>();
+    public Dictionary<Vector3Int, InteractionCollectable> ignoreCollectablePool = new Dictionary<Vector3Int, InteractionCollectable>();
+    
+    public Dictionary<Vector3Int, GameObject> enemyPool = new Dictionary<Vector3Int, GameObject>();
+    public Dictionary<Vector3Int, GameObject> ignoreEnemyPool = new Dictionary<Vector3Int, GameObject>();
     
     //Naive approach; no pooling
     public void RemoveCollectableAt(Vector3Int position)
@@ -18,6 +21,16 @@ public class LevelEntityPlacer : MonoBehaviour
             collectablePool.Remove(position);
         }
     }
+    
+    public void RemoveEnemyAt(Vector3Int position)
+    {
+        GameObject target;
+        if (enemyPool.TryGetValue(position, out target))
+        {
+            Destroy(target);
+            enemyPool.Remove(position);
+        }
+    }
 
     private void CollectCollectable(InteractionCollectable collectable)
     {
@@ -25,19 +38,28 @@ public class LevelEntityPlacer : MonoBehaviour
         {
             var result = collectablePool.First(x => x.Value == collectable);
             RemoveCollectableAt(result.Key);
-            ignorePool.Add(result.Key, result.Value);
+            ignoreCollectablePool.Add(result.Key, result.Value);
         }
     }
     
     public void GenerateCollectable(GameObject obj, Vector3Int position)
     {
         if (collectablePool.ContainsKey(position)) return;//is already active
-        if (ignorePool.ContainsKey(position)) return;//is already collected
+        if (ignoreCollectablePool.ContainsKey(position)) return;//is already collected
         var container = Instantiate(obj, transform);
         var collectable = container.GetComponent(typeof(InteractionCollectable)) as InteractionCollectable;
         container.transform.localPosition = position;
         collectablePool[position] = collectable;
         collectable.OnRemove -= CollectCollectable;
         collectable.OnRemove += CollectCollectable;
+    }
+    
+    public void GenerateEnemy(GameObject obj, Vector3Int position)
+    {
+        if (enemyPool.ContainsKey(position)) return;//is already active
+        if (ignoreEnemyPool.ContainsKey(position)) return;//is already collected
+        var container = Instantiate(obj, transform);
+        container.transform.localPosition = position;
+        enemyPool[position] = container;
     }
 }
