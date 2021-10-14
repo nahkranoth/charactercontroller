@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2aa6be2e21b68c49b432674b1557d7f, type: 3}
-  m_Name: Candy
+  m_Name: Axe
   m_EditorClassIdentifier: 
   item:
-    menuName: candy
-    menuSprite: {fileID: 7977443681283346765, guid: c2373f223dfc417489f3926b168f0510, type: 3}
-    equipedSprite: {fileID: 0}
-    behaviour: 1
-    consumable: 1
+    menuName: axe
+    menuSprite: {fileID: -5557420877203330147, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
+    equipedSprite: {fileID: -5557420877203330147, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
+    behaviour: 3
+    consumable: 0
     amount: 1
+  rarity: 5

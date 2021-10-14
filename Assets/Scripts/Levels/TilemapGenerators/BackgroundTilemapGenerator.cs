@@ -22,7 +22,7 @@ public class BackgroundTilemapGenerator : TilemapGenerator
         var boundsGroup = PullRandomGroup(data.planBounds, 4);
         FillBounds(ref blueprint, boundsGroup, TileLibraryKey.Foliage); //flower beds
 
-        DrawBoundsOutline(ref blueprint, boundsGroup, TileLibraryKey.Path);
+        DrawBoundsOutline(ref blueprint, boundsGroup, TileLibraryKey.Path, 0.05f);
         
         data.planBounds = data.planBounds.Except(boundsGroup).ToArray();
         

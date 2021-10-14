@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,8 +28,8 @@ public class InteractionCollectable : MonoBehaviour
 
    private void OnCollect(int force)
    {
-      var randI = Random.Range(0, collectableItems.collection.descriptions.Count);
-      var chosen = collectableItems.collection.descriptions[randI];
+      var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRarity>()) as ItemDescription;
+      
       message.QueMessage($"Found {chosen.item.menuName}");
       player.inventory.AddByDescription(chosen);
       interaction.OnInteraction -= OnCollect;

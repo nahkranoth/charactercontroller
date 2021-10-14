@@ -12,5 +12,4 @@ public class Item
     public bool consumable;
     public int amount = 1;
 
-    public int rarity = 100;
 }
