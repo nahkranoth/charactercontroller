@@ -81,7 +81,7 @@ public class NPCController : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             return;
         }
-        activeState.Execute();
+        // activeState.Execute();
     }
 
     public void SetState(string name)

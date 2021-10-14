@@ -9,7 +9,8 @@ public class ZombieIdleState: AbstractEnemyState
     private Vector3 roamTarget;
     
     private INPCSettings settings;
-    private Coroutine idleWaitTimer;
+    private int idleWaitTimer;
+    private bool waitingToRoam;
     
     private PlayerController player;
 
@@ -20,26 +21,31 @@ public class ZombieIdleState: AbstractEnemyState
     }
 
     public override void Activate()
-    { 
-        if(idleWaitTimer != null) Parent.StopCoroutine(idleWaitTimer);
-        idleWaitTimer = Parent.StartCoroutine(WaitToRoamAgain());
+    {
+        roamChance = Random.Range(settings.roamChance.x, settings.roamChance.y);
+        idleWaitTimer = 0;
+        waitingToRoam = true;
     }
 
     public override void Execute()
     {
         Parent.rigidBody.velocity = Vector2.zero;
         Parent.rigidBody.Sleep();
+
+        if (waitingToRoam)
+        {
+            idleWaitTimer++;
+            if (idleWaitTimer > roamChance)
+            {
+                Parent.SetState("roam");
+                waitingToRoam =false;
+            }
+        }
+        
         if (Vector3.Distance(player.transform.position, Parent.transform.position) < settings.detectDistance)
         {
-            Parent.StopCoroutine(WaitToRoamAgain());
             Parent.SetState("angry");
         }
-    }
-
-    IEnumerator WaitToRoamAgain()
-    {
-        yield return new WaitForSeconds(Random.Range(settings.roamChance.x, settings.roamChance.y));
-        Parent.SetState("roam");
     }
     
 }

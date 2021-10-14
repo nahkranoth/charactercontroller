@@ -58,7 +58,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 1d9d4beea6f828546a64f31192ec9de5, type: 2}
   rigidBody: {fileID: 572130592}
   charDebug: {fileID: 6287317873963529915}
-  characterDebug: 1
+  characterDebug: 0
   pathfinding: {fileID: 0}
   damageTaker: {fileID: 6070785335149153078}
   myHealth: {fileID: 7745941944118724647}

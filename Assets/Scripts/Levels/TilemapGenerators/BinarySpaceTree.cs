@@ -28,7 +28,6 @@ public static class BinarySpaceTree
                 workload.Add(node.right);
                 workload.Remove(node);
             }
-            Debug.Log($"count: {workload.Count}");
             maxCap++;
         }
         return result.ToArray();

@@ -9,7 +9,7 @@ public abstract class INPCSettings:ScriptableObject
     public float attackWalkSpeed = 0.4f;
     public float strikeDistance = 0.3f;
 
-    public Vector2 roamChance = new Vector2(0.5f,2);
+    public Vector2Int roamChance = new Vector2Int(1,20);
     public float detectDistance = 1f;
     public float loseDistance = 1.4f;
     public int maxRoam = 10;
