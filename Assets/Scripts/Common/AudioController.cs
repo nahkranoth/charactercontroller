@@ -8,12 +8,14 @@ public class AudioController : MonoBehaviour
     {
         PlayerHurt,
         PlayerSwing,
-        ZombieHurt
+        ZombieHurt,
+        CollectItem
     }
     
     public AudioClip playerHurt;
     public AudioClip playerSwing;
     public AudioClip zombieGrowl;
+    public AudioClip collectItem;
     public List<AudioSource> sources;
     private int cycleStep = 0;
     private Dictionary<AudioClipName, AudioClip> audiomap;
@@ -24,7 +26,8 @@ public class AudioController : MonoBehaviour
         {
             {AudioClipName.PlayerHurt, playerHurt},
             {AudioClipName.PlayerSwing, playerSwing},
-            {AudioClipName.ZombieHurt, zombieGrowl}
+            {AudioClipName.ZombieHurt, zombieGrowl},
+            {AudioClipName.CollectItem, collectItem}
         };
         
         WorldGraph.Subscribe(this, typeof(AudioController));

@@ -10,6 +10,9 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     public EntityCollection containerEntities;
     public EntityCollection enemyEntities;
 
+    public int perChunkContainers;
+    public int perChunkEnemies;
+    
     private List<Vector3Int> possiblePlaces;
 
     public void RemoveAt(Vector3Int position)
@@ -29,7 +32,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     {
         Vector3Int spawnPos;
         
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < perChunkEnemies; i++)
         {
             var ranI = Random.Range(0, possiblePlaces.Count);
             var place = possiblePlaces[ranI];
@@ -46,7 +49,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     {
         Vector3Int spawnPos;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < perChunkContainers; i++)
         {
             var ranI = Random.Range(0, possiblePlaces.Count);
             var place = possiblePlaces[ranI];

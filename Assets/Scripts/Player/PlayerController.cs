@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
       itemBehaviourController.ChangeHealth += myHealth.Modify;
       
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
+      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
    }
 
    public void EquipItem(ItemBehaviourStates.Behaviours behaviour)

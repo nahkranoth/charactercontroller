@@ -10,12 +10,14 @@ public class InteractionCollectable : MonoBehaviour
    public ItemCollectionDescription collectableItems;
    private PlayerController player;
    private MessageController message;
+   private AudioController audio;
 
    public Action<InteractionCollectable> OnRemove;
    private void Start()
    {
       player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
       message = WorldGraph.Retrieve(typeof(MessageController)) as MessageController;
+      audio = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
       StartCoroutine(StartCollectDetection());
    }
 
@@ -29,8 +31,8 @@ public class InteractionCollectable : MonoBehaviour
    private void OnCollect(int force)
    {
       var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRarity>()) as ItemDescription;
-      
       message.QueMessage($"Found {chosen.item.menuName}");
+      audio.PlaySound(AudioController.AudioClipName.CollectItem);
       player.inventory.AddByDescription(chosen);
       interaction.OnInteraction -= OnCollect;
       OnRemove?.Invoke(this);

@@ -24,7 +24,7 @@ public class NPCPathfindingController
     
     public Vector3 GetTarget()
     {
-        if (path == null) return Vector3.zero;
+        if (path == null || path.Count <= currentNode) return Vector3.zero;
         return path[currentNode].worldPos;
     }
     

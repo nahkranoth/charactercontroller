@@ -223,8 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8657a42608cd65342a2a8f0541ca1f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestPrefab: {fileID: 649723127512308276, guid: 2fec1a3befb7a9b4e9b1b32eeb1b8c1b, type: 3}
-  menuWheelController: {fileID: 0}
   menuActive: 0
   npcActive: 1
   playerActive: 1
@@ -271,6 +269,7 @@ MonoBehaviour:
   playerHurt: {fileID: 8300000, guid: 336b123b5c1eec84fbceee4c97beb134, type: 3}
   playerSwing: {fileID: 8300000, guid: db6bb8cbca68f7042801ee4361a72bbc, type: 3}
   zombieGrowl: {fileID: 8300000, guid: d1a45f54c1f856644ba66667eea2cbb4, type: 3}
+  collectItem: {fileID: 8300000, guid: 49227e36ffffb6f46a6a0f0468f8a006, type: 3}
   sources:
   - {fileID: 754378507075951650}
   - {fileID: 5432873573789083101}
