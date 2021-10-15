@@ -11,6 +11,11 @@ public static class Helpers
     {
         return Vector3.Distance(a, b) < range;
     }
+    
+    public static bool InRange(Vector3Int a, Vector3Int b, int range)
+    {
+        return Vector3Int.Distance(a, b) < range;
+    }
 
     public static int CycleConstraint(int max, int min, int index)
     {

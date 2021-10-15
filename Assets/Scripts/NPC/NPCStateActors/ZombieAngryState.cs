@@ -24,7 +24,7 @@ public class ZombieAngryState: AbstractEnemyState
 
     private void InitializePath()
     {
-        var newPath = Parent.pathfinding.FindPathToPlayerByWorldPos(Parent.transform.position, 4);
+        var newPath = Parent.pathfinding.FindPathToPlayerByWorldPos(Parent.transform.position);
         Parent.npcPathController.InitializePath(newPath);
         Parent.npcPathController.NextNode();
         roamTarget = Parent.npcPathController.GetTarget();

@@ -28,6 +28,7 @@ public class PathfindingController : MonoBehaviour
     List<CellData> openList = new List<CellData>();
     List<CellData> closeList = new List<CellData>();
     public bool DEBUG = true;
+    public KeyValuePair<Vector3Int, CellData>[] cellmapList;
 
     private void Awake()
     {
@@ -45,11 +46,11 @@ public class PathfindingController : MonoBehaviour
     public void Generate()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        
         cellMap = GetTilemapAsCellmap(
             bgGenerator.tilemap,
             collGenerator.tilemap
         );
+        cellmapList = cellMap.ToArray();
     }
 
     private Dictionary<Vector3Int, CellData> GetTilemapAsCellmap(Tilemap tilemap, Tilemap collision)
@@ -80,22 +81,26 @@ public class PathfindingController : MonoBehaviour
     public List<CellData> FindPathToRandomPosByWorldPos(Vector3 worldPos, int depth=-1)
     {
         var startCell = GetFromCellMapByWorldPos(worldPos);
-        var finishCell = GetRandomCell();
+        
+        var finishCell = GetRandomCell(depth, startCell.position);
+        
+        var result = new List<CellData>();
         if (startCell != null && finishCell != null)
         {
-            return FindPath(startCell, finishCell, depth);
+            result = FindPath(startCell, finishCell);
         }
-        Debug.LogWarning($"Could not find Path: Start {startCell} Finish {finishCell}");
-        return null;
+        
+        if(result.Count == 0) Debug.LogWarning($"Could not find Path: Start {startCell} Finish {finishCell}");
+        return result;
     }
     
-    public List<CellData> FindPathToPlayerByWorldPos(Vector3 worldPos, int depth)
+    public List<CellData> FindPathToPlayerByWorldPos(Vector3 worldPos)
     {
         var startCell = GetFromCellMapByWorldPos(worldPos);
         var finishCell = GetFromCellMapByWorldPos(player.transform.position);
-        return FindPath(startCell, finishCell, depth);
+        return FindPath(startCell, finishCell);
     }
-    public List<CellData> FindPath(CellData startCell, CellData finishCell, int depth=-1)
+    public List<CellData> FindPath(CellData startCell, CellData finishCell)
     {
         if (startCell == null || finishCell == null)return new List<CellData>();
 
@@ -117,7 +122,7 @@ public class PathfindingController : MonoBehaviour
                 if (neighbour == finishCell)
                 {
                     neighbour.parent = bestCell;
-                    return ConstructPath(neighbour, depth);
+                    return ConstructPath(neighbour);
                 }
                 
                 //var neighbour_neighbours = GetCellNeighbours(bestCell);
@@ -177,7 +182,7 @@ public class PathfindingController : MonoBehaviour
             cell.Value.heuristics = 0;
         }
     }
-    private List<CellData> ConstructPath(CellData destination, int depth)
+    private List<CellData> ConstructPath(CellData destination)
     {
         var path = new List<CellData>{destination};
         var current = destination;
@@ -192,11 +197,10 @@ public class PathfindingController : MonoBehaviour
             }
             current = current.parent;
             path.Add(current);
-            // if(DEBUG) bgGenerator.ColorTileAtCell(current.position, bgGenerator.tilemap, Color.red);
+            if(DEBUG) bgGenerator.ColorTileAtCell(current.position, bgGenerator.tilemap, Color.red);
         }
 
         path.Reverse();
-        if(depth != -1 && depth <= path.Count) path = path.GetRange(0, depth);
         return path;
     }
     
@@ -207,16 +211,17 @@ public class PathfindingController : MonoBehaviour
         return c;
     }
     
-    private CellData GetRandomCell()//TODO: optimize restrict this to a smaller area
+    private CellData GetRandomCell(int depth, Vector3Int origin)//TODO: optimize restrict this to a smaller area
     {
         int cntr = 0;
-        var cellmapList = cellMap.ToArray();
+        
         while (cntr <= 100)
         {
             cntr++;
-            var randId = Random.Range(0, cellMap.Count);
+            var randId = Random.Range(0, cellmapList.Length);
             var cell = cellmapList[randId];
-            if(cell.Value.walkable) return cell.Value;
+            
+            if(cell.Value.walkable && Helpers.InRange(cell.Key, origin, depth)) return cell.Value;
         }
         
         Debug.LogError("Could not Find Walkable Random Tile");
