@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class WorldController : MonoBehaviour
 {
-    public GameObject chestPrefab;
-    public GameObject menuWheelController;
     public bool menuActive = false;
     public bool npcActive = true;
     public bool playerActive = true;
@@ -31,11 +29,6 @@ public class WorldController : MonoBehaviour
         playerActive = !menuActive;
         npcActive = !menuActive;
         OnToggleMenu?.Invoke(menuActive);
-    }
-    
-    public void SpawnChest(Vector3 position)
-    {
-        Instantiate(chestPrefab, position, Quaternion.identity);
     }
     
 }

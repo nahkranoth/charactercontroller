@@ -115,11 +115,11 @@ public class PathfindingController : MonoBehaviour
                     return ConstructPath(neighbour, depth);
                 }
                 
-                var neighbour_neighbours = GetCellNeighbours(bestCell);
+                //var neighbour_neighbours = GetCellNeighbours(bestCell);
                 
                 float extra_cost = 0;
                 
-                if (neighbour_neighbours.Any(x => x.walkable == false)) extra_cost = 1f;
+                //if (neighbour_neighbours.Any(x => x.walkable == false)) extra_cost = 1f;
                 
                 var g = bestCell.cost + extra_cost + (neighbour.position - bestCell.position).magnitude;
                 var h = (finishCell.position - neighbour.position).magnitude;
