@@ -8,7 +8,6 @@ public class LevelEntityPlacer : MonoBehaviour
     public Dictionary<Vector3Int, InteractionCollectable> ignoreCollectablePool = new Dictionary<Vector3Int, InteractionCollectable>();
     
     public Dictionary<Vector3Int, GameObject> enemyPool = new Dictionary<Vector3Int, GameObject>();
-    public Dictionary<Vector3Int, GameObject> ignoreEnemyPool = new Dictionary<Vector3Int, GameObject>();
     
     //Naive approach; no pooling
     public void RemoveCollectableAt(Vector3Int position)
@@ -57,7 +56,6 @@ public class LevelEntityPlacer : MonoBehaviour
     public void GenerateEnemy(GameObject obj, Vector3Int position)
     {
         if (enemyPool.ContainsKey(position)) return;//is already active
-        if (ignoreEnemyPool.ContainsKey(position)) return;//is already collected
         var container = Instantiate(obj, transform);
         container.transform.localPosition = position;
         enemyPool[position] = container;

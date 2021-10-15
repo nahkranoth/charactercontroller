@@ -27,7 +27,12 @@ public class NPCController : MonoBehaviour
     private PlayerController player;
 
     private bool initialized;
-    
+
+    private void Awake()
+    {
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+    }
+
     void Start()
     {
         myHealth.Set(settings.GetHealth());
@@ -81,8 +86,16 @@ public class NPCController : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             return;
         }
-        //TODO: Optimize, only run when player is nearby (control that check from the players side)
-        activeState.Execute();
+
+          //TODO 4 drawn out of my ass
+        if (Vector3.Distance(player.transform.position, transform.position) < 4f) 
+        {
+            activeState.Execute();
+        }
+        else
+        {
+            rigidBody.velocity = Vector2.zero;
+        }
     }
 
     public void SetState(string name)
@@ -117,7 +130,6 @@ public class NPCController : MonoBehaviour
         mainHitbox.OnTriggerStay -= OnTrigger;
         damageTaker.OnTakeDamage -= Damage;
         Destroy(damageTaker);
-        worldController.SpawnChest(transform.position);
     }
 
     public void Destroy()
