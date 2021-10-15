@@ -25,13 +25,16 @@ public class NPCPathfindingController
     public Vector3 GetTarget()
     {
         if (path == null || path.Count <= currentNode) return Vector3.zero;
-        return path[currentNode].worldPos;
+        var pathNode = path[currentNode];
+        pathNode.worldPos.z = 0;
+        return pathNode.worldPos;
     }
     
     public Vector3 FindDeltaVecOfCurrentNode(Vector3 ownPos)
     {
-        if (path == null) return Vector3.zero;
+        if (path == null || path.Count <= currentNode) return Vector3.zero;
         var pathNode = path[currentNode];
+        pathNode.worldPos.z = 0;
         return pathNode.worldPos - ownPos;
     }
 }

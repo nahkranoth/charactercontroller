@@ -246,6 +246,7 @@ public class PathfindingController : MonoBehaviour
     {
         CellData c;
         var position = bgGenerator.tilemap.WorldToCell(pos);
+        position.z = 0;
         cellMap.TryGetValue(position, out c);
         return c;
     }
