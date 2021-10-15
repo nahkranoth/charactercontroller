@@ -18,12 +18,17 @@ public class ItemBehaviourController:MonoBehaviour
         behaviourToActionMap[ItemBehaviourStates.Behaviours.None] = () => { Debug.Log("Do nothing");};
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Candy] = () =>
         {
-            ChangeHealth?.Invoke(20);
+            ChangeHealth?.Invoke(10);
         };
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Chocolate] = () =>
         {
-            ChangeHealth?.Invoke(50);
+            ChangeHealth?.Invoke(20);
         };
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.Honey] = () =>
+        {
+            ChangeHealth?.Invoke(40);
+        };
+        
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Axe] = () =>
         {
             Equip?.Invoke(ItemBehaviourStates.Behaviours.Axe);

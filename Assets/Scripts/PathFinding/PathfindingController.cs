@@ -32,6 +32,11 @@ public class PathfindingController : MonoBehaviour
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(PathfindingController));
+    }
+
+    private void Start()
+    {
+        //TODO sometimes OnGenerate is already called
         repeater = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
         repeater.OnGenerate -= Generate;
         repeater.OnGenerate += Generate;

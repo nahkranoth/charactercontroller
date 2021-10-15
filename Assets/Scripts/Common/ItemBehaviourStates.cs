@@ -6,6 +6,7 @@
         Candy,
         Sword,
         Axe,
-        Chocolate
+        Chocolate,
+        Honey
     }
 }
