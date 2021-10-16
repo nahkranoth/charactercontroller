@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
-  m_Name: smallStatue
+  m_Name: SmallStatue
   m_EditorClassIdentifier: 
   map:
   - position: {x: 0, y: 0, z: 0}
-    tile: {fileID: 11400000, guid: 5d7fa5a806a13494aa96e1715cf8dc30, type: 2}
+    tile: {fileID: 11400000, guid: 30a1d487070e24548a295d6ff3a49b39, type: 2}
   - position: {x: 0, y: 1, z: 0}
-    tile: {fileID: 11400000, guid: 5a9c6d52701e9bd4f8a9ba697de5b91c, type: 2}
+    tile: {fileID: 11400000, guid: 26421921cbf03724fba6fae3ac4e430d, type: 2}
   size: {x: 1, y: 2}
   type: 3
-  rarity: 10
+  rarity: 50
+  constructSprite: {fileID: 21300000, guid: 05db8f53b41dd694db48b8286b275a8b, type: 3}
+  shadowPositionOffset: {x: 0, y: 0, z: 0}
+  shadowScaleOffset: {x: 0, y: 0, z: 0}

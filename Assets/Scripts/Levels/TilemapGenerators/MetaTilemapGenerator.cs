@@ -36,8 +36,8 @@ public class MetaTilemapGenerator:MonoBehaviour
         var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, boundsAreaSearchDepth);
         
         generateData.planBounds = levelPlanLeft.Concat(levelPlanRight).ToArray();
-        generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize), root);
-        generateData.collision = ParseBlueprint(collision.Generate(generateData, tilemapSize), root);
+        generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize, root), root);
+        generateData.collision = ParseBlueprint(collision.Generate(generateData, tilemapSize, root), root);
         
         debugDraw.SetBounds(generateData.planBounds, root);
         

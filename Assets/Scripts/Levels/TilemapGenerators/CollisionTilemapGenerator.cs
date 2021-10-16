@@ -5,8 +5,9 @@ public class CollisionTilemapGenerator : TilemapGenerator
 {
     public TileConstructCollection buildings;
     private GenerateTilemapData data;
-
-    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize)
+    public GameObject shadowSprite;
+    public bool drawShadows = true;
+    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
     {
         size = mapSize;
         data = _data;
@@ -24,7 +25,9 @@ public class CollisionTilemapGenerator : TilemapGenerator
         //Constructs
         foreach (var constructPosition in PullRandomGroup(data.planBounds, 21))
         {
-            if (AddConstruct(ref blueprint, buildings, constructPosition)?.type == TileConstructType.House)
+            var construct = AddConstruct(ref blueprint, buildings, constructPosition);
+            if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition, root);
+            if (construct?.type == TileConstructType.House)
             {
                 DrawBoundsOutline(ref blueprint, new []{constructPosition}, TileLibraryKey.Fence, .1f);
             }
@@ -33,6 +36,16 @@ public class CollisionTilemapGenerator : TilemapGenerator
         return blueprint;
     }
 
+    public void AddConstructShadowSprite(TileConstruct construct, Bounds position, Vector3Int root)
+    {
+        var shSprite = Instantiate(shadowSprite, transform, true).GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        shSprite.sprite = construct.constructSprite;
+        var zOffset = new Vector3(0, 0, -shSprite.sprite.bounds.extents.y);
+        var newPos = root + position.center + zOffset + construct.shadowPositionOffset;
+        shSprite.transform.localPosition = newPos;
+        shSprite.transform.localScale = shSprite.transform.localScale + construct.shadowScaleOffset;
+    }
+    
     public TileConstruct AddConstruct(ref TileBase[,] map, TileConstructCollection constructs, Bounds bounds)
     {
         var construct = constructs.GetByBounds(bounds);

@@ -9,6 +9,11 @@ public class TileConstruct:ScriptableObject, IRarity
     public Vector2Int size;
     public TileConstructType type;
     public int rarity;
+    public Sprite constructSprite;
+
+    public Vector3 shadowPositionOffset;
+    public Vector3 shadowScaleOffset;
+    
     public int Rarity
     {
         get { return rarity;}
@@ -19,7 +24,7 @@ public class TileConstruct:ScriptableObject, IRarity
 public enum TileConstructType
 {
     House,
-    Tree,
+    Flora,
     Cliffs,
     CityScape
 }

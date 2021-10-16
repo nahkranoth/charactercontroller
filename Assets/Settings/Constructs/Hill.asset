@@ -134,5 +134,6 @@ MonoBehaviour:
   - position: {x: 6, y: 7, z: 0}
     tile: {fileID: 11400000, guid: bb6a8618811233142969fbb1f43b35c2, type: 2}
   size: {x: 7, y: 9}
-  type: 2
-  rarity: 50
+  type: 1
+  rarity: 30
+  constructSprite: {fileID: 21300000, guid: 192944adf74d7974bbc1e602bbdde7be, type: 3}

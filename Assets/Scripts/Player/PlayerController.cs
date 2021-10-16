@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
       input.Directions += OnDirections;
       input.StopDirections -= OnStopDirections;
       input.StopDirections += OnStopDirections;
-      attackController.OnWeaponHitSomething -= OnWeaponHitSomething;
-      attackController.OnWeaponHitSomething += OnWeaponHitSomething;
+      attackController.OnToolHitSomething -= OnToolHitSomething;
+      attackController.OnToolHitSomething += OnToolHitSomething;
       attackController.chargingPowerAttack -= OnChargingPowerAttack;
       attackController.chargingPowerAttack += OnChargingPowerAttack;
       itemBehaviourController.Equip -= EquipItem;
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
       animator.SetCharging(charging);
    }
    
-   private void OnWeaponHitSomething(Collider2D collider, int damage)
+   private void OnToolHitSomething(Collider2D collider, int damage)
    {
       StartCoroutine(ResetDamageState());
    }

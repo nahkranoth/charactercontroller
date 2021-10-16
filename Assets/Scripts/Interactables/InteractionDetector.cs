@@ -8,18 +8,18 @@ public class InteractionDetector : MonoBehaviour
     private void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        player.attackController.OnWeaponHitSomething -= OnPossibleInteraction;
-        player.attackController.OnWeaponHitSomething += OnPossibleInteraction;
+        player.attackController.OnToolHitSomething -= OnPossibleInteraction;
+        player.attackController.OnToolHitSomething += OnPossibleInteraction;
     }
 
     private void OnDestroy()
     {
-        player.attackController.OnWeaponHitSomething -= OnPossibleInteraction;
+        player.attackController.OnToolHitSomething -= OnPossibleInteraction;
     }
 
-    private void OnPossibleInteraction(Collider2D collider, int force)
+    private void OnPossibleInteraction(Collider2D other, int force)
     {
-        InteractionDetector target = collider.GetComponent<InteractionDetector>();
+        InteractionDetector target = other.GetComponent<InteractionDetector>();
         if (target == this)
         {
             OnInteraction?.Invoke(force);

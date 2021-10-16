@@ -18,8 +18,9 @@ public class TileMapExtender:Editor
         if (GUILayout.Button("Save"))
         {
             var tm = target as Tilemap;
-            tm.CompressBounds();//TODO NOT TESTED
+            tm.CompressBounds();
             TileConstruct tc = CreateInstance<TileConstruct>();
+
             var nMap = new List<TileWrapper>();
             for (int x = 0; x < tm.size.x; x++)
             {

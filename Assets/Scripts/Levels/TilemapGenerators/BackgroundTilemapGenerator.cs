@@ -6,7 +6,7 @@ public class BackgroundTilemapGenerator : TilemapGenerator
 {
     private GenerateTilemapData data;
 
-    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize)
+    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
     {
         size = mapSize;
         data = _data;

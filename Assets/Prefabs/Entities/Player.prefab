@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7482345195232766880}
   - component: {fileID: 9058590136681751550}
   - component: {fileID: 1521678023464578071}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  weaponBox: {fileID: 2562224371129144456}
+  weaponBox: {fileID: 0}
   animator: {fileID: 3995198645062540489}
 --- !u!61 &9058590136681751550
 BoxCollider2D:
@@ -144,8 +144,8 @@ GameObject:
   - component: {fileID: 4812996927506430585}
   - component: {fileID: 6009274952209795968}
   - component: {fileID: 2004432606}
-  - component: {fileID: 2562224371129144456}
-  m_Layer: 6
+  - component: {fileID: 2884925537351346267}
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a20417edfe5dbc344afb0849cc90be99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -243,7 +243,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2018243, y: 0.09628957}
   m_EdgeRadius: 0
---- !u!114 &2562224371129144456
+--- !u!114 &2884925537351346267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 7224929123394807414}
   - component: {fileID: 6067675064658534782}
   - component: {fileID: 921906859}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553563042785767798}
   - component: {fileID: 2106564544172682518}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WeaponContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 8489176548067116706}
   - component: {fileID: 8684737470424266280}
   - component: {fileID: 3995198645062540489}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SpriteHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
