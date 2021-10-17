@@ -67,19 +67,29 @@ public abstract class TilemapGenerator : MonoBehaviour
         var road = library.GetTile(tile);
 
         var offstCurrentX = 0;
+        
         for (int y = 0; y < halfY+1; y++)
         {
             offstCurrentX = currentX + offsetX;
 
             for (int x = -thickness/2; x < thickness/2; x++)
             {
-                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, y] = road;
+                if (WithinTilemap(offstCurrentX + x, xSize))
+                {
+                    map[offstCurrentX+x, y] = road;
+                }
                 //mirror
-                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, ySize-1-y] = road;
+                if (WithinTilemap(offstCurrentX + x, xSize))
+                {
+                    map[offstCurrentX+x, ySize-1-y] = road;
+                }
             }
           
             currentX += Random.Range(-1, 2);
         }
+        
+        //DO Some kernel magic with NineTiles on this blueprint
+        
     }
     
     internal void FillBounds(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey)

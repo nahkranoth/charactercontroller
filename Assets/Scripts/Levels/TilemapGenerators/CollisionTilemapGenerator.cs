@@ -19,7 +19,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
         FillBounds(ref blueprint, eastwall, TileLibraryKey.DimFloor); //wall
         
         //WEST WALL
-        Bounds[] westWall = {new Bounds{center = new Vector3(3, 0, 0), size=new Vector3(4,size.y*2,0)}};
+        Bounds[] westWall = {new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}};
         FillBounds(ref blueprint, westWall, TileLibraryKey.SolidFloor); //wall
         
         //Constructs
