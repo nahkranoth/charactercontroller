@@ -4,8 +4,8 @@ public class PlayerEquipController : MonoBehaviour
 {
     public SpriteRenderer weaponSprite;
 
+    public Item current;
     public Sprite sword;
-    public Sprite axe;
     
     private void Awake()
     {
@@ -17,8 +17,9 @@ public class PlayerEquipController : MonoBehaviour
         weaponSprite.sprite = sword;
     }
 
-    public void Equip(Sprite sprite)
+    public void Equip(Item item)
     {
-        weaponSprite.sprite = sprite;
+        current = item;
+        weaponSprite.sprite = item.equipedSprite;
     }
 }

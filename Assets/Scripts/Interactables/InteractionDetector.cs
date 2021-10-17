@@ -17,7 +17,7 @@ public class InteractionDetector : MonoBehaviour
         player.attackController.OnToolHitSomething -= OnPossibleInteraction;
     }
 
-    private void OnPossibleInteraction(Collider2D other, int force)
+    private void OnPossibleInteraction(Collider2D other, Item tool, int force)
     {
         InteractionDetector target = other.GetComponent<InteractionDetector>();
         if (target == this)

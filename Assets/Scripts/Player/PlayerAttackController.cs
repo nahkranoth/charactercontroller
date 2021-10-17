@@ -6,10 +6,11 @@ public class PlayerAttackController: MonoBehaviour
     public InputController input;
     public TriggerBox weaponBox;
     public PlayerAnimatorController animator;
+    public PlayerEquipController equip;
     
     public Action<int> UpdateReadyAttack;
     public Action<bool> chargingPowerAttack;
-    public Action<Collider2D, int> OnToolHitSomething;
+    public Action<Collider2D, Item, int> OnToolHitSomething;
     
     private Coroutine attackTiming;
     private Coroutine attackReadyTiming;
@@ -33,7 +34,7 @@ public class PlayerAttackController: MonoBehaviour
     {
         int damage = 1;
         if (fullAttackReady) damage += 5;
-        OnToolHitSomething?.Invoke(other, damage);
+        OnToolHitSomething?.Invoke(other, equip.current, damage);
     }
    
     private void OnAttackSlash()

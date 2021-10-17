@@ -13,13 +13,13 @@ public class TilemapCollisionDetector : MonoBehaviour
         playerAttack.OnToolHitSomething += PlayerHitSomething;
     }
 
-    private void PlayerHitSomething(Collider2D collider, int damage)
+    private void PlayerHitSomething(Collider2D collider, Item tool, int damage)
     {
         var pos = tilemapCollider.ClosestPoint(playerAttack.weaponBox.transform.position);
         var cell = collisionTilemap.WorldToCell(pos);
         cell.z = 0;
         var til = collisionTilemap.GetTile(cell);
-        if (cell != null && til != null)
+        if (tool.destroysBlocks && cell != null && til != null)
         {
             collisionTilemap.SetTile(cell, null);
         }

@@ -16,6 +16,11 @@ public class ItemStorage
            }
            return false;
        }
+
+       public Item FindByBehaviour(ItemBehaviourStates.Behaviours behave)
+       {
+           return storage.Find(x => x.behaviour == behave);
+       }
        
        public void AddByDescription(ItemDescription description)
        {
@@ -26,6 +31,7 @@ public class ItemStorage
                menuSprite = description.item.menuSprite,
                equipedSprite = description.item.equipedSprite,
                consumable = description.item.consumable,
+               destroysBlocks = description.item.destroysBlocks
            };
 
            var storageLocation = storage.Find(x => x.menuName == possibleItem.menuName);
@@ -43,6 +49,7 @@ public class ItemStorage
               menuSprite = description.item.menuSprite,
               equipedSprite = description.item.equipedSprite,
               consumable = description.item.consumable,
+              destroysBlocks = description.item.destroysBlocks
            });
        }
 

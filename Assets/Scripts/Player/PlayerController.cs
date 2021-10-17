@@ -65,13 +65,16 @@ public class PlayerController : MonoBehaviour
       
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
+      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
+      
+      equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
 
    public void EquipItem(ItemBehaviourStates.Behaviours behaviour)
    {
       var itm = inventory.storage.Find(x => x.behaviour == behaviour);
       Debug.Log("Equip Item:"+itm.menuName);
-      equipController.Equip(itm.equipedSprite);
+      equipController.Equip(itm);
    }
 
    private void OnChargingPowerAttack(bool charging)
@@ -80,7 +83,7 @@ public class PlayerController : MonoBehaviour
       animator.SetCharging(charging);
    }
    
-   private void OnToolHitSomething(Collider2D collider, int damage)
+   private void OnToolHitSomething(Collider2D collider, Item itm, int damage)
    {
       StartCoroutine(ResetDamageState());
    }

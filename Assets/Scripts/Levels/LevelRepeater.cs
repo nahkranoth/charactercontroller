@@ -11,7 +11,6 @@ public class LevelRepeater : MonoBehaviour
     public MetaLevelEntityPlacer metaEntityPlacer;
     public Tilemap backgroundTilemap;
     public Tilemap collisionTilemap;
-    public int keepLoaded;
 
     public Action OnGenerate;
     
@@ -28,6 +27,7 @@ public class LevelRepeater : MonoBehaviour
     {
         currentStep = 0;
         currentLowStep = 0;
+        //TODO: Currently hardcoded to 3
         GenerateAtRoot(currentStep);
         GenerateAtRoot(currentStep-StepSize());
         GenerateAtRoot(currentStep+StepSize());
@@ -77,8 +77,6 @@ public class LevelRepeater : MonoBehaviour
         return metaTilemapGenerator.tilemapSize.y - 1;
     }
 
-    //TODO Not Perfect, regenerates unnecesary
-    
     public void Increase()
     {
         var newStep = currentStep + StepSize();

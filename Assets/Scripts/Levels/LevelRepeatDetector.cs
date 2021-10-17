@@ -15,14 +15,12 @@ public class LevelRepeatDetector : MonoBehaviour
         if (player.Directions.y > 0 && player.transform.localPosition.y > highest - incOffset)
         {
             repeater.Increase();
-            Debug.Log("Increase");
             return;
         }
         
         if (player.Directions.y < 0 && player.transform.localPosition.y < lowest + decOffset)
         {
             repeater.Decrease();
-            Debug.Log("Decrease");
         }
     }
 }
