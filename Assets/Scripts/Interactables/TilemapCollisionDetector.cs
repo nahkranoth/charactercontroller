@@ -5,7 +5,6 @@ public class TilemapCollisionDetector : MonoBehaviour
 {
     public Tilemap collisionTilemap;
     public TilemapCollider2D tilemapCollider;
-    public TileBase destrTilebase;
     private PlayerAttackController playerAttack;
     private void Start()
     {
@@ -20,7 +19,6 @@ public class TilemapCollisionDetector : MonoBehaviour
         var cell = collisionTilemap.WorldToCell(pos);
         cell.z = 0;
         var til = collisionTilemap.GetTile(cell);
-        Debug.Log(til);
         if (cell != null && til != null)
         {
             collisionTilemap.SetTile(cell, null);

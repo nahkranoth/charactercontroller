@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Debug = UnityEngine.Debug;
 
 public class LevelRepeater : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class LevelRepeater : MonoBehaviour
     
     private GenerateTilemapData tickBlueprint;
     private int currentStep;
+    private int currentLowStep;
 
     private void Awake()
     {
@@ -24,7 +27,12 @@ public class LevelRepeater : MonoBehaviour
     public void Start()
     {
         currentStep = 0;
+        currentLowStep = 0;
         GenerateAtRoot(currentStep);
+        GenerateAtRoot(currentStep-StepSize());
+        GenerateAtRoot(currentStep+StepSize());
+        currentLowStep = currentStep-StepSize();
+        currentStep = currentStep+StepSize();
     }
 
     private void GenerateAtRoot(int step)
@@ -36,19 +44,20 @@ public class LevelRepeater : MonoBehaviour
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0));
     }
 
-    public void RemoveAt(int yPos)
+    public void RemoveAt(int step)
     {
         List<Vector3Int> remove = new List<Vector3Int>();
+        Vector3Int pos = Vector3Int.zero;
         for (int x = 0; x < metaTilemapGenerator.tilemapSize.x; x++)
         {
             for (int y = 0; y < metaTilemapGenerator.tilemapSize.y; y++)
             {
-                var pos = new Vector3Int(x, y + yPos, 0);
+                pos = new Vector3Int(x, y + step, 0);
                 metaEntityPlacer.RemoveAt(pos);
                 remove.Add(pos);
             } 
         }
-
+        
         var rmTileBase = new TileBase[remove.Count];
         backgroundTilemap.SetTiles(remove.ToArray(), rmTileBase);
         collisionTilemap.SetTiles(remove.ToArray(), rmTileBase);
@@ -60,28 +69,32 @@ public class LevelRepeater : MonoBehaviour
     
     public int GetLowestGeneratePoint()
     {
-        return currentStep;
+        return currentLowStep;
     }
 
     private int StepSize()
     {
         return metaTilemapGenerator.tilemapSize.y - 1;
     }
+
+    //TODO Not Perfect, regenerates unnecesary
     
     public void Increase()
     {
         var newStep = currentStep + StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(currentStep - StepSize() * keepLoaded);
-        currentStep += StepSize();
+        RemoveAt(currentLowStep-1);
+        currentStep = newStep;
+        currentLowStep += StepSize();
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0));
     }
     public void Decrease()
     {
-        var newStep = currentStep - StepSize();
+        var newStep = currentLowStep - StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(currentStep + StepSize() * keepLoaded);
+        RemoveAt(currentStep+1);
         currentStep -= StepSize();
+        currentLowStep = newStep;
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0));
     }
    
