@@ -5,14 +5,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-
 public abstract class TilemapGenerator : MonoBehaviour
 {
     [HideInInspector] public Vector2Int size;
     public Tilemap tilemap;
     public TileLibrary library;
     public TileBase[,] blueprint;
-    
     internal void Fill(TileLibraryKey key)
     {
         for (int x = 0; x < size.x; x++)
