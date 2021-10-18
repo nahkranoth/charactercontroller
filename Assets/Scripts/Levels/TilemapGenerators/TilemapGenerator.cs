@@ -39,7 +39,7 @@ public abstract class TilemapGenerator : MonoBehaviour
         int ySize = blueprint.GetUpperBound(1);
         int halfY = ySize / 2;
         var road = library.GetTile(tile);
-
+        TileBase[,] result = new TileBase[xSize, ySize];
         var offstCurrentX = 0;
         for (int y = 0; y < halfY+1; y++)
         {
@@ -49,11 +49,12 @@ public abstract class TilemapGenerator : MonoBehaviour
 
             for (var x = 0; x < edgeDiff; x++)
             {
-                if(WithinTilemap(offstCurrentX+x, xSize)) blueprint[offstCurrentX+x, y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) result[offstCurrentX+x, y] = road;
                 //mirror
-                if(WithinTilemap(offstCurrentX+x, xSize)) blueprint[offstCurrentX+x, ySize-1-y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) result[offstCurrentX+x, ySize-1-y] = road;
             }
-          
+            
+            AddToBlueprint(result);
             currentX += Random.Range(-1, 2);
         }
     }
@@ -66,6 +67,8 @@ public abstract class TilemapGenerator : MonoBehaviour
         int halfY = ySize / 2;
         var road = library.GetTile(tile);
 
+        TileBase[,] result = new TileBase[xSize, ySize];
+        
         var offstCurrentX = 0;
         
         for (int y = 0; y < halfY+1; y++)
@@ -76,15 +79,16 @@ public abstract class TilemapGenerator : MonoBehaviour
             {
                 if (WithinTilemap(offstCurrentX + x, xSize))
                 {
-                    blueprint[offstCurrentX+x, y] = road;
+                    result[offstCurrentX+x, y] = road;
                 }
                 //mirror
                 if (WithinTilemap(offstCurrentX + x, xSize))
                 {
-                    blueprint[offstCurrentX+x, ySize-1-y] = road;
+                    result[offstCurrentX+x, ySize-1-y] = road;
                 }
             }
-          
+
+            AddToBlueprint(result);
             currentX += Random.Range(-1, 2);
         }
         
@@ -121,7 +125,7 @@ public abstract class TilemapGenerator : MonoBehaviour
     {
         int xSize = blueprint.GetUpperBound(0);
         int ySize = blueprint.GetUpperBound(1);
-        
+        TileBase[,] result = new TileBase[xSize, ySize];
         foreach (var patternBounds in bounds)
         {
             int centerX = (int) patternBounds.center.x;
@@ -136,13 +140,13 @@ public abstract class TilemapGenerator : MonoBehaviour
                 if (WithinTilemap(newX, xSize, centerY + extentY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    blueprint[newX, centerY+extentY] = library.GetTile(tileKey);
+                    result[newX, centerY+extentY] = library.GetTile(tileKey);
                 }
 
                 if (WithinTilemap(newX, xSize, centerY - extentY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    blueprint[newX, centerY-extentY] = library.GetTile(tileKey);
+                    result[newX, centerY-extentY] = library.GetTile(tileKey);
                 }
             }
             
@@ -152,17 +156,18 @@ public abstract class TilemapGenerator : MonoBehaviour
                 if (WithinTilemap(centerX + extentX - 1, xSize, newY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    blueprint[centerX+extentX, newY] = library.GetTile(tileKey);
+                    result[centerX+extentX, newY] = library.GetTile(tileKey);
                 }
 
                 if (WithinTilemap(centerX + extentX, xSize, newY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    blueprint[centerX-extentX, newY] = library.GetTile(tileKey);
+                    result[centerX-extentX, newY] = library.GetTile(tileKey);
                 }
             }
             
         }
+        AddToBlueprint(result);
     }
 
     private bool WithinTilemap(int val, int max)
@@ -179,14 +184,26 @@ public abstract class TilemapGenerator : MonoBehaviour
     {
         int xSize = blueprint.GetUpperBound(0);
         int ySize = blueprint.GetUpperBound(1);
-
+        TileBase[,] result = new TileBase[xSize, ySize];
         for (int i = 0; i < density; i++)
         {
             var xRange = Random.Range(0, xSize);
             var yRange = Random.Range(0, ySize);
-            blueprint[xRange, yRange] = library.GetTile(tileKey);
+            result[xRange, yRange] = library.GetTile(tileKey);
         }
-        
+        AddToBlueprint(result);
+    }
+
+    internal void AddToBlueprint(TileBase[,] overwriter)
+    {
+        for (int x = 0; x < overwriter.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y < overwriter.GetUpperBound(1); y++)
+            {
+                var ovr = overwriter[x, y];
+                if(ovr != null) blueprint[x, y] = overwriter[x,y];
+            }
+        }
     }
 
     public List<Vector3Int> GetAllTilesOfKey(TileLibraryKey key)
