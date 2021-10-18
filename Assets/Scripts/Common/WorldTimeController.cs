@@ -15,6 +15,8 @@ public class WorldTimeController : MonoBehaviour
     public Action OnNightFall;
     public Action OnDayBreak;
     public bool isNight;
+
+    public bool timePassing = true;
     
     // Start is called before the first frame update
     private void Awake()
@@ -36,6 +38,7 @@ public class WorldTimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!timePassing) return;
         sunLight.Rotate(Vector3.right, timeSpeed*Time.deltaTime);
         currentTime += timeSpeed * Time.deltaTime;
         CheckDayCycle();

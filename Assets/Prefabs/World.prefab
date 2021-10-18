@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sunLight: {fileID: 0}
-  timeSpeed: 2
+  timeSpeed: 0.5
   startTime: 0
   nightfallTime: 80
   dayBreakTime: 290
