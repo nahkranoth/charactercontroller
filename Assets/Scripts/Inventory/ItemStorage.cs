@@ -31,7 +31,7 @@ public class ItemStorage
                menuSprite = description.item.menuSprite,
                equipedSprite = description.item.equipedSprite,
                consumable = description.item.consumable,
-               destroysBlocks = description.item.destroysBlocks
+               canChopWood = description.item.canChopWood
            };
 
            var storageLocation = storage.Find(x => x.menuName == possibleItem.menuName);
@@ -49,7 +49,7 @@ public class ItemStorage
               menuSprite = description.item.menuSprite,
               equipedSprite = description.item.equipedSprite,
               consumable = description.item.consumable,
-              destroysBlocks = description.item.destroysBlocks
+              canChopWood = description.item.canChopWood
            });
        }
 

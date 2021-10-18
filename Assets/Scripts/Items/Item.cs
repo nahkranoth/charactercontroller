@@ -12,6 +12,6 @@ public class Item
     public bool consumable;
     public int amount = 1;
     
-    public bool destroysBlocks;
+    public bool canChopWood;
 
 }

@@ -19,7 +19,7 @@ public class TilemapCollisionDetector : MonoBehaviour
         var cell = collisionTilemap.WorldToCell(pos);
         cell.z = 0;
         var til = collisionTilemap.GetTile(cell);
-        if (tool.destroysBlocks && cell != null && til != null)
+        if (tool.canChopWood && cell != null && til != null)
         {
             collisionTilemap.SetTile(cell, null);
         }
