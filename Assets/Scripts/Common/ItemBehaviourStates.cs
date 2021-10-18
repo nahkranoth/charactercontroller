@@ -7,6 +7,7 @@
         Sword,
         Axe,
         Chocolate,
-        Honey
+        Honey,
+        Torch
     }
 }

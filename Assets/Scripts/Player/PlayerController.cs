@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
    public ItemCollectionDescription itemDescriptions;
 
    public ItemStorage inventory = new ItemStorage();
-
+   
    public Vector2 Directions
    {
       get => directions;
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
       input.Directions += OnDirections;
       input.StopDirections -= OnStopDirections;
       input.StopDirections += OnStopDirections;
+
       attackController.OnToolHitSomething -= OnToolHitSomething;
       attackController.OnToolHitSomething += OnToolHitSomething;
       attackController.chargingPowerAttack -= OnChargingPowerAttack;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
+      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
       
       equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }

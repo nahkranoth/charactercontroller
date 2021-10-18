@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.08431373, g: 0.092156865, b: 0.10392157, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -1198,6 +1198,10 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 706521977}
+    - target: {fileID: 838655989812550667, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
+      propertyPath: m_Name
+      value: Lantern
+      objectReference: {fileID: 0}
     - target: {fileID: 1655262374592594938, guid: 7fd1bb929f15d744b9e758469d892ae2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1319,6 +1323,10 @@ PrefabInstance:
       propertyPath: sunLight
       value: 
       objectReference: {fileID: 1583351813}
+    - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
+      propertyPath: startTime
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
 --- !u!1001 &3530391785043385970

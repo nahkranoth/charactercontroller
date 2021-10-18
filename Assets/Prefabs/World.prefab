@@ -227,6 +227,7 @@ MonoBehaviour:
   menuActive: 0
   npcActive: 1
   playerActive: 1
+  time: {fileID: 5426119669905143255}
 --- !u!114 &3978370907118042542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +302,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c980aa3b696a4aa4fbaa206c080b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sunLight: {fileID: 0}
+  timeSpeed: 2
+  startTime: 0
+  nightfallTime: 80
+  dayBreakTime: 290
+  isNight: 0
 --- !u!1 &2639698450006718359
 GameObject:
   m_ObjectHideFlags: 0

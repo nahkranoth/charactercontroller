@@ -37,6 +37,10 @@ public class ItemBehaviourController:MonoBehaviour
         {
             Equip?.Invoke(ItemBehaviourStates.Behaviours.Sword);
         };
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.Torch] = () =>
+        {
+            Equip?.Invoke(ItemBehaviourStates.Behaviours.Torch);
+        };
     }
 
     public void Execute(ItemBehaviourStates.Behaviours behaviour)

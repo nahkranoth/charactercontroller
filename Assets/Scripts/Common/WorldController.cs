@@ -6,6 +6,7 @@ public class WorldController : MonoBehaviour
     public bool menuActive = false;
     public bool npcActive = true;
     public bool playerActive = true;
+    public WorldTimeController time;
     private InputController input;
     
     public Action<bool> OnToggleMenu;
