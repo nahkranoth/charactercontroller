@@ -876,7 +876,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.986515, b: 0.8726415, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 1.4
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1323,6 +1323,14 @@ PrefabInstance:
       propertyPath: sunLight
       value: 
       objectReference: {fileID: 1583351813}
+    - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
+      propertyPath: timeSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
+      propertyPath: timePassing
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
 --- !u!1001 &3530391785043385970

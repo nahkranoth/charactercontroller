@@ -13,11 +13,11 @@ public abstract class TilemapGenerator : MonoBehaviour
     public TileLibrary library;
     public TileBase[,] blueprint;
     
-    internal void Fill(ref TileBase[,] map, TileLibraryKey key)
+    internal void Fill(TileLibraryKey key)
     {
         for (int x = 0; x < size.x; x++)
         for (int y = 0; y < size.y; y++)
-            map[x, y] = library.GetTile(key);
+            blueprint[x, y] = library.GetTile(key);
     }
     internal Bounds[] PullRandomGroup(Bounds[] full, int amount)
     {
@@ -32,11 +32,11 @@ public abstract class TilemapGenerator : MonoBehaviour
         return result;
     }
 
-    internal void AddVerticalDrunkFillEast(ref TileBase[,] map, TileLibraryKey tile, int offsetX)
+    internal void AddVerticalDrunkFillEast(TileLibraryKey tile, int offsetX)
     {
-        int xSize = map.GetUpperBound(0);
+        int xSize = blueprint.GetUpperBound(0);
         int currentX = xSize / 2;
-        int ySize = map.GetUpperBound(1);
+        int ySize = blueprint.GetUpperBound(1);
         int halfY = ySize / 2;
         var road = library.GetTile(tile);
 
@@ -49,20 +49,20 @@ public abstract class TilemapGenerator : MonoBehaviour
 
             for (var x = 0; x < edgeDiff; x++)
             {
-                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) blueprint[offstCurrentX+x, y] = road;
                 //mirror
-                if(WithinTilemap(offstCurrentX+x, xSize)) map[offstCurrentX+x, ySize-1-y] = road;
+                if(WithinTilemap(offstCurrentX+x, xSize)) blueprint[offstCurrentX+x, ySize-1-y] = road;
             }
           
             currentX += Random.Range(-1, 2);
         }
     }
     
-    internal void AddVerticalDrunk(ref TileBase[,] map, TileLibraryKey tile, int offsetX, int thickness=3)
+    internal void AddVerticalDrunk(TileLibraryKey tile, int offsetX, int thickness=3)
     {
-        int xSize = map.GetUpperBound(0);
+        int xSize = blueprint.GetUpperBound(0);
         int currentX = xSize / 2;
-        int ySize = map.GetUpperBound(1);
+        int ySize = blueprint.GetUpperBound(1);
         int halfY = ySize / 2;
         var road = library.GetTile(tile);
 
@@ -76,12 +76,12 @@ public abstract class TilemapGenerator : MonoBehaviour
             {
                 if (WithinTilemap(offstCurrentX + x, xSize))
                 {
-                    map[offstCurrentX+x, y] = road;
+                    blueprint[offstCurrentX+x, y] = road;
                 }
                 //mirror
                 if (WithinTilemap(offstCurrentX + x, xSize))
                 {
-                    map[offstCurrentX+x, ySize-1-y] = road;
+                    blueprint[offstCurrentX+x, ySize-1-y] = road;
                 }
             }
           
@@ -92,10 +92,10 @@ public abstract class TilemapGenerator : MonoBehaviour
         
     }
     
-    internal void FillBounds(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey)
+    internal void FillBounds(Bounds[] bounds, TileLibraryKey tileKey)
     {
-        int xSize = map.GetUpperBound(0);
-        int ySize = map.GetUpperBound(1);
+        int xSize = blueprint.GetUpperBound(0);
+        int ySize = blueprint.GetUpperBound(1);
         
         foreach (var patternBounds in bounds)
         {
@@ -111,16 +111,16 @@ public abstract class TilemapGenerator : MonoBehaviour
                 {
                     var newX = centerX + x;
                     var newY = centerY + y;
-                    if(WithinTilemap(newX, xSize, newY, ySize)) map[newX, newY] = library.GetTile(tileKey);
+                    if(WithinTilemap(newX, xSize, newY, ySize)) blueprint[newX, newY] = library.GetTile(tileKey);
                 }
             }
         }
     }
     
-    internal void DrawBoundsOutline(ref TileBase[,] map, Bounds[] bounds, TileLibraryKey tileKey, float breakup = 0f)
+    internal void DrawBoundsOutline(Bounds[] bounds, TileLibraryKey tileKey, float breakup = 0f)
     {
-        int xSize = map.GetUpperBound(0);
-        int ySize = map.GetUpperBound(1);
+        int xSize = blueprint.GetUpperBound(0);
+        int ySize = blueprint.GetUpperBound(1);
         
         foreach (var patternBounds in bounds)
         {
@@ -136,13 +136,13 @@ public abstract class TilemapGenerator : MonoBehaviour
                 if (WithinTilemap(newX, xSize, centerY + extentY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    map[newX, centerY+extentY] = library.GetTile(tileKey);
+                    blueprint[newX, centerY+extentY] = library.GetTile(tileKey);
                 }
 
                 if (WithinTilemap(newX, xSize, centerY - extentY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    map[newX, centerY-extentY] = library.GetTile(tileKey);
+                    blueprint[newX, centerY-extentY] = library.GetTile(tileKey);
                 }
             }
             
@@ -152,13 +152,13 @@ public abstract class TilemapGenerator : MonoBehaviour
                 if (WithinTilemap(centerX + extentX - 1, xSize, newY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    map[centerX+extentX, newY] = library.GetTile(tileKey);
+                    blueprint[centerX+extentX, newY] = library.GetTile(tileKey);
                 }
 
                 if (WithinTilemap(centerX + extentX, xSize, newY, ySize))
                 {
                     if(Random.Range(0f, 1f) <= breakup) continue;
-                    map[centerX-extentX, newY] = library.GetTile(tileKey);
+                    blueprint[centerX-extentX, newY] = library.GetTile(tileKey);
                 }
             }
             
@@ -175,16 +175,16 @@ public abstract class TilemapGenerator : MonoBehaviour
         return valX >= 0 && valX <= maxX && valY >= 0 && valY <= maxY;
     }
 
-    internal void DrawSpray(ref TileBase[,] map, int density, TileLibraryKey tileKey)
+    internal void DrawSpray(int density, TileLibraryKey tileKey)
     {
-        int xSize = map.GetUpperBound(0);
-        int ySize = map.GetUpperBound(1);
+        int xSize = blueprint.GetUpperBound(0);
+        int ySize = blueprint.GetUpperBound(1);
 
         for (int i = 0; i < density; i++)
         {
             var xRange = Random.Range(0, xSize);
             var yRange = Random.Range(0, ySize);
-            map[xRange, yRange] = library.GetTile(tileKey);
+            blueprint[xRange, yRange] = library.GetTile(tileKey);
         }
         
     }

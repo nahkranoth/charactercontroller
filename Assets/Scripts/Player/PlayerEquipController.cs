@@ -18,11 +18,6 @@ public class PlayerEquipController : MonoBehaviour
     private void Start()
     {
         worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
-
-        worldController.time.OnNightFall -= LightLantern;
-        worldController.time.OnNightFall += LightLantern;
-        worldController.time.OnDayBreak -= DimLantern;
-        worldController.time.OnDayBreak += DimLantern;
         weaponSprite.sprite = sword;
     }
 
@@ -30,20 +25,11 @@ public class PlayerEquipController : MonoBehaviour
     {
         current = item;
         weaponSprite.sprite = item.equipedSprite;
-        DimLantern();
-        LightLantern();
+        CheckLantern();
     }
     
-    private void LightLantern()
+    private void CheckLantern()
     {
-        if (current.behaviour == ItemBehaviourStates.Behaviours.Torch)
-        {
-            lantern.enabled = true;
-        }
-    }
-   
-    private void DimLantern()
-    {
-        lantern.enabled = false;
+        lantern.enabled = (current.behaviour == ItemBehaviourStates.Behaviours.Torch);
     }
 }

@@ -14,13 +14,13 @@ public class CollisionTilemapGenerator : TilemapGenerator
         blueprint = new TileBase[size.x, size.y];
 
         //EAST WALL
-        AddVerticalDrunkFillEast(ref blueprint, TileLibraryKey.DimFloor, size.x/2-8); //make 
+        AddVerticalDrunkFillEast(TileLibraryKey.DimFloor, size.x/2-8); //make 
         Bounds[] eastwall = {new Bounds{center = new Vector3(size.x-4, 0, 0), size=new Vector3(4,size.y*2,0)}};
-        FillBounds(ref blueprint, eastwall, TileLibraryKey.DimFloor); //wall
+        FillBounds(eastwall, TileLibraryKey.DimFloor); //wall
         
         //WEST WALL
         Bounds[] westWall = {new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}};
-        FillBounds(ref blueprint, westWall, TileLibraryKey.SolidFloor); //wall
+        FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
         
         //Constructs
         foreach (var constructPosition in PullRandomGroup(data.planBounds, 21))
@@ -29,7 +29,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
             if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition, root);
             if (construct?.type == TileConstructType.House)
             {
-                DrawBoundsOutline(ref blueprint, new []{constructPosition}, TileLibraryKey.Fence, .1f);
+                DrawBoundsOutline(new []{constructPosition}, TileLibraryKey.Fence, .1f);
             }
         }
        
