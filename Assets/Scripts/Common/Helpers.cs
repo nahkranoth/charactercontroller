@@ -17,6 +17,11 @@ public static class Helpers
         return Vector3Int.Distance(a, b) < range;
     }
 
+    public static Vector3Int RandomVector3(int range) //see no Z!!
+    {
+        return new Vector3Int(Random.Range(-range, range), Random.Range(-range, range), 0);
+    }
+
     public static int CycleConstraint(int max, int min, int index)
     {
         int result = index % (max+1);

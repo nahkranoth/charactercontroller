@@ -11,6 +11,7 @@ public class TileConstruct:ScriptableObject, IRarity
     public int rarity;
     public Sprite constructSprite;
     public int spray;
+    public bool inCenterOfBounds = false;
     public Vector3 shadowPositionOffset;
     public Vector3 shadowScaleOffset;
     
