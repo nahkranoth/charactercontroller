@@ -191,6 +191,20 @@ public abstract class TilemapGenerator : MonoBehaviour
         }
         AddToBlueprint(result);
     }
+    
+    internal void DrawSprayConstruct(int density, TileConstruct construct)
+    {
+        // int xSize = blueprint.GetUpperBound(0);
+        // int ySize = blueprint.GetUpperBound(1);
+        // TileBase[,] result = new TileBase[xSize, ySize];
+        // for (int i = 0; i < density; i++)
+        // {
+        //     var xRange = Random.Range(0, xSize);
+        //     var yRange = Random.Range(0, ySize);
+        //     result[xRange, yRange] = library.GetTile(tileKey);
+        // }
+        // AddToBlueprint(result);
+    }
 
     internal void AddToBlueprint(TileBase[,] overwriter)
     {

@@ -23,7 +23,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
         FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
         
         //Constructs
-        foreach (var constructPosition in PullRandomGroup(data.planBounds, 21))
+        foreach (var constructPosition in PullRandomGroup(data.planBounds, 41))
         {
             var construct = AddConstruct(ref blueprint, buildings, constructPosition);
             if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition, root);
@@ -62,9 +62,4 @@ public class CollisionTilemapGenerator : TilemapGenerator
         return construct;
     }
 
-    public TileConstruct GetConstructByTileBase(TileBase tile)
-    {
-        return null; //TODO For tilemap collision detection
-    }
-    
 }

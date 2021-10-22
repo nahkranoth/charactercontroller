@@ -10,7 +10,7 @@ public class TileConstruct:ScriptableObject, IRarity
     public TileConstructType type;
     public int rarity;
     public Sprite constructSprite;
-
+    public int spray;
     public Vector3 shadowPositionOffset;
     public Vector3 shadowScaleOffset;
     
