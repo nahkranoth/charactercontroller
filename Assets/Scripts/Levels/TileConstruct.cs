@@ -26,5 +26,6 @@ public enum TileConstructType
     House,
     Flora,
     Cliffs,
-    CityScape
+    CityScape,
+    Tree
 }

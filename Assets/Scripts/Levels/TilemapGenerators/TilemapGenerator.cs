@@ -10,7 +10,10 @@ public abstract class TilemapGenerator : MonoBehaviour
     [HideInInspector] public Vector2Int size;
     public Tilemap tilemap;
     public TileLibrary library;
+    public RuleTileLibrary ruleTiles;
+
     public TileBase[,] blueprint;
+
     internal void Fill(TileLibraryKey key)
     {
         for (int x = 0; x < size.x; x++)
@@ -57,19 +60,18 @@ public abstract class TilemapGenerator : MonoBehaviour
         }
     }
     
-    internal void AddVerticalDrunk(TileLibraryKey tile, int offsetX, int thickness=3)
+    internal void AddVerticalDrunk(RuleTileLibraryKey tile, int offsetX, int thickness=3)
     {
         int xSize = blueprint.GetUpperBound(0);
         int currentX = xSize / 2;
         int ySize = blueprint.GetUpperBound(1);
         int halfY = ySize / 2;
-        var road = library.GetTile(tile);
+        var road = ruleTiles.GetRuleTile(tile);
 
         TileBase[,] result = new TileBase[xSize, ySize];
         
         var offstCurrentX = 0;
-        
-        for (int y = 0; y < halfY+1; y++)
+        for (int y = 0; y < halfY; y++)
         {
             offstCurrentX = currentX + offsetX;
 
@@ -89,8 +91,6 @@ public abstract class TilemapGenerator : MonoBehaviour
             AddToBlueprint(result);
             currentX += Random.Range(-1, 2);
         }
-        
-        //DO Some kernel magic with NineTiles on this blueprint
         
     }
     
@@ -196,7 +196,7 @@ public abstract class TilemapGenerator : MonoBehaviour
     {
         for (int x = 0; x < overwriter.GetUpperBound(0); x++)
         {
-            for (int y = 0; y < overwriter.GetUpperBound(1); y++)
+            for (int y = 0; y < overwriter.GetUpperBound(1)+1; y++)
             {
                 var ovr = overwriter[x, y];
                 if(ovr != null) blueprint[x, y] = overwriter[x,y];

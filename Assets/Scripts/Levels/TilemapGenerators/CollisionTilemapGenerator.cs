@@ -61,4 +61,10 @@ public class CollisionTilemapGenerator : TilemapGenerator
 
         return construct;
     }
+
+    public TileConstruct GetConstructByTileBase(TileBase tile)
+    {
+        return null; //TODO For tilemap collision detection
+    }
+    
 }

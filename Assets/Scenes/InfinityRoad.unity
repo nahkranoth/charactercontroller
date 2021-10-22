@@ -1340,10 +1340,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1517900154}
     m_Modifications:
-    - target: {fileID: 2414587273026665772, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3530391785398088930, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: m_Name
       value: TilemapContainer

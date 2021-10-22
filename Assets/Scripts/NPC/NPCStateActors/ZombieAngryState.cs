@@ -6,6 +6,7 @@ public class ZombieAngryState: AbstractEnemyState
     private PlayerController player;
     private float currentWalkSpeed = 0.1f;
     private bool attacking;
+    private float attackTimer = 0f;
     private INPCSettings settings;
     private Vector3 roamTarget;
     private Vector3 walkDirections;
@@ -32,7 +33,22 @@ public class ZombieAngryState: AbstractEnemyState
 
     public override void Execute()
     {
-        WithinStrikingDistance();
+        if (!attacking && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
+        {
+            attacking = true;
+        }
+
+        if (attacking)
+        {
+            attackTimer += 1f * Time.deltaTime;
+            if (attackTimer >= settings.strikeDelayTime && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
+            {
+                Parent.attacking = true;
+                attacking = false;
+                attackTimer = 0f;
+                Attack();
+            }
+        }
         
         if (Vector3.Distance(player.transform.position, Parent.transform.position) > settings.loseDistance)
         {
@@ -61,16 +77,6 @@ public class ZombieAngryState: AbstractEnemyState
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
         Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.attackWalkSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
-    }
-    
-    private void WithinStrikingDistance()
-    {
-        if (!attacking && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
-        {
-            attacking = true;
-            Parent.attacking = true;
-            Attack();
-        }
     }
     
     private void Attack()

@@ -3,9 +3,10 @@ using UnityEngine.Tilemaps;
 
 public class TilemapCollisionDetector : MonoBehaviour
 {
-    public Tilemap collisionTilemap;
     public TilemapCollider2D tilemapCollider;
+    public CollisionTilemapGenerator collisionTilemapGenerator;
     private PlayerAttackController playerAttack;
+    
     private void Start()
     {
         playerAttack = WorldGraph.Retrieve(typeof(PlayerAttackController)) as PlayerAttackController;
@@ -16,12 +17,13 @@ public class TilemapCollisionDetector : MonoBehaviour
     private void PlayerHitSomething(Collider2D collider, Item tool, int damage)
     {
         var pos = tilemapCollider.ClosestPoint(playerAttack.weaponBox.transform.position);
-        var cell = collisionTilemap.WorldToCell(pos);
+        var cell = collisionTilemapGenerator.tilemap.WorldToCell(pos);
         cell.z = 0;
-        var til = collisionTilemap.GetTile(cell);
-        if (tool.canChopWood && cell != null && til != null)
+        var til = collisionTilemapGenerator.tilemap.GetTile(cell);
+        collisionTilemapGenerator.GetConstructByTileBase(til);
+        if (tool.canChopWood && til != null)
         {
-            collisionTilemap.SetTile(cell, null);
+            collisionTilemapGenerator.tilemap.SetTile(cell, null);
         }
     }
     

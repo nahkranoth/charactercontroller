@@ -19,5 +19,5 @@ MonoBehaviour:
     behaviour: 3
     consumable: 0
     amount: 1
-    destroysBlocks: 1
+    canChopWood: 1
   rarity: 5
