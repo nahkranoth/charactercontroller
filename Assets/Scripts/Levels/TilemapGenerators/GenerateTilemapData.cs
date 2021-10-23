@@ -12,6 +12,7 @@ public class GenerateTilemapData
     
     public TileLibrary library;
     public RuleTileLibrary ruleTiles;
+    public TileConstructCollection constructCollection;
 
     public Vector3Int[] GetBackgroundPositions()
     {

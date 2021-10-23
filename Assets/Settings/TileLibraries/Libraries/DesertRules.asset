@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aeb12e18a144f09aeb82765a65795a, type: 3}
+  m_Name: DesertRules
+  m_EditorClassIdentifier: 
+  library:
+  - key: 0
+    tile: {fileID: 11400000, guid: 004b45261de3a3145b1d8ced340d5596, type: 2}

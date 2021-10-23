@@ -230,6 +230,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHealth: {fileID: 1521678023464578071}
+  hunger: 1
+  thirst: 1
+  sleep: 1
+  thirstTick: 5
+  hungerTick: 10
+  sleepTick: 30
 --- !u!114 &1521678023464578071
 MonoBehaviour:
   m_ObjectHideFlags: 0

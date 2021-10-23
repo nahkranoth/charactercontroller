@@ -13,11 +13,17 @@ public class LevelRepeater : MonoBehaviour
     public Tilemap collisionTilemap;
 
     public Action OnGenerate;
-    
+
     private GenerateTilemapData tickBlueprint;
     private int currentStep;
     private int currentLowStep;
 
+    private int Step
+    {
+        get { return currentStep/ StepSize(); }
+    }
+    
+    
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(LevelRepeater));
@@ -37,7 +43,7 @@ public class LevelRepeater : MonoBehaviour
 
     private void GenerateAtRoot(int step)
     {
-        tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0));
+        tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0), Step);
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
         OnGenerate?.Invoke();

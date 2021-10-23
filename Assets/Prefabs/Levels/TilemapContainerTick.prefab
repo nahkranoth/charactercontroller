@@ -380,8 +380,7 @@ MonoBehaviour:
   collision: {fileID: 5635896799117020292}
   debugDraw: {fileID: 2414587273026665772}
   boundsAreaSearchDepth: 8
-  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
-  ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
+  setCollection: {fileID: 11400000, guid: 736f3a8b848f6174b9d08fe7238c50aa, type: 2}
 --- !u!114 &3530391785398088928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +409,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 63, y: 63}
   tilemap: {fileID: 3530391785229653826}
-  buildings: {fileID: 11400000, guid: 06b390bc0178003448e89085dcc9fd1e, type: 2}
   shadowSprite: {fileID: 8776861624619945948, guid: a7a35da73e9abb14d899be099c18dadf, type: 3}
   drawShadows: 0
 --- !u!114 &2414587273026665772

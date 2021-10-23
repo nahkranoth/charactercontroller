@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555bf58ab8dd417fa42b96a8ebaebadf, type: 3}
+  m_Name: GrasslandSet
+  m_EditorClassIdentifier: 
+  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
+  ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
+  constructCollection: {fileID: 11400000, guid: 06b390bc0178003448e89085dcc9fd1e, type: 2}

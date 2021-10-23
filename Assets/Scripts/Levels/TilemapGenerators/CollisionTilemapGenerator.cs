@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class CollisionTilemapGenerator : TilemapGenerator
 {
-    public TileConstructCollection buildings;
+    private TileConstructCollection constructs;
     private GenerateTilemapData data;
     public GameObject shadowSprite;
     public bool drawShadows = true;
@@ -16,6 +16,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
         data = _data;
         library = _data.library;
         ruleTiles = _data.ruleTiles;
+        constructs = _data.constructCollection;
         blueprint = new TileBase[size.x, size.y];
 
         //EAST WALL
@@ -30,7 +31,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
         //Constructs
         foreach (var constructPosition in PullRandomGroup(data.planBounds, 41))
         {
-            var construct = AddConstruct(buildings, constructPosition);
+            var construct = AddConstruct(constructs, constructPosition);
             if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition, root);
             if (construct?.type == TileConstructType.House)
             {
