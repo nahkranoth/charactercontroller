@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555bf58ab8dd417fa42b96a8ebaebadf, type: 3}
   m_Name: DesertSet
   m_EditorClassIdentifier: 
-  step: 4
+  step: 0
+  bitTreeSearchDepth: 6
+  constructDensity: 20
   library: {fileID: 11400000, guid: a2c0a91461e75274cb0abf342cb0295a, type: 2}
   ruleTiles: {fileID: 11400000, guid: d67d870e2ef08d44088e103a70310998, type: 2}
   constructCollection: {fileID: 11400000, guid: b4302a59203bbdd4eac5220a8752d16d, type: 2}

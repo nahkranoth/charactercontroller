@@ -14,8 +14,8 @@ public class CollisionTilemapGenerator : TilemapGenerator
     {
         size = mapSize;
         data = _data;
-        library = _data.library;
-        ruleTiles = _data.ruleTiles;
+        library = _data.set.library;
+        ruleTiles = _data.set.ruleTiles;
         constructs = _data.constructCollection;
         blueprint = new TileBase[size.x, size.y];
 
@@ -29,7 +29,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
         FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
         
         //Constructs
-        foreach (var constructPosition in PullRandomGroup(data.planBounds, 41))
+        foreach (var constructPosition in PullRandomGroup(data.planBounds, data.set.constructDensity))
         {
             var construct = AddConstruct(constructs, constructPosition);
             if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition, root);

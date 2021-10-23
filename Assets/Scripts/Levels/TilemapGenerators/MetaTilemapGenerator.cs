@@ -15,18 +15,17 @@ public class MetaTilemapGenerator:MonoBehaviour
     public CollisionTilemapGenerator collision;
 
     public DebugDrawBounds debugDraw;
-    public int boundsAreaSearchDepth;
 
     public GeneratorSetCollection setCollection;
     
     public GenerateTilemapData Generate(Vector3Int root, int step)
     {
         Random.InitState(root.y);
-        
-        GenerateTilemapData generateData = new GenerateTilemapData();
-
         var trimmedWidth = tilemapSize.x - 52;//trim value
         var trimmedHeight = tilemapSize.y - 8;//trim value
+        var set = setCollection.GetByStep(step);
+        
+        GenerateTilemapData generateData = new GenerateTilemapData(set);
         
         //generate level plan bounds
         var collPosLeft = new Vector3Int(tilemapSize.x/4, tilemapSize.y/2, 0);
@@ -34,16 +33,11 @@ public class MetaTilemapGenerator:MonoBehaviour
         var collPosRight = new Vector3Int(tilemapSize.x - tilemapSize.x/4, tilemapSize.y/2, 0);
         var sourceBoundsRight = new Bounds(collPosRight, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
         
-        var levelPlanLeft = BinarySpaceTree.Generate(sourceBoundsLeft, boundsAreaSearchDepth);
-        var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, boundsAreaSearchDepth);
+        var levelPlanLeft = BinarySpaceTree.Generate(sourceBoundsLeft, set.bitTreeSearchDepth);
+        var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, set.bitTreeSearchDepth);
         
         generateData.planBounds = levelPlanLeft.Concat(levelPlanRight).ToArray();
-
-        var set = setCollection.GetByStep(step);
-        generateData.library = set.library;
-        generateData.ruleTiles = set.ruleTiles;
-        generateData.constructCollection = set.constructCollection;
-        generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize, root), root);
+        generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize), root);
         generateData.collision = ParseBlueprint(collision.Generate(generateData, tilemapSize, root), root);
         
         debugDraw.SetBounds(generateData.planBounds, root);

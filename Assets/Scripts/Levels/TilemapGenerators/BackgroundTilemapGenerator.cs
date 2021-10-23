@@ -7,12 +7,12 @@ public class BackgroundTilemapGenerator : TilemapGenerator
     private GenerateTilemapData data;
 
 
-    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
+    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize)
     {
         size = mapSize;
         data = _data;
-        library = _data.library;
-        ruleTiles = _data.ruleTiles;
+        library = _data.set.library;
+        ruleTiles = _data.set.ruleTiles;
         blueprint = new TileBase[size.x,size.y];
         
         Fill(TileLibraryKey.Floor);

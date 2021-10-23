@@ -9,10 +9,14 @@ public class GenerateTilemapData
 
     public GenerateTilemapPair background;
     public GenerateTilemapPair collision;
-    
-    public TileLibrary library;
-    public RuleTileLibrary ruleTiles;
     public TileConstructCollection constructCollection;
+    public GeneratorSet set;
+    
+    public GenerateTilemapData(GeneratorSet _set)
+    { 
+        set = _set;
+        constructCollection = set.constructCollection;
+    }
 
     public Vector3Int[] GetBackgroundPositions()
     {
