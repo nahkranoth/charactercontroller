@@ -7,6 +7,8 @@ public class ItemBehaviourController:MonoBehaviour
     private Dictionary<ItemBehaviourStates.Behaviours, Action> behaviourToActionMap;
     public Action<ItemBehaviourStates.Behaviours> Equip;
     public Action<int> ChangeHealth;
+    public Action<float> ChangeHunger;
+    public Action<float> ChangeThirst;
     private void Awake()
     {
         behaviourToActionMap = new Dictionary<ItemBehaviourStates.Behaviours, Action>();
@@ -19,14 +21,19 @@ public class ItemBehaviourController:MonoBehaviour
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Candy] = () =>
         {
             ChangeHealth?.Invoke(10);
+            ChangeHunger?.Invoke(30);
         };
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Chocolate] = () =>
         {
             ChangeHealth?.Invoke(20);
+            ChangeHunger?.Invoke(40);
+
         };
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Honey] = () =>
         {
             ChangeHealth?.Invoke(40);
+            ChangeHunger?.Invoke(60);
+            ChangeThirst?.Invoke(10);
         };
         
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Axe] = () =>
@@ -40,6 +47,10 @@ public class ItemBehaviourController:MonoBehaviour
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Torch] = () =>
         {
             Equip?.Invoke(ItemBehaviourStates.Behaviours.Torch);
+        };
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.WaterBottle] = () =>
+        {
+            ChangeThirst?.Invoke(80);
         };
     }
 

@@ -8,6 +8,7 @@
         Axe,
         Chocolate,
         Honey,
-        Torch
+        Torch,
+        WaterBottle
     }
 }

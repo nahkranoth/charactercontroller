@@ -18,12 +18,45 @@ public class PlayerHealthStatus:MonoBehaviour
     public float sleepTick = 30f;
     private float currenSleepTick = 0f;
 
+    private ItemBehaviourController itemBehavior;
+    
     public Action<float> SetThirst;
     public Action<float> SetHunger;
     public Action<float> SetSleep;
+    
     private void Awake()
     {
         WorldGraph.Subscribe(this,typeof(PlayerHealthStatus));
+    }
+
+    private void Start()
+    {
+        itemBehavior = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
+        itemBehavior.ChangeHunger -= AddHunger;
+        itemBehavior.ChangeHunger += AddHunger;
+        itemBehavior.ChangeThirst -= AddThirst;
+        itemBehavior.ChangeThirst += AddThirst;
+    }
+
+    public void AddHunger(float amount)
+    {
+        hunger += amount;//normalize
+        if (hunger > 1f) hunger = 1f;
+        SetHunger?.Invoke(hunger);
+    }
+    
+    public void AddThirst(float amount)
+    {
+        thirst += amount;
+        if (thirst > 1f) thirst = 1f;
+        SetThirst?.Invoke(thirst);
+    }
+    
+    public void AddSleep(float amount)
+    {
+        sleep += amount;
+        if (sleep > 1f) sleep = 1f;
+        SetSleep?.Invoke(sleep);
     }
 
     private void FixedUpdate()

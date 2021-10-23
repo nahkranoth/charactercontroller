@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
       
       equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
