@@ -825,6 +825,7 @@ MonoBehaviour:
   metaEntityPlacer: {fileID: 1517900160}
   backgroundTilemap: {fileID: 1528139976}
   collisionTilemap: {fileID: 788604936}
+  generatorCollection: {fileID: 11400000, guid: 736f3a8b848f6174b9d08fe7238c50aa, type: 2}
 --- !u!114 &1517900160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,7 +842,6 @@ MonoBehaviour:
   containerEntities: {fileID: 11400000, guid: 3da112b3b2cba7d4a905bf33f5d19bd2, type: 2}
   enemyEntities: {fileID: 11400000, guid: 7df93cf8c4426fb40b2a4428deef1e47, type: 2}
   perChunkContainers: 4
-  perChunkEnemies: 3
 --- !u!1839735485 &1528139976 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 3530391785209153640, guid: ffb75eae928247e428cf46d225134f9b, type: 3}

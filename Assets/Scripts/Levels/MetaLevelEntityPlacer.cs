@@ -10,19 +10,19 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     public EntityCollection containerEntities;
     public EntityCollection enemyEntities;
 
-    public int perChunkContainers;
-    public int perChunkEnemies;
-    
     private List<Vector3Int> possiblePlaces;
 
+    private GeneratorSet generatorSet;
+    
     public void RemoveAt(Vector3Int position)
     {
         entityPlacer.RemoveCollectableAt(position);
         entityPlacer.RemoveEnemyAt(position);
     }
     
-    public void Generate(MetaTilemapGenerator generator, Vector3Int root)
+    public void Generate(MetaTilemapGenerator generator, Vector3Int root, GeneratorSet set)
     {
+        generatorSet = set;
         possiblePlaces = generator.background.GetAllTilesOfKey(TileLibraryKey.Floor);
         GenerateContainers(generator, root);
         GenerateEnemies(generator, root);
@@ -32,7 +32,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     {
         Vector3Int spawnPos;
         
-        for (int i = 0; i < perChunkEnemies; i++)
+        for (int i = 0; i < generatorSet.enemyDensity; i++)
         {
             var ranI = Random.Range(0, possiblePlaces.Count);
             var place = possiblePlaces[ranI];
@@ -49,7 +49,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     {
         Vector3Int spawnPos;
 
-        for (int i = 0; i < perChunkContainers; i++)
+        for (int i = 0; i < generatorSet.containerDensity; i++)
         {
             var ranI = Random.Range(0, possiblePlaces.Count);
             var place = possiblePlaces[ranI];

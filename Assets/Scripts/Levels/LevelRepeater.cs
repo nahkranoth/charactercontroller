@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Debug = UnityEngine.Debug;
@@ -13,6 +12,7 @@ public class LevelRepeater : MonoBehaviour
     public Tilemap collisionTilemap;
 
     public Action OnGenerate;
+    public GeneratorSetCollection generatorCollection;
 
     private GenerateTilemapData tickBlueprint;
     private int currentStep;
@@ -43,11 +43,12 @@ public class LevelRepeater : MonoBehaviour
 
     private void GenerateAtRoot(int step)
     {
-        tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0), Step);
+        var set = generatorCollection.GetByStep(Step);
+        tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0), set);
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
         OnGenerate?.Invoke();
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0), generatorCollection.GetByStep(Step));
     }
 
     public void RemoveAt(int step)
@@ -89,9 +90,9 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(newStep);
         RemoveAt(currentLowStep-1);
         currentStep = newStep;
-        Debug.Log($"Current Step: {currentStep / StepSize()}");
+        Debug.Log($"Current Step: {Step}");
         currentLowStep += StepSize();
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Step));
     }
     public void Decrease()
     {
@@ -99,9 +100,9 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(newStep);
         RemoveAt(currentStep+1);
         currentStep -= StepSize();
-        Debug.Log($"Current Step: {currentStep /  StepSize()}");
+        Debug.Log($"Current Step: {Step}");
         currentLowStep = newStep;
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Step));
     }
    
 }

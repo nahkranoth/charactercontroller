@@ -15,15 +15,13 @@ public class MetaTilemapGenerator:MonoBehaviour
     public CollisionTilemapGenerator collision;
 
     public DebugDrawBounds debugDraw;
-
-    public GeneratorSetCollection setCollection;
     
-    public GenerateTilemapData Generate(Vector3Int root, int step)
+    public GenerateTilemapData Generate(Vector3Int root, GeneratorSet generatorSet)
     {
         Random.InitState(root.y);
         var trimmedWidth = tilemapSize.x - 52;//trim value
         var trimmedHeight = tilemapSize.y - 8;//trim value
-        var set = setCollection.GetByStep(step);
+        var set = generatorSet;
         
         GenerateTilemapData generateData = new GenerateTilemapData(set);
         
