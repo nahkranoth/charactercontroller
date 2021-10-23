@@ -17,6 +17,9 @@ public class MetaTilemapGenerator:MonoBehaviour
     public DebugDrawBounds debugDraw;
     public int boundsAreaSearchDepth;
 
+    public TileLibrary library;
+    public RuleTileLibrary ruleTiles;
+    
     public GenerateTilemapData Generate(Vector3Int root)
     {
         Random.InitState(root.y);
@@ -36,6 +39,8 @@ public class MetaTilemapGenerator:MonoBehaviour
         var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, boundsAreaSearchDepth);
         
         generateData.planBounds = levelPlanLeft.Concat(levelPlanRight).ToArray();
+        generateData.library = library;
+        generateData.ruleTiles = ruleTiles;
         generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize, root), root);
         generateData.collision = ParseBlueprint(collision.Generate(generateData, tilemapSize, root), root);
         

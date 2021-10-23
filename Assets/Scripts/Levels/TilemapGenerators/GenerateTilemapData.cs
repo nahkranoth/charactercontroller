@@ -9,6 +9,9 @@ public class GenerateTilemapData
 
     public GenerateTilemapPair background;
     public GenerateTilemapPair collision;
+    
+    public TileLibrary library;
+    public RuleTileLibrary ruleTiles;
 
     public Vector3Int[] GetBackgroundPositions()
     {

@@ -11,6 +11,8 @@ public class BackgroundTilemapGenerator : TilemapGenerator
     {
         size = mapSize;
         data = _data;
+        library = _data.library;
+        ruleTiles = _data.ruleTiles;
         blueprint = new TileBase[size.x,size.y];
         
         Fill(TileLibraryKey.Floor);

@@ -46,21 +46,11 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
@@ -82,30 +72,30 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 1.084227e-19
-      e01: 1.2051126e-26
-      e02: 1.2050417e-26
-      e03: 1.2050417e-26
-      e10: 7.5e-43
-      e11: 6.4e-44
-      e12: 6.4e-44
-      e13: 6.4e-44
-      e20: 3.6175587e+31
-      e21: 3.7261306e+19
-      e22: -8.561409
-      e23: 3.7261306e+19
+      e00: -2.5244127e-29
+      e01: -1.373657e+38
+      e02: -1.3735637e+38
+      e03: -1.3735637e+38
+      e10: 9.26e-43
+      e11: 2.45e-43
+      e12: 2.45e-43
+      e13: 2.45e-43
+      e20: 7.7396035e+29
+      e21: -9.11473e+9
+      e22: 0.0000000027935858
+      e23: -9.11473e+9
       e30: 4.5904e-41
-      e31: 7.51e-43
-      e32: 7.48e-43
-      e33: 7.51e-43
+      e31: 9.28e-43
+      e32: 9.26e-43
+      e33: 9.28e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 3.147511e-17, g: 3.147511e-17, b: 3.147511e-17, a: 3.147511e-17}
+    m_Data: {r: -8.752939e+9, g: -8.752939e+9, b: -8.752939e+9, a: -8.752939e+9}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 71, y: 69, z: 1}
+  m_Size: {x: 5, y: 5, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -389,7 +379,9 @@ MonoBehaviour:
   background: {fileID: 3530391785398088928}
   collision: {fileID: 5635896799117020292}
   debugDraw: {fileID: 2414587273026665772}
-  boundsAreaSearchDepth: 6
+  boundsAreaSearchDepth: 8
+  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
+  ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
 --- !u!114 &3530391785398088928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,8 +396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 63, y: 63}
   tilemap: {fileID: 3530391785209153640}
-  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
-  ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
 --- !u!114 &5635896799117020292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,8 +410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 63, y: 63}
   tilemap: {fileID: 3530391785229653826}
-  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
-  ruleTiles: {fileID: 0}
   buildings: {fileID: 11400000, guid: 06b390bc0178003448e89085dcc9fd1e, type: 2}
   shadowSprite: {fileID: 8776861624619945948, guid: a7a35da73e9abb14d899be099c18dadf, type: 3}
   drawShadows: 0

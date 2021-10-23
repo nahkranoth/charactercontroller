@@ -9,11 +9,13 @@ public class CollisionTilemapGenerator : TilemapGenerator
     public GameObject shadowSprite;
     public bool drawShadows = true;
 
-    private List<TileConstruct> constructs = new List<TileConstruct>();//TODO would be cool to keep a track of all constructs (also needed for shadows)
+    //private List<TileConstruct> constructs = new List<TileConstruct>();//TODO would be cool to keep a track of all constructs (also needed for shadows)
     public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
     {
         size = mapSize;
         data = _data;
+        library = _data.library;
+        ruleTiles = _data.ruleTiles;
         blueprint = new TileBase[size.x, size.y];
 
         //EAST WALL

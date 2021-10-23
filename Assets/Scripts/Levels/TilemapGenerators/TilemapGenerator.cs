@@ -9,8 +9,8 @@ public abstract class TilemapGenerator : MonoBehaviour
 {
     [HideInInspector] public Vector2Int size;
     public Tilemap tilemap;
-    public TileLibrary library;
-    public RuleTileLibrary ruleTiles;
+    internal TileLibrary library;
+    internal RuleTileLibrary ruleTiles;
 
     public TileBase[,] blueprint;
 
