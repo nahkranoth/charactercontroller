@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthAspectController:MonoBehaviour
+public class HealthAspectIndicator:MonoBehaviour
 {
     private Image img;
     

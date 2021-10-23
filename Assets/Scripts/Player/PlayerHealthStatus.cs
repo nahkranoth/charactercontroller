@@ -18,9 +18,9 @@ public class PlayerHealthStatus:MonoBehaviour
     public float sleepTick = 30f;
     private float currenSleepTick = 0f;
 
-    public Action<float> DecreaseThirst;
-    public Action<float> DecreaseHunger;
-    public Action<float> DecreaseSleep;
+    public Action<float> SetThirst;
+    public Action<float> SetHunger;
+    public Action<float> SetSleep;
     private void Awake()
     {
         WorldGraph.Subscribe(this,typeof(PlayerHealthStatus));
@@ -33,7 +33,7 @@ public class PlayerHealthStatus:MonoBehaviour
         {
             thirst -= 0.1f;
             currentThirstTick = 0f;
-            DecreaseThirst?.Invoke(thirst);
+            SetThirst?.Invoke(thirst);
         }
         
         currentHungerTick += 1f * Time.deltaTime;
@@ -41,7 +41,7 @@ public class PlayerHealthStatus:MonoBehaviour
         {
             hunger -= 0.1f;
             currentHungerTick = 0f;
-            DecreaseHunger?.Invoke(hunger);
+            SetHunger?.Invoke(hunger);
         }
         
         currenSleepTick += 1f * Time.deltaTime;
@@ -49,7 +49,7 @@ public class PlayerHealthStatus:MonoBehaviour
         {
             sleep -= 0.1f;
             currenSleepTick = 0f;
-            DecreaseSleep?.Invoke(sleep);
+            SetSleep?.Invoke(sleep);
         }
     }
 }
