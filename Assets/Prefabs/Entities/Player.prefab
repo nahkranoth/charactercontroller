@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2896419028564088478}
   - component: {fileID: 2414988906261066786}
   m_Layer: 0
-  m_Name: LanternLight
+  m_Name: Lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3490643704792580732}
   - component: {fileID: 7482345195232766880}
   - component: {fileID: 9058590136681751550}
+  - component: {fileID: 6946515414908163401}
   - component: {fileID: 1521678023464578071}
   m_Layer: 0
   m_Name: Player
@@ -151,7 +152,7 @@ MonoBehaviour:
   spriteHolder: {fileID: 7224929123394807414}
   weaponSpriteHolder: {fileID: 553563042785767798}
   settings: {fileID: 11400000, guid: 5dcbb97dac4cdfc4ea93d93fd5e70059, type: 2}
-  myHealth: {fileID: 1521678023464578071}
+  playerHealthStatus: {fileID: 6946515414908163401}
   itemDescriptions: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
 --- !u!50 &3490643704792580732
 Rigidbody2D:
@@ -216,6 +217,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18402189, y: 0.31033564}
   m_EdgeRadius: 0
+--- !u!114 &6946515414908163401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655262374592594940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c02ca61c164b54a3e339891a32c5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHealth: {fileID: 1521678023464578071}
 --- !u!114 &1521678023464578071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +516,7 @@ MonoBehaviour:
     behaviour: 0
     consumable: 0
     amount: 1
-    destroysBlocks: 0
+    canChopWood: 0
   sword: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
 --- !u!1 &5891043133381511318
 GameObject:

@@ -97,5 +97,7 @@ MonoBehaviour:
   type: 0
   rarity: 40
   constructSprite: {fileID: 21300000, guid: ce9aee4a265a66f48a0d798605319868, type: 3}
+  spray: 0
+  inCenterOfBounds: 1
   shadowPositionOffset: {x: 0, y: 0, z: 0}
   shadowScaleOffset: {x: -1, y: 0, z: 0}

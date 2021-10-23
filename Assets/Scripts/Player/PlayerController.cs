@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
    public Transform spriteHolder;
    public Transform weaponSpriteHolder;
    public PlayerSettings settings;
+   public PlayerHealthStatus playerHealthStatus;
    
    private Vector3 myScale = new Vector3(1, 1, 1);
 
@@ -21,8 +22,6 @@ public class PlayerController : MonoBehaviour
    
    private float walkSpeed = 14f;
    private Vector2 directions;
-
-   public Health myHealth;
 
    private bool invincible = false;
    private WorldController worldController;
@@ -41,7 +40,7 @@ public class PlayerController : MonoBehaviour
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
       walkSpeed = settings.walkSpeed;
-      myHealth.Set(settings.startHealth);
+      playerHealthStatus.myHealth.Set(settings.startHealth);
    }
 
    private void Start()
@@ -61,8 +60,8 @@ public class PlayerController : MonoBehaviour
       attackController.chargingPowerAttack += OnChargingPowerAttack;
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
-      itemBehaviourController.ChangeHealth -= myHealth.Modify;
-      itemBehaviourController.ChangeHealth += myHealth.Modify;
+      itemBehaviourController.ChangeHealth -= playerHealthStatus.myHealth.Modify;
+      itemBehaviourController.ChangeHealth += playerHealthStatus.myHealth.Modify;
       
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
@@ -116,7 +115,7 @@ public class PlayerController : MonoBehaviour
    {
       if (invincible) return;
       audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
-      myHealth.Modify(-damage);
+      playerHealthStatus.myHealth.Modify(-damage);
       animator.SetDamage();
       walkSpeed = 0;
       invincible = true;
