@@ -19,8 +19,12 @@ public static class BinarySpaceTree
                 var node = workload[i];
                 if (node.IsLeaf)
                 {
-                    
-                    result.Add(new TypedBounds {bounds = node.bounds, type = BoundsType.Flora});
+                    var rType = BoundsTypeHelper.GetRandomBoundsType();
+                    result.Add(new TypedBounds
+                    {
+                        bounds = node.bounds, 
+                        type = rType
+                    });
                     workload.Remove(node);
                     continue;
                 }
