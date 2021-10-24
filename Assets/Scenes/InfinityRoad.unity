@@ -841,7 +841,6 @@ MonoBehaviour:
   entityPlacer: {fileID: 825148140}
   containerEntities: {fileID: 11400000, guid: 3da112b3b2cba7d4a905bf33f5d19bd2, type: 2}
   enemyEntities: {fileID: 11400000, guid: 7df93cf8c4426fb40b2a4428deef1e47, type: 2}
-  perChunkContainers: 4
 --- !u!1839735485 &1528139976 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 3530391785209153640, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
@@ -1321,11 +1320,11 @@ PrefabInstance:
       objectReference: {fileID: 1583351813}
     - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
       propertyPath: timeSpeed
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
       propertyPath: timePassing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
