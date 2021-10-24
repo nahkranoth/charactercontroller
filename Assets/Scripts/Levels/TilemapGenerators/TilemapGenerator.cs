@@ -119,6 +119,31 @@ public abstract class TilemapGenerator : MonoBehaviour
         }
     }
     
+    internal void FillBounds(TypedBounds[] bounds, RuleTileLibraryKey tileKey)
+    {
+        int xSize = blueprint.GetUpperBound(0);
+        int ySize = blueprint.GetUpperBound(1);
+        
+        foreach (var patternBounds in bounds)
+        {
+            int centerX = (int) patternBounds.bounds.center.x;
+            int centerY = (int) patternBounds.bounds.center.y;
+            
+            int extentX = (int) patternBounds.bounds.extents.x;
+            int extentY = (int) patternBounds.bounds.extents.y;
+            
+            for (var x = -extentX; x < extentX+1; x++)
+            {
+                for (var y = -extentY; y < extentY+1; y++)
+                {
+                    var newX = centerX + x;
+                    var newY = centerY + y;
+                    if(WithinTilemap(newX, xSize, newY, ySize)) blueprint[newX, newY] = ruleTiles.GetRuleTile(tileKey);
+                }
+            }
+        }
+    }
+    
     internal void DrawBoundsOutline(TypedBounds[] bounds, TileLibraryKey tileKey, float breakup = 0f)
     {
         int xSize = blueprint.GetUpperBound(0);

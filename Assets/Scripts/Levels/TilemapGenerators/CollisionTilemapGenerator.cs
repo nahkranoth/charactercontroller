@@ -32,11 +32,11 @@ public class CollisionTilemapGenerator : TilemapGenerator
         {
             //SOUTH WALL
             TypedBounds[] southWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, 2, 0), size=new Vector3(size.x*2,4,0)}}};
-            FillBounds(southWall, TileLibraryKey.SolidFloor); //wall
+            FillBounds(southWall, RuleTileLibraryKey.CityWall); //wall
             TypedBounds[] northWallOne = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
-            FillBounds(northWallOne, TileLibraryKey.Fence); //wall
+            FillBounds(northWallOne, RuleTileLibraryKey.CityWall); //wall
             TypedBounds[] northWallTwo = {new TypedBounds{bounds=new Bounds{center = new Vector3(size.x, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
-            FillBounds(northWallTwo, TileLibraryKey.Fence); //wall
+            FillBounds(northWallTwo, RuleTileLibraryKey.CityWall); //wall
         }
         
         //Constructs

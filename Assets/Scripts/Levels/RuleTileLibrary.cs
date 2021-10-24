@@ -26,4 +26,5 @@ public struct RuleTileLibraryItem
 public enum RuleTileLibraryKey
 {
     Road,
+    CityWall
 }

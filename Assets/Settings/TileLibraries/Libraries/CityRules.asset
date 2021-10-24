@@ -15,3 +15,5 @@ MonoBehaviour:
   library:
   - key: 0
     tile: {fileID: 11400000, guid: 38eca1d8aee33104184f1e39008b0a39, type: 2}
+  - key: 1
+    tile: {fileID: 11400000, guid: 1f61abbe9b6f3284aa33358cab979636, type: 2}
