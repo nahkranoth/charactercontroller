@@ -27,6 +27,17 @@ public class CollisionTilemapGenerator : TilemapGenerator
         //WEST WALL
         TypedBounds[] westWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}}};
         FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
+
+        if (data.set.walledOff)
+        {
+            //SOUTH WALL
+            TypedBounds[] southWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, 2, 0), size=new Vector3(size.x*2,4,0)}}};
+            FillBounds(southWall, TileLibraryKey.SolidFloor); //wall
+            TypedBounds[] northWallOne = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
+            FillBounds(northWallOne, TileLibraryKey.Fence); //wall
+            TypedBounds[] northWallTwo = {new TypedBounds{bounds=new Bounds{center = new Vector3(size.x, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
+            FillBounds(northWallTwo, TileLibraryKey.Fence); //wall
+        }
         
         //Constructs
         var group = PullRandomGroup(data.planBounds, data.set.constructDensity);

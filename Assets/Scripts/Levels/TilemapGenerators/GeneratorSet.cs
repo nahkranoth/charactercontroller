@@ -10,6 +10,7 @@ public class GeneratorSet:ScriptableObject
     public int enemyDensity = 4;
     public int containerDensity = 2;
     public bool hasRoad = true;
+    public bool walledOff = false;
     public TileLibrary library;
     public RuleTileLibrary ruleTiles;
     public TileConstructCollection constructCollection;

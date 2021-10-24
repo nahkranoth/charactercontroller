@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa103634998794478b2f184e87a0415, type: 3}
-  m_Name: PlayerSettings
+  m_Script: {fileID: 11500000, guid: d2aeb12e18a144f09aeb82765a65795a, type: 3}
+  m_Name: CityRules
   m_EditorClassIdentifier: 
-  startHealth: 50
-  walkSpeed: 88
-  chargeWalkSpeed: 3
+  library:
+  - key: 0
+    tile: {fileID: 11400000, guid: 38eca1d8aee33104184f1e39008b0a39, type: 2}

@@ -9,6 +9,10 @@ public class GeneratorSetCollection:ScriptableObject
     public List<GeneratorSet> collection;
     public GeneratorSet GetByStep(int step)
     {
-        return collection.OrderBy(p => p.step).Last(x => x.step <= step);
+        var possible = collection.OrderBy(p => p.step).LastOrDefault(x => x.step <= step);
+        
+        if (possible == null) possible = collection[0];
+
+        return possible;
     }
 }

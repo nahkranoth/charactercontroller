@@ -19,17 +19,13 @@ public class BackgroundTilemapGenerator : TilemapGenerator
         DrawSpray(55, TileLibraryKey.FloorFoliage2);
         DrawSpray(12, TileLibraryKey.FloorFoliage3);
         
-        if(data.set.hasRoad){
-            AddVerticalDrunk(RuleTileLibraryKey.Road, 0, 7); //make road
-        }
+        if(data.set.hasRoad) AddVerticalDrunk(RuleTileLibraryKey.Road, 0, 7); //make road
 
-        var boundsGroup = PullRandomGroup(data.planBounds, 4);
-        FillBounds(boundsGroup, TileLibraryKey.Foliage); //flower beds
+        var cropBounds = PullRandomGroup(data.planBounds, 4); //flower beds
+        FillBounds(cropBounds, TileLibraryKey.Foliage);
+        DrawBoundsOutline(cropBounds, TileLibraryKey.Path, 0.05f);
+        data.planBounds = data.planBounds.Except(cropBounds).ToArray();// remove cropfields for the next generator
 
-        DrawBoundsOutline(boundsGroup, TileLibraryKey.Path, 0.05f);
-
-        data.planBounds = data.planBounds.Except(boundsGroup).ToArray();
-        
         return blueprint;
     }
 }

@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 555bf58ab8dd417fa42b96a8ebaebadf, type: 3}
-  m_Name: GrasslandSet
+  m_Name: CitySet
   m_EditorClassIdentifier: 
-  step: 4
-  bitTreeSearchDepth: 7
-  constructDensity: 50
-  enemyDensity: 4
-  containerDensity: 2
-  hasRoad: 1
-  library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
-  ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
+  step: 0
+  bitTreeSearchDepth: 4
+  constructDensity: 90
+  enemyDensity: 0
+  containerDensity: 5
+  hasRoad: 0
+  walledOff: 1
+  library: {fileID: 11400000, guid: 79b770bcbd34c9248b107af927a39f61, type: 2}
+  ruleTiles: {fileID: 11400000, guid: 15ad3848f32597c43a053b6d7d1eb73c, type: 2}
   constructCollection: {fileID: 11400000, guid: 06b390bc0178003448e89085dcc9fd1e, type: 2}
   boundTypes:
-  - type: 1
-    probability: 70
   - type: 0
-    probability: 10
+    probability: 50
+  - type: 2
+    probability: 40

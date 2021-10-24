@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c680e6e3e2c3b4e958ec139d296c98, type: 3}
+  m_Name: City
+  m_EditorClassIdentifier: 
+  library:
+  - key: 0
+    tile: {fileID: 11400000, guid: 660a320d11f22684d97cd1ed7d0a99fa, type: 2}
+  - key: 1
+    tile: {fileID: 11400000, guid: f0b1f3b30844fc1478f41850f183f5fd, type: 2}
+  - key: 2
+    tile: {fileID: 11400000, guid: e0df980595af0d8489a854178b0cfa46, type: 2}
+  - key: 3
+    tile: {fileID: 11400000, guid: 312ef6048a634ae4ab9adacc782a1d9e, type: 2}
+  - key: 4
+    tile: {fileID: 11400000, guid: 0ca1c716a276689468ea6ed300b3aa25, type: 2}
+  - key: 5
+    tile: {fileID: 11400000, guid: 0ca1c716a276689468ea6ed300b3aa25, type: 2}
+  - key: 6
+    tile: {fileID: 11400000, guid: 0b7d25b0f8021e841bdacaf869f35f8c, type: 2}
+  - key: 7
+    tile: {fileID: 11400000, guid: 3882161860048214e99696ef7d223c35, type: 2}
+  - key: 8
+    tile: {fileID: 11400000, guid: bd5d7197e3f03cb43afca74495ffcb0a, type: 2}
+  - key: 9
+    tile: {fileID: 11400000, guid: 3680686afef6ba942aa0bc498ac0f8bd, type: 2}

@@ -43,12 +43,12 @@ public class LevelRepeater : MonoBehaviour
 
     private void GenerateAtRoot(int step)
     {
-        var set = generatorCollection.GetByStep(Step);
+        var set = generatorCollection.GetByStep(step/StepSize());
         tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0), set);
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
         OnGenerate?.Invoke();
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0), generatorCollection.GetByStep(Step));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0), generatorCollection.GetByStep(step/StepSize()));
     }
 
     public void RemoveAt(int step)
@@ -91,7 +91,7 @@ public class LevelRepeater : MonoBehaviour
         RemoveAt(currentLowStep-1);
         currentStep = newStep;
         currentLowStep += StepSize();
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Step));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Mathf.FloorToInt(currentStep/StepSize())));
     }
     public void Decrease()
     {
@@ -99,8 +99,9 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(newStep);
         RemoveAt(currentStep+1);
         currentStep -= StepSize();
+        Debug.Log($"Current Step: {Step}");
         currentLowStep = newStep;
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Step));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Mathf.FloorToInt(currentStep/StepSize())));
     }
    
 }
