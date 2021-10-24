@@ -21,19 +21,20 @@ public class CollisionTilemapGenerator : TilemapGenerator
 
         //EAST WALL
         AddVerticalDrunkFillEast(TileLibraryKey.DimFloor, size.x/2-8); //make 
-        Bounds[] eastwall = {new Bounds{center = new Vector3(size.x-4, 0, 0), size=new Vector3(4,size.y*2,0)}};
+        TypedBounds[] eastwall = { new TypedBounds { bounds = new Bounds{center = new Vector3(size.x-4, 0, 0), size=new Vector3(4,size.y*2,0)}}};
         FillBounds(eastwall, TileLibraryKey.DimFloor); //wall
         
         //WEST WALL
-        Bounds[] westWall = {new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}};
+        TypedBounds[] westWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}}};
         FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
         
         //Constructs
-        foreach (var constructPosition in PullRandomGroup(data.planBounds, data.set.constructDensity))
+        var group = PullRandomGroup(data.planBounds, data.set.constructDensity);
+        foreach (var constructPosition in group)
         {
-            var construct = AddConstruct(constructs, constructPosition);
-            if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition, root);
-            if (construct?.type == TileConstructType.House)
+            var construct = AddConstruct(constructs, constructPosition.bounds);
+            if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition.bounds, root);
+            if (construct?.type == BoundsType.House)
             {
                 DrawBoundsOutline(new []{constructPosition}, TileLibraryKey.Fence, .1f);
             }

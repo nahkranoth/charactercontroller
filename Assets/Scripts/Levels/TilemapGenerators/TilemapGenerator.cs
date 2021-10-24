@@ -20,17 +20,17 @@ public abstract class TilemapGenerator : MonoBehaviour
         for (int y = 0; y < size.y; y++)
             blueprint[x, y] = library.GetTile(key);
     }
-    internal Bounds[] PullRandomGroup(Bounds[] full, int amount)
+    internal TypedBounds[] PullRandomGroup(TypedBounds[] full, int amount)
     {
-        Bounds[] result = new Bounds[amount];
-        if (full.Length == 0) return new Bounds[0];
+        List<TypedBounds> result = new List<TypedBounds>();
+        if (full.Length == 0) return new TypedBounds[0];
         for (int i = 0; i < amount; i++)
         {
             var randID = Random.Range(0, full.Length);
             var candidate = full[randID];
-            if (!((IList) result).Contains(candidate)) result[i] = candidate;
+            if (!result.Contains(candidate)) result.Add(candidate);
         }
-        return result;
+        return result.ToArray();
     }
 
     internal void AddVerticalDrunkFillEast(TileLibraryKey tile, int offsetX)
@@ -94,18 +94,18 @@ public abstract class TilemapGenerator : MonoBehaviour
         
     }
     
-    internal void FillBounds(Bounds[] bounds, TileLibraryKey tileKey)
+    internal void FillBounds(TypedBounds[] bounds, TileLibraryKey tileKey)
     {
         int xSize = blueprint.GetUpperBound(0);
         int ySize = blueprint.GetUpperBound(1);
         
         foreach (var patternBounds in bounds)
         {
-            int centerX = (int) patternBounds.center.x;
-            int centerY = (int) patternBounds.center.y;
+            int centerX = (int) patternBounds.bounds.center.x;
+            int centerY = (int) patternBounds.bounds.center.y;
             
-            int extentX = (int) patternBounds.extents.x;
-            int extentY = (int) patternBounds.extents.y;
+            int extentX = (int) patternBounds.bounds.extents.x;
+            int extentY = (int) patternBounds.bounds.extents.y;
             
             for (var x = -extentX; x < extentX+1; x++)
             {
@@ -119,18 +119,18 @@ public abstract class TilemapGenerator : MonoBehaviour
         }
     }
     
-    internal void DrawBoundsOutline(Bounds[] bounds, TileLibraryKey tileKey, float breakup = 0f)
+    internal void DrawBoundsOutline(TypedBounds[] bounds, TileLibraryKey tileKey, float breakup = 0f)
     {
         int xSize = blueprint.GetUpperBound(0);
         int ySize = blueprint.GetUpperBound(1);
         TileBase[,] result = new TileBase[xSize, ySize];
         foreach (var patternBounds in bounds)
         {
-            int centerX = (int) patternBounds.center.x;
-            int centerY = (int) patternBounds.center.y;
+            int centerX = (int) patternBounds.bounds.center.x;
+            int centerY = (int) patternBounds.bounds.center.y;
             
-            int extentX = (int) patternBounds.extents.x;
-            int extentY = (int) patternBounds.extents.y;
+            int extentX = (int) patternBounds.bounds.extents.x;
+            int extentY = (int) patternBounds.bounds.extents.y;
             
             for (var x = -extentX; x < extentX + 1; x++)
             {
@@ -190,20 +190,6 @@ public abstract class TilemapGenerator : MonoBehaviour
             result[xRange, yRange] = library.GetTile(tileKey);
         }
         AddToBlueprint(result);
-    }
-    
-    internal void DrawSprayConstruct(int density, TileConstruct construct)
-    {
-        // int xSize = blueprint.GetUpperBound(0);
-        // int ySize = blueprint.GetUpperBound(1);
-        // TileBase[,] result = new TileBase[xSize, ySize];
-        // for (int i = 0; i < density; i++)
-        // {
-        //     var xRange = Random.Range(0, xSize);
-        //     var yRange = Random.Range(0, ySize);
-        //     result[xRange, yRange] = library.GetTile(tileKey);
-        // }
-        // AddToBlueprint(result);
     }
 
     internal void AddToBlueprint(TileBase[,] overwriter)

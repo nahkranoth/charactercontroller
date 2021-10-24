@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class BinarySpaceTree
 {
-    public static Bounds[] Generate(Bounds source, int maxDepth)
+    public static TypedBounds[] Generate(Bounds source, int maxDepth)
     {
         var root = new BinaryTreeNode( source, 0, maxDepth);
         root.Split();//start splitting
@@ -11,7 +11,7 @@ public static class BinarySpaceTree
         int maxCap = 0;
 
         List<BinaryTreeNode> workload = new List<BinaryTreeNode>{root};
-        List<Bounds> result = new List<Bounds>();
+        List<TypedBounds> result = new List<TypedBounds>();
         while (workload.Count > 0 || maxCap <= 90)
         {
             for (var i = 0; i < workload.Count; i++)
@@ -19,7 +19,8 @@ public static class BinarySpaceTree
                 var node = workload[i];
                 if (node.IsLeaf)
                 {
-                    result.Add(node.bounds);
+                    
+                    result.Add(new TypedBounds {bounds = node.bounds, type = BoundsType.Flora});
                     workload.Remove(node);
                     continue;
                 }

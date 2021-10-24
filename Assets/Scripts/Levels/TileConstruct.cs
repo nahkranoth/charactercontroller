@@ -7,7 +7,7 @@ public class TileConstruct:ScriptableObject, IRarity
 {
     public List<TileWrapper> map;
     public Vector2Int size;
-    public TileConstructType type;
+    public BoundsType type;
     public int rarity;
     public Sprite constructSprite;
     public int spray;
@@ -20,13 +20,4 @@ public class TileConstruct:ScriptableObject, IRarity
         get { return rarity;}
         set { rarity = value; }
     }
-}
-
-public enum TileConstructType
-{
-    House,
-    Flora,
-    Cliffs,
-    CityScape,
-    Tree
 }

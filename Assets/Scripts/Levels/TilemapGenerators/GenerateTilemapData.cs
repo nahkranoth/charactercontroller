@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class GenerateTilemapData
 {
-    public Bounds[] planBounds;
+    public TypedBounds[] planBounds;
 
     public GenerateTilemapPair background;
     public GenerateTilemapPair collision;
