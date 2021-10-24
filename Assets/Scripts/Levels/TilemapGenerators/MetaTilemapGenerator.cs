@@ -31,8 +31,8 @@ public class MetaTilemapGenerator:MonoBehaviour
         var collPosRight = new Vector3Int(tilemapSize.x - tilemapSize.x/4, tilemapSize.y/2, 0);
         var sourceBoundsRight = new Bounds(collPosRight, new Vector3Int(trimmedWidth/2, trimmedHeight, 0));
         
-        var levelPlanLeft = BinarySpaceTree.Generate(sourceBoundsLeft, set.bitTreeSearchDepth);
-        var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, set.bitTreeSearchDepth);
+        var levelPlanLeft = BinarySpaceTree.Generate(sourceBoundsLeft, generateData);
+        var levelPlanRight = BinarySpaceTree.Generate(sourceBoundsRight, generateData);
         
         generateData.planBounds = levelPlanLeft.Concat(levelPlanRight).ToArray();
         generateData.background = ParseBlueprint(background.Generate(generateData, tilemapSize), root);

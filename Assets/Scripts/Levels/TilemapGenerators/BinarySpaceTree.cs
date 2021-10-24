@@ -3,9 +3,9 @@ using UnityEngine;
 
 public static class BinarySpaceTree
 {
-    public static TypedBounds[] Generate(Bounds source, int maxDepth)
+    public static TypedBounds[] Generate(Bounds source, GenerateTilemapData generateData)
     {
-        var root = new BinaryTreeNode( source, 0, maxDepth);
+        var root = new BinaryTreeNode( source, 0, generateData.set.bitTreeSearchDepth);
         root.Split();//start splitting
         //Traverse
         int maxCap = 0;
@@ -19,7 +19,7 @@ public static class BinarySpaceTree
                 var node = workload[i];
                 if (node.IsLeaf)
                 {
-                    var rType = BoundsTypeHelper.GetRandomBoundsType();
+                    var rType = BoundsTypeHelper.GetRandomBoundsType(generateData.set.boundTypes);
                     result.Add(new TypedBounds
                     {
                         bounds = node.bounds, 

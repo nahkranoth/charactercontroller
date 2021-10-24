@@ -19,7 +19,9 @@ public class BackgroundTilemapGenerator : TilemapGenerator
         DrawSpray(55, TileLibraryKey.FloorFoliage2);
         DrawSpray(12, TileLibraryKey.FloorFoliage3);
         
-        AddVerticalDrunk(RuleTileLibraryKey.Road, 0, 7); //make road
+        if(data.set.hasRoad){
+            AddVerticalDrunk(RuleTileLibraryKey.Road, 0, 7); //make road
+        }
 
         var boundsGroup = PullRandomGroup(data.planBounds, 4);
         FillBounds(boundsGroup, TileLibraryKey.Foliage); //flower beds

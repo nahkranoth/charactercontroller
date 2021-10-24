@@ -90,7 +90,6 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(newStep);
         RemoveAt(currentLowStep-1);
         currentStep = newStep;
-        Debug.Log($"Current Step: {Step}");
         currentLowStep += StepSize();
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Step));
     }
@@ -100,7 +99,6 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(newStep);
         RemoveAt(currentStep+1);
         currentStep -= StepSize();
-        Debug.Log($"Current Step: {Step}");
         currentLowStep = newStep;
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,newStep,0), generatorCollection.GetByStep(Step));
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555bf58ab8dd417fa42b96a8ebaebadf, type: 3}
   m_Name: GrasslandSet
   m_EditorClassIdentifier: 
-  step: 5
+  step: 0
   bitTreeSearchDepth: 7
   constructDensity: 50
   enemyDensity: 4
@@ -20,3 +20,8 @@ MonoBehaviour:
   library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
   ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
   constructCollection: {fileID: 11400000, guid: 06b390bc0178003448e89085dcc9fd1e, type: 2}
+  boundTypes:
+  - type: 1
+    probability: 70
+  - type: 0
+    probability: 10

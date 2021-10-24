@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,19 +8,33 @@ public enum BoundsType
 {
     House,
     Flora,
-    Cliffs,
-    CityScape,
-    Tree
+    CityScape
 }
 
 public static class BoundsTypeHelper
 {
-    public static BoundsType GetRandomBoundsType()
+    public static BoundsType GetRandomBoundsType(List<BoundsTypeProbability> probabilities)
     {
-        var values = Enum.GetValues(typeof(BoundsType));
-        int i = Random.Range(0, values.Length);
-        var result = (BoundsType)values.GetValue(i);
-        return result;
+        var fullWeight = 0;
+        foreach (var prob in probabilities)
+        {
+            fullWeight += prob.probability;
+        }
+
+        int iR = Random.Range(0, fullWeight);
+
+        BoundsTypeProbability selectedBoundsType = null;
+        foreach (BoundsTypeProbability bt in probabilities)
+        {
+            if (iR < bt.probability)
+            {
+                selectedBoundsType = bt;
+                break;
+            }
+
+            iR = iR - bt.probability;
+        }
+        return selectedBoundsType.type;
     }
 
     public static Color GetDebugColor(BoundsType type)
@@ -27,12 +43,8 @@ public static class BoundsTypeHelper
         {
             case BoundsType.House:
                 return Color.cyan;
-            case BoundsType.Cliffs:
-                return Color.magenta;
             case BoundsType.Flora:
                 return Color.green;
-            case BoundsType.Tree:
-                return Color.yellow;
             case BoundsType.CityScape:
                 return Color.gray;
             default:

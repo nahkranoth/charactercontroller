@@ -30,13 +30,13 @@ public class CollisionTilemapGenerator : TilemapGenerator
         
         //Constructs
         var group = PullRandomGroup(data.planBounds, data.set.constructDensity);
-        foreach (var constructPosition in group)
+        foreach (var tBounds in group)
         {
-            var construct = AddConstruct(constructs, constructPosition.bounds);
-            if(construct != null && drawShadows) AddConstructShadowSprite(construct, constructPosition.bounds, root);
+            var construct = AddConstruct(constructs, tBounds);
+            if(construct != null && drawShadows) AddConstructShadowSprite(construct, tBounds.bounds, root);
             if (construct?.type == BoundsType.House)
             {
-                DrawBoundsOutline(new []{constructPosition}, TileLibraryKey.Fence, .1f);
+                DrawBoundsOutline(new []{tBounds}, TileLibraryKey.Fence, .1f);
             }
         }
        
@@ -53,15 +53,15 @@ public class CollisionTilemapGenerator : TilemapGenerator
         shSprite.transform.localScale = shSprite.transform.localScale + construct.shadowScaleOffset;
     }
     
-    public TileConstruct AddConstruct(TileConstructCollection constructs, Bounds bounds)
+    public TileConstruct AddConstruct(TileConstructCollection constructs, TypedBounds tBounds)
     {
-        var construct = constructs.GetByBounds(bounds);
+        var construct = constructs.GetByBounds(tBounds);
         if (construct == null) return null;
 
         for (var i = 0; i < construct.spray+1; i++)
         {
-            var center = new Vector3Int((int) bounds.center.x, (int) bounds.center.y, 0);
-            Vector3Int rPos = Helpers.RandomVector3((int) bounds.extents.x/2);
+            var center = new Vector3Int((int) tBounds.bounds.center.x, (int) tBounds.bounds.center.y, 0);
+            Vector3Int rPos = Helpers.RandomVector3((int) tBounds.bounds.extents.x/2);
             var pos = construct.inCenterOfBounds ? center : center + rPos;
             DrawConstruct(construct, pos);
         }

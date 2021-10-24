@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "GeneratorSet", menuName = "Custom/GeneratorSet")]
 public class GeneratorSet:ScriptableObject
@@ -8,7 +9,9 @@ public class GeneratorSet:ScriptableObject
     public int constructDensity = 20;
     public int enemyDensity = 4;
     public int containerDensity = 2;
+    public bool hasRoad = true;
     public TileLibrary library;
     public RuleTileLibrary ruleTiles;
     public TileConstructCollection constructCollection;
+    public List<BoundsTypeProbability> boundTypes;
 }
