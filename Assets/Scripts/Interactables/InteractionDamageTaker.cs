@@ -10,7 +10,6 @@ public class InteractionDamageTaker : MonoBehaviour
     public AudioController.AudioClipName damageSound;
     [HideInInspector] public bool damageRecovering = false;
     public float damageRecoveryTime = 2f;
-    public DamageIndicator damageIndicator;
     
     private AudioController audioController;
     
@@ -30,7 +29,6 @@ public class InteractionDamageTaker : MonoBehaviour
     {
         if (damageRecovering) return;
         damageRecovering = true;
-        damageIndicator.ShowDamage(damage);
         OnTakeDamage?.Invoke(damage);
         audioController.PlaySound(damageSound);
         StartCoroutine(DamageFinished());

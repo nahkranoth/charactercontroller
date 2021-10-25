@@ -15,4 +15,7 @@ public class GeneratorSet:ScriptableObject
     public RuleTileLibrary ruleTiles;
     public TileConstructCollection constructCollection;
     public List<BoundsTypeProbability> boundTypes;
+
+    public EntityCollection containers;
+    public EntityCollection npcs;
 }

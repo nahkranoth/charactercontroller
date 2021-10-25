@@ -15,7 +15,7 @@ MonoBehaviour:
   step: 0
   bitTreeSearchDepth: 4
   constructDensity: 90
-  enemyDensity: 0
+  enemyDensity: 6
   containerDensity: 5
   hasRoad: 0
   walledOff: 1
@@ -27,3 +27,5 @@ MonoBehaviour:
     probability: 50
   - type: 2
     probability: 40
+  containers: {fileID: 11400000, guid: 3da112b3b2cba7d4a905bf33f5d19bd2, type: 2}
+  npcs: {fileID: 11400000, guid: 7006adb55d4d7504fa4f1234a266d996, type: 2}

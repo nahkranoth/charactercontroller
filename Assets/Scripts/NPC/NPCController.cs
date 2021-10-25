@@ -28,11 +28,6 @@ public class NPCController : MonoBehaviour
 
     private bool initialized;
 
-    private void Awake()
-    {
-        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-    }
-
     void Start()
     {
         myHealth.Set(settings.GetHealth());
@@ -43,6 +38,7 @@ public class NPCController : MonoBehaviour
         
         stateNetwork = (INPCStateNetwork)Activator.CreateInstance(settings.GetStateNetworkType());
         
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
         
         if(characterDebug) charDebug.Init(settings);
@@ -58,11 +54,13 @@ public class NPCController : MonoBehaviour
         
         mainHitbox.OnTriggerStay -= OnTrigger;
         mainHitbox.OnTriggerStay += OnTrigger;
-
-        damageTaker.OnTakeDamage -= Damage;
-        damageTaker.OnTakeDamage += Damage;
-        damageTaker.OnDamageFinished -= DamageFinished;
-        damageTaker.OnDamageFinished += DamageFinished;
+        
+        if(!settings.invincible){
+            damageTaker.OnTakeDamage -= Damage;
+            damageTaker.OnTakeDamage += Damage;
+            damageTaker.OnDamageFinished -= DamageFinished;
+            damageTaker.OnDamageFinished += DamageFinished;
+        }
 
         initialized = true;
     }
@@ -87,7 +85,7 @@ public class NPCController : MonoBehaviour
             return;
         }
 
-          //TODO 4 drawn out of my ass
+          //TODO 4 drawn out of my ass (behavior culling)
         if (Vector3.Distance(player.transform.position, transform.position) < 4f) 
         {
             activeState.Execute();

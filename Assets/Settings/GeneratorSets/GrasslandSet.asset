@@ -18,6 +18,7 @@ MonoBehaviour:
   enemyDensity: 4
   containerDensity: 2
   hasRoad: 1
+  walledOff: 0
   library: {fileID: 11400000, guid: 5a7714eba666f6a449b37283699adce5, type: 2}
   ruleTiles: {fileID: 11400000, guid: ac523dcac40852b43a380f68ea3450d6, type: 2}
   constructCollection: {fileID: 11400000, guid: 06b390bc0178003448e89085dcc9fd1e, type: 2}
@@ -26,3 +27,5 @@ MonoBehaviour:
     probability: 70
   - type: 0
     probability: 10
+  containers: {fileID: 11400000, guid: 3da112b3b2cba7d4a905bf33f5d19bd2, type: 2}
+  npcs: {fileID: 11400000, guid: 7df93cf8c4426fb40b2a4428deef1e47, type: 2}

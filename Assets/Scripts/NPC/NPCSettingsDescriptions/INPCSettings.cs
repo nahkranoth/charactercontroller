@@ -14,6 +14,8 @@ public abstract class INPCSettings:ScriptableObject
     public float detectDistance = 1f;
     public float loseDistance = 1.4f;
     public int maxRoam = 10;
+
+    public bool invincible = false;
     
     public abstract int GetHealth();
     public abstract int GetDamage();

@@ -7,9 +7,6 @@ public class MetaLevelEntityPlacer : MonoBehaviour
 {
     public LevelEntityPlacer entityPlacer;
 
-    public EntityCollection containerEntities;
-    public EntityCollection enemyEntities;
-
     private List<Vector3Int> possiblePlaces;
 
     private GeneratorSet generatorSet;
@@ -40,7 +37,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
             {
                 var vecToInt = generator.background.tilemap.CellToLocal(place);
                 spawnPos = new Vector3Int((int)vecToInt.x, (int)vecToInt.y, (int)vecToInt.z) + root;
-                entityPlacer.GenerateEnemy(enemyEntities.GetRandom(), spawnPos);
+                entityPlacer.GenerateEnemy(generatorSet.npcs.GetRandom(), spawnPos);
             }
         }
     }
@@ -57,7 +54,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
             {
                 var vecToInt = generator.background.tilemap.CellToLocal(place);
                 spawnPos = new Vector3Int((int)vecToInt.x, (int)vecToInt.y, (int)vecToInt.z) + root;
-                entityPlacer.GenerateCollectable(containerEntities.GetRandom(), spawnPos);
+                entityPlacer.GenerateCollectable(generatorSet.containers.GetRandom(), spawnPos);
             }
         }
     }

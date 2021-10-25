@@ -27,3 +27,5 @@ MonoBehaviour:
     probability: 80
   - type: 2
     probability: 80
+  containers: {fileID: 11400000, guid: 3da112b3b2cba7d4a905bf33f5d19bd2, type: 2}
+  npcs: {fileID: 11400000, guid: 7df93cf8c4426fb40b2a4428deef1e47, type: 2}

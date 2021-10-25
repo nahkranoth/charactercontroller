@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a373396d132710249a1d49ba0f5359eb, type: 3}
+  m_Name: PalmTree
+  m_EditorClassIdentifier: 
+  map:
+  - position: {x: 0, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 52f2013332c771b4481e816175296524, type: 2}
+  - position: {x: 0, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: 28809d63da8231842a2c7cdd92815473, type: 2}
+  - position: {x: 0, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: a9c35fd94a7107e47abc81e10e50d5b1, type: 2}
+  - position: {x: 0, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 82b2e233b52ce2e4b9f527f424cfe640, type: 2}
+  - position: {x: 1, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 3b3458fed7d20dd4b8cc5b147c1a09b4, type: 2}
+  - position: {x: 1, y: 1, z: 0}
+    tile: {fileID: 11400000, guid: d7260cbc6c1eaea4eb93eae405badd6f, type: 2}
+  - position: {x: 1, y: 2, z: 0}
+    tile: {fileID: 11400000, guid: 724a2985e6ca2ff4982441f589e5f2c5, type: 2}
+  - position: {x: 1, y: 3, z: 0}
+    tile: {fileID: 11400000, guid: 2e9d6477aec54c44284af51bc6d43ca3, type: 2}
+  size: {x: 2, y: 4}
+  type: 1
+  rarity: 60
+  constructSprite: {fileID: 21300000, guid: f6f018b97a848d74eacfee665ea57b14, type: 3}
+  spray: 16
+  inCenterOfBounds: 0
+  shadowPositionOffset: {x: 0, y: 0, z: 0}
+  shadowScaleOffset: {x: 0, y: 0, z: 0}
