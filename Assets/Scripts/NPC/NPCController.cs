@@ -76,7 +76,7 @@ public class NPCController : MonoBehaviour
 
     public void PlayerHitSomething(Collider2D collider, Item item, int damage)
     {
-        if (collider)
+        if (collider == mainCollider)
         {
             stateNetwork.OnTriggerByPlayer(collider, player);
         }
