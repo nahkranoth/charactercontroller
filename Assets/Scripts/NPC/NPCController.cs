@@ -26,7 +26,6 @@ public class NPCController : MonoBehaviour
 
     public Health myHealth;
     
-    private int damage = 5;
     [HideInInspector] public bool attacking = false;
 
     private PlayerController player;
@@ -36,9 +35,7 @@ public class NPCController : MonoBehaviour
     void Start()
     {
         myHealth.Set(settings.GetHealth());
-        
-        damage = settings.GetDamage();
-        
+
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         
         stateNetwork = (INPCStateNetwork)Activator.CreateInstance(settings.GetStateNetworkType());
@@ -78,11 +75,7 @@ public class NPCController : MonoBehaviour
     public void OnTrigger(Collider2D collider)
     {
         PlayerController target = collider.GetComponent<PlayerController>();
-        if (target && attacking && !damageTaker.damageRecovering)
-        {
-            target.Damage(damage);
-            attacking = false;
-        }
+        if (target) stateNetwork.OnTriggerByPlayer(collider, target);
     }
     
     void FixedUpdate()

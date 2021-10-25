@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Object = System.Object;
 
 public class RabiteStateNetwork:INPCStateNetwork
 {
-    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController parent, Object rawSettings)
+    private NPCController parentController;
+    private RabiteSettings settings;
+    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController _parentController, Object rawSettings)
     {
-        RabiteSettings settings = rawSettings as RabiteSettings;
+        parentController = _parentController;
+        settings = rawSettings as RabiteSettings;
         
         var dict = new Dictionary<string, AbstractEnemyState>()
         {
@@ -18,7 +22,7 @@ public class RabiteStateNetwork:INPCStateNetwork
         
         foreach (var abstractEnemyState in dict)
         {
-            abstractEnemyState.Value.Init(parent);
+            abstractEnemyState.Value.Init(parentController);
         }
 
         return dict;
@@ -42,5 +46,14 @@ public class RabiteStateNetwork:INPCStateNetwork
     public string GetDieNode()
     {
         return "die";
+    }
+
+    public void OnTriggerByPlayer(Collider2D collider, PlayerController player)
+    {
+        if (parentController.attacking && !parentController.damageTaker.damageRecovering)//TODO move to stateNetworks
+        {
+            player.Damage(settings.damage);
+            parentController.attacking = false;
+        }
     }
 }

@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Object = System.Object;
 
 public class HumanStateNetwork:INPCStateNetwork
 {
@@ -18,6 +19,11 @@ public class HumanStateNetwork:INPCStateNetwork
         }
 
         return dict;
+    }
+
+    public void OnTriggerByPlayer(Collider2D collider, PlayerController player)
+    {
+        Debug.Log("Human Triggered");
     }
 
     public string GetStartNode()

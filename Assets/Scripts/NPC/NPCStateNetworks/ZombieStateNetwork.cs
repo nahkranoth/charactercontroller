@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Object = System.Object;
 
 public class ZombieStateNetwork:INPCStateNetwork
 {
@@ -42,5 +43,10 @@ public class ZombieStateNetwork:INPCStateNetwork
     public string GetDieNode()
     {
         return "die";
+    }
+
+    public void OnTriggerByPlayer(Collider2D collider, PlayerController playerController)
+    {
+        throw new System.NotImplementedException();
     }
 }
