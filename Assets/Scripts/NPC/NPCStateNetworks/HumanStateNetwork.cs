@@ -4,9 +4,12 @@ using Object = System.Object;
 
 public class HumanStateNetwork:INPCStateNetwork
 {
-    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController parent, Object rawSettings)
+    private HumanSettings settings;
+    private NPCController parent;
+    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController _parent, Object rawSettings)
     {
-        HumanSettings settings = rawSettings as HumanSettings;
+        settings = rawSettings as HumanSettings;
+        parent = _parent;
         
         var dict = new Dictionary<string, AbstractEnemyState>()
         {
@@ -23,6 +26,11 @@ public class HumanStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer(Collider2D collider, PlayerController player)
     {
+        if (settings.isShopKeeper)
+        {
+            var ds = WorldGraph.Retrieve(typeof(Deepstorage)) as Deepstorage;
+            ds.SetVisible(parent.inventory.storage, true);
+        }
         Debug.Log("Human Triggered");
     }
 
