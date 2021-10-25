@@ -2,5 +2,5 @@
 
 public class NPCInventory:MonoBehaviour
 {
-    public ItemStorage storage = new ItemStorage();
+    public EntityInventory storage = new EntityInventory();
 }

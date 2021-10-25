@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class MetaHealthAspectController:MonoBehaviour
 {
@@ -6,17 +7,30 @@ public class MetaHealthAspectController:MonoBehaviour
     public HealthAspectIndicator hungerAspect;
     public HealthAspectIndicator sleepAspect;
 
+    public TextMeshProUGUI moneyText;
+    
+    private PlayerController player;
     private PlayerHealthStatus playerHealthStatus;
+    private EntityInventory playerInventory;
     
     private void Start()
     {
-        playerHealthStatus = WorldGraph.Retrieve(typeof(PlayerHealthStatus)) as PlayerHealthStatus;
-        playerHealthStatus.SetThirst -= OnSetThirst;
-        playerHealthStatus.SetThirst += OnSetThirst;
-        playerHealthStatus.SetSleep -= OnSetSleep;
-        playerHealthStatus.SetSleep += OnSetSleep;
-        playerHealthStatus.SetHunger -= OnSetHunger;
-        playerHealthStatus.SetHunger += OnSetHunger;
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        player.playerHealthStatus.SetThirst -= OnSetThirst;
+        player.playerHealthStatus.SetThirst += OnSetThirst;
+        player.playerHealthStatus.SetSleep -= OnSetSleep;
+        player.playerHealthStatus.SetSleep += OnSetSleep;
+        player.playerHealthStatus.SetHunger -= OnSetHunger;
+        player.playerHealthStatus.SetHunger += OnSetHunger;
+
+        player.inventory.OnMoneyChange -= SetMoney;
+        player.inventory.OnMoneyChange += SetMoney;
+
+    }
+
+    private void SetMoney(int amount)
+    {
+        moneyText.text = $"${amount}";
     }
     
     private void OnSetThirst(float thirst)

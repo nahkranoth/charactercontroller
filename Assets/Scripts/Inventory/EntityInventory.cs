@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 
 [Serializable]
-public class ItemStorage
+public class EntityInventory
 {
        public List<Item> storage = new List<Item>();
-        
+       private int money;
+
+       public Action<int> OnMoneyChange;
+       
+       public int Money
+       {
+           get { return money; }
+       }
+       
        public bool TakeItem(Item item)
        {
            var itm = storage.Find(x => x == item);
@@ -61,5 +69,12 @@ public class ItemStorage
            {
                AddByDescription(description);
            }
+       }
+       
+       
+       public void ChangeMoney(int amount)
+       {
+           money += amount;
+           OnMoneyChange?.Invoke(money);
        }
 }

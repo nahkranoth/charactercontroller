@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
    public ItemCollectionDescription itemDescriptions;
 
-   public ItemStorage inventory = new ItemStorage();
+   public EntityInventory inventory = new EntityInventory();
    
    public Vector2 Directions
    {
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
-      
+      inventory.ChangeMoney(300);
       equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
 
@@ -129,4 +129,5 @@ public class PlayerController : MonoBehaviour
       invincible = false;
       walkSpeed = settings.walkSpeed;
    }
+
 }
