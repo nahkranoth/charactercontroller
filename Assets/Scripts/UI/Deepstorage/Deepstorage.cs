@@ -47,13 +47,22 @@ public class Deepstorage : MonoBehaviour
         {
             var ds = Instantiate(deepStoragePrefab, inventoryGrid.transform).GetComponent<DeepstorageItem>();
             ds.Apply(itm);
+            ds.OnSelect -= OnSelectItem;
+            ds.OnSelect += OnSelectItem;
         }
 
         if (!mainPanel.activeSelf)
         {
-            foreach (Transform child in inventoryGrid.transform) {
+            foreach (Transform child in inventoryGrid.transform)
+            {
+                child.GetComponent<DeepstorageItem>().OnSelect -= OnSelectItem;
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    private void OnSelectItem(Item item)
+    {
+        Debug.Log($"Show {item.menuName}");
     }
 }

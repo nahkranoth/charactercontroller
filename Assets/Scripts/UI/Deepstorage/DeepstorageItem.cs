@@ -6,11 +6,21 @@ using UnityEngine.UI;
 public class DeepstorageItem:MonoBehaviour
 {
     public Image img;
-    public TextMeshProUGUI amount;
+    public TextMeshProUGUI infoText;
 
+    public Action<Item> OnSelect;
+
+    private Item item;
+    
     public void Apply(Item itm)
     {
+        item = itm;
         img.sprite = itm.menuSprite;
-        amount.text = $"x{itm.amount}";
+        infoText.text = $"x{itm.amount} {itm.menuName}";
+    }
+
+    public void OnClick()
+    {
+        OnSelect?.Invoke(item);
     }
 }
