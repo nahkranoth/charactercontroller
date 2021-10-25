@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
    private float walkSpeed = 14f;
    private Vector2 directions;
 
-   private bool invincible = false;
+   private bool invincible;
    private WorldController worldController;
 
    public ItemCollectionDescription itemDescriptions;

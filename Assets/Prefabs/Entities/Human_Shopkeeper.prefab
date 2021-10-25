@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 7627963637988199835}
-  mainHitbox: {fileID: 7893274899369040521}
+  mainCollider: {fileID: 572130593}
   settings: {fileID: 11400000, guid: bf20a2f44d6fb3340b3c114e3bf7950a, type: 2}
   rigidBody: {fileID: 572130592}
   charDebug: {fileID: 6322337321363106242}

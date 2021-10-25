@@ -6,7 +6,7 @@ using UnityEngine;
 public class NPCController : MonoBehaviour
 {
     public NPCAnimatorController animatorController;
-    public TriggerBox mainHitbox;
+    public Collider2D mainCollider;
     public INPCSettings settings;
     public Rigidbody2D rigidBody;
     public CharacterDebugController charDebug;
@@ -29,6 +29,7 @@ public class NPCController : MonoBehaviour
     [HideInInspector] public bool attacking = false;
 
     private PlayerController player;
+    private PlayerAttackController playerAttack;
 
     private bool initialized;
 
@@ -42,6 +43,10 @@ public class NPCController : MonoBehaviour
         
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
+
+        playerAttack = player.attackController;
+        playerAttack.OnToolHitSomething -= PlayerHitSomething;
+        playerAttack.OnToolHitSomething += PlayerHitSomething;
         
         if(characterDebug) charDebug.Init(settings);
         charDebug.gameObject.SetActive(characterDebug);
@@ -53,9 +58,6 @@ public class NPCController : MonoBehaviour
         
         SetState(stateNetwork.GetStartNode());
         charDebug.SetStateText(stateNetwork.GetStartNode());
-        
-        mainHitbox.OnTriggerStay -= OnTrigger;
-        mainHitbox.OnTriggerStay += OnTrigger;
         
         if(!settings.invincible){
             damageTaker.OnTakeDamage -= Damage;
@@ -72,10 +74,12 @@ public class NPCController : MonoBehaviour
         initialized = true;
     }
 
-    public void OnTrigger(Collider2D collider)
+    public void PlayerHitSomething(Collider2D collider, Item item, int damage)
     {
-        PlayerController target = collider.GetComponent<PlayerController>();
-        if (target) stateNetwork.OnTriggerByPlayer(collider, target);
+        if (collider)
+        {
+            stateNetwork.OnTriggerByPlayer(collider, player);
+        }
     }
     
     void FixedUpdate()
@@ -128,7 +132,7 @@ public class NPCController : MonoBehaviour
     {
         StopAllCoroutines();
         SetState(stateNetwork.GetDieNode());
-        mainHitbox.OnTriggerStay -= OnTrigger;
+        playerAttack.OnToolHitSomething -= PlayerHitSomething;
         damageTaker.OnTakeDamage -= Damage;
         Destroy(damageTaker);
     }
