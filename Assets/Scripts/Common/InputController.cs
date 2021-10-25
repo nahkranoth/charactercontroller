@@ -8,6 +8,7 @@ public class InputController : MonoBehaviour
     public Action AttackSlash;
     public Action OpenMenu;
     public Action Select;
+    public Action OpenDeepStorage;
     
     private int vert, hor = 0;
     private Vector2 directions;
@@ -21,6 +22,7 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) AttackSlash?.Invoke();
         if (Input.GetKeyDown(KeyCode.Q)) OpenMenu?.Invoke();
+        if (Input.GetKeyDown(KeyCode.R)) OpenDeepStorage?.Invoke();
         if (Input.GetKeyDown(KeyCode.E)) Select?.Invoke();
     }
 

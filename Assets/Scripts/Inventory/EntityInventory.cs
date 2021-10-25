@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class EntityInventory
 {
        public List<Item> storage = new List<Item>();
-       private int money;
+       [SerializeField] private int money;
 
        public Action<int> OnMoneyChange;
        

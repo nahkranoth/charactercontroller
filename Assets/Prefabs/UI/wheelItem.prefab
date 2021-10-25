@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6138851452705378888}
   - component: {fileID: 7697095062849039029}
   m_Layer: 5
-  m_Name: wheelItem
+  m_Name: WheelItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
