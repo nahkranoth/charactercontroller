@@ -7,7 +7,7 @@ public class GeneratorSet:ScriptableObject
     public int step = 0;
     public int bitTreeSearchDepth = 1;
     public int constructDensity = 20;
-    public int enemyDensity = 4;
+    public int npcDensity = 4;
     public int containerDensity = 2;
     public bool hasRoad = true;
     public bool walledOff = false;

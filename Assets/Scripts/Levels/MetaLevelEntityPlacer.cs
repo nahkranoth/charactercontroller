@@ -29,7 +29,7 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     {
         Vector3Int spawnPos;
         
-        for (int i = 0; i < generatorSet.enemyDensity; i++)
+        for (int i = 0; i < generatorSet.npcDensity; i++)
         {
             var ranI = Random.Range(0, possiblePlaces.Count);
             var place = possiblePlaces[ranI];

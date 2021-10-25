@@ -15,7 +15,7 @@ MonoBehaviour:
   step: 0
   bitTreeSearchDepth: 4
   constructDensity: 90
-  enemyDensity: 6
+  npcDensity: 6
   containerDensity: 5
   hasRoad: 0
   walledOff: 1

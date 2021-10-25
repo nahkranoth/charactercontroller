@@ -22,4 +22,4 @@ MonoBehaviour:
   detectDistance: 1
   loseDistance: 1.4
   maxRoam: 10
-  knockbackAmount: 0.2
+  invincible: 1

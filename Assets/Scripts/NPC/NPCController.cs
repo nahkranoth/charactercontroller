@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Inventory;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
@@ -17,7 +18,11 @@ public class NPCController : MonoBehaviour
     private WorldController worldController;
     [HideInInspector] public PathfindingController pathfinding;
     public NPCPathfindingController npcPathController;
+    
     public InteractionDamageTaker damageTaker;
+
+    public ItemCollectionDescription itemCollection;
+    public NPCInventory inventory;
 
     public Health myHealth;
     
@@ -60,6 +65,11 @@ public class NPCController : MonoBehaviour
             damageTaker.OnTakeDamage += Damage;
             damageTaker.OnDamageFinished -= DamageFinished;
             damageTaker.OnDamageFinished += DamageFinished;
+        }
+
+        if (inventory != null)
+        {
+            inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Honey));
         }
 
         initialized = true;
