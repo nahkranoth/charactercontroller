@@ -19,5 +19,6 @@ MonoBehaviour:
     behaviour: 3
     consumable: 0
     amount: 1
+    price: 800
     canChopWood: 1
   rarity: 5

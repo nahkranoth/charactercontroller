@@ -1176,46 +1176,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1540780422167529360, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1540780422167529360, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1540780422167529360, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1540780422167529360, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2088504684701374120, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2088504684701374120, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2088504684701374120, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2088504684701374120, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5403659425367175830, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_ChildControlWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5403659425367175830, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
-      propertyPath: m_ChildForceExpandHeight
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de2d59a160ea2a548a4fe16d546cc8c3, type: 3}
 --- !u!1001 &1500617376362735768

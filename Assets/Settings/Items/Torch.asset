@@ -19,5 +19,6 @@ MonoBehaviour:
     behaviour: 6
     consumable: 0
     amount: 1
-    destroysBlocks: 0
+    price: 90
+    canChopWood: 0
   rarity: 40

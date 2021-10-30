@@ -35,15 +35,8 @@ public class EntityInventory
        
        public void AddByDescription(ItemDescription description)
        {
-           var possibleItem = new Item
-           {
-               behaviour = description.item.behaviour,
-               menuName = description.item.menuName,
-               menuSprite = description.item.menuSprite,
-               equipedSprite = description.item.equipedSprite,
-               consumable = description.item.consumable,
-               canChopWood = description.item.canChopWood
-           };
+
+           var possibleItem = description.item.DeepCopy();
 
            var storageLocation = storage.Find(x => x.menuName == possibleItem.menuName);
 
@@ -53,15 +46,21 @@ public class EntityInventory
                return;
            }
            
-           storage.Add(new Item
+           storage.Add(possibleItem);
+       }
+       
+       public void AddByItem(Item _item)
+       {
+
+           var storageLocation = storage.Find(x => x.menuName == _item.menuName);
+
+           if (storageLocation != null)
            {
-              behaviour = description.item.behaviour,
-              menuName = description.item.menuName,
-              menuSprite = description.item.menuSprite,
-              equipedSprite = description.item.equipedSprite,
-              consumable = description.item.consumable,
-              canChopWood = description.item.canChopWood
-           });
+               storageLocation.amount += 1;
+               return;
+           }
+           
+           storage.Add(_item);
        }
 
        public void AddMultipleByDescription(List<ItemDescription> descriptions)

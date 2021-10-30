@@ -6,9 +6,13 @@ public class Deepstorage : MonoBehaviour
     public GameObject deepStoragePrefab;
     public GameObject mainPanel;
     public GameObject inventoryGrid;
+
+    public DeepstorageInfo infoPanel;
     
     private PlayerController player;
 
+    private bool asShop;
+    
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(Deepstorage));
@@ -28,20 +32,23 @@ public class Deepstorage : MonoBehaviour
         ToggleVisible(player.inventory, false);
     }
 
-    public void SetVisible(EntityInventory inventory, bool asShop)
+    public void SetVisible(EntityInventory inventory, bool _asShop)
     {
         if(mainPanel.activeSelf) return;
+        infoPanel.info.text = _asShop ? "Welcome to my shop" : "Player inventory";
         mainPanel.SetActive(true);
-        InstantiateItems(inventory, asShop);
+        InstantiateItems(inventory);
+        asShop = _asShop;
     }
     
-    public void ToggleVisible(EntityInventory inventory, bool asShop)
+    public void ToggleVisible(EntityInventory inventory, bool _asShop)
     {
         mainPanel.SetActive(!mainPanel.activeSelf);
-        InstantiateItems(inventory, asShop);
+        asShop = _asShop;
+        InstantiateItems(inventory);
     }
 
-    private void InstantiateItems(EntityInventory inventory, bool asShop)
+    private void InstantiateItems(EntityInventory inventory)
     {
         foreach (var itm in inventory.storage)
         {
@@ -61,8 +68,21 @@ public class Deepstorage : MonoBehaviour
         }
     }
 
-    private void OnSelectItem(Item item)
+    private void OnSelectItem(Item _item)
     {
-        Debug.Log($"Show {item.menuName}");
+        infoPanel.OnInfo(new DeepStorageInfoData()
+        {
+            isShop = asShop,
+            item = _item,
+            firstActionName = "Buy",
+            onFirstAction = OnBuy
+        });
+    }
+
+    private void OnBuy(Item item)
+    {
+        if (player.inventory.Money < item.price) return;
+        player.inventory.ChangeMoney(-item.price);
+        player.inventory.AddByItem(item.DeepCopy());
     }
 }
