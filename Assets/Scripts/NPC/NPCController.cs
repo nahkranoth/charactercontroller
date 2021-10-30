@@ -69,6 +69,8 @@ public class NPCController : MonoBehaviour
         if (inventory != null)
         {
             inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Honey));
+            inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
+            inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Chocolate));
         }
 
         initialized = true;

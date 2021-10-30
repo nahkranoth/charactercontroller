@@ -29,7 +29,7 @@ public class HumanStateNetwork:INPCStateNetwork
         if (settings.isShopKeeper)
         {
             var ds = WorldGraph.Retrieve(typeof(Deepstorage)) as Deepstorage;
-            ds.SetVisible(parent.inventory.storage, true);
+            ds.SetVisibleAsShop(parent.inventory.storage);
         }
         Debug.Log("Human Triggered");
     }

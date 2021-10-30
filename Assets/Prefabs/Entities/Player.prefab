@@ -154,6 +154,9 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 5dcbb97dac4cdfc4ea93d93fd5e70059, type: 2}
   playerHealthStatus: {fileID: 6946515414908163401}
   itemDescriptions: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
+  inventory:
+    storage: []
+    money: 0
 --- !u!50 &3490643704792580732
 Rigidbody2D:
   serializedVersion: 4
@@ -233,9 +236,9 @@ MonoBehaviour:
   hunger: 1
   thirst: 1
   sleep: 1
-  thirstTick: 5
-  hungerTick: 10
-  sleepTick: 30
+  thirstTick: 10
+  hungerTick: 20
+  sleepTick: 60
 --- !u!114 &1521678023464578071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +525,7 @@ MonoBehaviour:
     behaviour: 0
     consumable: 0
     amount: 1
+    price: 0
     canChopWood: 0
   sword: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
 --- !u!1 &5891043133381511318

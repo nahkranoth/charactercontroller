@@ -10,7 +10,12 @@ public class MetaLevelEntityPlacer : MonoBehaviour
     private List<Vector3Int> possiblePlaces;
 
     private GeneratorSet generatorSet;
-    
+
+    private void Awake()
+    {
+        WorldGraph.Subscribe(this, typeof(MetaLevelEntityPlacer));
+    }
+
     public void RemoveAt(Vector3Int position)
     {
         entityPlacer.RemoveCollectableAt(position);
