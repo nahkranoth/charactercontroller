@@ -10,11 +10,14 @@ public class Item
     public ItemBehaviourStates.Behaviours behaviour;
     
     public bool consumable;
-    public int amount = 1;
+    public bool equipable;
 
     public int price;
     
     public bool canChopWood;
+    public int damage;
+    
+    [HideInInspector] public int amount = 1;
 
     public Item DeepCopy()
     {

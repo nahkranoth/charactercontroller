@@ -14,7 +14,7 @@ public class TilemapCollisionDetector : MonoBehaviour
         playerAttack.OnToolHitSomething += PlayerHitSomething;
     }
 
-    private void PlayerHitSomething(Collider2D collider, Item tool, int damage)
+    private void PlayerHitSomething(Collider2D collider, Item tool)
     {
         var pos = tilemapCollider.ClosestPoint(playerAttack.weaponBox.transform.position);
         var cell = collisionTilemapGenerator.tilemap.WorldToCell(pos);

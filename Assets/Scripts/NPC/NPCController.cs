@@ -76,7 +76,7 @@ public class NPCController : MonoBehaviour
         initialized = true;
     }
 
-    public void PlayerHitSomething(Collider2D collider, Item item, int damage)
+    public void PlayerHitSomething(Collider2D collider, Item item)
     {
         if (collider == mainCollider)
         {

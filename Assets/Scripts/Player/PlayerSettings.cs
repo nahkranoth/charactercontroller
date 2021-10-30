@@ -5,5 +5,6 @@ public class PlayerSettings : ScriptableObject
 {
     public int startHealth = 50;
     public float walkSpeed = 14f;
+    public float chargeSpeed = 1f;
     public float chargeWalkSpeed = 3f;
 }

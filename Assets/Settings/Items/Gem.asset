@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2aa6be2e21b68c49b432674b1557d7f, type: 3}
-  m_Name: Axe
+  m_Name: Gem
   m_EditorClassIdentifier: 
   item:
-    menuName: axe
-    menuSprite: {fileID: -5557420877203330147, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
-    equipedSprite: {fileID: -5557420877203330147, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
-    behaviour: 3
+    menuName: Gem
+    menuSprite: {fileID: -3758517520442943948, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
+    equipedSprite: {fileID: -3758517520442943948, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
+    behaviour: 8
     consumable: 0
-    equipable: 1
+    equipable: 0
     amount: 1
-    price: 800
-    canChopWood: 1
-    damage: 6
+    price: 300
+    canChopWood: 0
+    damage: 0
   rarity: 5

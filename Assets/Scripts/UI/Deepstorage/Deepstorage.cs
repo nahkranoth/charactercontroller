@@ -137,6 +137,7 @@ public class Deepstorage : MonoBehaviour
     
     private void OnSell(Item item)
     {
+        if (!player.inventory.Exists(item)) return;
         player.inventory.ChangeMoney(item.price);
         player.inventory.RemoveByItem(item);
         RerenderInventory();

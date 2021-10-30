@@ -18,7 +18,9 @@ MonoBehaviour:
     equipedSprite: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
     behaviour: 2
     consumable: 0
+    equipable: 1
     amount: 1
     price: 1100
     canChopWood: 0
+    damage: 12
   rarity: 0

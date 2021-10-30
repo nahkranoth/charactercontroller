@@ -9,6 +9,7 @@
         Chocolate,
         Honey,
         Torch,
-        WaterBottle
+        WaterBottle,
+        Gem
     }
 }

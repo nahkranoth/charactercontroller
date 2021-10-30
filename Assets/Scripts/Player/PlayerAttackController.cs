@@ -7,10 +7,11 @@ public class PlayerAttackController: MonoBehaviour
     public TriggerBox weaponBox;
     public PlayerAnimatorController animator;
     public PlayerEquipController equip;
+    public PlayerController player;
     
     public Action<int> UpdateReadyAttack;
     public Action<bool> chargingPowerAttack;
-    public Action<Collider2D, Item, int> OnToolHitSomething;
+    public Action<Collider2D, Item> OnToolHitSomething;
     
     private Coroutine attackTiming;
     private Coroutine attackReadyTiming;
@@ -28,13 +29,12 @@ public class PlayerAttackController: MonoBehaviour
         input.UseTool -= OnAttackSlash;
         input.UseTool += OnAttackSlash;
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
     
     private void OnToolTrigger(Collider2D other)
     {
-        int damage = 1;
-        if (fullAttackReady) damage += 5;
-        OnToolHitSomething?.Invoke(other, equip.current, damage);
+        OnToolHitSomething?.Invoke(other, equip.current);
     }
    
     private void OnAttackSlash()
@@ -62,7 +62,7 @@ public class PlayerAttackController: MonoBehaviour
         int i;
         for (i = 0; i <= 100; i++)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(player.settings.chargeSpeed);
             UpdateReadyAttack.Invoke(i);
         }
 

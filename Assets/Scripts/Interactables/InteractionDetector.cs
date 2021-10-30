@@ -17,12 +17,12 @@ public class InteractionDetector : MonoBehaviour
         player.attackController.OnToolHitSomething -= OnPossibleInteraction;
     }
 
-    private void OnPossibleInteraction(Collider2D other, Item tool, int force)
+    private void OnPossibleInteraction(Collider2D other, Item tool)
     {
         InteractionDetector target = other.GetComponent<InteractionDetector>();
         if (target == this)
         {
-            OnInteraction?.Invoke(force);
+            OnInteraction?.Invoke(tool.damage);
         }
     }
 }

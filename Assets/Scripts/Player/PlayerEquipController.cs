@@ -23,6 +23,7 @@ public class PlayerEquipController : MonoBehaviour
 
     public void Equip(Item item)
     {
+        if (!item.equipable) return;
         current = item;
         weaponSprite.sprite = item.equipedSprite;
         CheckLantern();

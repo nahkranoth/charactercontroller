@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a2890dba34489cad325b60ee11d025, type: 3}
   m_Name: RabiteSettings
   m_EditorClassIdentifier: 
-  health: 4
+  health: 42
   damage: 2
   roamWalkSpeed: 0.9
   attackWalkSpeed: 0.6
   strikeDistance: 0.4
+  strikeDelayTime: 4
   roamChance: {x: 1, y: 10}
   detectDistance: 0.4
   loseDistance: 2
   maxRoam: 15
+  invincible: 0
   knockbackAmount: 0.2

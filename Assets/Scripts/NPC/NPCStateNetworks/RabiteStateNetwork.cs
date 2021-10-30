@@ -52,7 +52,7 @@ public class RabiteStateNetwork:INPCStateNetwork
     {
         if (parentController.attacking && !parentController.damageTaker.damageRecovering)//TODO move to stateNetworks
         {
-            player.Damage(settings.damage);
+            player.Damage(player.attackController.equip.current.damage);
             parentController.attacking = false;
         }
     }

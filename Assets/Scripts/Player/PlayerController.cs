@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
+      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Gem));
       inventory.ChangeMoney(300);
       equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
       animator.SetCharging(charging);
    }
    
-   private void OnToolHitSomething(Collider2D collider, Item itm, int damage)
+   private void OnToolHitSomething(Collider2D collider, Item itm)
    {
       StartCoroutine(ResetDamageState());
    }

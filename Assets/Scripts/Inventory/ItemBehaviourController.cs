@@ -56,6 +56,8 @@ public class ItemBehaviourController:MonoBehaviour
 
     public void Execute(ItemBehaviourStates.Behaviours behaviour)
     {
-        behaviourToActionMap[behaviour].Invoke();
+        Action action;
+        behaviourToActionMap.TryGetValue(behaviour, out action); 
+        if (action != null) action.Invoke();
     }
 }

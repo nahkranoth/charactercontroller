@@ -61,6 +61,12 @@ public class EntityInventory
            
            storage.Remove(_item);
        }
+
+       public bool Exists(Item _item)
+       {
+           var storageLocation = storage.Find(x => x.menuName == _item.menuName);
+           return storageLocation != null;
+       }
        
        public void AddByItem(Item _item)
        {
