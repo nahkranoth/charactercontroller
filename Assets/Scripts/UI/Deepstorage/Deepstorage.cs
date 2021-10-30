@@ -10,7 +10,8 @@ public class Deepstorage : MonoBehaviour
     public DeepstorageInfo infoPanel;
     
     private PlayerController player;
-
+    private InputController input;
+    
     private bool asShop;
     
     private void Awake()
@@ -21,21 +22,23 @@ public class Deepstorage : MonoBehaviour
     void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        var inputController = WorldGraph.Retrieve(typeof(InputController)) as InputController;
-        inputController.OpenDeepStorageAsPlayer -= ToggleVisibleAsPlayer;
-        inputController.OpenDeepStorageAsPlayer += ToggleVisibleAsPlayer;
+        input = WorldGraph.Retrieve(typeof(InputController)) as InputController;
+        input.OpenDeepStorageAsPlayer -= ToggleVisibleAsPlayer;
+        input.OpenDeepStorageAsPlayer += ToggleVisibleAsPlayer;
         mainPanel.SetActive(false);
     }
 
     private void ToggleVisibleAsPlayer()
     {
         ToggleVisible(player.inventory, false);
+        infoPanel.info.text = "Inventory";
     }
 
     public void SetVisible(EntityInventory inventory, bool _asShop)
     {
         if(mainPanel.activeSelf) return;
         infoPanel.info.text = _asShop ? "Welcome to my shop" : "Player inventory";
+        input.BlockExcept(InputType.OpenInventory);
         mainPanel.SetActive(true);
         InstantiateItems(inventory);
         asShop = _asShop;
@@ -44,6 +47,10 @@ public class Deepstorage : MonoBehaviour
     public void ToggleVisible(EntityInventory inventory, bool _asShop)
     {
         mainPanel.SetActive(!mainPanel.activeSelf);
+        
+        if (mainPanel.activeSelf) input.BlockExcept(InputType.OpenInventory);
+        else input.LiftBlockExcept();
+        
         asShop = _asShop;
         InstantiateItems(inventory);
     }

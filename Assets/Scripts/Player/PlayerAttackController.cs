@@ -25,8 +25,8 @@ public class PlayerAttackController: MonoBehaviour
 
     private void Start()
     {
-        input.AttackSlash -= OnAttackSlash;
-        input.AttackSlash += OnAttackSlash;
+        input.UseTool -= OnAttackSlash;
+        input.UseTool += OnAttackSlash;
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
     }
     
