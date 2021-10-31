@@ -19,7 +19,7 @@ public class CollisionTilemapGenerator : TilemapGenerator
     }
 
     //private List<TileConstruct> constructs = new List<TileConstruct>();//TODO would be cool to keep a track of all constructs (also needed for shadows)
-    public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
+    public TileBase[,] Generate(ref GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
     {
         size = mapSize;
         data = _data;
@@ -107,7 +107,9 @@ public class CollisionTilemapGenerator : TilemapGenerator
     {
         var xSize = blueprint.GetUpperBound(0);
         var ySize = blueprint.GetUpperBound(1);
-
+        
+        data.generatedConstructs.Add(new Tuple<Vector3Int, TileConstruct>(position, construct));
+        
         Dictionary<Vector2Int, TileBase> tempBlueprint = new Dictionary<Vector2Int, TileBase>();
         
         foreach (var tile in construct.map)

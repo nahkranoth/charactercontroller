@@ -15,6 +15,8 @@ public class TileConstruct:ScriptableObject, IRarity
     public Vector3 shadowPositionOffset;
     public Vector3 shadowScaleOffset;
 
+    public bool hasPaths;
+
     public List<EntitySpawner> entities = new List<EntitySpawner>();
     
     public int Rarity

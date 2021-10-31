@@ -39,6 +39,7 @@ MonoBehaviour:
   inCenterOfBounds: 1
   shadowPositionOffset: {x: 0, y: 1, z: 0}
   shadowScaleOffset: {x: -3, y: 0, z: 0}
+  hasPaths: 1
   entities:
   - position: {x: -2, y: -2, z: 0}
     npcSpawner: 0

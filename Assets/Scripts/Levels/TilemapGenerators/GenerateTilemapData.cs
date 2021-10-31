@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Levels.TilemapGenerators;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,6 +12,8 @@ public class GenerateTilemapData
     public GenerateTilemapPair collision;
     public TileConstructCollection constructCollection;
     public GeneratorSet set;
+
+    public List<Tuple<Vector3Int, TileConstruct>> generatedConstructs = new List<Tuple<Vector3Int, TileConstruct>>();
     
     public GenerateTilemapData(GeneratorSet _set)
     { 
