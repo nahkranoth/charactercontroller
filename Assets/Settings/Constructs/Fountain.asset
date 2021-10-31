@@ -33,9 +33,14 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 179f964ee42e6874b95d5e11654f7862, type: 2}
   size: {x: 3, y: 3}
   type: 2
-  rarity: 10
+  rarity: 50
   constructSprite: {fileID: 21300000, guid: 43a19727009d4f94498ad2639b602398, type: 3}
   spray: 0
   inCenterOfBounds: 1
   shadowPositionOffset: {x: 0, y: 1, z: 0}
   shadowScaleOffset: {x: -3, y: 0, z: 0}
+  entities:
+  - position: {x: -2, y: -2, z: 0}
+    npcSpawner: 0
+    collectableSpawner: 1
+    entity: {fileID: 649723127512308276, guid: 77f33689c0006534da92b4ec7015d89d, type: 3}

@@ -59,6 +59,9 @@ public class CollisionTilemapGenerator : TilemapGenerator
                 DrawBoundsOutline(new []{tBounds}, TileLibraryKey.Fence, .1f);
             }
 
+            
+            //Spawn entities connected to the construct
+            if (construct == null) continue;
             foreach (var eSpawn in construct.entities)
             {
                 var pos= Vector3Int.RoundToInt(tBounds.bounds.center + eSpawn.position);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class LevelRepeater : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class LevelRepeater : MonoBehaviour
 
     public Action OnGenerate;
     public GeneratorSetCollection generatorCollection;
-
+    
     private GenerateTilemapData tickBlueprint;
     private int currentStep;
     private int currentLowStep;
+
 
     private int Step
     {
