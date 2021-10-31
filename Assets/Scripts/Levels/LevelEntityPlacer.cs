@@ -53,7 +53,7 @@ public class LevelEntityPlacer : MonoBehaviour
         collectable.OnRemove += CollectCollectable;
     }
     
-    public void GenerateEnemy(GameObject obj, Vector3Int position)
+    public void GenerateNPC(GameObject obj, Vector3Int position)
     {
         if (enemyPool.ContainsKey(position)) return;//is already active
         var container = Instantiate(obj, transform);

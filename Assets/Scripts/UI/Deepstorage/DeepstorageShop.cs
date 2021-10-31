@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Deepstorage : MonoBehaviour
+public class DeepstorageShop : MonoBehaviour
 {
     public GameObject deepStoragePrefab;
     public GameObject mainPanel;
@@ -19,39 +19,26 @@ public class Deepstorage : MonoBehaviour
     
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(Deepstorage));
+        WorldGraph.Subscribe(this, typeof(DeepstorageShop));
     }
 
     void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         input = WorldGraph.Retrieve(typeof(InputController)) as InputController;
-        input.OpenDeepStorageAsPlayer -= ToggleVisibleAsPlayer;
-        input.OpenDeepStorageAsPlayer += ToggleVisibleAsPlayer;
+        input.OpenDeepStorageAsPlayer -= Hide;
+        input.OpenDeepStorageAsPlayer += Hide;
         mainPanel.SetActive(false);
     }
 
-    private void ToggleVisibleAsPlayer()
+    private void Hide()
     {
-        infoPanel.info.text = "Inventory";
-        buyButton.gameObject.SetActive(false);
-        sellButton.gameObject.SetActive(false);
-        mainPanel.SetActive(!mainPanel.activeSelf);
-
-        if (mainPanel.activeSelf)
-        {
-            input.BlockExcept(InputType.OpenInventory);
-        }
-        else
-        {
-            input.LiftBlockExcept();
-        }
-        
-        asShop = false;
-        InstantiateItems(player.inventory);
+        input.LiftBlockExcept();
+        DestroyItems();
+        mainPanel.SetActive(false);
     }
 
-    public void SetVisibleAsShop(EntityInventory inventory)
+    public void Show(EntityInventory inventory)
     {
         if(mainPanel.activeSelf) return;
         activeShopInventory = inventory;

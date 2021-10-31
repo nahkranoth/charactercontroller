@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1c9a9127404985a2bd2131ad35c86c, type: 3}
+  m_Name: HumanHotelOwnerSettings
+  m_EditorClassIdentifier: 
+  health: 30
+  damage: 5
+  roamWalkSpeed: 0.1
+  attackWalkSpeed: 0.4
+  strikeDistance: 0.3
+  strikeDelayTime: 4
+  roamChance: {x: 1, y: 20}
+  detectDistance: 1
+  loseDistance: 1.4
+  maxRoam: 10
+  invincible: 1
+  isShopKeeper: 0
+  isHotelOwner: 1

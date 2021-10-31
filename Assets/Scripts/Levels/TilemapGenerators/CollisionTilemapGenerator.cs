@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,6 +9,14 @@ public class CollisionTilemapGenerator : TilemapGenerator
     private GenerateTilemapData data;
     public GameObject shadowSprite;
     public bool drawShadows = true;
+
+
+    private MetaLevelEntityPlacer metaEntityPlacer;
+
+    private void Awake()
+    {
+        metaEntityPlacer = WorldGraph.Retrieve(typeof(MetaLevelEntityPlacer)) as MetaLevelEntityPlacer;
+    }
 
     //private List<TileConstruct> constructs = new List<TileConstruct>();//TODO would be cool to keep a track of all constructs (also needed for shadows)
     public TileBase[,] Generate(GenerateTilemapData _data, Vector2Int mapSize, Vector3Int root)
@@ -48,6 +57,17 @@ public class CollisionTilemapGenerator : TilemapGenerator
             if (construct?.type == BoundsType.House)
             {
                 DrawBoundsOutline(new []{tBounds}, TileLibraryKey.Fence, .1f);
+            }
+
+            foreach (var eSpawn in construct.entities)
+            {
+                var pos= Vector3Int.RoundToInt(tBounds.bounds.center + eSpawn.position);
+                if (eSpawn.npcSpawner)
+                {
+                    metaEntityPlacer.entityPlacer.GenerateNPC(eSpawn.entity, pos);
+                    continue;
+                }
+                if(eSpawn.collectableSpawner) metaEntityPlacer.entityPlacer.GenerateCollectable(eSpawn.entity, pos);
             }
         }
        

@@ -6,6 +6,7 @@ public class HumanSettings : INPCSettings
 {
 
     public bool isShopKeeper = false;
+    public bool isHotelOwner = false;
     
     public override int GetHealth()
     {

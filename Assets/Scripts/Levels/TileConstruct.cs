@@ -14,6 +14,8 @@ public class TileConstruct:ScriptableObject, IRarity
     public bool inCenterOfBounds = false;
     public Vector3 shadowPositionOffset;
     public Vector3 shadowScaleOffset;
+
+    public List<EntitySpawner> entities;
     
     public int Rarity
     {
