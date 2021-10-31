@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Codice.Client.BaseCommands;
 using Inventory;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class NPCController : MonoBehaviour
     public Rigidbody2D rigidBody;
     public CharacterDebugController charDebug;
     public bool characterDebug;
+    public TriggerBox hitTrigger;
     
     private INPCStateNetwork stateNetwork;
     private Dictionary<string, AbstractEnemyState> stateDictionary;
@@ -24,12 +26,15 @@ public class NPCController : MonoBehaviour
     public ItemCollectionDescription itemCollection;
     public NPCInventory inventory;
 
+    public EntityCollection dropPool;
+    
     public Health myHealth;
     
     [HideInInspector] public bool attacking = false;
 
     private PlayerController player;
     private PlayerAttackController playerAttack;
+    private MetaLevelEntityPlacer metaEntity;
 
     private bool initialized;
 
@@ -43,10 +48,10 @@ public class NPCController : MonoBehaviour
         
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         worldController = WorldGraph.Retrieve(typeof(WorldController)) as WorldController;
+        metaEntity = WorldGraph.Retrieve(typeof(MetaLevelEntityPlacer)) as MetaLevelEntityPlacer;
 
-        playerAttack = player.attackController;
-        playerAttack.OnToolHitSomething -= PlayerHitSomething;
-        playerAttack.OnToolHitSomething += PlayerHitSomething;
+        hitTrigger.OnTriggerStay -= OnHitSomething;
+        hitTrigger.OnTriggerStay += OnHitSomething;
         
         if(characterDebug) charDebug.Init(settings);
         charDebug.gameObject.SetActive(characterDebug);
@@ -65,6 +70,11 @@ public class NPCController : MonoBehaviour
             damageTaker.OnDamageFinished -= DamageFinished;
             damageTaker.OnDamageFinished += DamageFinished;
         }
+        else
+        {
+            damageTaker.OnTakeDamage -= OnInteraction;
+            damageTaker.OnTakeDamage += OnInteraction;
+        }
 
         if (inventory != null)
         {
@@ -76,11 +86,12 @@ public class NPCController : MonoBehaviour
         initialized = true;
     }
 
-    public void PlayerHitSomething(Collider2D collider, Item item)
+    private void OnHitSomething(Collider2D collider2D)
     {
-        if (collider == mainCollider)
+        if (attacking && !damageTaker.damageRecovering)//TODO move to stateNetworks
         {
-            stateNetwork.OnTriggerByPlayer(collider, player);
+            player.Damage(settings.damage);
+            attacking = false;
         }
     }
     
@@ -112,6 +123,11 @@ public class NPCController : MonoBehaviour
         if(characterDebug) charDebug.SetStateText(name);
     }
 
+    private void OnInteraction(int amount)
+    {
+        stateNetwork.OnTriggerByPlayer();
+    }
+
     private void Damage(int amount)
     {
         attacking = false;
@@ -134,7 +150,6 @@ public class NPCController : MonoBehaviour
     {
         StopAllCoroutines();
         SetState(stateNetwork.GetDieNode());
-        playerAttack.OnToolHitSomething -= PlayerHitSomething;
         damageTaker.OnTakeDamage -= Damage;
         Destroy(damageTaker);
     }
@@ -142,6 +157,7 @@ public class NPCController : MonoBehaviour
     public void Destroy()
     {
         damageTaker.OnDamageFinished -= DamageFinished;
+        metaEntity.entityPlacer.GenerateCollectable(dropPool.GetRandom(), transform.localPosition);
         DestroyImmediate(gameObject);
     }
 }

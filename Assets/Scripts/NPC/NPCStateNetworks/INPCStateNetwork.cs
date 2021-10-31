@@ -10,6 +10,6 @@ public interface INPCStateNetwork
     string GetDamagedNode();
     string GetDamageFinishedNode();
     string GetDieNode();
-    public void OnTriggerByPlayer(Collider2D collider, PlayerController player);
+    public void OnTriggerByPlayer();
 
 }

@@ -57,6 +57,12 @@ public class PlayerAttackController: MonoBehaviour
         attackReadyTiming = StartCoroutine(AttackReadyTiming());
     }
 
+    public int CurrentDamage()
+    {
+        var multi = fullAttackReady ? 1 : 0.1f;
+        return Mathf.RoundToInt(equip.current.damage * multi);
+    }
+
     IEnumerator AttackReadyTiming()
     {
         int i;

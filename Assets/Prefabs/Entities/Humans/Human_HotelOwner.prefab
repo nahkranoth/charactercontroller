@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7745941944118724647}
   - component: {fileID: 7091964223806311742}
   m_Layer: 0
-  m_Name: Human_Shopkeeper
+  m_Name: Human_HotelOwner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,10 +56,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorController: {fileID: 7627963637988199835}
   mainCollider: {fileID: 572130593}
-  settings: {fileID: 11400000, guid: 9accd3b143a886f4f9fe1770a051a799, type: 2}
+  settings: {fileID: 11400000, guid: 85fb6066c6b4a2f46a8565193d1ef0eb, type: 2}
   rigidBody: {fileID: 572130592}
   charDebug: {fileID: 6322337321363106242}
   characterDebug: 0
+  hitTrigger: {fileID: 7893274899369040521}
   pathfinding: {fileID: 0}
   damageTaker: {fileID: 6070785335149153078}
   itemCollection: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
@@ -626,7 +627,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1053163879090666930, guid: 9e5868e6c8adc4347bc4865e65a6e2ba, type: 3}
+  m_Sprite: {fileID: 3992722548285116649, guid: 9e5868e6c8adc4347bc4865e65a6e2ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

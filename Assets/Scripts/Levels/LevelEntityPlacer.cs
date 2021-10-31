@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,14 @@ public class LevelEntityPlacer : MonoBehaviour
     public Dictionary<Vector3Int, InteractionCollectable> ignoreCollectablePool = new Dictionary<Vector3Int, InteractionCollectable>();
     
     public Dictionary<Vector3Int, GameObject> enemyPool = new Dictionary<Vector3Int, GameObject>();
+
+    private MetaTilemapGenerator tilemapGenerator;
     
+    private void Start()
+    {
+        tilemapGenerator = WorldGraph.Retrieve(typeof(MetaTilemapGenerator)) as MetaTilemapGenerator;
+    }
+
     //Naive approach; no pooling
     public void RemoveCollectableAt(Vector3Int position)
     {
@@ -40,7 +48,12 @@ public class LevelEntityPlacer : MonoBehaviour
             ignoreCollectablePool.Add(result.Key, result.Value);
         }
     }
-    
+
+    public void GenerateCollectable(GameObject obj, Vector3 position)
+    {
+        GenerateCollectable(obj, Vector3Int.RoundToInt(position));
+    }
+
     public void GenerateCollectable(GameObject obj, Vector3Int position)
     {
         if (collectablePool.ContainsKey(position)) return;//is already active

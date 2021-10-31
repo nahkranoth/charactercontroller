@@ -24,7 +24,7 @@ public class HumanStateNetwork:INPCStateNetwork
         return dict;
     }
 
-    public void OnTriggerByPlayer(Collider2D collider, PlayerController player)
+    public void OnTriggerByPlayer()
     {
         if (settings.isShopKeeper)
         {

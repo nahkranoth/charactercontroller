@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa103634998794478b2f184e87a0415, type: 3}
-  m_Name: PlayerSettings
+  m_Script: {fileID: 11500000, guid: a208d57510a0878438aee58e612fe495, type: 3}
+  m_Name: LowDropContainerCollection
   m_EditorClassIdentifier: 
-  startHealth: 50
-  walkSpeed: 23
-  chargeSpeed: 0.005
-  chargeWalkSpeed: 3
+  collection:
+  - {fileID: 649723127512308276, guid: 39306f8bde3922d4fb8ea0deea8b0e94, type: 3}
+  - {fileID: 649723127512308276, guid: 77f33689c0006534da92b4ec7015d89d, type: 3}

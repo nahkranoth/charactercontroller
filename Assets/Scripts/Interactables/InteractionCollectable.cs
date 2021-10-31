@@ -18,12 +18,6 @@ public class InteractionCollectable : MonoBehaviour
       player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
       message = WorldGraph.Retrieve(typeof(MessageController)) as MessageController;
       audio = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
-      StartCoroutine(StartCollectDetection());
-   }
-
-   IEnumerator StartCollectDetection()
-   {
-      yield return new WaitForSeconds(2f);
       interaction.OnInteraction -= OnCollect;
       interaction.OnInteraction += OnCollect;
    }

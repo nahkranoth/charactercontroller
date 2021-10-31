@@ -2,21 +2,21 @@
 using UnityEngine;
 using Object = System.Object;
 
-public class RabiteStateNetwork:INPCStateNetwork
+public class BowlerStateNetwork:INPCStateNetwork
 {
     private NPCController parentController;
-    private RabiteSettings settings;
+    private BowlerSettings settings;
     public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController _parentController, Object rawSettings)
     {
         parentController = _parentController;
-        settings = rawSettings as RabiteSettings;
+        settings = rawSettings as BowlerSettings;
         
         var dict = new Dictionary<string, AbstractEnemyState>()
         {
             {"idle", new ZombieIdleState(settings)},
-            {"roam", new RabiteRoamState(settings)},
+            {"roam", new BowlerRoamState(settings)},
             {"knockback", new KnockbackHitState(settings.knockbackAmount)},
-            {"angry", new RabiteAngryState(settings)},
+            {"angry", new BowlerAngryState(settings)},
             {"die", new ZombieDieState()}
         };
         

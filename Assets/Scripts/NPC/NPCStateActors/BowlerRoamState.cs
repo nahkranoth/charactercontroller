@@ -2,7 +2,7 @@
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class ZombieRoamState: AbstractEnemyState
+public class BowlerRoamState: AbstractEnemyState
 {
     private bool moving = false;
     private Vector3 roamTarget;
@@ -10,7 +10,7 @@ public class ZombieRoamState: AbstractEnemyState
 
     private INPCSettings settings;
     
-    public ZombieRoamState(INPCSettings _settings)
+    public BowlerRoamState(INPCSettings _settings)
     {
         settings = _settings;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;

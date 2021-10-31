@@ -19,8 +19,8 @@ MonoBehaviour:
     behaviour: 3
     consumable: 0
     equipable: 1
-    amount: 1
     price: 800
     canChopWood: 1
-    damage: 6
+    damage: 60
+    amount: 1
   rarity: 5

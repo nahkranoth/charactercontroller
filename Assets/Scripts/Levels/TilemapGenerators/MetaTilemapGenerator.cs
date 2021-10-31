@@ -17,7 +17,12 @@ public class MetaTilemapGenerator:MonoBehaviour
     public DebugDrawBounds debugDraw;
 
     public int startSeed;
-    
+
+    private void Awake()
+    {
+        WorldGraph.Subscribe(this, typeof(MetaTilemapGenerator));
+    }
+
     public GenerateTilemapData Generate(Vector3Int root, GeneratorSet generatorSet)
     {
         Random.InitState(startSeed + root.y);

@@ -22,7 +22,7 @@ public class InteractionDetector : MonoBehaviour
         InteractionDetector target = other.GetComponent<InteractionDetector>();
         if (target == this)
         {
-            OnInteraction?.Invoke(tool.damage);
+            OnInteraction?.Invoke(player.attackController.CurrentDamage());
         }
     }
 }
