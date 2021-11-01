@@ -101,3 +101,6 @@ MonoBehaviour:
   inCenterOfBounds: 0
   shadowPositionOffset: {x: 0, y: 0, z: 0}
   shadowScaleOffset: {x: -4, y: 0, z: 0}
+  hasPaths: 0
+  destroyable: 1
+  entities: []

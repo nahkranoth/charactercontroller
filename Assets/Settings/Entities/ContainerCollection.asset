@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ContainerCollection
   m_EditorClassIdentifier: 
   collection:
-  - {fileID: 649723127512308276, guid: 2fec1a3befb7a9b4e9b1b32eeb1b8c1b, type: 3}
-  - {fileID: 649723127512308276, guid: 39306f8bde3922d4fb8ea0deea8b0e94, type: 3}
+  - entity: {fileID: 649723127512308276, guid: 39306f8bde3922d4fb8ea0deea8b0e94, type: 3}
+    probability: 0.9
+  - entity: {fileID: 649723127512308276, guid: 2fec1a3befb7a9b4e9b1b32eeb1b8c1b, type: 3}
+    probability: 0.07

@@ -1453,7 +1453,7 @@ PrefabInstance:
       objectReference: {fileID: 1583351813}
     - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
       propertyPath: timeSpeed
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5426119669905143255, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
       propertyPath: timePassing
@@ -1518,7 +1518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: startSeed
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb75eae928247e428cf46d225134f9b, type: 3}

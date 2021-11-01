@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Levels.TilemapGenerators;
@@ -67,6 +66,8 @@ public class MetaTilemapGenerator:MonoBehaviour
         List<Tuple<Vector3Int,TileConstruct>> generatedWithPaths = generateData.generatedConstructs.FindAll(x => x.Item2.hasPaths);
         var ordered = generatedWithPaths.OrderBy(x => x.Item1.magnitude).ToList();
         
+        if (ordered.Count <= 1) return; //Stop if not enough for drawing paths
+        
         for (int i = 0; i < ordered.Count-1; i++)
         {
             var construct = ordered[i];
@@ -97,7 +98,6 @@ public class MetaTilemapGenerator:MonoBehaviour
             
         }
     }
-    
 
     private GenerateTilemapPair ParseBlueprint(TileBase[,] blueprint, Vector3Int offset)
     {

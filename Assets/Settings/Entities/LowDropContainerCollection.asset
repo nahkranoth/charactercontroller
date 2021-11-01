@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: LowDropContainerCollection
   m_EditorClassIdentifier: 
   collection:
-  - {fileID: 649723127512308276, guid: 39306f8bde3922d4fb8ea0deea8b0e94, type: 3}
-  - {fileID: 649723127512308276, guid: 77f33689c0006534da92b4ec7015d89d, type: 3}
+  - entity: {fileID: 649723127512308276, guid: 77f33689c0006534da92b4ec7015d89d, type: 3}
+    probability: 0.3
+  - entity: {fileID: 649723127512308276, guid: 39306f8bde3922d4fb8ea0deea8b0e94, type: 3}
+    probability: 0.5

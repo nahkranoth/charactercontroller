@@ -49,11 +49,13 @@ public class WorldTimeController : MonoBehaviour
         if (TimeCycled() > nightfallTime && !isNight) 
         {
             isNight = true;
+            sunLight.GetComponent<Light>().shadows = LightShadows.None;
             OnNightFall?.Invoke();
         }
         if (TimeCycled() > dayBreakTime && isNight)
         {
             isNight = false;
+            sunLight.GetComponent<Light>().shadows = LightShadows.Soft;
             OnDayBreak?.Invoke();
         }
     }

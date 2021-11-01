@@ -6,11 +6,11 @@ using UnityEngine.Tilemaps;
 public class CollisionTilemapGenerator : TilemapGenerator
 {
     private TileConstructCollection constructs;
-    private GenerateTilemapData data;
     public GameObject shadowSprite;
     public bool drawShadows = true;
-
-
+    
+    [HideInInspector] public GenerateTilemapData data;
+    
     private MetaLevelEntityPlacer metaEntityPlacer;
 
     private void Awake()

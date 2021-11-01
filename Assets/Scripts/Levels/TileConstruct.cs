@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [Serializable]
 public class TileConstruct:ScriptableObject, IRarity
@@ -16,8 +17,14 @@ public class TileConstruct:ScriptableObject, IRarity
     public Vector3 shadowScaleOffset;
 
     public bool hasPaths;
+    public bool destroyable;
 
     public List<EntitySpawner> entities = new List<EntitySpawner>();
+
+    public TileBase ContainsTile(TileBase tile)
+    {
+        return map.Find(x => x.tile == tile)?.tile;
+    }
     
     public int Rarity
     {
