@@ -4,7 +4,7 @@ using Object = System.Object;
 
 public interface INPCStateNetwork
 { 
-    Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController parent, Object rawSettings);
+    Dictionary<string, AbstractNPCState> GetStateNetwork(NPCController parent, Object rawSettings);
 
     string GetStartNode();
     string GetDamagedNode();

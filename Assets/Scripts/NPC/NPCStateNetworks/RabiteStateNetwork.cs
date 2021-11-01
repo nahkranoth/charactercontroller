@@ -6,12 +6,12 @@ public class RabiteStateNetwork:INPCStateNetwork
 {
     private NPCController parentController;
     private RabiteSettings settings;
-    public Dictionary<string, AbstractEnemyState> GetStateNetwork(NPCController _parentController, Object rawSettings)
+    public Dictionary<string, AbstractNPCState> GetStateNetwork(NPCController _parentController, Object rawSettings)
     {
         parentController = _parentController;
         settings = rawSettings as RabiteSettings;
         
-        var dict = new Dictionary<string, AbstractEnemyState>()
+        var dict = new Dictionary<string, AbstractNPCState>()
         {
             {"idle", new ZombieIdleState(settings)},
             {"roam", new RabiteRoamState(settings)},

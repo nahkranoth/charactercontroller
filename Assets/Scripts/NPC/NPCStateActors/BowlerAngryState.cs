@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class BowlerAngryState: AbstractEnemyState
+public class BowlerAngryState: AbstractNPCState
 {
     private PlayerController player;
     private float currentWalkSpeed = 0.1f;

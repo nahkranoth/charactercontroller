@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class RabiteAngryState: AbstractEnemyState
+public class RabiteAngryState: AbstractNPCState
 {
     private PlayerController player;
     private float currentWalkSpeed = 0.1f;

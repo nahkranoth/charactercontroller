@@ -1,4 +1,4 @@
-﻿public abstract class AbstractEnemyState
+﻿public abstract class AbstractNPCState
 {
     private NPCController parent;
 

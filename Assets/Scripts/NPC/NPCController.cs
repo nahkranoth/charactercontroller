@@ -15,8 +15,8 @@ public class NPCController : MonoBehaviour
     public TriggerBox hitTrigger;
     
     private INPCStateNetwork stateNetwork;
-    private Dictionary<string, AbstractEnemyState> stateDictionary;
-    private AbstractEnemyState activeState;
+    private Dictionary<string, AbstractNPCState> stateDictionary;
+    private AbstractNPCState activeState;
     private WorldController worldController;
     [HideInInspector] public PathfindingController pathfinding;
     public NPCPathfindingController npcPathController;
@@ -106,7 +106,7 @@ public class NPCController : MonoBehaviour
         }
 
           //TODO 4 drawn out of my ass (behavior culling)
-        if (Vector3.Distance(player.transform.position, transform.position) < 4f) 
+        if (!settings.distanceCulling || Vector3.Distance(player.transform.position, transform.position) < 4f) 
         {
             activeState.Execute();
         }

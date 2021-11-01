@@ -16,7 +16,7 @@ MonoBehaviour:
   bitTreeSearchDepth: 4
   constructDensity: 90
   npcDensity: 6
-  containerDensity: 5
+  containerDensity: 2
   hasRoad: 0
   walledOff: 1
   library: {fileID: 11400000, guid: 79b770bcbd34c9248b107af927a39f61, type: 2}

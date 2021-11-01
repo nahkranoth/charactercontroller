@@ -2,18 +2,19 @@
 using UnityEngine;
 using Object = System.Object;
 
-public class HumanStateNetwork:INPCStateNetwork
+public class DonkeyStateNetwork:INPCStateNetwork
 {
-    private HumanSettings settings;
+    private DonkeySettings settings;
     private NPCController parent;
     public Dictionary<string, AbstractNPCState> GetStateNetwork(NPCController _parent, Object rawSettings)
     {
-        settings = rawSettings as HumanSettings;
+        settings = rawSettings as DonkeySettings;
         parent = _parent;
         
         var dict = new Dictionary<string, AbstractNPCState>()
         {
-            {"idle", new HumanIdleState()}
+            {"idle", new DonkeyIdleState()},
+            {"follow", new DonkeyFollowState(settings)},
         };
         
         foreach (var abstractEnemyState in dict)
@@ -26,17 +27,7 @@ public class HumanStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer()
     {
-        if (settings.isShopKeeper)
-        {
-            var ds = WorldGraph.Retrieve(typeof(DeepstorageShop)) as DeepstorageShop;
-            ds.Show(parent.inventory.storage);
-        }
         
-        if (settings.isHotelOwner)
-        {
-            
-        }
-        Debug.Log("Human Triggered");
     }
 
     public string GetStartNode()

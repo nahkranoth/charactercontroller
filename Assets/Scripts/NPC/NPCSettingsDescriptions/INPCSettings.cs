@@ -16,6 +16,7 @@ public abstract class INPCSettings:ScriptableObject
     public int maxRoam = 10;
     
     public bool invincible = false;
+    public bool distanceCulling = true;
     
     public abstract int GetHealth();
     public abstract int GetDamage();

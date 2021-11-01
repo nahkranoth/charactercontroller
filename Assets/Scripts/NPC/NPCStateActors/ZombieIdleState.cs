@@ -3,7 +3,7 @@ using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class ZombieIdleState: AbstractEnemyState
+public class ZombieIdleState: AbstractNPCState
 {
     private float roamChance = 0.1f;
     private Vector3 roamTarget;
@@ -38,7 +38,7 @@ public class ZombieIdleState: AbstractEnemyState
             if (idleWaitTimer > roamChance*100)
             {
                 Parent.SetState("roam");
-                waitingToRoam =false;
+                waitingToRoam = false;
             }
         }
         

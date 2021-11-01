@@ -2,7 +2,7 @@
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class RabiteRoamState: AbstractEnemyState
+public class RabiteRoamState: AbstractNPCState
 {
     private bool moving = false;
     private Vector3 roamTarget;

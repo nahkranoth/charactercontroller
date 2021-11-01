@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class KnockbackHitState: AbstractEnemyState
+public class KnockbackHitState: AbstractNPCState
 {
     public KnockbackHitState(float _knockbackAmount)
     {

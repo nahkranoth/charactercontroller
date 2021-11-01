@@ -1,4 +1,4 @@
-﻿public class HumanIdleState:AbstractEnemyState
+﻿public class HumanIdleState:AbstractNPCState
 {
     public override void Activate()
     {
