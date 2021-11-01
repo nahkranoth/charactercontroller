@@ -11,10 +11,17 @@ public class LevelEntityPlacer : MonoBehaviour
     public Dictionary<Vector3Int, GameObject> enemyPool = new Dictionary<Vector3Int, GameObject>();
 
     private MetaTilemapGenerator tilemapGenerator;
+    private ItemBehaviourController itemBehaviourController;
+    private PlayerController player;
     
     private void Start()
     {
         tilemapGenerator = WorldGraph.Retrieve(typeof(MetaTilemapGenerator)) as MetaTilemapGenerator;
+        itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+
+        itemBehaviourController.SpawnEntity -= SpawnEntity;
+        itemBehaviourController.SpawnEntity += SpawnEntity;
     }
 
     //Naive approach; no pooling
@@ -72,5 +79,10 @@ public class LevelEntityPlacer : MonoBehaviour
         var container = Instantiate(obj, transform);
         container.transform.localPosition = position;
         enemyPool[position] = container;
+    }
+
+    public void SpawnEntity(GameObject obj)
+    {
+        GenerateNPC(obj, Vector3Int.RoundToInt(player.transform.localPosition));
     }
 }

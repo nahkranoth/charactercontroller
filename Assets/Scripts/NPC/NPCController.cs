@@ -80,7 +80,7 @@ public class NPCController : MonoBehaviour
         {
             inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Honey));
             inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
-            inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Chocolate));
+            inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
         }
 
         initialized = true;

@@ -16,6 +16,8 @@ public class Item
     
     public bool canChopWood;
     public int damage;
+
+    public GameObject spawnable;
     
     [HideInInspector] public int amount = 1;
 

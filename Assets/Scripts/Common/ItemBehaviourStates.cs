@@ -10,6 +10,7 @@
         Honey,
         Torch,
         WaterBottle,
-        Gem
+        Gem,
+        DonkeySpawner
     }
 }

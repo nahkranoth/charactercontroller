@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa6be2e21b68c49b432674b1557d7f, type: 3}
+  m_Name: DonkeySpawner
+  m_EditorClassIdentifier: 
+  item:
+    menuName: donkey
+    menuSprite: {fileID: 1498735017976769781, guid: 2e4c058140cf6b04685530f708d1c7ef, type: 3}
+    equipedSprite: {fileID: 1498735017976769781, guid: 2e4c058140cf6b04685530f708d1c7ef, type: 3}
+    behaviour: 9
+    consumable: 1
+    equipable: 0
+    price: 10
+    canChopWood: 0
+    damage: 0
+    spawnable: {fileID: 683834771004767112, guid: dffaec56c8a70474882d34e2a73de9a9, type: 3}
+    amount: 1
+  rarity: 0

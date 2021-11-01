@@ -57,7 +57,7 @@ public class MenuWheelController : MonoBehaviour
     {
         if (currentItems.Count == 0) return;
         var cItem = itemList[selectionStep].currentItem;
-        itemBehaviourController.Execute(cItem.behaviour);
+        itemBehaviourController.Execute(cItem);
         Debug.Log($"Take Item {cItem.menuName}");
         if (cItem.consumable && playerController.inventory.TakeItem(cItem))
         {
