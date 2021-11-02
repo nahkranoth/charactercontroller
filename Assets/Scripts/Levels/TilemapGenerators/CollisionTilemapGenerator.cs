@@ -28,26 +28,8 @@ public class CollisionTilemapGenerator : TilemapGenerator
         constructs = _data.constructCollection;
         blueprint = new TileBase[size.x, size.y];
 
-        //EAST WALL
-        AddVerticalDrunkFillEast(TileLibraryKey.DimFloor, size.x/2-8); //make 
-        TypedBounds[] eastwall = { new TypedBounds { bounds = new Bounds{center = new Vector3(size.x-4, 0, 0), size=new Vector3(4,size.y*2,0)}}};
-        FillBounds(eastwall, TileLibraryKey.DimFloor); //wall
-        
-        //WEST WALL
-        TypedBounds[] westWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}}};
-        FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
-
-        if (data.set.walledOff)
-        {
-            //SOUTH WALL
-            TypedBounds[] southWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, 2, 0), size=new Vector3(size.x*2,4,0)}}};
-            FillBounds(southWall, RuleTileLibraryKey.CityWall); //wall
-            TypedBounds[] northWallOne = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
-            FillBounds(northWallOne, RuleTileLibraryKey.CityWall); //wall
-            TypedBounds[] northWallTwo = {new TypedBounds{bounds=new Bounds{center = new Vector3(size.x, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
-            FillBounds(northWallTwo, RuleTileLibraryKey.CityWall); //wall
-        }
-        
+        GenerateWalls();
+            
         //Constructs
         var group = PullRandomGroup(data.planBounds, data.set.constructDensity);
         foreach (var tBounds in group)
@@ -58,7 +40,6 @@ public class CollisionTilemapGenerator : TilemapGenerator
             {
                 DrawBoundsOutline(new []{tBounds}, TileLibraryKey.Fence, .1f);
             }
-
             
             //Spawn entities connected to the construct
             if (construct == null) continue;
@@ -75,6 +56,48 @@ public class CollisionTilemapGenerator : TilemapGenerator
         }
        
         return blueprint;
+    }
+    
+    //TODO Refactor into something more elegant
+    private void GenerateWalls()
+    {
+        //EAST WALL
+        AddVerticalDrunkFillEast(TileLibraryKey.DimFloor, size.x/2-8); //make 
+        TypedBounds[] eastwall = { new TypedBounds { bounds = new Bounds{center = new Vector3(size.x-4, 0, 0), size=new Vector3(4,size.y*2,0)}}};
+        FillBounds(eastwall, TileLibraryKey.DimFloor); //wall
+        
+        //WEST WALL
+        TypedBounds[] westWall = {new TypedBounds{bounds=new Bounds{center = new Vector3(2, 0, 0), size=new Vector3(4,size.y*2,0)}}};
+        FillBounds(westWall, TileLibraryKey.SolidFloor); //wall
+
+        if (data.set.southWall == WallType.Full)
+        {
+            //SOUTH WALL
+            TypedBounds[] southWall = {new TypedBounds {bounds = new Bounds {center = new Vector3(0, 2, 0), size = new Vector3(size.x * 2, 4, 0)}}};
+            FillBounds(southWall, RuleTileLibraryKey.CityWall); //wall
+        }else if (data.set.southWall == WallType.Gate)
+        {
+            //SOUTH WALL
+            TypedBounds[] southWallOne = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, 2, 0), size=new Vector3(size.x-16,4,0)}}};
+            FillBounds(southWallOne, RuleTileLibraryKey.CityWall); //wall
+            TypedBounds[] southWallTwo = {new TypedBounds{bounds=new Bounds{center = new Vector3(size.x, 2, 0), size=new Vector3(size.x-16,4,0)}}};
+            FillBounds(southWallTwo, RuleTileLibraryKey.CityWall); //wall
+        }
+
+        if (data.set.northWall == WallType.Full)
+        {
+            //NORTH WALL
+            TypedBounds[] northWallOne = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, size.y-4, 0), size=new Vector3(size.x * 2,4,0)}}};
+            FillBounds(northWallOne, RuleTileLibraryKey.CityWall); //wall
+            
+        }else if (data.set.northWall == WallType.Gate)
+        {
+            //NORTH WALL
+            TypedBounds[] northWallOne = {new TypedBounds{bounds=new Bounds{center = new Vector3(0, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
+            FillBounds(northWallOne, RuleTileLibraryKey.CityWall); //wall
+            TypedBounds[] northWallTwo = {new TypedBounds{bounds=new Bounds{center = new Vector3(size.x, size.y-4, 0), size=new Vector3(size.x-16,4,0)}}};
+            FillBounds(northWallTwo, RuleTileLibraryKey.CityWall); //wall
+        }
     }
 
     public void AddConstructShadowSprite(TileConstruct construct, Bounds position, Vector3Int root)

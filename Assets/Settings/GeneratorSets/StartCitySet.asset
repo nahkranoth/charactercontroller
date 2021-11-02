@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 555bf58ab8dd417fa42b96a8ebaebadf, type: 3}
-  m_Name: CitySet
+  m_Name: StartCitySet
   m_EditorClassIdentifier: 
   bitTreeSearchDepth: 4
   constructDensity: 90
@@ -18,7 +18,7 @@ MonoBehaviour:
   containerDensity: 2
   hasRoad: 0
   northWall: 0
-  southWall: 0
+  southWall: 1
   onlyEverOneInGenerator: 1
   library: {fileID: 11400000, guid: 79b770bcbd34c9248b107af927a39f61, type: 2}
   ruleTiles: {fileID: 11400000, guid: 15ad3848f32597c43a053b6d7d1eb73c, type: 2}
