@@ -15,7 +15,8 @@ public class PlayerAttackController: MonoBehaviour
     
     private Coroutine attackTiming;
     private Coroutine attackReadyTiming;
-    private bool fullAttackReady = true;
+    [HideInInspector] public bool fullAttackReady = true;
+    [HideInInspector] public int charge;
 
     private AudioController audioController;
 
@@ -26,6 +27,7 @@ public class PlayerAttackController: MonoBehaviour
 
     private void Start()
     {
+        charge = 100;
         input.UseTool -= OnAttackSlash;
         input.UseTool += OnAttackSlash;
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
@@ -41,6 +43,11 @@ public class PlayerAttackController: MonoBehaviour
     {
         animator.AttackSlash();
         audioController.PlaySound(AudioController.AudioClipName.PlayerSwing);
+        StartAttackTiming();
+    }
+
+    public void StartAttackTiming()
+    {
         if(attackTiming != null) StopCoroutine(attackTiming);
         attackTiming = StartCoroutine(AttackTiming());
     }
@@ -53,8 +60,13 @@ public class PlayerAttackController: MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         weaponBox.OnTriggerStay -= OnToolTrigger;
         fullAttackReady = false;
+        StartChargeFill();
+    }
+
+    public void StartChargeFill()
+    {
         if(attackReadyTiming != null) StopCoroutine(attackReadyTiming);
-        attackReadyTiming = StartCoroutine(AttackReadyTiming());
+        attackReadyTiming = StartCoroutine(AttackDone());
     }
 
     public int CurrentDamage()
@@ -63,27 +75,33 @@ public class PlayerAttackController: MonoBehaviour
         return Mathf.RoundToInt(equip.current.damage * multi);
     }
 
-    IEnumerator AttackReadyTiming()
+    public void SetCharge(int amount)
     {
-        int i;
-        for (i = 0; i <= 100; i++)
+        charge = amount;
+        UpdateReadyAttack.Invoke(charge);
+        StartChargeFill();
+    }
+
+    IEnumerator AttackDone()
+    {
+        for (charge = 0; charge <= 100; charge++)
         {
             yield return new WaitForSeconds(player.settings.chargeSpeed);
-            UpdateReadyAttack.Invoke(i);
+            UpdateReadyAttack.Invoke(charge);
         }
 
-        i = 100;
+        charge = 100;
         while (Input.GetMouseButton(0))
         {
-            i++;
-            yield return new WaitForSeconds(0.05f);
+            if(charge<200) charge++;
+            yield return new WaitForSeconds(0.01f);
             chargingPowerAttack.Invoke(true);
-            UpdateReadyAttack.Invoke(i);
+            UpdateReadyAttack.Invoke(charge);
         }
 
-        if (i >= 200)
+        if (charge >= 200)
         {
-            Debug.Log("Do Power Attack");
+           Debug.Log("PowerAttack");
         }
 
         UpdateReadyAttack.Invoke(100);

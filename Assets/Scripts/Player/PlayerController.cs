@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
       input.Directions += OnDirections;
       input.StopDirections -= OnStopDirections;
       input.StopDirections += OnStopDirections;
+      input.DodgeRoll += DodgeRoll;
+      input.DodgeRoll += DodgeRoll;
 
       attackController.OnToolHitSomething -= OnToolHitSomething;
       attackController.OnToolHitSomething += OnToolHitSomething;
@@ -106,6 +108,14 @@ public class PlayerController : MonoBehaviour
       spriteHolder.localScale = myScale;
       weaponSpriteHolder.localScale = myScale;
       animator.SetWalk((int)directions.x,(int)directions.y);
+   }
+
+   private void DodgeRoll()
+   {
+      if (attackController.charge <= 90) return;
+      animator.DodgeRoll();
+      attackController.SetCharge(0);
+      rigid.AddForce(Directions * 2f, ForceMode2D.Impulse);
    }
    
    private void OnStopDirections()

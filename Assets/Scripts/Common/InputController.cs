@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     public Action OpenMenu;
     public Action Select;
     public Action OpenDeepStorageAsPlayer;
+    public Action DodgeRoll;
     
     private int vert, hor = 0;
     private Vector2 directions;
@@ -40,6 +41,12 @@ public class InputController : MonoBehaviour
                 type = InputType.UseTool,
                 criteria = x => { return Input.GetMouseButtonDown(0); },
                 action = () => { UseTool?.Invoke(); }
+            },
+            new InputCheckData
+            {
+                type = InputType.UseTool,
+                criteria = x => { return Input.GetMouseButtonDown(1); },
+                action = () => { DodgeRoll?.Invoke(); }
             },
             new InputCheckData
             {

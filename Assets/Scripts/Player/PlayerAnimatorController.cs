@@ -14,6 +14,11 @@ public class PlayerAnimatorController : MonoBehaviour
    {
       animator.SetTrigger("AttackSlash");
    }
+   
+   public void DodgeRoll()
+   {
+      animator.SetTrigger("DodgeRoll");
+   }
 
    public void SetDamage()
    {
