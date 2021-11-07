@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 50
   walkSpeed: 22
-  chargeSpeed: 0.005
+  runSpeed: 33
+  chargeSpeed: 0.01
   chargeWalkSpeed: 3
+  dodgeRollForce: 20

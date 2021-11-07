@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
    private ItemBehaviourController itemBehaviourController;
    
    private float walkSpeed = 14f;
+   private float runSpeed = 14f;
    private Vector2 directions;
 
    private bool invincible;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
    public ItemCollectionDescription itemDescriptions;
 
    public EntityInventory inventory = new EntityInventory();
+
+   private Coroutine dodgeRollApplyForce;
    
    public Vector2 Directions
    {
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
       walkSpeed = settings.walkSpeed;
+      runSpeed = settings.runSpeed;
       playerHealthStatus.myHealth.Set(settings.startHealth);
    }
 
@@ -102,20 +106,41 @@ public class PlayerController : MonoBehaviour
          animator.SetWalk(0,0);
          return;
       }
+
+      var speed = walkSpeed;
+      if (canRun()) speed = runSpeed;
       
-      rigid.AddForce(directions * walkSpeed);
+      rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1: directions.x;
       spriteHolder.localScale = myScale;
       weaponSpriteHolder.localScale = myScale;
       animator.SetWalk((int)directions.x,(int)directions.y);
    }
 
+   private bool canRun()
+   {
+      return input.running && attackController.charge > 0;
+   }
+
    private void DodgeRoll()
    {
-      if (attackController.charge <= 90) return;
+      if (attackController.charge < 50) return;
+      attackController.SetCharge(attackController.charge - 50);
       animator.DodgeRoll();
-      attackController.SetCharge(0);
-      rigid.AddForce(Directions * 2f, ForceMode2D.Impulse);
+      
+      if(dodgeRollApplyForce != null) StopCoroutine(dodgeRollApplyForce);
+      dodgeRollApplyForce = StartCoroutine(ApplyRollForce());
+   }
+
+   private IEnumerator ApplyRollForce()
+   {
+      var cntr = 0;
+      while (cntr < 20)
+      {
+         yield return new WaitForFixedUpdate();
+         rigid.AddForce(Directions * settings.dodgeRollForce, ForceMode2D.Force);
+         cntr++;
+      }
    }
    
    private void OnStopDirections()

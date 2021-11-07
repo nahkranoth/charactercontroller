@@ -18,6 +18,8 @@ public class InputController : MonoBehaviour
     private List<InputCheckData> keyActions;
 
     private InputType blockExcept;
+
+    public bool running;
     
     private void Awake()
     {
@@ -77,6 +79,18 @@ public class InputController : MonoBehaviour
                 type = InputType.West,
                 criteria = x => { return Input.GetKey(KeyCode.A); },
                 action = () => { hor = -1; }
+            },
+            new InputCheckData
+            {
+                type = InputType.Run,
+                criteria = x => { return Input.GetKeyDown(KeyCode.LeftShift); },
+                action = () => { running = true; }
+            },
+            new InputCheckData
+            {
+                type = InputType.Run,
+                criteria = x => { return Input.GetKeyUp(KeyCode.LeftShift); },
+                action = () => { running = false; }
             }
         };
     }
@@ -98,6 +112,7 @@ public class InputController : MonoBehaviour
             if (blockExcept != InputType.None && blockExcept != kAction.type) continue;
             if (kAction.criteria.Invoke(0)) kAction.action.Invoke();
         }
+        
     }
 
     void FixedUpdate()

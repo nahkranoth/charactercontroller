@@ -10,7 +10,8 @@ public enum InputType{
     North,
     South,
     East,
-    West
+    West,
+    Run
 }
 
 public class InputCheckData
