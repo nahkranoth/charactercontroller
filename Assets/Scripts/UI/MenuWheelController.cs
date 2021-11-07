@@ -114,11 +114,6 @@ public class MenuWheelController : MonoBehaviour
 
     private void SetText()
     {
-        if (!currentItems[selectionStep].consumable)
-        {
-            selectedItemTxt.text = $"{currentItems[selectionStep].menuName}";
-            return;
-        }
         selectedItemTxt.text = $"{currentItems[selectionStep].amount}x {currentItems[selectionStep].menuName}";
     }
     

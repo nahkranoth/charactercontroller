@@ -104,3 +104,4 @@ MonoBehaviour:
   hasPaths: 0
   destroyable: 1
   entities: []
+  dropOnDestroy: {fileID: 11400000, guid: d8ca5131a43a097408dfc1dc35aa3a20, type: 2}

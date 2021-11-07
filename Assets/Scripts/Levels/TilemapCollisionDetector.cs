@@ -6,12 +6,16 @@ public class TilemapCollisionDetector : MonoBehaviour
     public TilemapCollider2D tilemapCollider;
     public CollisionTilemapGenerator collisionTilemapGenerator;
     private PlayerAttackController playerAttack;
+    private LevelRepeater levelRepeater;
+    private LevelEntityPlacer levelEntityPlacer;
     
     private void Start()
     {
         playerAttack = WorldGraph.Retrieve(typeof(PlayerAttackController)) as PlayerAttackController;
         playerAttack.OnToolHitSomething -= PlayerHitSomething;
         playerAttack.OnToolHitSomething += PlayerHitSomething;
+        levelRepeater = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
+        levelEntityPlacer = WorldGraph.Retrieve(typeof(LevelEntityPlacer)) as LevelEntityPlacer;
     }
 
     private void PlayerHitSomething(Collider2D collider, Item tool)
@@ -32,6 +36,7 @@ public class TilemapCollisionDetector : MonoBehaviour
             if (match != null && match.destroyable)
             {
                 FloodFill(cell);
+                levelEntityPlacer.GenerateCollectable(match.dropOnDestroy.GetRandom().gameObject,collisionTilemapGenerator.tilemap.CellToLocal(cell));
             }
         }
     }

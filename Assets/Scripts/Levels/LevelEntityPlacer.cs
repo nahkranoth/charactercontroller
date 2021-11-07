@@ -13,7 +13,13 @@ public class LevelEntityPlacer : MonoBehaviour
     private MetaTilemapGenerator tilemapGenerator;
     private ItemBehaviourController itemBehaviourController;
     private PlayerController player;
-    
+
+
+    private void Awake()
+    {
+        WorldGraph.Subscribe(this, typeof(LevelEntityPlacer));
+    }
+
     private void Start()
     {
         tilemapGenerator = WorldGraph.Retrieve(typeof(MetaTilemapGenerator)) as MetaTilemapGenerator;

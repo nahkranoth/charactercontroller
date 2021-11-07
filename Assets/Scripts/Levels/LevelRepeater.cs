@@ -25,6 +25,11 @@ public class LevelRepeater : MonoBehaviour
         get { return currentStep/ StepSize(); }
     }
     
+    public int CurrentStep
+    {
+        get { return currentStep; }
+    }
+    
     
     private void Awake()
     {

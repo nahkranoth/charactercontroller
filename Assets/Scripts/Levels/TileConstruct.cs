@@ -21,6 +21,8 @@ public class TileConstruct:ScriptableObject, IRarity
 
     public List<EntitySpawner> entities = new List<EntitySpawner>();
 
+    public EntityCollection dropOnDestroy;
+
     public TileBase ContainsTile(TileBase tile)
     {
         return map.Find(x => x.tile == tile)?.tile;
