@@ -20,8 +20,7 @@ public class PlayerController : MonoBehaviour
    private AudioController audioController;
    private ItemBehaviourController itemBehaviourController;
    
-   private float walkSpeed = 14f;
-   private float runSpeed = 14f;
+   private float speed = 14f;
    private Vector2 directions;
 
    private bool invincible;
@@ -30,7 +29,8 @@ public class PlayerController : MonoBehaviour
    public ItemCollectionDescription itemDescriptions;
 
    public EntityInventory inventory = new EntityInventory();
-
+   public PlayerStatus status;
+   
    private Coroutine dodgeRollApplyForce;
    
    public Vector2 Directions
@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
-      playerHealthStatus.myHealth.Set(settings.health);
+      status = settings.status.DeepCopy();
+      playerHealthStatus.myHealth.Set(status.health);
    }
 
    private void Start()
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
    private void OnChargingPowerAttack(bool charging)
    {
-      walkSpeed = charging ? settings.chargeWalkSpeed : settings.walkSpeed;
+      speed = charging ? status.chargeWalkSpeed : status.walkSpeed;
       animator.SetCharging(charging);
    }
    
@@ -102,8 +103,8 @@ public class PlayerController : MonoBehaviour
          return;
       }
 
-      var speed = walkSpeed;
-      if (canRun()) speed = settings.runSpeed;
+      var speed = status.walkSpeed;
+      if (canRun()) speed = status.runSpeed;
       
       rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1: directions.x;
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
       while (cntr < 20)
       {
          yield return new WaitForFixedUpdate();
-         rigid.AddForce(Directions * settings.dodgeRollForce, ForceMode2D.Force);
+         rigid.AddForce(Directions * status.dodgeRollForce, ForceMode2D.Force);
          cntr++;
       }
       invincible = false;
@@ -151,7 +152,7 @@ public class PlayerController : MonoBehaviour
       audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
       playerHealthStatus.myHealth.Modify(-damage);
       animator.SetDamage();
-      walkSpeed = 0;
+      speed = 0;
       invincible = true;
       StartCoroutine(ResetDamageState());
    }
@@ -160,7 +161,7 @@ public class PlayerController : MonoBehaviour
    {
       yield return new WaitForSeconds(1f);
       invincible = false;
-      walkSpeed = settings.walkSpeed;
+      speed = status.walkSpeed;
    }
 
 }

@@ -1,14 +1,43 @@
+using UnityEngine;
+using UnityEngine.UI;
+
 public class DeepstorageInventory : AbstractDeepStorageScreen
 {
+    
+    public Button saveButton;
+    public Button loadButton;
+
+    private PlayerController player;
+    private SaveLoad saveLoad;
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(DeepstorageInventory));
     }
     
+    
+    
     protected override void AfterStart()
     {
         input.OpenDeepStorageAsPlayer -= ToggleShow;
         input.OpenDeepStorageAsPlayer += ToggleShow;
+        
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        
+        saveButton.onClick.AddListener(SaveClicked);
+        loadButton.onClick.AddListener(LoadClicked);
+        
+        saveLoad = WorldGraph.Retrieve(typeof(SaveLoad)) as SaveLoad;
+        Debug.Log(saveLoad);
+    }
+
+    private void SaveClicked()
+    {
+        saveLoad.Save();
+    }
+    
+    private void LoadClicked()
+    {
+        
     }
 
     private void ToggleShow()

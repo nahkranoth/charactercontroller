@@ -7,10 +7,6 @@ public class Health:MonoBehaviour
     private int maxAmount;
     private bool alive = true;
     
-    public float hunger = 1f;
-    public float thirst = 1f;
-    public float sleep = 1f;
-
     public Action Die;
     public Action<int> OnChange;
 

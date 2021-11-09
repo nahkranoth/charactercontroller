@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa103634998794478b2f184e87a0415, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  startHealth: 50
-  walkSpeed: 22
-  runSpeed: 33
-  chargeSpeed: 0.01
-  chargeWalkSpeed: 3
-  dodgeRollForce: 20
+  status:
+    health: 50
+    hunger: 1
+    thirst: 1
+    sleep: 1
+    walkSpeed: 22
+    runSpeed: 33
+    chargeSpeed: 0.005
+    chargeWalkSpeed: 3
+    dodgeRollForce: 4

@@ -1,13 +1,9 @@
 {
-    "name": "UI",
+    "name": "SaveLoad",
     "rootNamespace": "",
     "references": [
         "GUID:1e98252b48cc2e14fa7d5fccefffeadc",
-        "GUID:ec6d75381ad11a447936c5a252c62d43",
-        "GUID:da87b15b0b8bc7c47bb9ff2c3e2e1b6b",
-        "GUID:83fb7030a64dfd740a194b1a3a7376e2",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:3b83cc45c76e8e04cb74f5560461e256"
+        "GUID:ec6d75381ad11a447936c5a252c62d43"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
