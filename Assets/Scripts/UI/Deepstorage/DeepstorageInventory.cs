@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 public class DeepstorageInventory : AbstractDeepStorageScreen
 {
     private void Awake()
