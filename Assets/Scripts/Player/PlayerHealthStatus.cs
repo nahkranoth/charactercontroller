@@ -5,10 +5,6 @@ public class PlayerHealthStatus:MonoBehaviour
 {
     public Health myHealth;
 
-    public float hunger = 1f;
-    public float thirst = 1f;
-    public float sleep = 1f;
-
     public float thirstTick = 4f;
     private float currentThirstTick = 0f;
     
@@ -40,23 +36,23 @@ public class PlayerHealthStatus:MonoBehaviour
 
     public void AddHunger(float amount)
     {
-        hunger += amount;//normalize
-        if (hunger > 1f) hunger = 1f;
-        SetHunger?.Invoke(hunger);
+        myHealth.hunger += amount;//normalize
+        if (myHealth.hunger > 1f) myHealth.hunger = 1f;
+        SetHunger?.Invoke(myHealth.hunger);
     }
     
     public void AddThirst(float amount)
     {
-        thirst += amount;
-        if (thirst > 1f) thirst = 1f;
-        SetThirst?.Invoke(thirst);
+        myHealth.thirst += amount;
+        if (myHealth.thirst > 1f) myHealth.thirst = 1f;
+        SetThirst?.Invoke(myHealth.thirst);
     }
     
     public void AddSleep(float amount)
     {
-        sleep += amount;
-        if (sleep > 1f) sleep = 1f;
-        SetSleep?.Invoke(sleep);
+        myHealth.sleep += amount;
+        if (myHealth.sleep > 1f) myHealth.sleep = 1f;
+        SetSleep?.Invoke(myHealth.sleep);
     }
 
     private void FixedUpdate()
@@ -64,25 +60,25 @@ public class PlayerHealthStatus:MonoBehaviour
         currentThirstTick += 1f * Time.deltaTime;
         if (currentThirstTick > thirstTick)
         {
-            thirst -= 0.1f;
+            myHealth.thirst -= 0.1f;
             currentThirstTick = 0f;
-            SetThirst?.Invoke(thirst);
+            SetThirst?.Invoke(myHealth.thirst);
         }
         
         currentHungerTick += 1f * Time.deltaTime;
         if (currentHungerTick > hungerTick)
         {
-            hunger -= 0.1f;
+            myHealth.hunger -= 0.1f;
             currentHungerTick = 0f;
-            SetHunger?.Invoke(hunger);
+            SetHunger?.Invoke(myHealth.hunger);
         }
         
         currenSleepTick += 1f * Time.deltaTime;
         if (currenSleepTick > sleepTick)
         {
-            sleep -= 0.1f;
+            myHealth.sleep -= 0.1f;
             currenSleepTick = 0f;
-            SetSleep?.Invoke(sleep);
+            SetSleep?.Invoke(myHealth.sleep);
         }
     }
 }

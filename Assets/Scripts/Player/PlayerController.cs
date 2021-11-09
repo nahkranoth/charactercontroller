@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
-      playerHealthStatus.myHealth.Set(settings.startHealth);
+      playerHealthStatus.myHealth.Set(settings.health);
    }
 
    private void Start()
