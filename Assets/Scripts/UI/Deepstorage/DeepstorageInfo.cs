@@ -9,10 +9,10 @@ public class DeepstorageInfo : MonoBehaviour
 
     public void OnInfo(DeepStorageInfoData data)
     {
-        actionButton.gameObject.SetActive(data.isShop);
+        actionButton.gameObject.SetActive(data.onFirstAction != null);
         actionButton.onClick.RemoveAllListeners();
-        actionButton.onClick.AddListener(() => data.onFirstAction(data.item) );
-        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = data.firstActionName;
+        actionButton.onClick.AddListener(() => data.onFirstAction.action(data.item) );
+        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = data.onFirstAction.name;
         info.text = $"{data.item.menuName}\n${data.item.price}";
     }
     

@@ -36,14 +36,11 @@ public class PlayerController : MonoBehaviour
    public Vector2 Directions
    {
       get => directions;
-      set => directions = value;
    }
    
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
-      walkSpeed = settings.walkSpeed;
-      runSpeed = settings.runSpeed;
       playerHealthStatus.myHealth.Set(settings.startHealth);
    }
 
@@ -74,7 +71,6 @@ public class PlayerController : MonoBehaviour
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Gem));
       inventory.ChangeMoney(300);
       equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
@@ -82,7 +78,6 @@ public class PlayerController : MonoBehaviour
    public void EquipItem(ItemBehaviourStates.Behaviours behaviour)
    {
       var itm = inventory.storage.Find(x => x.behaviour == behaviour);
-      Debug.Log("Equip Item:"+itm.menuName);
       equipController.Equip(itm);
    }
 
@@ -108,7 +103,7 @@ public class PlayerController : MonoBehaviour
       }
 
       var speed = walkSpeed;
-      if (canRun()) speed = runSpeed;
+      if (canRun()) speed = settings.runSpeed;
       
       rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1: directions.x;
@@ -135,12 +130,14 @@ public class PlayerController : MonoBehaviour
    private IEnumerator ApplyRollForce()
    {
       var cntr = 0;
+      invincible = true;
       while (cntr < 20)
       {
          yield return new WaitForFixedUpdate();
          rigid.AddForce(Directions * settings.dodgeRollForce, ForceMode2D.Force);
          cntr++;
       }
+      invincible = false;
    }
    
    private void OnStopDirections()

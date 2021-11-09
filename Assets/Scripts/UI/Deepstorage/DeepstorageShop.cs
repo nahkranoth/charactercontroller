@@ -1,51 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeepstorageShop : MonoBehaviour
+public class DeepstorageShop : AbstractDeepStorageScreen
 {
-    public GameObject deepStoragePrefab;
-    public GameObject mainPanel;
-    public GameObject inventoryGrid;
-    public DeepstorageInfo infoPanel;
+    
     public Button buyButton;
     public Button sellButton;
-    
-    private PlayerController player;
-    private InputController input;
-    private EntityInventory activeShopInventory;
-    
+
     private bool asShop;
     private bool asShopSellState;
-    
+
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(DeepstorageShop));
     }
-
-    void Start()
+    
+    protected override void AfterStart()
     {
-        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        input = WorldGraph.Retrieve(typeof(InputController)) as InputController;
         input.OpenDeepStorageAsPlayer -= Hide;
         input.OpenDeepStorageAsPlayer += Hide;
-        mainPanel.SetActive(false);
     }
-
-    private void Hide()
-    {
-        input.LiftBlockExcept();
-        DestroyItems();
-        mainPanel.SetActive(false);
-    }
-
+    
     public void Show(EntityInventory inventory)
     {
         if(mainPanel.activeSelf) return;
-        activeShopInventory = inventory;
+        activeInventory = inventory;
         infoPanel.info.text = "Welcome to my shop";
         input.BlockExcept(InputType.OpenInventory);
         mainPanel.SetActive(true);
-        InstantiateItems(activeShopInventory);
+        InstantiateItems(activeInventory,OnSelectItem);
         buyButton.gameObject.SetActive(true);
         sellButton.gameObject.SetActive(true);
         asShop = true;
@@ -57,60 +40,30 @@ public class DeepstorageShop : MonoBehaviour
     private void SetShopToSellState()
     {
         asShopSellState = true;
-        DestroyItems();
-        InstantiateItems(player.inventory);
+        DestroyItems(OnSelectItem);
+        InstantiateItems(player.inventory, OnSelectItem);
     }
-    
+
     private void SetShopToBuyState()
     {
         asShopSellState = false;
-        DestroyItems();
-        InstantiateItems(activeShopInventory);
+        DestroyItems(OnSelectItem);
+        InstantiateItems(activeInventory, OnSelectItem);
     }
 
-    private void InstantiateItems(EntityInventory inventory)
-    {
-        foreach (var itm in inventory.storage)
-        {
-            var ds = Instantiate(deepStoragePrefab, inventoryGrid.transform).GetComponent<DeepstorageItem>();
-            ds.Apply(itm);
-            ds.OnSelect -= OnSelectItem;
-            ds.OnSelect += OnSelectItem;
-        }
-
-        if (!mainPanel.activeSelf)
-        {
-            DestroyItems();
-        }
-    }
-
-    private void DestroyItems()
-    {
-        foreach (Transform child in inventoryGrid.transform)
-        {
-            child.GetComponent<DeepstorageItem>().OnSelect -= OnSelectItem;
-            Destroy(child.gameObject);
-        }
-    }
-
-    private void RerenderInventory()
-    {
-        DestroyItems();
-        var activeInventory = asShopSellState ? player.inventory : activeShopInventory;
-        InstantiateItems(activeInventory);
-    }
-
-    private void OnSelectItem(Item _item)
+    protected override void OnSelectItem(Item _item)
     {
         infoPanel.OnInfo(new DeepStorageInfoData()
         {
-            isShop = asShop,
             item = _item,
-            firstActionName = asShopSellState ? "Sell":"Buy",
-            onFirstAction = (itm) =>
+            onFirstAction = new DeepStorageInfoAction
             {
-                if (asShopSellState) OnSell(itm);
-                else OnBuy(itm);
+                name =  asShopSellState ? "Sell":"Buy",
+                action = (itm) =>
+                {
+                    if (asShopSellState) OnSell(itm);
+                    else OnBuy(itm);
+                }
             }
         });
     }

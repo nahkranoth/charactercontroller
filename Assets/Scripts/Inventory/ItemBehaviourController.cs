@@ -18,7 +18,6 @@ public class ItemBehaviourController:MonoBehaviour
 
     private void Start()
     {
-        
         behaviourToActionMap[ItemBehaviourStates.Behaviours.None] = (item) => { Debug.Log("Do nothing");};
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Candy] = (item) =>
         {

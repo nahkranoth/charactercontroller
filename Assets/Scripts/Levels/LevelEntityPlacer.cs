@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +9,6 @@ public class LevelEntityPlacer : MonoBehaviour
     
     public Dictionary<Vector3Int, GameObject> enemyPool = new Dictionary<Vector3Int, GameObject>();
 
-    private MetaTilemapGenerator tilemapGenerator;
     private ItemBehaviourController itemBehaviourController;
     private PlayerController player;
 
@@ -22,7 +20,6 @@ public class LevelEntityPlacer : MonoBehaviour
 
     private void Start()
     {
-        tilemapGenerator = WorldGraph.Retrieve(typeof(MetaTilemapGenerator)) as MetaTilemapGenerator;
         itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
 
