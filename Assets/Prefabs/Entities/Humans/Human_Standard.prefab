@@ -64,7 +64,8 @@ MonoBehaviour:
   damageTaker: {fileID: 6070785335149153078}
   itemCollection: {fileID: 0}
   inventory: {fileID: 0}
-  myHealth: {fileID: 7745941944118724647}
+  dropPool: {fileID: 0}
+  myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:

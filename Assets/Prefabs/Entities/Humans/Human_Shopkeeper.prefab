@@ -66,7 +66,7 @@ MonoBehaviour:
   itemCollection: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
   inventory: {fileID: 7091964223806311742}
   dropPool: {fileID: 0}
-  myHealth: {fileID: 7745941944118724647}
+  myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Health:MonoBehaviour
+public class NPCHealth:MonoBehaviour
 {
     private int amount;
     private int maxAmount;
@@ -10,16 +10,6 @@ public class Health:MonoBehaviour
     public Action Die;
     public Action<int> OnChange;
 
-    public int Amount
-    {
-        get { return amount; }
-    }
-    
-    public int MaxAmount
-    {
-        get { return maxAmount; }
-    }
-    
     public void Modify(int change)
     {
         amount += change;

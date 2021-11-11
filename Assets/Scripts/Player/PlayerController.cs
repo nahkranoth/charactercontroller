@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
       status = settings.status.DeepCopy();
-      playerHealthStatus.myHealth.Set(status.health);
+      status.SetHealth(status.health);
    }
 
    private void Start()
@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
       attackController.chargingPowerAttack += OnChargingPowerAttack;
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
-      itemBehaviourController.ChangeHealth -= playerHealthStatus.myHealth.Modify;
-      itemBehaviourController.ChangeHealth += playerHealthStatus.myHealth.Modify;
+      itemBehaviourController.ChangeHealth -= status.ModifyHealth;
+      itemBehaviourController.ChangeHealth += status.ModifyHealth;
       
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
       inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
    {
       if (invincible) return;
       audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
-      playerHealthStatus.myHealth.Modify(-damage);
+      status.ModifyHealth(-damage);
       animator.SetDamage();
       speed = 0;
       invincible = true;

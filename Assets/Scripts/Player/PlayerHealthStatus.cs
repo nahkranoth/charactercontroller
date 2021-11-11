@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerHealthStatus:MonoBehaviour
 {
-    public Health myHealth;
-
     public float thirstTick = 4f;
     private float currentThirstTick = 0f;
     

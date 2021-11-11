@@ -28,7 +28,7 @@ public class NPCController : MonoBehaviour
 
     public EntityCollection dropPool;
     
-    public Health myHealth;
+    public NPCHealth myNpcHealth;
     
     [HideInInspector] public bool attacking = false;
 
@@ -40,7 +40,7 @@ public class NPCController : MonoBehaviour
 
     void Start()
     {
-        myHealth.Set(settings.GetHealth());
+        myNpcHealth.Set(settings.GetHealth());
 
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         
@@ -131,8 +131,8 @@ public class NPCController : MonoBehaviour
     private void Damage(int amount)
     {
         attacking = false;
-        myHealth.Modify(-amount);
-        if (myHealth.IsDead())
+        myNpcHealth.Modify(-amount);
+        if (myNpcHealth.IsDead())
         {
             Die();
             return;
@@ -143,7 +143,7 @@ public class NPCController : MonoBehaviour
 
     private void DamageFinished()
     {
-        if(!myHealth.IsDead()) SetState(stateNetwork.GetDamageFinishedNode());
+        if(!myNpcHealth.IsDead()) SetState(stateNetwork.GetDamageFinishedNode());
     }
 
     private void Die()
