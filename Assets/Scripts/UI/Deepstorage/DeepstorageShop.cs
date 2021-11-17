@@ -41,7 +41,7 @@ public class DeepstorageShop : AbstractDeepStorageScreen
     {
         asShopSellState = true;
         DestroyItems(OnSelectItem);
-        InstantiateItems(player.inventory, OnSelectItem);
+        InstantiateItems(player.status.inventory, OnSelectItem);
     }
 
     private void SetShopToBuyState()
@@ -70,16 +70,16 @@ public class DeepstorageShop : AbstractDeepStorageScreen
     
     private void OnBuy(Item item)
     {
-        if (player.inventory.Money < item.price) return;
-        player.inventory.ChangeMoney(-item.price);
-        player.inventory.AddByItem(item.DeepCopy());
+        if (player.status.Money < item.price) return;
+        player.status.ChangeMoney(-item.price);
+        player.status.inventory.AddByItem(item.DeepCopy());
     }
     
     private void OnSell(Item item)
     {
-        if (!player.inventory.Exists(item)) return;
-        player.inventory.ChangeMoney(item.price);
-        player.inventory.RemoveByItem(item);
+        if (!player.status.inventory.Exists(item)) return;
+        player.status.ChangeMoney(item.price);
+        player.status.inventory.RemoveByItem(item);
         RerenderInventory();
     }
 }

@@ -1,3 +1,4 @@
+using Codice.CM.WorkspaceServer.DataStore.Merge;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +14,6 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
     {
         WorldGraph.Subscribe(this, typeof(DeepstorageInventory));
     }
-    
-    
     
     protected override void AfterStart()
     {
@@ -37,7 +36,9 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
     
     private void LoadClicked()
     {
-        
+        var playerStatus = saveLoad.Load();
+        player.status = Merger.CloneAndMerge(player.status, playerStatus);
+        player.status.Update();
     }
 
     private void ToggleShow()
@@ -47,7 +48,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
             Hide();
             return;
         }
-        Show(player.inventory);
+        Show(player.status.inventory);
     }
 
     public void Show(EntityInventory inventory)
@@ -70,7 +71,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
                 name = "Destroy",
                 action = (item) =>
                 {
-                    player.inventory.RemoveByItem(_item);
+                    player.status.inventory.RemoveByItem(_item);
                     RerenderInventory();
                 }
             }

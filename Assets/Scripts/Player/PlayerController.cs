@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -28,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
    public ItemCollectionDescription itemDescriptions;
 
-   public EntityInventory inventory = new EntityInventory();
    public PlayerStatus status;
    
    private Coroutine dodgeRollApplyForce;
@@ -41,7 +38,9 @@ public class PlayerController : MonoBehaviour
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(PlayerController));
-      status = settings.status.DeepCopy();
+      
+      PlayerSettings clone = Instantiate(settings);
+      status = clone.status;
       status.SetHealth(status.health);
    }
 
@@ -67,18 +66,18 @@ public class PlayerController : MonoBehaviour
       itemBehaviourController.ChangeHealth -= status.ModifyHealth;
       itemBehaviourController.ChangeHealth += status.ModifyHealth;
       
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
-      inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
-      inventory.ChangeMoney(300);
-      equipController.Equip(inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
+      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
+      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
+      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
+      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
+      status.Update();
+      equipController.Equip(status.inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
 
    public void EquipItem(ItemBehaviourStates.Behaviours behaviour)
    {
-      var itm = inventory.storage.Find(x => x.behaviour == behaviour);
+      var itm = status.inventory.storage.Find(x => x.behaviour == behaviour);
       equipController.Equip(itm);
    }
 
@@ -103,7 +102,7 @@ public class PlayerController : MonoBehaviour
          return;
       }
 
-      var speed = status.walkSpeed;
+      speed = status.walkSpeed;
       if (canRun()) speed = status.runSpeed;
       
       rigid.AddForce(directions * speed);

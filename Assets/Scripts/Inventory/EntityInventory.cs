@@ -6,15 +6,7 @@ using UnityEngine;
 public class EntityInventory
 {
        public List<Item> storage = new List<Item>();
-       [SerializeField] private int money;
 
-       public Action<int> OnMoneyChange;
-       
-       public int Money
-       {
-           get { return money; }
-       }
-       
        public bool TakeItem(Item item)
        {
            var itm = storage.Find(x => x == item);
@@ -89,11 +81,5 @@ public class EntityInventory
                AddByDescription(description);
            }
        }
-       
-       
-       public void ChangeMoney(int amount)
-       {
-           money += amount;
-           OnMoneyChange?.Invoke(money);
-       }
+    
 }

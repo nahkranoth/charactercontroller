@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   status:
+    maxHealth: 50
     health: 50
     hunger: 1
     thirst: 1
     sleep: 1
-    walkSpeed: 22
-    runSpeed: 33
-    chargeSpeed: 0.005
+    walkSpeed: 18
+    runSpeed: 23
+    chargeSpeed: 0.002
     chargeWalkSpeed: 3
     dodgeRollForce: 4
+    money: 300
+    inventory:
+      storage: []

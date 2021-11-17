@@ -23,8 +23,8 @@ public class MetaHealthAspectController:MonoBehaviour
         player.playerHealthStatus.SetHunger -= OnSetHunger;
         player.playerHealthStatus.SetHunger += OnSetHunger;
 
-        player.inventory.OnMoneyChange -= SetMoney;
-        player.inventory.OnMoneyChange += SetMoney;
+        player.status.OnMoneyChange -= SetMoney;
+        player.status.OnMoneyChange += SetMoney;
 
     }
 

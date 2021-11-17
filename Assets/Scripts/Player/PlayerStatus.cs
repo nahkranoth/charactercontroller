@@ -16,24 +16,45 @@ public class PlayerStatus
     public float chargeWalkSpeed = 3f;
     public float dodgeRollForce = 4f;
 
+    public int money;
+    
     private bool alive;
-    
-    public PlayerStatus DeepCopy()
-    {
-        return MemberwiseClone() as PlayerStatus;
-    }
-    
+
     public Action Die;
     public Action<int> OnChange;
+    
+    public EntityInventory inventory;
+    
+    public Action<int> OnMoneyChange;
+
+    public int Money
+    {
+        get { return money; }
+        set { money = value; }
+    }
+
+    public void ChangeMoney(int amount)
+    {
+        money += amount;
+        Update();
+    }
+
+    public void Update()
+    {
+        OnMoneyChange?.Invoke(money);
+        OnChange?.Invoke(health);
+    }
 
     public int CurrentHealth
     {
         get { return health; }
+        set { health = value; }
     }
     
     public int MaxHealth
     {
         get { return maxHealth; }
+        set { maxHealth = value; }
     }
     
     public void ModifyHealth(int change)
@@ -55,7 +76,7 @@ public class PlayerStatus
         alive = true;
         if (health <= 0) alive = false;
     }
-    
+
     public bool IsDead()
     {
         return !alive;
