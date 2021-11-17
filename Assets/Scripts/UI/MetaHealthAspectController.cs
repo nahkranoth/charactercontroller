@@ -25,7 +25,6 @@ public class MetaHealthAspectController:MonoBehaviour
 
         player.status.OnMoneyChange -= SetMoney;
         player.status.OnMoneyChange += SetMoney;
-
     }
 
     private void SetMoney(int amount)
