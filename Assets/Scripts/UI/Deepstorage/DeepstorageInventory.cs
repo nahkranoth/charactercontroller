@@ -39,6 +39,8 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
         var playerStatus = saveLoad.Load();
         player.status = Merger.CloneAndMerge(player.status, playerStatus);
         player.status.Update();
+        activeInventory = player.status.inventory;
+        RerenderInventory();
     }
 
     private void ToggleShow()
