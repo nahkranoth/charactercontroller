@@ -13,7 +13,6 @@ public class SaveLoad:MonoBehaviour
     private void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        // player = WorldGraph.Retrieve(typeof(LevelRepeater)) as LevelRepeater;
     }
 
     public void Save()

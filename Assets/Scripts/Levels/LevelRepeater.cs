@@ -29,9 +29,8 @@ public class LevelRepeater : MonoBehaviour
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         player.status.currentStep = 0;
         player.status.currentLowStep = 0;
-        
-        // player.status.OnUpdate -= Regenerate;
-        // player.status.OnUpdate += Regenerate;
+        player.status.OnUpdate -= Regenerate;
+        player.status.OnUpdate += Regenerate;
         Regenerate();
     }
 
@@ -40,6 +39,7 @@ public class LevelRepeater : MonoBehaviour
         GenerateAtRoot(player.status.currentStep);
         GenerateAtRoot(player.status.currentStep-StepSize());
         GenerateAtRoot(player.status.currentStep+StepSize());
+        
         player.status.currentLowStep = player.status.currentStep-StepSize();
         player.status.currentStep = player.status.currentStep+StepSize();
     }
@@ -51,7 +51,7 @@ public class LevelRepeater : MonoBehaviour
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
         collisionTilemap.SetTiles(tickBlueprint.GetCollisionPositions(), tickBlueprint.GetCollisionTiles());
         OnGenerate?.Invoke();
-        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0), generatorCollection.GetByStep(Mathf.FloorToInt(step/StepSize())));
+        metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0), set);
     }
 
     public void RemoveAt(int step)
