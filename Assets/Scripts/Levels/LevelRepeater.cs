@@ -16,20 +16,8 @@ public class LevelRepeater : MonoBehaviour
     public GeneratorSetCollection generatorCollection;
     
     private GenerateTilemapData tickBlueprint;
-    private int currentStep;
-    private int currentLowStep;
 
-
-    private int Step
-    {
-        get { return currentStep/ StepSize(); }
-    }
-    
-    public int CurrentStep
-    {
-        get { return currentStep; }
-    }
-    
+    private PlayerController player;
     
     private void Awake()
     {
@@ -38,14 +26,22 @@ public class LevelRepeater : MonoBehaviour
 
     public void Start()
     {
-        currentStep = 0;
-        currentLowStep = 0;
-        //TODO: Currently hardcoded to 3
-        GenerateAtRoot(currentStep);
-        GenerateAtRoot(currentStep-StepSize());
-        GenerateAtRoot(currentStep+StepSize());
-        currentLowStep = currentStep-StepSize();
-        currentStep = currentStep+StepSize();
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        player.status.currentStep = 0;
+        player.status.currentLowStep = 0;
+        
+        // player.status.OnUpdate -= Regenerate;
+        // player.status.OnUpdate += Regenerate;
+        Regenerate();
+    }
+
+    public void Regenerate()
+    {
+        GenerateAtRoot(player.status.currentStep);
+        GenerateAtRoot(player.status.currentStep-StepSize());
+        GenerateAtRoot(player.status.currentStep+StepSize());
+        player.status.currentLowStep = player.status.currentStep-StepSize();
+        player.status.currentStep = player.status.currentStep+StepSize();
     }
 
     private void GenerateAtRoot(int step)
@@ -78,12 +74,12 @@ public class LevelRepeater : MonoBehaviour
     }
     public int GetHighestGeneratePoint()
     {
-        return currentStep + StepSize();
+        return player.status.currentStep + StepSize();
     }
     
     public int GetLowestGeneratePoint()
     {
-        return currentLowStep;
+        return player.status.currentLowStep;
     }
 
     private int StepSize()
@@ -93,19 +89,19 @@ public class LevelRepeater : MonoBehaviour
 
     public void Increase()
     {
-        var newStep = currentStep + StepSize();
+        var newStep = player.status.currentStep + StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(currentLowStep-1);
-        currentStep = newStep;
-        currentLowStep += StepSize();
+        RemoveAt(player.status.currentLowStep-1);
+        player.status.currentStep = newStep;
+        player.status.currentLowStep += StepSize();
     }
     public void Decrease()
     {
-        var newStep = currentLowStep - StepSize();
+        var newStep = player.status.currentLowStep - StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(currentStep+1);
-        currentStep -= StepSize();
-        currentLowStep = newStep;
+        RemoveAt(player.status.currentStep+1);
+        player.status.currentStep -= StepSize();
+        player.status.currentLowStep = newStep;
     }
    
 }

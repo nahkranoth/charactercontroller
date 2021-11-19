@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class PlayerStatus
@@ -22,10 +23,16 @@ public class PlayerStatus
 
     public Action Die;
     public Action<int> OnChange;
+    public Action OnUpdate;
     
     public EntityInventory inventory;
+
+    public int currentStep;
+    public int currentLowStep;
     
     public Action<int> OnMoneyChange;
+
+    public Vector3 position;
 
     public int Money
     {
@@ -43,6 +50,7 @@ public class PlayerStatus
     {
         OnMoneyChange?.Invoke(money);
         OnChange?.Invoke(health);
+        OnUpdate?.Invoke();
     }
 
     public int CurrentHealth

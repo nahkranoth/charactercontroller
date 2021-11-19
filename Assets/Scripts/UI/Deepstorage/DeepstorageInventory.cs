@@ -26,7 +26,6 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
         loadButton.onClick.AddListener(LoadClicked);
         
         saveLoad = WorldGraph.Retrieve(typeof(SaveLoad)) as SaveLoad;
-        Debug.Log(saveLoad);
     }
 
     private void SaveClicked()
