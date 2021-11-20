@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 90
   damage: 5
-  roamWalkSpeed: 0.6
+  roamWalkSpeed: 1.3
   attackWalkSpeed: 0.4
   strikeDistance: 0.3
   strikeDelayTime: 4

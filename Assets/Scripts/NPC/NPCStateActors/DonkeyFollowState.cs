@@ -39,6 +39,7 @@ public class DonkeyFollowState: AbstractNPCState
     {
         resetFollowTimer += Time.deltaTime;
         initializePathTimer += Time.deltaTime;
+        //Roam to player target
         if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
         {
             if (Parent.npcPathController.NextNode())
@@ -51,6 +52,13 @@ public class DonkeyFollowState: AbstractNPCState
                 InitializePath();
             }
             resetFollowTimer = 0;
+        }
+        
+        //Spawn to player if too far away
+        if (!Helpers.InRange(Parent.transform.position, player.transform.position, 16f))
+        {
+            Parent.transform.position = player.transform.position + Vector3.down*1f;
+            InitializePath();
         }
 
         if (resetFollowTimer >= resetFollowTime)

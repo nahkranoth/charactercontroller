@@ -828,6 +828,7 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 1528139976}
   collisionTilemap: {fileID: 788604936}
   generatorCollection: {fileID: 11400000, guid: 736f3a8b848f6174b9d08fe7238c50aa, type: 2}
+  startSeed: 0
 --- !u!114 &1517900160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,7 +1655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107603378791404076, guid: ffb75eae928247e428cf46d225134f9b, type: 3}
       propertyPath: startSeed
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb75eae928247e428cf46d225134f9b, type: 3}

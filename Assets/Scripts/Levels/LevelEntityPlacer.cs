@@ -86,6 +86,7 @@ public class LevelEntityPlacer : MonoBehaviour
 
     public void SpawnEntity(GameObject obj)
     {
-        GenerateNPC(obj, Vector3Int.RoundToInt(player.transform.localPosition));
+        var container = Instantiate(obj, transform);
+        container.transform.localPosition = Vector3Int.RoundToInt(player.transform.localPosition);
     }
 }
