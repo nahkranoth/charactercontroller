@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCity: {fileID: 11400000, guid: bc80553d4c56de84bb31f7ed1a73d9ea, type: 2}
   collection:
-  - {fileID: 11400000, guid: de103fd5434d5874c9582953c90067b2, type: 2}
   - {fileID: 11400000, guid: 354f382cbb0a5304bb6a533d102cdd7f, type: 2}
-  - {fileID: 11400000, guid: 699214fe3b24962488487ab86479ef19, type: 2}
   switchMin: 4
   switchMax: 10

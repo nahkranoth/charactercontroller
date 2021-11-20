@@ -103,10 +103,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1655262374592594938}
   - component: {fileID: 722555852}
-  - component: {fileID: 3490643704792580732}
   - component: {fileID: 7482345195232766880}
-  - component: {fileID: 9058590136681751550}
   - component: {fileID: 6946515414908163401}
+  - component: {fileID: 2877498420544819789}
+  - component: {fileID: 3490643704792580732}
+  - component: {fileID: 9058590136681751550}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -153,9 +154,53 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 5dcbb97dac4cdfc4ea93d93fd5e70059, type: 2}
   playerHealthStatus: {fileID: 6946515414908163401}
   itemDescriptions: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
-  inventory:
-    storage: []
-    money: 0
+  statusController: {fileID: 2877498420544819789}
+--- !u!114 &7482345195232766880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655262374592594940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8180488b0bf74476b2ff8e19e0d9a166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 0}
+  weaponBox: {fileID: 2884925537351346267}
+  animator: {fileID: 3995198645062540489}
+  equip: {fileID: 2106564544172682518}
+  player: {fileID: 722555852}
+  fullAttackReady: 1
+  charge: 0
+--- !u!114 &6946515414908163401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655262374592594940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c02ca61c164b54a3e339891a32c5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirstTick: 10
+  hungerTick: 20
+  sleepTick: 60
+--- !u!114 &2877498420544819789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655262374592594940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259573215280412dbf261a404c305300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   status:
     maxHealth: 50
     health: 50
@@ -167,6 +212,13 @@ MonoBehaviour:
     chargeSpeed: 1
     chargeWalkSpeed: 3
     dodgeRollForce: 4
+    money: 0
+    alive: 0
+    inventory:
+      storage: []
+    currentStep: 0
+    currentLowStep: 0
+    position: {x: 0, y: 0, z: 0}
 --- !u!50 &3490643704792580732
 Rigidbody2D:
   serializedVersion: 4
@@ -188,25 +240,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &7482345195232766880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655262374592594940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8180488b0bf74476b2ff8e19e0d9a166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 0}
-  weaponBox: {fileID: 2884925537351346267}
-  animator: {fileID: 3995198645062540489}
-  equip: {fileID: 2106564544172682518}
-  player: {fileID: 722555852}
-  fullAttackReady: 1
-  charge: 0
 --- !u!61 &9058590136681751550
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233,22 +266,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18402189, y: 0.31033564}
   m_EdgeRadius: 0
---- !u!114 &6946515414908163401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655262374592594940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c02ca61c164b54a3e339891a32c5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myHealth: {fileID: 0}
-  thirstTick: 10
-  hungerTick: 20
-  sleepTick: 60
 --- !u!1 &4097235929450552897
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +543,9 @@ MonoBehaviour:
     price: 0
     canChopWood: 0
     damage: 0
+    nourishment: 0
+    healing: 0
+    thirst: 0
     spawnable: {fileID: 0}
     amount: 1
   sword: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}

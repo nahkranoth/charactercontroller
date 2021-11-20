@@ -16,9 +16,15 @@ MonoBehaviour:
     menuName: Honey
     menuSprite: {fileID: -8878694685562031488, guid: c2373f223dfc417489f3926b168f0510, type: 3}
     equipedSprite: {fileID: -8878694685562031488, guid: c2373f223dfc417489f3926b168f0510, type: 3}
-    behaviour: 5
+    behaviour: 1
     consumable: 1
-    amount: 1
+    equipable: 0
     price: 60
     canChopWood: 0
+    damage: 0
+    nourishment: 40
+    healing: 50
+    thirst: 20
+    spawnable: {fileID: 0}
+    amount: 1
   rarity: 15

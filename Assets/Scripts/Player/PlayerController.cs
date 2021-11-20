@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
    public ItemCollectionDescription itemDescriptions;
 
-   public PlayerStatus status;
+   public PlayerStatusController statusController;
    
    private Coroutine dodgeRollApplyForce;
    
@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
       WorldGraph.Subscribe(this, typeof(PlayerController));
       
       PlayerSettings clone = Instantiate(settings);
-      status = clone.status;
-      status.SetHealth(status.health);
+      statusController.status = clone.status;
+      statusController.SetHealth(statusController.status.health);
    }
 
    private void Start()
@@ -63,27 +63,26 @@ public class PlayerController : MonoBehaviour
       attackController.chargingPowerAttack += OnChargingPowerAttack;
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
-      itemBehaviourController.ChangeHealth -= status.ModifyHealth;
-      itemBehaviourController.ChangeHealth += status.ModifyHealth;
+      itemBehaviourController.ChangeHealth -= statusController.ModifyHealth;
+      itemBehaviourController.ChangeHealth += statusController.ModifyHealth;
       
-      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
-      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Candy));
-      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
-      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
-      status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.WaterBottle));
-      status.Update();
-      equipController.Equip(status.inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
+      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
+      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.SimpleFood));
+      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
+      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      statusController.StatusUpdate();
+      equipController.Equip(statusController.status.inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
 
    public void EquipItem(ItemBehaviourStates.Behaviours behaviour)
    {
-      var itm = status.inventory.storage.Find(x => x.behaviour == behaviour);
+      var itm = statusController.status.inventory.storage.Find(x => x.behaviour == behaviour);
       equipController.Equip(itm);
    }
 
    private void OnChargingPowerAttack(bool charging)
    {
-      speed = charging ? status.chargeWalkSpeed : status.walkSpeed;
+      speed = charging ? statusController.status.chargeWalkSpeed : statusController.status.walkSpeed;
       animator.SetCharging(charging);
    }
    
@@ -102,8 +101,8 @@ public class PlayerController : MonoBehaviour
          return;
       }
 
-      speed = status.walkSpeed;
-      if (canRun()) speed = status.runSpeed;
+      speed = statusController.status.walkSpeed;
+      if (canRun()) speed = statusController.status.runSpeed;
       
       rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1: directions.x;
@@ -134,7 +133,7 @@ public class PlayerController : MonoBehaviour
       while (cntr < 20)
       {
          yield return new WaitForFixedUpdate();
-         rigid.AddForce(Directions * status.dodgeRollForce, ForceMode2D.Force);
+         rigid.AddForce(Directions * statusController.status.dodgeRollForce, ForceMode2D.Force);
          cntr++;
       }
       invincible = false;
@@ -149,7 +148,7 @@ public class PlayerController : MonoBehaviour
    {
       if (invincible) return;
       audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
-      status.ModifyHealth(-damage);
+      statusController.ModifyHealth(-damage);
       animator.SetDamage();
       speed = 0;
       invincible = true;
@@ -160,7 +159,7 @@ public class PlayerController : MonoBehaviour
    {
       yield return new WaitForSeconds(1f);
       invincible = false;
-      speed = status.walkSpeed;
+      speed = statusController.status.walkSpeed;
    }
 
 }

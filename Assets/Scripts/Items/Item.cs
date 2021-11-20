@@ -17,6 +17,10 @@ public class Item
     public bool canChopWood;
     public int damage;
 
+    public int nourishment;
+    public int healing;
+    public int thirst;
+
     public GameObject spawnable;
     
     [HideInInspector] public int amount = 1;

@@ -15,7 +15,6 @@ public class MetaTilemapGenerator:MonoBehaviour
 
     public DebugDrawBounds debugDraw;
 
-    public int startSeed;
 
     private PathfindingController pathfinding;
     
@@ -31,7 +30,6 @@ public class MetaTilemapGenerator:MonoBehaviour
 
     public GenerateTilemapData Generate(Vector3Int root, GeneratorSet generatorSet)
     {
-        Random.InitState(startSeed + root.y);
         var trimmedWidth = tilemapSize.x - 52;//trim value
         var trimmedHeight = tilemapSize.y - 8;//trim value
         

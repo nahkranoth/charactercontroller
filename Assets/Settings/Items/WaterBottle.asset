@@ -16,9 +16,15 @@ MonoBehaviour:
     menuName: Water Bottle
     menuSprite: {fileID: 6593700352781383774, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
     equipedSprite: {fileID: 6593700352781383774, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
-    behaviour: 7
+    behaviour: 1
     consumable: 1
-    amount: 1
+    equipable: 0
     price: 40
     canChopWood: 0
+    damage: 0
+    nourishment: 0
+    healing: 0
+    thirst: 80
+    spawnable: {fileID: 0}
+    amount: 1
   rarity: 60

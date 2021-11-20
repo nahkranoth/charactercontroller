@@ -48,7 +48,7 @@ public class MenuWheelController : MonoBehaviour
 
     private void Show()
     {
-        currentItems = playerController.status.inventory.storage;
+        currentItems = playerController.statusController.status.inventory.storage;
         wheelHolder.gameObject.SetActive(true);
         selectedItemTxt.gameObject.SetActive(true);
     }
@@ -59,9 +59,9 @@ public class MenuWheelController : MonoBehaviour
         var cItem = itemList[selectionStep].currentItem;
         itemBehaviourController.Execute(cItem);
         Debug.Log($"Take Item {cItem.menuName}");
-        if (cItem.consumable && playerController.status.inventory.TakeItem(cItem))
+        if (cItem.consumable && playerController.statusController.status.inventory.TakeItem(cItem))
         {
-            currentItems = playerController.status.inventory.storage;
+            currentItems = playerController.statusController.status.inventory.storage;
             spinStep = 0;
             selectionStep = 0;
             MakeWheel();

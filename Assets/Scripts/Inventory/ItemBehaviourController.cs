@@ -19,24 +19,12 @@ public class ItemBehaviourController:MonoBehaviour
     private void Start()
     {
         behaviourToActionMap[ItemBehaviourStates.Behaviours.None] = (item) => { Debug.Log("Do nothing");};
-        behaviourToActionMap[ItemBehaviourStates.Behaviours.Candy] = (item) =>
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.SimpleFood] = (item) =>
         {
-            ChangeHealth?.Invoke(10);
-            ChangeHunger?.Invoke(30);
+            ChangeHealth?.Invoke(item.healing);
+            ChangeHunger?.Invoke(item.nourishment);
+            ChangeThirst?.Invoke(item.thirst);
         };
-        behaviourToActionMap[ItemBehaviourStates.Behaviours.Chocolate] = (item) =>
-        {
-            ChangeHealth?.Invoke(20);
-            ChangeHunger?.Invoke(40);
-
-        };
-        behaviourToActionMap[ItemBehaviourStates.Behaviours.Honey] = (item) =>
-        {
-            ChangeHealth?.Invoke(40);
-            ChangeHunger?.Invoke(60);
-            ChangeThirst?.Invoke(10);
-        };
-        
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Axe] = (item) =>
         {
             Equip?.Invoke(ItemBehaviourStates.Behaviours.Axe);
@@ -49,14 +37,11 @@ public class ItemBehaviourController:MonoBehaviour
         {
             Equip?.Invoke(ItemBehaviourStates.Behaviours.Torch);
         };
-        behaviourToActionMap[ItemBehaviourStates.Behaviours.WaterBottle] = (item) =>
-        {
-            ChangeThirst?.Invoke(80);
-        };
         behaviourToActionMap[ItemBehaviourStates.Behaviours.DonkeySpawner] = (item) =>
         {
             SpawnEntity?.Invoke(item.spawnable);
         };
+       
     }
 
     public void Execute(Item item)

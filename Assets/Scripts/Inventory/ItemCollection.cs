@@ -14,5 +14,10 @@ namespace Inventory
             return descriptions.First(x => x.item.behaviour == search);
         }
         
+        public ItemDescription FindByName(string search)
+        {
+            return descriptions.First(x => x.item.menuName == search);
+        }
+        
     }
 }

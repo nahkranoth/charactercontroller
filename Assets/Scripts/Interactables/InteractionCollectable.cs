@@ -27,7 +27,7 @@ public class InteractionCollectable : MonoBehaviour
       var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRarity>()) as ItemDescription;
       message.QueMessage($"Found {chosen.item.menuName}");
       audio.PlaySound(AudioController.AudioClipName.CollectItem);
-      player.status.inventory.AddByDescription(chosen);
+      player.statusController.status.inventory.AddByDescription(chosen);
       interaction.OnInteraction -= OnCollect;
       OnRemove?.Invoke(this);
    }

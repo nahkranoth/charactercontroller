@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SaveLoad:MonoBehaviour
 {
@@ -17,8 +16,8 @@ public class SaveLoad:MonoBehaviour
 
     public void Save()
     { 
-        player.status.position = player.transform.localPosition;
-        string playerSaveData = JsonUtility.ToJson(player.status);
+        player.statusController.status.position = player.transform.localPosition;
+        string playerSaveData = JsonUtility.ToJson(player.statusController.status);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/saveData.json", playerSaveData);
     }
 

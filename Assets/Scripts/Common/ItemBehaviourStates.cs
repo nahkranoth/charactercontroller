@@ -3,14 +3,11 @@
     public enum Behaviours
     {
         None,
-        Candy,
+        SimpleFood,
         Sword,
         Axe,
-        Chocolate,
-        Honey,
         Torch,
-        WaterBottle,
         Gem,
-        DonkeySpawner
+        DonkeySpawner,
     }
 }

@@ -14,10 +14,16 @@ public class LevelRepeater : MonoBehaviour
 
     public Action OnGenerate;
     public GeneratorSetCollection generatorCollection;
-    
+    public int startSeed;
+
     private GenerateTilemapData tickBlueprint;
 
     private PlayerController player;
+    private SaveLoad saveLoad;
+    
+    
+
+    private List<int> activeSteps = new List<int>();
     
     private void Awake()
     {
@@ -27,25 +33,36 @@ public class LevelRepeater : MonoBehaviour
     public void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        player.status.currentStep = 0;
-        player.status.currentLowStep = 0;
-        player.status.OnUpdate -= Regenerate;
-        player.status.OnUpdate += Regenerate;
-        Regenerate();
+
+        player.statusController.OnFullReset -= Regenerate;
+        player.statusController.OnFullReset += Regenerate;
+
+        player.statusController.status.currentStep = 0;
+        player.statusController.status.currentLowStep = 0;
+        
+        GenerateAtRoot(player.statusController.status.currentStep);
+        GenerateAtRoot(player.statusController.status.currentStep-StepSize());
+        GenerateAtRoot(player.statusController.status.currentStep+StepSize());
+        
+        player.statusController.status.currentLowStep = player.statusController.status.currentStep-StepSize();
+        player.statusController.status.currentStep = player.statusController.status.currentStep+StepSize();
     }
 
     public void Regenerate()
     {
-        GenerateAtRoot(player.status.currentStep);
-        GenerateAtRoot(player.status.currentStep-StepSize());
-        GenerateAtRoot(player.status.currentStep+StepSize());
+        RemoveAll();
+        GenerateAtRoot(player.statusController.status.currentStep);
+        GenerateAtRoot(player.statusController.status.currentStep-StepSize());
+        GenerateAtRoot(player.statusController.status.currentStep+StepSize());
         
-        player.status.currentLowStep = player.status.currentStep-StepSize();
-        player.status.currentStep = player.status.currentStep+StepSize();
+        player.statusController.status.currentLowStep = player.statusController.status.currentStep-StepSize();
+        player.statusController.status.currentStep = player.statusController.status.currentStep+StepSize();
     }
 
     private void GenerateAtRoot(int step)
     {
+        Random.InitState(startSeed + step);
+        activeSteps.Add(step);
         var set = generatorCollection.GetByStep(Mathf.FloorToInt(step/StepSize()));
         tickBlueprint = metaTilemapGenerator.Generate(new Vector3Int(0,step,0), set);
         backgroundTilemap.SetTiles(tickBlueprint.GetBackgroundPositions(), tickBlueprint.GetBackgroundTiles());
@@ -54,8 +71,16 @@ public class LevelRepeater : MonoBehaviour
         metaEntityPlacer.Generate(metaTilemapGenerator, new Vector3Int(0,step,0), set);
     }
 
+    private void RemoveAll()
+    {
+        List<int> tempToRemove = new List<int>();
+        foreach (var mstep in activeSteps) tempToRemove.Add(mstep);
+        foreach (var tRemove in tempToRemove) RemoveAt(tRemove);
+    }
+
     public void RemoveAt(int step)
     {
+        activeSteps.Remove(step);
         List<Vector3Int> remove = new List<Vector3Int>();
         Vector3Int pos = Vector3Int.zero;
         for (int x = 0; x < metaTilemapGenerator.tilemapSize.x; x++)
@@ -74,12 +99,12 @@ public class LevelRepeater : MonoBehaviour
     }
     public int GetHighestGeneratePoint()
     {
-        return player.status.currentStep + StepSize();
+        return player.statusController.status.currentStep + StepSize();
     }
     
     public int GetLowestGeneratePoint()
     {
-        return player.status.currentLowStep;
+        return player.statusController.status.currentLowStep;
     }
 
     private int StepSize()
@@ -89,19 +114,19 @@ public class LevelRepeater : MonoBehaviour
 
     public void Increase()
     {
-        var newStep = player.status.currentStep + StepSize();
+        var newStep = player.statusController.status.currentStep + StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(player.status.currentLowStep-1);
-        player.status.currentStep = newStep;
-        player.status.currentLowStep += StepSize();
+        RemoveAt(player.statusController.status.currentLowStep-1);
+        player.statusController.status.currentStep = newStep;
+        player.statusController.status.currentLowStep += StepSize();
     }
     public void Decrease()
     {
-        var newStep = player.status.currentLowStep - StepSize();
+        var newStep = player.statusController.status.currentLowStep - StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(player.status.currentStep+1);
-        player.status.currentStep -= StepSize();
-        player.status.currentLowStep = newStep;
+        RemoveAt(player.statusController.status.currentStep+1);
+        player.statusController.status.currentStep -= StepSize();
+        player.statusController.status.currentLowStep = newStep;
     }
    
 }

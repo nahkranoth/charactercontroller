@@ -16,9 +16,15 @@ MonoBehaviour:
     menuName: chocolate
     menuSprite: {fileID: -8033723429876189661, guid: c2373f223dfc417489f3926b168f0510, type: 3}
     equipedSprite: {fileID: 0}
-    behaviour: 4
+    behaviour: 1
     consumable: 1
-    amount: 1
+    equipable: 0
     price: 40
     canChopWood: 0
+    damage: 0
+    nourishment: 30
+    healing: 30
+    thirst: 0
+    spawnable: {fileID: 0}
+    amount: 1
   rarity: 20

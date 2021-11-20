@@ -36,9 +36,8 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
     private void LoadClicked()
     {
         var playerStatus = saveLoad.Load();
-        player.status = Merger.CloneAndMerge(player.status, playerStatus);
-        player.status.Update();
-        activeInventory = player.status.inventory;
+        player.statusController.OverrideStatus(playerStatus); 
+        activeInventory = player.statusController.status.inventory;
         RerenderInventory();
     }
 
@@ -49,7 +48,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
             Hide();
             return;
         }
-        Show(player.status.inventory);
+        Show(player.statusController.status.inventory);
     }
 
     public void Show(EntityInventory inventory)
@@ -72,7 +71,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
                 name = "Destroy",
                 action = (item) =>
                 {
-                    player.status.inventory.RemoveByItem(_item);
+                    player.statusController.status.inventory.RemoveByItem(_item);
                     RerenderInventory();
                 }
             }

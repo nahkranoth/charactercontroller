@@ -19,75 +19,12 @@ public class PlayerStatus
 
     public int money;
     
-    private bool alive;
+    public bool alive;
 
-    public Action Die;
-    public Action<int> OnChange;
-    public Action OnUpdate;
-    
     public EntityInventory inventory;
 
     public int currentStep;
     public int currentLowStep;
-    
-    public Action<int> OnMoneyChange;
 
     public Vector3 position;
-
-    public int Money
-    {
-        get { return money; }
-        set { money = value; }
-    }
-
-    public void ChangeMoney(int amount)
-    {
-        money += amount;
-        Update();
-    }
-
-    public void Update()
-    {
-        OnMoneyChange?.Invoke(money);
-        OnChange?.Invoke(health);
-        OnUpdate?.Invoke();
-    }
-
-    public int CurrentHealth
-    {
-        get { return health; }
-        set { health = value; }
-    }
-    
-    public int MaxHealth
-    {
-        get { return maxHealth; }
-        set { maxHealth = value; }
-    }
-    
-    public void ModifyHealth(int change)
-    {
-        health += change;
-        if (health <= 0)
-        {
-            alive = false;
-            Die?.Invoke();
-        }
-        if (health > maxHealth) health = maxHealth;
-        if (alive) OnChange?.Invoke(health);
-    }
-
-    public void SetHealth(int set)
-    {
-        health = set;
-        maxHealth = set;
-        alive = true;
-        if (health <= 0) alive = false;
-    }
-
-    public bool IsDead()
-    {
-        return !alive;
-    }
-
 }
