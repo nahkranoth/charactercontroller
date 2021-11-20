@@ -34,10 +34,35 @@ public class DeepstorageNPCInventory : AbstractDeepStorageScreen
         infoPanel.info.text = "NPC inventory";
         input.BlockExcept(InputType.OpenInventory);
         mainPanel.SetActive(true);
-        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
-        InstantiateItems(player.Inventory, OnSelectItem, playerInventoryGrid.transform);
+        RerenderInventory();
     }
 
+    private void RerenderInventory()
+    {
+        DestroyItems(OnSelectItem, inventoryGrid.transform);
+        DestroyItems(OnSelectItem, playerInventoryGrid.transform);
+        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(player.Inventory, OnSelectPlayerItem, playerInventoryGrid.transform);
+    }
+    
+    private void OnSelectPlayerItem(Item _item)
+    {
+        infoPanel.OnInfo(new DeepStorageInfoData()
+        {
+            item = _item,
+            onFirstAction = new DeepStorageInfoAction
+            {
+                name = "Transfer",
+                action = (item) =>
+                {
+                    player.Inventory.RemoveByItem(_item);
+                    activeInventory.AddByItem(_item);
+                    RerenderInventory();
+                }
+            }
+        });
+    }
+    
     protected override void OnSelectItem(Item _item)
     {
         infoPanel.OnInfo(new DeepStorageInfoData()
@@ -45,10 +70,11 @@ public class DeepstorageNPCInventory : AbstractDeepStorageScreen
             item = _item,
             onFirstAction = new DeepStorageInfoAction
             {
-                name = "Destroy",
+                name = "Transfer",
                 action = (item) =>
                 {
-                    player.Inventory.RemoveByItem(_item);
+                    activeInventory.RemoveByItem(_item);
+                    player.Inventory.AddByItem(_item);
                     RerenderInventory();
                 }
             }

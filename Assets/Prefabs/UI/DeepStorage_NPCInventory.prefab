@@ -16,6 +16,7 @@ MonoBehaviour:
   infoPanel: {fileID: 5978496016214436590}
   deepStoragePrefab: {fileID: 7863505327213945831, guid: 674c6707db2b5a14c8111e57267076e1, type: 3}
   inventoryGrid: {fileID: 2025824512896315665}
+  playerInventoryGrid: {fileID: 6300132613541781779}
 --- !u!1 &6300132613541781779
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,5 +22,10 @@ MonoBehaviour:
     price: 800
     canChopWood: 1
     damage: 60
+    nourishment: 0
+    healing: 0
+    thirst: 0
+    weight: 3.2
+    spawnable: {fileID: 0}
     amount: 1
   rarity: 5

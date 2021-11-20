@@ -26,7 +26,7 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     protected void Hide()
     {
         input.LiftBlockExcept();
-        DestroyItems(OnSelectItem);
+        DestroyItems(OnSelectItem, inventoryGrid.transform);
         mainPanel.SetActive(false);
     }
     
@@ -42,13 +42,13 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
 
         if (!mainPanel.activeSelf)
         {
-            DestroyItems(OnSelectItem);
+            DestroyItems(OnSelectItem, inventoryGrid.transform);
         }
     }
     
-    protected void DestroyItems(Action<Item> OnSelectItem)
+    protected void DestroyItems(Action<Item> OnSelectItem, Transform target)
     {
-        foreach (Transform child in inventoryGrid.transform)
+        foreach (Transform child in target)
         {
             child.GetComponent<DeepstorageItem>().OnSelect -= OnSelectItem;
             Destroy(child.gameObject);
@@ -57,7 +57,7 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
       
     protected void RerenderInventory()
     {
-        DestroyItems(OnSelectItem);
+        DestroyItems(OnSelectItem, inventoryGrid.transform);
         InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
     }
 

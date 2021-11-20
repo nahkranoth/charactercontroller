@@ -25,6 +25,7 @@ MonoBehaviour:
     nourishment: 40
     healing: 50
     thirst: 20
+    weight: 0.5
     spawnable: {fileID: 0}
     amount: 1
   rarity: 15

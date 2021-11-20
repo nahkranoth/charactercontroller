@@ -40,14 +40,14 @@ public class DeepstorageShop : AbstractDeepStorageScreen
     private void SetShopToSellState()
     {
         asShopSellState = true;
-        DestroyItems(OnSelectItem);
+        DestroyItems(OnSelectItem, inventoryGrid.transform);
         InstantiateItems(player.Inventory, OnSelectItem, inventoryGrid.transform);
     }
 
     private void SetShopToBuyState()
     {
         asShopSellState = false;
-        DestroyItems(OnSelectItem);
+        DestroyItems(OnSelectItem, inventoryGrid.transform);
         InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
     }
 

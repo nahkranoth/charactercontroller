@@ -1,4 +1,5 @@
 using Codice.CM.WorkspaceServer.DataStore.Merge;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,8 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
     
     public Button saveButton;
     public Button loadButton;
-
+    public TextMeshProUGUI storageCapText;
+    
     private PlayerController player;
     private SaveLoad saveLoad;
     private void Awake()
@@ -57,8 +59,21 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
         activeInventory = inventory;
         infoPanel.info.text = "Player inventory";
         input.BlockExcept(InputType.OpenInventory);
+        SetStorageCap();
         mainPanel.SetActive(true);
         InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+    }
+    
+    void RerenderInventory()
+    {
+        DestroyItems(OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+        SetStorageCap();
+    }
+
+    private void SetStorageCap()
+    {
+        storageCapText.text = $"{activeInventory.TotalItemWeight()}";
     }
 
     protected override void OnSelectItem(Item _item)

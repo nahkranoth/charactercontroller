@@ -81,5 +81,16 @@ public class EntityInventory
                AddByDescription(description);
            }
        }
+
+       public float TotalItemWeight()
+       {
+           float total = 0f;
+           foreach (var item in storage)
+           {
+               total += item.weight;
+           }
+
+           return total;
+       }
     
 }

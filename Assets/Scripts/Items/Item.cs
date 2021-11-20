@@ -21,6 +21,8 @@ public class Item
     public int healing;
     public int thirst;
 
+    public float weight;
+
     public GameObject spawnable;
     
     [HideInInspector] public int amount = 1;
