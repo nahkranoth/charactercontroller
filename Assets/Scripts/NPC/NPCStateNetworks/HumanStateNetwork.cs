@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Object = System.Object;
 
 public class HumanStateNetwork:INPCStateNetwork

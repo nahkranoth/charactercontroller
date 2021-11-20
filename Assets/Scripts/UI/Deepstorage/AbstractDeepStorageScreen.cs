@@ -12,7 +12,6 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     protected InputController input;
     
     protected EntityInventory activeInventory;
-
     
     public void Start()
     {
@@ -31,11 +30,11 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
         mainPanel.SetActive(false);
     }
     
-    protected void InstantiateItems(EntityInventory inventory, Action<Item> OnSelectItem)
+    protected void InstantiateItems(EntityInventory inventory, Action<Item> OnSelectItem, Transform target)
     {
         foreach (var itm in inventory.storage)
         {
-            var ds = Instantiate(deepStoragePrefab, inventoryGrid.transform).GetComponent<DeepstorageItem>();
+            var ds = Instantiate(deepStoragePrefab, target).GetComponent<DeepstorageItem>();
             ds.Apply(itm);
             ds.OnSelect -= OnSelectItem;
             ds.OnSelect += OnSelectItem;
@@ -59,7 +58,7 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     protected void RerenderInventory()
     {
         DestroyItems(OnSelectItem);
-        InstantiateItems(activeInventory, OnSelectItem);
+        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
     }
 
     protected abstract void OnSelectItem(Item _item);

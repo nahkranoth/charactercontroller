@@ -8,12 +8,14 @@ public class DonkeyStateNetwork:INPCStateNetwork
     private NPCController parent;
     
     private MessageController messageController;
+    private DeepstorageNPCInventory deepStorage;
 
     public Dictionary<string, AbstractNPCState> GetStateNetwork(NPCController _parent, Object rawSettings)
     {
         settings = rawSettings as DonkeySettings;
         parent = _parent;
         messageController = WorldGraph.Retrieve(typeof(MessageController)) as MessageController;
+        deepStorage = WorldGraph.Retrieve(typeof(DeepstorageNPCInventory)) as DeepstorageNPCInventory;
         var dict = new Dictionary<string, AbstractNPCState>()
         {
             {"idle", new DonkeyIdleState()},
@@ -30,7 +32,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer()
     {
-        messageController.QueMessage("Eey-haa");
+        deepStorage.ToggleShow(parent.inventory.storage);
     }
 
     public string GetStartNode()

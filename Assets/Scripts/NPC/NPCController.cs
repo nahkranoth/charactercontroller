@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Codice.Client.BaseCommands;
-using Inventory;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour

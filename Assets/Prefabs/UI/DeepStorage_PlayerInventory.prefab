@@ -139,7 +139,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 635375775757875573, guid: 1e419d0e36be75643aa7f7f85bc90768, type: 3}
       propertyPath: m_Name
-      value: DeepStorage_Inventory
+      value: DeepStorage_PlayerInventory
       objectReference: {fileID: 0}
     - target: {fileID: 635375775757875574, guid: 1e419d0e36be75643aa7f7f85bc90768, type: 3}
       propertyPath: m_Pivot.x

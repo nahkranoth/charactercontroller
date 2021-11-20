@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 572130593}
   - component: {fileID: 6070785335149153078}
   - component: {fileID: 7745941944118724647}
+  - component: {fileID: 3349942357779499763}
   m_Layer: 0
   m_Name: Animal_Donkey
   m_TagString: Untagged
@@ -62,8 +63,8 @@ MonoBehaviour:
   hitTrigger: {fileID: 7893274899369040521}
   pathfinding: {fileID: 0}
   damageTaker: {fileID: 6070785335149153078}
-  itemCollection: {fileID: 0}
-  inventory: {fileID: 0}
+  itemCollection: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
+  inventory: {fileID: 3349942357779499763}
   dropPool: {fileID: 0}
   myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
@@ -156,6 +157,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa76f847dac46d397c6e70d8bdc4f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3349942357779499763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683834771004767112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2c41974431425cb3bc83aaee2e070c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storage:
+    storage: []
 --- !u!1 &1496904689154910621
 GameObject:
   m_ObjectHideFlags: 0

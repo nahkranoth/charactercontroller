@@ -2,7 +2,7 @@ using Codice.CM.WorkspaceServer.DataStore.Merge;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeepstorageInventory : AbstractDeepStorageScreen
+public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
 {
     
     public Button saveButton;
@@ -12,7 +12,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
     private SaveLoad saveLoad;
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(DeepstorageInventory));
+        WorldGraph.Subscribe(this, typeof(DeepstoragePlayerInventory));
     }
     
     protected override void AfterStart()
@@ -37,7 +37,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
     {
         var playerStatus = saveLoad.Load();
         player.statusController.OverrideStatus(playerStatus); 
-        activeInventory = player.statusController.status.inventory;
+        activeInventory = player.Inventory;
         RerenderInventory();
     }
 
@@ -48,7 +48,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
             Hide();
             return;
         }
-        Show(player.statusController.status.inventory);
+        Show(player.Inventory);
     }
 
     public void Show(EntityInventory inventory)
@@ -58,7 +58,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
         infoPanel.info.text = "Player inventory";
         input.BlockExcept(InputType.OpenInventory);
         mainPanel.SetActive(true);
-        InstantiateItems(activeInventory, OnSelectItem);
+        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
     }
 
     protected override void OnSelectItem(Item _item)
@@ -71,7 +71,7 @@ public class DeepstorageInventory : AbstractDeepStorageScreen
                 name = "Destroy",
                 action = (item) =>
                 {
-                    player.statusController.status.inventory.RemoveByItem(_item);
+                    player.Inventory.RemoveByItem(_item);
                     RerenderInventory();
                 }
             }

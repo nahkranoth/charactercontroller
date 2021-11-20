@@ -22,5 +22,5 @@ MonoBehaviour:
   detectDistance: 1
   loseDistance: 1.4
   maxRoam: 20
-  invincible: 0
+  invincible: 1
   distanceCulling: 0

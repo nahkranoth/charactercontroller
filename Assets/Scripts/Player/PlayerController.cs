@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
    
    private Coroutine dodgeRollApplyForce;
    
-   public Vector2 Directions
-   {
-      get => directions;
-   }
+   public Vector2 Directions => directions;
+
+   public EntityInventory Inventory => statusController.status.inventory;
+
    
    private void Awake()
    {
@@ -66,18 +66,18 @@ public class PlayerController : MonoBehaviour
       itemBehaviourController.ChangeHealth -= statusController.ModifyHealth;
       itemBehaviourController.ChangeHealth += statusController.ModifyHealth;
       
-      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
-      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.SimpleFood));
-      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
-      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
-      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.SimpleFood));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
       statusController.StatusUpdate();
-      equipController.Equip(statusController.status.inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
+      equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
 
    public void EquipItem(ItemBehaviourStates.Behaviours behaviour)
    {
-      var itm = statusController.status.inventory.storage.Find(x => x.behaviour == behaviour);
+      var itm = Inventory.storage.Find(x => x.behaviour == behaviour);
       equipController.Equip(itm);
    }
 
