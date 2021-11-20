@@ -41,6 +41,7 @@ public class HumanStateNetwork:INPCStateNetwork
         {
             //Give option to sleep - and save
             messageController.QueMessage("Do you want to sleep here?");
+            return;
         }
         
         messageController.QueMessage("Nice weather aint it?");

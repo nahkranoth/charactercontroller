@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
       statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.SimpleFood));
       statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      statusController.status.inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
       statusController.StatusUpdate();
       equipController.Equip(statusController.status.inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }

@@ -6,11 +6,14 @@ public class DonkeyStateNetwork:INPCStateNetwork
 {
     private DonkeySettings settings;
     private NPCController parent;
+    
+    private MessageController messageController;
+
     public Dictionary<string, AbstractNPCState> GetStateNetwork(NPCController _parent, Object rawSettings)
     {
         settings = rawSettings as DonkeySettings;
         parent = _parent;
-        
+        messageController = WorldGraph.Retrieve(typeof(MessageController)) as MessageController;
         var dict = new Dictionary<string, AbstractNPCState>()
         {
             {"idle", new DonkeyIdleState()},
@@ -27,7 +30,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer()
     {
-        
+        messageController.QueMessage("Eey-haa");
     }
 
     public string GetStartNode()
