@@ -25,6 +25,8 @@ public class PlayerStatus
 
     public int currentStep;
     public int currentLowStep;
-
+    
     public Vector3 position;
+
+    public float maxCarryWeight;
 }

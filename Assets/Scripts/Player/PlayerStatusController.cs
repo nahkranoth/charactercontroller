@@ -79,4 +79,9 @@ public class PlayerStatusController:MonoBehaviour
         FullReset();
         StatusUpdate();
     }
+
+    public bool HasCarrySpace(float weight)
+    {
+        return status.maxCarryWeight > status.inventory.TotalItemWeight() + weight;
+    }
 }

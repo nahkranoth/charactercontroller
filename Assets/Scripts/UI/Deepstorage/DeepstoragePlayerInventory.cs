@@ -73,7 +73,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
 
     private void SetStorageCap()
     {
-        storageCapText.text = $"{activeInventory.TotalItemWeight()}";
+        storageCapText.text = $"{activeInventory.TotalItemWeight()}/{player.statusController.status.maxCarryWeight}";
     }
 
     protected override void OnSelectItem(Item _item)

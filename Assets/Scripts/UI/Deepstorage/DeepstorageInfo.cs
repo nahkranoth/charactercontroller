@@ -13,7 +13,7 @@ public class DeepstorageInfo : MonoBehaviour
         actionButton.onClick.RemoveAllListeners();
         actionButton.onClick.AddListener(() => data.onFirstAction.action(data.item) );
         actionButton.GetComponentInChildren<TextMeshProUGUI>().text = data.onFirstAction.name;
-        info.text = $"{data.item.menuName}\n${data.item.price}";
+        info.text = $"{data.item.menuName}\n${data.item.price}\n{data.item.weight}";
     }
     
 }

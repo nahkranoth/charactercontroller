@@ -25,6 +25,13 @@ public class InteractionCollectable : MonoBehaviour
    private void OnCollect(int force)
    {
       var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRarity>()) as ItemDescription;
+
+      if (!player.statusController.HasCarrySpace(chosen.item.weight))
+      {
+         message.QueMessage("Not enough space to carry");
+         return;
+      }
+
       message.QueMessage($"Found {chosen.item.menuName}");
       audio.PlaySound(AudioController.AudioClipName.CollectItem);
       player.Inventory.AddByDescription(chosen);

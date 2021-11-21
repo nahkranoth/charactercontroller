@@ -27,7 +27,6 @@ public class EntityInventory
        
        public void AddByDescription(ItemDescription description)
        {
-
            var possibleItem = description.item.DeepCopy();
 
            var storageLocation = storage.Find(x => x.menuName == possibleItem.menuName);

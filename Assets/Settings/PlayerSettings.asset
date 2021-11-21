@@ -24,8 +24,10 @@ MonoBehaviour:
     chargeWalkSpeed: 3
     dodgeRollForce: 4
     money: 300
+    alive: 0
     inventory:
       storage: []
     currentStep: 0
     currentLowStep: 0
     position: {x: 0, y: 0, z: 0}
+    maxWeight: 60
