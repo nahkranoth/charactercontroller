@@ -19,7 +19,7 @@ MonoBehaviour:
     behaviour: 6
     consumable: 1
     equipable: 0
-    price: 10
+    price: 1000
     canChopWood: 0
     damage: 0
     nourishment: 0

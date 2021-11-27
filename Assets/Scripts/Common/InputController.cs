@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    public PlayerInput playerInput;
-    
     public Action<Vector2> Directions;
     public Action StopDirections;
     public Action UseTool;
@@ -24,11 +22,6 @@ public class InputController : MonoBehaviour
 
     public bool running;
 
-    public void OpenWheelMenu()
-    {
-        OpenMenu?.Invoke();
-    }
-
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -40,60 +33,46 @@ public class InputController : MonoBehaviour
 
         if (ctx.canceled)
             hor = vert = 0;
+    }
 
+    public void SetRun(InputAction.CallbackContext ctx)
+    {
+        running = ctx.performed;
+    }
+    
+    public void OnDodge(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        DodgeRoll?.Invoke();
+    }
+    
+    public void OnAction(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        UseTool?.Invoke();
+    }
+    
+    public void OnUse(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        Select?.Invoke();
+    }
+
+    public void OpenPlayerInventory(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        OpenDeepStorageAsPlayer?.Invoke();
+    }
+    
+    public void OpenWheelInventory(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        OpenMenu?.Invoke();
     }
     
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(InputController));
-
-        playerInput.onActionTriggered += context => { Debug.Log(context); }; 
-        
-        keyActions = new List<InputCheckData>()
-        {
-            new InputCheckData
-            {
-                type = InputType.OpenWheelMenu,
-                criteria = x => { return Input.GetKeyDown(KeyCode.Q); },
-                action = () => { OpenMenu?.Invoke(); }
-            },
-            new InputCheckData
-            {
-                type = InputType.OpenInventory,
-                criteria = x => { return Input.GetKeyDown(KeyCode.R); },
-                action = () => { OpenDeepStorageAsPlayer?.Invoke(); }
-            },
-            new InputCheckData
-            {
-                type = InputType.UseTool,
-                criteria = x => { return Input.GetMouseButtonDown(0); },
-                action = () => { UseTool?.Invoke(); }
-            },
-            new InputCheckData
-            {
-                type = InputType.UseTool,
-                criteria = x => { return Input.GetMouseButtonDown(1); },
-                action = () => { DodgeRoll?.Invoke(); }
-            },
-            new InputCheckData
-            {
-                type = InputType.Select,
-                criteria = x => { return Input.GetKeyDown(KeyCode.E); },
-                action = () => { Select?.Invoke(); }
-            },
-            new InputCheckData
-            {
-                type = InputType.Run,
-                criteria = x => { return Input.GetKeyDown(KeyCode.LeftShift); },
-                action = () => { running = true; }
-            },
-            new InputCheckData
-            {
-                type = InputType.Run,
-                criteria = x => { return Input.GetKeyUp(KeyCode.LeftShift); },
-                action = () => { running = false; }
-            }
-        };
     }
 
     public void BlockExcept(InputType exception)
@@ -104,16 +83,6 @@ public class InputController : MonoBehaviour
     public void LiftBlockExcept()
     {
         blockExcept = InputType.None;
-    }
-
-    private void Update()
-    {
-        // foreach (var kAction in keyActions)
-        // {
-        //     if (blockExcept != InputType.None && blockExcept != kAction.type) continue;
-        //     if (kAction.criteria.Invoke(0)) kAction.action.Invoke();
-        // }
-        //
     }
 
     void FixedUpdate()
