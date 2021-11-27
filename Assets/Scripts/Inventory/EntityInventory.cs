@@ -86,7 +86,7 @@ public class EntityInventory
            float total = 0f;
            foreach (var item in storage)
            {
-               total += item.weight;
+               total += item.weight * item.amount;
            }
 
            return total;

@@ -30,4 +30,4 @@ MonoBehaviour:
     currentStep: 0
     currentLowStep: 0
     position: {x: 0, y: 0, z: 0}
-    maxWeight: 60
+    maxCarryWeight: 10

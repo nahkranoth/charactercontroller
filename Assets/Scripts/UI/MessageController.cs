@@ -8,19 +8,27 @@ using UnityEngine.UI;
 public class MessageController : MonoBehaviour
 {
    public GameObject messageBlock;
-   public Text text;
-   private List<string> messageQue = new List<string>();
-
+   public Text questionText;
+   public Text answerOneText;
+   public Text answerTwoText;
+   private List<MessageQuestion> messageQue = new List<MessageQuestion>();
+   
    private Coroutine waitTimer;
 
    private void Awake()
    {
       WorldGraph.Subscribe(this, typeof(MessageController));
    }
+   
+   public void QueMessageQuestion(string message, List<(string, Action)> answers)
+   {
+      messageQue.Add(new MessageQuestion{question = message, answers = answers});
+      ShowMessage();
+   }
 
    public void QueMessage(string message)
    {
-      messageQue.Add(message);
+      messageQue.Add(new MessageQuestion{question = message});
       ShowMessage();
    }
 
@@ -28,8 +36,16 @@ public class MessageController : MonoBehaviour
    {
       if(waitTimer == null)
       {
-         text.text = messageQue[0];
+         questionText.text = messageQue[0].question;
          messageBlock.SetActive(true);
+         answerOneText.text = "";
+         answerTwoText.text = "";
+         if (messageQue[0].answers.Count >= 2)
+         {
+            answerOneText.text = messageQue[0].answers[0].Item1;
+            answerTwoText.text = messageQue[0].answers[1].Item1;
+         }
+         
          waitTimer = StartCoroutine(WaitForNextMessage());
       }
    }

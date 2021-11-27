@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
+    public PlayerInput playerInput;
+    
     public Action<Vector2> Directions;
     public Action StopDirections;
     public Action UseTool;
@@ -12,7 +15,7 @@ public class InputController : MonoBehaviour
     public Action OpenDeepStorageAsPlayer;
     public Action DodgeRoll;
     
-    private int vert, hor = 0;
+    private float vert, hor = 0;
     private Vector2 directions;
 
     private List<InputCheckData> keyActions;
@@ -20,10 +23,32 @@ public class InputController : MonoBehaviour
     private InputType blockExcept;
 
     public bool running;
+
+    public void OpenWheelMenu()
+    {
+        OpenMenu?.Invoke();
+    }
+
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            Vector2 inputVec = ctx.ReadValue<Vector2>();
+            vert = inputVec.y;
+            hor = inputVec.x;
+        }
+
+        if (ctx.canceled)
+            hor = vert = 0;
+
+    }
     
     private void Awake()
     {
         WorldGraph.Subscribe(this, typeof(InputController));
+
+        playerInput.onActionTriggered += context => { Debug.Log(context); }; 
+        
         keyActions = new List<InputCheckData>()
         {
             new InputCheckData
@@ -58,30 +83,6 @@ public class InputController : MonoBehaviour
             },
             new InputCheckData
             {
-                type = InputType.North,
-                criteria = x => { return Input.GetKey(KeyCode.W); },
-                action = () => { vert = 1; }
-            },
-            new InputCheckData
-            {
-                type = InputType.South,
-                criteria = x => { return Input.GetKey(KeyCode.S); },
-                action = () => { vert = -1; }
-            },
-            new InputCheckData
-            {
-                type = InputType.East,
-                criteria = x => { return Input.GetKey(KeyCode.D); },
-                action = () => { hor = 1; }
-            },
-            new InputCheckData
-            {
-                type = InputType.West,
-                criteria = x => { return Input.GetKey(KeyCode.A); },
-                action = () => { hor = -1; }
-            },
-            new InputCheckData
-            {
                 type = InputType.Run,
                 criteria = x => { return Input.GetKeyDown(KeyCode.LeftShift); },
                 action = () => { running = true; }
@@ -107,12 +108,12 @@ public class InputController : MonoBehaviour
 
     private void Update()
     {
-        foreach (var kAction in keyActions)
-        {
-            if (blockExcept != InputType.None && blockExcept != kAction.type) continue;
-            if (kAction.criteria.Invoke(0)) kAction.action.Invoke();
-        }
-        
+        // foreach (var kAction in keyActions)
+        // {
+        //     if (blockExcept != InputType.None && blockExcept != kAction.type) continue;
+        //     if (kAction.criteria.Invoke(0)) kAction.action.Invoke();
+        // }
+        //
     }
 
     void FixedUpdate()
@@ -127,9 +128,6 @@ public class InputController : MonoBehaviour
         }
         
         Directions?.Invoke(directions);
-        vert = 0;
-        hor = 0;
-        directions.x = 0;
-        directions.y = 0;
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Object = System.Object;
 
 public class HumanStateNetwork:INPCStateNetwork
@@ -39,7 +40,8 @@ public class HumanStateNetwork:INPCStateNetwork
         if (settings.isHotelOwner)
         {
             //Give option to sleep - and save
-            messageController.QueMessage("Do you want to sleep here?");
+            messageController.QueMessageQuestion("Do you want to sleep here?",
+                new List<(string, Action)> {("Yes", null), ("No", null)});
             return;
         }
         
