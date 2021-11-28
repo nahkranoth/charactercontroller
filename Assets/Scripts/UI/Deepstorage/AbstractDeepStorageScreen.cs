@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbstractDeepStorageScreen:MonoBehaviour
@@ -7,11 +8,13 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     public DeepstorageInfo infoPanel;
     public GameObject deepStoragePrefab;
     public GameObject inventoryGrid;
+    public GameObject secondInventoryGrid;
 
     protected PlayerController player;
     protected InputController input;
     
     protected EntityInventory activeInventory;
+    protected EntityInventory secondInventory;
     
     public void Start()
     {
@@ -27,12 +30,13 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     {
         input.LiftBlockExcept();
         DestroyItems(OnSelectItem, inventoryGrid.transform);
+        if(secondInventoryGrid) DestroyItems(OnSelectItem, secondInventoryGrid.transform);
         mainPanel.SetActive(false);
     }
     
-    protected void InstantiateItems(EntityInventory inventory, Action<Item> OnSelectItem, Transform target)
+    protected void InstantiateItems(List<Item> storage, Action<Item> OnSelectItem, Transform target)
     {
-        foreach (var itm in inventory.storage)
+        foreach (var itm in storage)
         {
             var ds = Instantiate(deepStoragePrefab, target).GetComponent<DeepstorageItem>();
             ds.Apply(itm);
@@ -58,7 +62,7 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     protected void RerenderInventory()
     {
         DestroyItems(OnSelectItem, inventoryGrid.transform);
-        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
     }
 
     protected abstract void OnSelectItem(Item _item);

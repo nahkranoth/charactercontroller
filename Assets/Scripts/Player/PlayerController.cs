@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
    public Vector2 Directions => directions;
 
    public EntityInventory Inventory => statusController.status.inventory;
+   public EntityInventory Wearing => statusController.status.wearing;
 
    
    private void Awake()
@@ -71,6 +73,12 @@ public class PlayerController : MonoBehaviour
       // Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
       // Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
+      
+      
+      //Wearables
+      
+      // Wearing.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      
       statusController.StatusUpdate();
       equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
@@ -106,10 +114,10 @@ public class PlayerController : MonoBehaviour
       if (canRun()) speed = statusController.status.runSpeed;
       
       rigid.AddForce(directions * speed);
-      myScale.x = directions.x == 0 ? 1: directions.x;
+      myScale.x = directions.x == 0 ? 1 : Mathf.Sign(directions.x);
       spriteHolder.localScale = myScale;
       weaponSpriteHolder.localScale = myScale;
-      animator.SetWalk((int)directions.x,(int)directions.y);
+      animator.SetWalk(Math.Sign(directions.x),Math.Sign(directions.y));
    }
 
    private bool canRun()

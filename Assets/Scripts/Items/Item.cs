@@ -11,6 +11,7 @@ public class Item
     
     public bool consumable;
     public bool equipable;
+    public bool wearable;
 
     public int price;
     

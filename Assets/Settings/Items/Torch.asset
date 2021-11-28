@@ -19,6 +19,7 @@ MonoBehaviour:
     behaviour: 4
     consumable: 0
     equipable: 1
+    wearable: 1
     price: 90
     canChopWood: 0
     damage: 0

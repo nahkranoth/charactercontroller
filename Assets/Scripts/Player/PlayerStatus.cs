@@ -22,6 +22,7 @@ public class PlayerStatus
     public bool alive;
 
     public EntityInventory inventory;
+    public EntityInventory wearing;
 
     public int currentStep;
     public int currentLowStep;

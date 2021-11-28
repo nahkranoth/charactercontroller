@@ -1,6 +1,4 @@
-using Codice.CM.WorkspaceServer.DataStore.Merge;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
@@ -50,24 +48,28 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
             Hide();
             return;
         }
-        Show(player.Inventory);
+        Show();
     }
 
-    public void Show(EntityInventory inventory)
+    public void Show()
     {
         if(mainPanel.activeSelf) return;
-        activeInventory = inventory;
+        activeInventory = player.Inventory;
+        secondInventory = player.Wearing;
         infoPanel.info.text = "Player inventory";
         input.BlockExcept(InputType.OpenInventory);
         SetStorageCap();
         mainPanel.SetActive(true);
-        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(secondInventory.storage, OnSecondarySelectItem, secondInventoryGrid.transform);
     }
     
     void RerenderInventory()
     {
         DestroyItems(OnSelectItem, inventoryGrid.transform);
-        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+        DestroyItems(OnSecondarySelectItem, secondInventoryGrid.transform);
+        InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(secondInventory.storage, OnSecondarySelectItem, secondInventoryGrid.transform);
         SetStorageCap();
     }
 
@@ -76,21 +78,63 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
         storageCapText.text = $"{activeInventory.TotalItemWeight()}/{player.statusController.status.maxCarryWeight}";
     }
 
+    private void OnSecondarySelectItem(Item _item)
+    {
+        if (_item.wearable)
+        {
+            infoPanel.OnInfo(new DeepStorageInfoData()
+            {
+                item = _item,
+                onFirstAction = new DeepStorageInfoAction
+                {
+                    name = "Unwear",
+                    action = (item) =>
+                    {
+                        player.Inventory.AddByItem(_item);
+                        player.Wearing.RemoveByItem(_item);
+                        RerenderInventory();
+                        infoPanel.ResetInfo();
+                    }
+                }
+            });
+        }
+    }
+    
     protected override void OnSelectItem(Item _item)
     {
-        infoPanel.OnInfo(new DeepStorageInfoData()
+        if (_item.wearable)
         {
-            item = _item,
-            onFirstAction = new DeepStorageInfoAction
+            infoPanel.OnInfo(new DeepStorageInfoData()
             {
-                name = "Destroy",
-                action = (item) =>
+                item = _item,
+                onFirstAction = new DeepStorageInfoAction
                 {
-                    player.Inventory.RemoveByItem(_item);
-                    RerenderInventory();
+                    name = "Wear",
+                    action = (item) =>
+                    {
+                        player.Inventory.RemoveByItem(_item);
+                        player.Wearing.AddByItem(_item);
+                        RerenderInventory();
+                        infoPanel.ResetInfo();
+                    }
                 }
-            }
-        });
+            });
+        }
+        
+        
+        // infoPanel.OnInfo(new DeepStorageInfoData()
+        // {
+        //     item = _item,
+        //     onFirstAction = new DeepStorageInfoAction
+        //     {
+        //         name = "Destroy",
+        //         action = (item) =>
+        //         {
+        //             player.Inventory.RemoveByItem(_item);
+        //             RerenderInventory();
+        //         }
+        //     }
+        // });
     }
   
 }

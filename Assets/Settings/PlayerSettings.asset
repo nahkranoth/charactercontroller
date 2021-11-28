@@ -19,7 +19,7 @@ MonoBehaviour:
     thirst: 1
     sleep: 1
     walkSpeed: 18
-    runSpeed: 44
+    runSpeed: 28
     chargeSpeed: 0.002
     chargeWalkSpeed: 3
     dodgeRollForce: 4

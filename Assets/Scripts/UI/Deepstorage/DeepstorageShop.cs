@@ -28,7 +28,7 @@ public class DeepstorageShop : AbstractDeepStorageScreen
         infoPanel.info.text = "Welcome to my shop";
         input.BlockExcept(InputType.OpenInventory);
         mainPanel.SetActive(true);
-        InstantiateItems(activeInventory,OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(activeInventory.storage,OnSelectItem, inventoryGrid.transform);
         buyButton.gameObject.SetActive(true);
         sellButton.gameObject.SetActive(true);
         asShop = true;
@@ -41,14 +41,14 @@ public class DeepstorageShop : AbstractDeepStorageScreen
     {
         asShopSellState = true;
         DestroyItems(OnSelectItem, inventoryGrid.transform);
-        InstantiateItems(player.Inventory, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(player.Inventory.storage, OnSelectItem, inventoryGrid.transform);
     }
 
     private void SetShopToBuyState()
     {
         asShopSellState = false;
         DestroyItems(OnSelectItem, inventoryGrid.transform);
-        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
     }
 
     protected override void OnSelectItem(Item _item)

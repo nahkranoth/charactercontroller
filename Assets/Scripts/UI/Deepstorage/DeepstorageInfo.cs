@@ -12,8 +12,16 @@ public class DeepstorageInfo : MonoBehaviour
         actionButton.gameObject.SetActive(data.onFirstAction != null);
         actionButton.onClick.RemoveAllListeners();
         actionButton.onClick.AddListener(() => data.onFirstAction.action(data.item) );
-        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = data.onFirstAction.name;
+        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = data.onFirstAction?.name;
         info.text = $"{data.item.menuName}\n${data.item.price}\n{data.item.weight}";
+    }
+
+    public void ResetInfo()
+    {
+        actionButton.onClick.RemoveAllListeners();
+        actionButton.gameObject.SetActive(false);
+        actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        info.text = "";
     }
     
 }

@@ -41,8 +41,8 @@ public class DeepstorageNPCInventory : AbstractDeepStorageScreen
     {
         DestroyItems(OnSelectItem, inventoryGrid.transform);
         DestroyItems(OnSelectItem, playerInventoryGrid.transform);
-        InstantiateItems(activeInventory, OnSelectItem, inventoryGrid.transform);
-        InstantiateItems(player.Inventory, OnSelectPlayerItem, playerInventoryGrid.transform);
+        InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
+        InstantiateItems(player.Inventory.storage, OnSelectPlayerItem, playerInventoryGrid.transform);
     }
     
     private void OnSelectPlayerItem(Item _item)
