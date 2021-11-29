@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
       
       //Wearables
       
-      // Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));
+      Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));
       
       statusController.StatusUpdate();
       equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
    private void OnChargingPowerAttack(bool charging)
    {
-      speed = charging ? statusController.status.modifiers.chargeWalkSpeed : statusController.status.modifiers.walkSpeed;
+      speed = charging ? statusController.status.modifiers.chargeWalkSpeed : statusController.WalkSpeed;
       animator.SetCharging(charging);
    }
    
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
          return;
       }
 
-      speed = statusController.status.modifiers.walkSpeed;
-      if (canRun()) speed = statusController.status.modifiers.runSpeed;
+      speed = statusController.WalkSpeed;
+      if (canRun()) speed = statusController.RunSpeed;
       
       rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1 : Mathf.Sign(directions.x);
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
    {
       yield return new WaitForSeconds(1f);
       invincible = false;
-      speed = statusController.status.modifiers.walkSpeed;
+      speed = statusController.WalkSpeed;
    }
 
    public void ApplyModifier(PlayerModifiers modifier)

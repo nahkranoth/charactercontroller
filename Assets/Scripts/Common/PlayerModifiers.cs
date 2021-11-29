@@ -13,9 +13,6 @@ public class PlayerModifiers
     
     public void AddModifier(PlayerModifiers other)
     {
-        maxHealth += other.maxHealth;
-        walkSpeed += other.walkSpeed;
-        runSpeed += other.runSpeed;
         chargeSpeed += other.chargeSpeed;
         chargeWalkSpeed += other.chargeWalkSpeed;
         dodgeRollForce += other.dodgeRollForce;
@@ -24,9 +21,6 @@ public class PlayerModifiers
     
     public void SubtractModifier(PlayerModifiers other)
     {
-        maxHealth -= other.maxHealth;
-        walkSpeed -= other.walkSpeed;
-        runSpeed -= other.runSpeed;
         chargeSpeed -= other.chargeSpeed;
         chargeWalkSpeed -= other.chargeWalkSpeed;
         dodgeRollForce -= other.dodgeRollForce;

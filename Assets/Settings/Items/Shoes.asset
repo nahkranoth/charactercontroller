@@ -22,9 +22,9 @@ MonoBehaviour:
     wearable: 1
     armor: 0.05
     wearableModifier:
-      maxHealth: 0
-      walkSpeed: 20
-      runSpeed: 20
+      maxHealth: 20
+      walkSpeed: 30
+      runSpeed: 80
       chargeSpeed: 0
       chargeWalkSpeed: 0
       dodgeRollForce: 0

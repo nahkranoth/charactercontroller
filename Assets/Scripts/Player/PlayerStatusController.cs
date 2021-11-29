@@ -43,13 +43,6 @@ public class PlayerStatusController:MonoBehaviour
         get { return status.health; }
         set { status.health = value; }
     }
-    
-    public int MaxHealth
-    {
-        get { return status.modifiers.maxHealth; }
-        set { status.modifiers.maxHealth = value; }
-    }
-
     public float Armor
     {
         get
@@ -57,6 +50,36 @@ public class PlayerStatusController:MonoBehaviour
             var result = status.wearing.storage;
             var sum = result.Sum(x => x.armor);
             return 1-Mathf.Min(1, sum);
+        }
+    }
+    
+    public float WalkSpeed
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.wearableModifier.walkSpeed);
+            return sum + status.modifiers.walkSpeed;
+        }
+    }
+    
+    public int MaxHealth
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.wearableModifier.maxHealth);
+            return sum + status.modifiers.maxHealth;
+        }
+    }
+
+    public float RunSpeed
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.wearableModifier.runSpeed);
+            return sum + status.modifiers.runSpeed;
         }
     }
     
@@ -73,14 +96,13 @@ public class PlayerStatusController:MonoBehaviour
         {
             status.alive = false;
         }
-        if (status.health > status.modifiers.maxHealth) status.health = status.modifiers.maxHealth;
+        if (status.health > MaxHealth) status.health = MaxHealth;
         if (status.alive) OnChangeHealth?.Invoke(status.health);
     }
 
     public void SetHealth(int set)
     {
         status.health = set;
-        status.modifiers.maxHealth = set;
         status.alive = true;
         if (status.health <= 0) status.alive = false;
     }
