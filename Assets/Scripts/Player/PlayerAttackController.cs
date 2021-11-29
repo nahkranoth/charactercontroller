@@ -86,7 +86,7 @@ public class PlayerAttackController: MonoBehaviour
     {
         for (charge = 0; charge <= 100; charge++)
         {
-            yield return new WaitForSeconds(player.settings.status.chargeSpeed);
+            yield return new WaitForSeconds(player.settings.status.modifiers.chargeSpeed);
             UpdateReadyAttack.Invoke(charge);
         }
 

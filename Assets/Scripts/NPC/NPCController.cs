@@ -78,6 +78,7 @@ public class NPCController : MonoBehaviour
         {
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Honey"));
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Water Bottle"));
+            inventory.storage.AddByDescription(itemCollection.collection.FindByName("Shoes"));
             inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
         }
 

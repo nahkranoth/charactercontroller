@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
    private void OnChargingPowerAttack(bool charging)
    {
-      speed = charging ? statusController.status.chargeWalkSpeed : statusController.status.walkSpeed;
+      speed = charging ? statusController.status.modifiers.chargeWalkSpeed : statusController.status.modifiers.walkSpeed;
       animator.SetCharging(charging);
    }
    
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
          return;
       }
 
-      speed = statusController.status.walkSpeed;
-      if (canRun()) speed = statusController.status.runSpeed;
+      speed = statusController.status.modifiers.walkSpeed;
+      if (canRun()) speed = statusController.status.modifiers.runSpeed;
       
       rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1 : Mathf.Sign(directions.x);
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
       while (cntr < 20)
       {
          yield return new WaitForFixedUpdate();
-         rigid.AddForce(Directions * statusController.status.dodgeRollForce, ForceMode2D.Force);
+         rigid.AddForce(Directions * statusController.status.modifiers.dodgeRollForce, ForceMode2D.Force);
          cntr++;
       }
       invincible = false;
@@ -168,7 +168,21 @@ public class PlayerController : MonoBehaviour
    {
       yield return new WaitForSeconds(1f);
       invincible = false;
-      speed = statusController.status.walkSpeed;
+      speed = statusController.status.modifiers.walkSpeed;
+   }
+
+   public void ApplyModifier(PlayerModifiers modifier)
+   {
+      statusController.MaxHealth += modifier.maxHealth;
+      statusController.status.modifiers.runSpeed += modifier.runSpeed;
+      statusController.status.modifiers.walkSpeed += modifier.walkSpeed;
+   }
+   
+   public void RemoveModifier(PlayerModifiers modifier)
+   {
+      statusController.MaxHealth -= modifier.maxHealth;
+      statusController.status.modifiers.runSpeed -= modifier.runSpeed;
+      statusController.status.modifiers.walkSpeed -= modifier.walkSpeed;
    }
 
 }

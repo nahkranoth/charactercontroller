@@ -45,8 +45,8 @@ public class PlayerStatusController:MonoBehaviour
     
     public int MaxHealth
     {
-        get { return status.maxHealth; }
-        set { status.maxHealth = value; }
+        get { return status.modifiers.maxHealth; }
+        set { status.modifiers.maxHealth = value; }
     }
     
     public void ModifyHealth(int change)
@@ -56,14 +56,14 @@ public class PlayerStatusController:MonoBehaviour
         {
             status.alive = false;
         }
-        if (status.health > status.maxHealth) status.health = status.maxHealth;
+        if (status.health > status.modifiers.maxHealth) status.health = status.modifiers.maxHealth;
         if (status.alive) OnChangeHealth?.Invoke(status.health);
     }
 
     public void SetHealth(int set)
     {
         status.health = set;
-        status.maxHealth = set;
+        status.modifiers.maxHealth = set;
         status.alive = true;
         if (status.health <= 0) status.alive = false;
     }
@@ -82,6 +82,6 @@ public class PlayerStatusController:MonoBehaviour
 
     public bool HasCarrySpace(float weight)
     {
-        return status.maxCarryWeight > status.inventory.TotalItemWeight() + weight;
+        return status.modifiers.maxCarryWeight > status.inventory.TotalItemWeight() + weight;
     }
 }

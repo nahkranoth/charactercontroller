@@ -12,6 +12,7 @@ public class Item
     public bool consumable;
     public bool equipable;
     public bool wearable;
+    public PlayerModifiers wearableModifier;
 
     public int price;
     
@@ -25,6 +26,7 @@ public class Item
     public float weight;
 
     public GameObject spawnable;
+
     
     [HideInInspector] public int amount = 1;
 

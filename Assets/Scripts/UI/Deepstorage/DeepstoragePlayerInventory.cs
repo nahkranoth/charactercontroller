@@ -75,7 +75,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
 
     private void SetStorageCap()
     {
-        storageCapText.text = $"{activeInventory.TotalItemWeight()}/{player.statusController.status.maxCarryWeight}";
+        storageCapText.text = $"{activeInventory.TotalItemWeight()}/{player.statusController.status.modifiers.maxCarryWeight}";
     }
 
     private void OnSecondarySelectItem(Item _item)
@@ -94,6 +94,8 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
                         player.Wearing.RemoveByItem(_item);
                         RerenderInventory();
                         infoPanel.ResetInfo();
+                        player.RemoveModifier(_item.wearableModifier);
+                        player.statusController.StatusUpdate();
                     }
                 }
             });
@@ -116,6 +118,8 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
                         player.Wearing.AddByItem(_item);
                         RerenderInventory();
                         infoPanel.ResetInfo();
+                        player.ApplyModifier(_item.wearableModifier);
+                        player.statusController.StatusUpdate();
                     }
                 }
             });
