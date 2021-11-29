@@ -37,26 +37,26 @@ public class LevelRepeater : MonoBehaviour
         player.statusController.OnFullReset -= Regenerate;
         player.statusController.OnFullReset += Regenerate;
 
-        player.statusController.status.currentStep = 0;
-        player.statusController.status.currentLowStep = 0;
+        player.statusController.status.currentLevelStep = 0;
+        player.statusController.status.currentLowLevelStep = 0;
         
-        GenerateAtRoot(player.statusController.status.currentStep);
-        GenerateAtRoot(player.statusController.status.currentStep-StepSize());
-        GenerateAtRoot(player.statusController.status.currentStep+StepSize());
+        GenerateAtRoot(player.statusController.status.currentLevelStep);
+        GenerateAtRoot(player.statusController.status.currentLevelStep-StepSize());
+        GenerateAtRoot(player.statusController.status.currentLevelStep+StepSize());
         
-        player.statusController.status.currentLowStep = player.statusController.status.currentStep-StepSize();
-        player.statusController.status.currentStep = player.statusController.status.currentStep+StepSize();
+        player.statusController.status.currentLowLevelStep = player.statusController.status.currentLevelStep-StepSize();
+        player.statusController.status.currentLevelStep = player.statusController.status.currentLevelStep+StepSize();
     }
 
     public void Regenerate()
     {
         RemoveAll();
-        GenerateAtRoot(player.statusController.status.currentStep);
-        GenerateAtRoot(player.statusController.status.currentStep-StepSize());
-        GenerateAtRoot(player.statusController.status.currentStep+StepSize());
+        GenerateAtRoot(player.statusController.status.currentLevelStep);
+        GenerateAtRoot(player.statusController.status.currentLevelStep-StepSize());
+        GenerateAtRoot(player.statusController.status.currentLevelStep+StepSize());
         
-        player.statusController.status.currentLowStep = player.statusController.status.currentStep-StepSize();
-        player.statusController.status.currentStep = player.statusController.status.currentStep+StepSize();
+        player.statusController.status.currentLowLevelStep = player.statusController.status.currentLevelStep-StepSize();
+        player.statusController.status.currentLevelStep = player.statusController.status.currentLevelStep+StepSize();
     }
 
     private void GenerateAtRoot(int step)
@@ -99,12 +99,12 @@ public class LevelRepeater : MonoBehaviour
     }
     public int GetHighestGeneratePoint()
     {
-        return player.statusController.status.currentStep + StepSize();
+        return player.statusController.status.currentLevelStep + StepSize();
     }
     
     public int GetLowestGeneratePoint()
     {
-        return player.statusController.status.currentLowStep;
+        return player.statusController.status.currentLowLevelStep;
     }
 
     private int StepSize()
@@ -114,19 +114,19 @@ public class LevelRepeater : MonoBehaviour
 
     public void Increase()
     {
-        var newStep = player.statusController.status.currentStep + StepSize();
+        var newStep = player.statusController.status.currentLevelStep + StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(player.statusController.status.currentLowStep-1);
-        player.statusController.status.currentStep = newStep;
-        player.statusController.status.currentLowStep += StepSize();
+        RemoveAt(player.statusController.status.currentLowLevelStep-1);
+        player.statusController.status.currentLevelStep = newStep;
+        player.statusController.status.currentLowLevelStep += StepSize();
     }
     public void Decrease()
     {
-        var newStep = player.statusController.status.currentLowStep - StepSize();
+        var newStep = player.statusController.status.currentLowLevelStep - StepSize();
         GenerateAtRoot(newStep);
-        RemoveAt(player.statusController.status.currentStep+1);
-        player.statusController.status.currentStep -= StepSize();
-        player.statusController.status.currentLowStep = newStep;
+        RemoveAt(player.statusController.status.currentLevelStep+1);
+        player.statusController.status.currentLevelStep -= StepSize();
+        player.statusController.status.currentLowLevelStep = newStep;
     }
    
 }

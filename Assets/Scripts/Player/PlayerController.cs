@@ -173,16 +173,12 @@ public class PlayerController : MonoBehaviour
 
    public void ApplyModifier(PlayerModifiers modifier)
    {
-      statusController.MaxHealth += modifier.maxHealth;
-      statusController.status.modifiers.runSpeed += modifier.runSpeed;
-      statusController.status.modifiers.walkSpeed += modifier.walkSpeed;
+      statusController.status.modifiers.AddModifier(modifier);
    }
    
    public void RemoveModifier(PlayerModifiers modifier)
    {
-      statusController.MaxHealth -= modifier.maxHealth;
-      statusController.status.modifiers.runSpeed -= modifier.runSpeed;
-      statusController.status.modifiers.walkSpeed -= modifier.walkSpeed;
+      statusController.status.modifiers.SubtractModifier(modifier);
    }
 
 }

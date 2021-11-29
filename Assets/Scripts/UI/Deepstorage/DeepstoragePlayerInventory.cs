@@ -104,41 +104,40 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
     
     protected override void OnSelectItem(Item _item)
     {
+        DeepStorageInfoAction firstAction = null;
+        
+        firstAction = new DeepStorageInfoAction
+        {
+            name = "Destroy",
+            action = (item) =>
+            {
+                player.Inventory.RemoveByItem(_item);
+                RerenderInventory();
+            }
+        };
+        
         if (_item.wearable)
         {
-            infoPanel.OnInfo(new DeepStorageInfoData()
+            firstAction = new DeepStorageInfoAction
             {
-                item = _item,
-                onFirstAction = new DeepStorageInfoAction
+                name = "Wear",
+                action = (item) =>
                 {
-                    name = "Wear",
-                    action = (item) =>
-                    {
-                        player.Inventory.RemoveByItem(_item);
-                        player.Wearing.AddByItem(_item);
-                        RerenderInventory();
-                        infoPanel.ResetInfo();
-                        player.ApplyModifier(_item.wearableModifier);
-                        player.statusController.StatusUpdate();
-                    }
+                    player.Inventory.RemoveByItem(_item);
+                    player.Wearing.AddByItem(_item);
+                    RerenderInventory();
+                    infoPanel.ResetInfo();
+                    player.ApplyModifier(_item.wearableModifier);
+                    player.statusController.StatusUpdate();
                 }
-            });
+            };
         }
-        
-        
-        // infoPanel.OnInfo(new DeepStorageInfoData()
-        // {
-        //     item = _item,
-        //     onFirstAction = new DeepStorageInfoAction
-        //     {
-        //         name = "Destroy",
-        //         action = (item) =>
-        //         {
-        //             player.Inventory.RemoveByItem(_item);
-        //             RerenderInventory();
-        //         }
-        //     }
-        // });
+
+        infoPanel.OnInfo(new DeepStorageInfoData()
+        {
+            item = _item,
+            onFirstAction = firstAction
+        });
     }
   
 }
