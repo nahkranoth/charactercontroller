@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2aa6be2e21b68c49b432674b1557d7f, type: 3}
-  m_Name: Shoes
+  m_Name: Helmet
   m_EditorClassIdentifier: 
   item:
-    menuName: Shoes
-    menuSprite: {fileID: 1755583839442456828, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
-    equipedSprite: {fileID: 1755583839442456828, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
+    menuName: Helmet
+    menuSprite: {fileID: 3253322457042160742, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
+    equipedSprite: {fileID: 3253322457042160742, guid: 2d10b4da2edb7244aa19becfde54ca28, type: 3}
     behaviour: 0
     consumable: 0
     equipable: 0
     wearable: 1
-    armor: 0.05
+    armor: 0.1
     wearableModifier:
       maxHealth: 0
-      walkSpeed: 20
-      runSpeed: 20
+      walkSpeed: 0
+      runSpeed: 0
       chargeSpeed: 0
       chargeWalkSpeed: 0
       dodgeRollForce: 0
@@ -38,4 +38,4 @@ MonoBehaviour:
     weight: 0
     spawnable: {fileID: 0}
     amount: 1
-  rarity: 30
+  rarity: 10

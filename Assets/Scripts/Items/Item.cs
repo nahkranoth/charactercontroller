@@ -12,6 +12,7 @@ public class Item
     public bool consumable;
     public bool equipable;
     public bool wearable;
+    public float armor;
     public PlayerModifiers wearableModifier;
 
     public int price;

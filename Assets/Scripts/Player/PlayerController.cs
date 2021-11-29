@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
       
       //Wearables
       
-      // Wearing.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
+      // Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));
       
       statusController.StatusUpdate();
       equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));

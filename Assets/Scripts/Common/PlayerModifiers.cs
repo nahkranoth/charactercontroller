@@ -10,7 +10,7 @@ public class PlayerModifiers
     public float chargeWalkSpeed;
     public float dodgeRollForce;
     public float maxCarryWeight;
-
+    
     public void AddModifier(PlayerModifiers other)
     {
         maxHealth += other.maxHealth;

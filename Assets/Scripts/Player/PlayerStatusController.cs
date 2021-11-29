@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerStatusController:MonoBehaviour
@@ -48,9 +49,25 @@ public class PlayerStatusController:MonoBehaviour
         get { return status.modifiers.maxHealth; }
         set { status.modifiers.maxHealth = value; }
     }
+
+    public float Armor
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.armor);
+            return 1-Mathf.Min(1, sum);
+        }
+    }
     
     public void ModifyHealth(int change)
     {
+        if (change < 0)
+        { //is damage
+            change = (int) (change * Armor);
+            // change = Math.Min(change, 0);
+        }
+        
         status.health += change;
         if (status.health <= 0)
         {
