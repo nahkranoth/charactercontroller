@@ -61,8 +61,6 @@ public class PlayerController : MonoBehaviour
 
       attackController.OnToolHitSomething -= OnToolHitSomething;
       attackController.OnToolHitSomething += OnToolHitSomething;
-      attackController.chargingPowerAttack -= OnChargingPowerAttack;
-      attackController.chargingPowerAttack += OnChargingPowerAttack;
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
       itemBehaviourController.ChangeHealth -= statusController.ModifyHealth;
@@ -78,6 +76,7 @@ public class PlayerController : MonoBehaviour
       //Wearables
       
       Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));
+      Wearing.AddByDescription(itemDescriptions.collection.FindByName("Backpack"));
       
       statusController.StatusUpdate();
       equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
@@ -87,12 +86,6 @@ public class PlayerController : MonoBehaviour
    {
       var itm = Inventory.storage.Find(x => x.behaviour == behaviour);
       equipController.Equip(itm);
-   }
-
-   private void OnChargingPowerAttack(bool charging)
-   {
-      speed = charging ? statusController.status.modifiers.chargeWalkSpeed : statusController.WalkSpeed;
-      animator.SetCharging(charging);
    }
    
    private void OnToolHitSomething(Collider2D collider, Item itm)
@@ -142,7 +135,7 @@ public class PlayerController : MonoBehaviour
       while (cntr < 20)
       {
          yield return new WaitForFixedUpdate();
-         rigid.AddForce(Directions * statusController.status.modifiers.dodgeRollForce, ForceMode2D.Force);
+         rigid.AddForce(Directions * statusController.DodgeRollForce, ForceMode2D.Force);
          cntr++;
       }
       invincible = false;
@@ -169,16 +162,6 @@ public class PlayerController : MonoBehaviour
       yield return new WaitForSeconds(1f);
       invincible = false;
       speed = statusController.WalkSpeed;
-   }
-
-   public void ApplyModifier(PlayerModifiers modifier)
-   {
-      statusController.status.modifiers.AddModifier(modifier);
-   }
-   
-   public void RemoveModifier(PlayerModifiers modifier)
-   {
-      statusController.status.modifiers.SubtractModifier(modifier);
    }
 
 }

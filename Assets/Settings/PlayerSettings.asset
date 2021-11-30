@@ -18,8 +18,7 @@ MonoBehaviour:
       maxHealth: 50
       walkSpeed: 23
       runSpeed: 35
-      chargeSpeed: 0.005
-      chargeWalkSpeed: 3
+      chargeTime: 2
       dodgeRollForce: 12
       maxCarryWeight: 10
     hunger: 1
@@ -31,6 +30,6 @@ MonoBehaviour:
       storage: []
     wearing:
       storage: []
-    currentStep: 0
-    currentLowStep: 0
+    currentLevelStep: 0
+    currentLowLevelStep: 0
     position: {x: 0, y: 0, z: 0}

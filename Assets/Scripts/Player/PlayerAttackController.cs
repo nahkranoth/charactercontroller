@@ -10,7 +10,6 @@ public class PlayerAttackController: MonoBehaviour
     public PlayerController player;
     
     public Action<int> UpdateReadyAttack;
-    public Action<bool> chargingPowerAttack;
     public Action<Collider2D, Item> OnToolHitSomething;
     
     private Coroutine attackTiming;
@@ -84,28 +83,15 @@ public class PlayerAttackController: MonoBehaviour
 
     IEnumerator AttackDone()
     {
+        var chargeTime = player.statusController.ChargeTime / 100;
         for (charge = 0; charge <= 100; charge++)
         {
-            yield return new WaitForSeconds(player.settings.status.modifiers.chargeSpeed);
+            yield return new WaitForSeconds(chargeTime);
             UpdateReadyAttack.Invoke(charge);
         }
 
         charge = 100;
-        while (Input.GetMouseButton(0))
-        {
-            if(charge<200) charge++;
-            yield return new WaitForSeconds(0.01f);
-            chargingPowerAttack.Invoke(true);
-            UpdateReadyAttack.Invoke(charge);
-        }
-
-        if (charge >= 200)
-        {
-           Debug.Log("PowerAttack");
-        }
-
         UpdateReadyAttack.Invoke(100);
-        chargingPowerAttack.Invoke(false);
         fullAttackReady = true;
     }
 }

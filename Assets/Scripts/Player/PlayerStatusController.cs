@@ -14,12 +14,7 @@ public class PlayerStatusController:MonoBehaviour
     {
         WorldGraph.Subscribe(this, typeof(PlayerStatusController));
     }
-    
-    public int Money
-    {
-        get { return status.money; }
-        set { status.money = value; }
-    }
+  
 
     public void ChangeMoney(int amount)
     {
@@ -38,11 +33,18 @@ public class PlayerStatusController:MonoBehaviour
         OnChangeHealth?.Invoke(status.health);
     }
 
+    public int Money
+    {
+        get { return status.money; }
+        set { status.money = value; }
+    }
+    
     public int CurrentHealth
     {
         get { return status.health; }
         set { status.health = value; }
     }
+    
     public float Armor
     {
         get
@@ -80,6 +82,36 @@ public class PlayerStatusController:MonoBehaviour
             var result = status.wearing.storage;
             var sum = result.Sum(x => x.wearableModifier.runSpeed);
             return sum + status.modifiers.runSpeed;
+        }
+    }
+
+    public float ChargeTime
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.wearableModifier.chargeTime);
+            return Mathf.Max(0.1f, status.modifiers.chargeTime + sum);
+        }
+    }
+
+    public float DodgeRollForce
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.wearableModifier.dodgeRollForce);
+            return status.modifiers.dodgeRollForce + sum;
+        }
+    }
+
+    public float MaxCarryWeight
+    {
+        get
+        {
+            var result = status.wearing.storage;
+            var sum = result.Sum(x => x.wearableModifier.maxCarryWeight);
+            return status.modifiers.maxCarryWeight + sum;
         }
     }
     
@@ -121,6 +153,6 @@ public class PlayerStatusController:MonoBehaviour
 
     public bool HasCarrySpace(float weight)
     {
-        return status.modifiers.maxCarryWeight > status.inventory.TotalItemWeight() + weight;
+        return MaxCarryWeight > status.inventory.TotalItemWeight() + weight;
     }
 }
