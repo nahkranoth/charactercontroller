@@ -48,7 +48,7 @@ public class BowlerStateNetwork:INPCStateNetwork
         return "die";
     }
 
-    public void OnTriggerByPlayer()
+    public void OnTriggerByPlayer(PlayerToolActionType type)
     {
         
     }

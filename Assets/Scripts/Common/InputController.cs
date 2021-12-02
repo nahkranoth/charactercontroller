@@ -9,11 +9,12 @@ public class InputController : MonoBehaviour
     public Action<Vector2> Directions;
     public Action StopDirections;
     public Action SlashTool;
-    public Action OpenMenu;
+    public Action ToggleWheelMenuShow;
     public Action ApplyTool;
     public Action OpenDeepStorageAsPlayer;
     public Action DodgeRoll;
     public Action OnCloseUI;
+    public Action ApplyMenuWheel;
 
     public PlayerInput playerInput;
     
@@ -89,10 +90,16 @@ public class InputController : MonoBehaviour
         OpenDeepStorageAsPlayer?.Invoke();
     }
     
-    public void OpenWheelInventory(InputAction.CallbackContext ctx)
+    public void ToggleWheelInventoryShow(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        OpenMenu?.Invoke();
+        ToggleWheelMenuShow?.Invoke();
+    }
+
+    public void OnMenuWheelUse(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        ApplyMenuWheel?.Invoke();
     }
 
     void FixedUpdate()

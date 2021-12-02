@@ -30,9 +30,12 @@ public class DonkeyStateNetwork:INPCStateNetwork
         return dict;
     }
 
-    public void OnTriggerByPlayer()
+    public void OnTriggerByPlayer(PlayerToolActionType type)
     {
-        deepStorage.Show(parent.inventory.storage);
+        if (type == PlayerToolActionType.Apply)
+        {
+            deepStorage.Show(parent.inventory.storage);
+        }
     }
 
     public string GetStartNode()

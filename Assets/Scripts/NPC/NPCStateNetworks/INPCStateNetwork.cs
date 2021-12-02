@@ -10,6 +10,6 @@ public interface INPCStateNetwork
     string GetDamagedNode();
     string GetDamageFinishedNode();
     string GetDieNode();
-    public void OnTriggerByPlayer();
+    public void OnTriggerByPlayer(PlayerToolActionType type);
 
 }

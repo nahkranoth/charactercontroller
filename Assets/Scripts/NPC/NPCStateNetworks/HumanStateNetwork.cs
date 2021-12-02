@@ -28,8 +28,9 @@ public class HumanStateNetwork:INPCStateNetwork
         return dict;
     }
 
-    public void OnTriggerByPlayer()
+    public void OnTriggerByPlayer(PlayerToolActionType type)
     {
+        if (type != PlayerToolActionType.Apply) return; //should make them angry
         if (settings.isShopKeeper)
         { //open inventory
             var ds = WorldGraph.Retrieve(typeof(DeepstorageShopInventory)) as DeepstorageShopInventory;

@@ -124,7 +124,7 @@ public class NPCController : MonoBehaviour
 
     private void OnInteraction(int amount, PlayerToolActionType type)
     {
-        stateNetwork.OnTriggerByPlayer();
+        stateNetwork.OnTriggerByPlayer(type);
     }
 
     private void Damage(int amount, PlayerToolActionType type)

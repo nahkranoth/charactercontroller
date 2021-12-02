@@ -42,8 +42,8 @@ public class MenuWheelController : MonoBehaviour
         
         itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
         
-        worldController.OnToggleMenu -= SetMyState;
-        worldController.OnToggleMenu += SetMyState;
+        worldController.OnToggleMenu -= ToggleShow;
+        worldController.OnToggleMenu += ToggleShow;
     }
 
     private void Show()
@@ -51,8 +51,18 @@ public class MenuWheelController : MonoBehaviour
         currentItems = playerController.Inventory.storage;
         wheelHolder.gameObject.SetActive(true);
         selectedItemTxt.gameObject.SetActive(true);
+        inputController.ChangeScheme("MenuWheel");
     }
-
+ 
+    public void Hide()
+    {
+        wheelHolder.gameObject.SetActive(false);
+        selectedItemTxt.gameObject.SetActive(false);
+        inputController.Directions -= OnDirections;
+        inputController.ApplyTool -= Select;
+        inputController.ChangeScheme("Player");
+    }
+    
     public void Select()
     {
         if (currentItems.Count == 0) return;
@@ -69,7 +79,7 @@ public class MenuWheelController : MonoBehaviour
         SetText();
     }
 
-    public void SetMyState(bool state)
+    public void ToggleShow(bool state)
     {
         if (state)
         {
@@ -84,21 +94,13 @@ public class MenuWheelController : MonoBehaviour
         Show();
         inputController.Directions -= OnDirections;
         inputController.Directions += OnDirections;
-        inputController.ApplyTool -= Select;
-        inputController.ApplyTool += Select;
+        inputController.ApplyMenuWheel -= Select;
+        inputController.ApplyMenuWheel += Select;
         spinStep = 0;
         selectionStep = 0;
-        
         MakeWheel();
     }
-    
-    public void Hide()
-    {
-        wheelHolder.gameObject.SetActive(false);
-        selectedItemTxt.gameObject.SetActive(false);
-        inputController.Directions -= OnDirections;
-        inputController.ApplyTool -= Select;
-    }
+   
 
     private void SetSpinStep(int dir)
     {

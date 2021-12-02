@@ -20,8 +20,8 @@ public class WorldController : MonoBehaviour
     private void Start()
     {
         input = WorldGraph.Retrieve(typeof(InputController)) as InputController;
-        input.OpenMenu -= ToggleMenu;
-        input.OpenMenu += ToggleMenu;
+        input.ToggleWheelMenuShow -= ToggleMenu;
+        input.ToggleWheelMenuShow += ToggleMenu;
     }
 
     public void ToggleMenu()

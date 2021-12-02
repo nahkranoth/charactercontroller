@@ -16,6 +16,7 @@ public class DamageIndicator : MonoBehaviour
 
     public void ShowDamage(int damage, PlayerToolActionType type)
     {
+        if (type != PlayerToolActionType.Slash) return;
         damageAnimation.SetTrigger("Hit");
         damageText.text = damage.ToString();
     }
