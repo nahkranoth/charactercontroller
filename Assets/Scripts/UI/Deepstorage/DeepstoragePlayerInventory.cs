@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
@@ -57,9 +58,11 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
         activeInventory = player.Inventory;
         secondInventory = player.Wearing;
         infoPanel.info.text = "Player inventory";
-        input.BlockExcept(InputType.OpenInventory);
         SetStorageCap();
         mainPanel.SetActive(true);
+        Debug.Log("Open UI");
+        input.ChangeScheme("UI");
+        input.OnCloseUI += Hide;
         InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
         InstantiateItems(secondInventory.storage, OnSecondarySelectItem, secondInventoryGrid.transform);
     }

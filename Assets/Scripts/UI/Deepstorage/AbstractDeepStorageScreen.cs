@@ -28,7 +28,7 @@ public abstract class AbstractDeepStorageScreen:MonoBehaviour
     
     protected void Hide()
     {
-        input.LiftBlockExcept();
+        input.OnCloseUI -= Hide;
         DestroyItems(OnSelectItem, inventoryGrid.transform);
         if(secondInventoryGrid) DestroyItems(OnSelectItem, secondInventoryGrid.transform);
         mainPanel.SetActive(false);

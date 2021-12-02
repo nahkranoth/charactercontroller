@@ -32,7 +32,7 @@ public class HumanStateNetwork:INPCStateNetwork
     {
         if (settings.isShopKeeper)
         { //open inventory
-            var ds = WorldGraph.Retrieve(typeof(DeepstorageShop)) as DeepstorageShop;
+            var ds = WorldGraph.Retrieve(typeof(DeepstorageShopInventory)) as DeepstorageShopInventory;
             ds.Show(parent.inventory.storage);
             return;
         }

@@ -32,7 +32,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer()
     {
-        deepStorage.ToggleShow(parent.inventory.storage);
+        deepStorage.Show(parent.inventory.storage);
     }
 
     public string GetStartNode()

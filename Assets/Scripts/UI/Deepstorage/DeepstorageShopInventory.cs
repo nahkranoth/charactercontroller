@@ -1,7 +1,6 @@
-using UnityEngine;
 using UnityEngine.UI;
 
-public class DeepstorageShop : AbstractDeepStorageScreen
+public class DeepstorageShopInventory : AbstractDeepStorageScreen
 {
     
     public Button buyButton;
@@ -12,13 +11,11 @@ public class DeepstorageShop : AbstractDeepStorageScreen
 
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(DeepstorageShop));
+        WorldGraph.Subscribe(this, typeof(DeepstorageShopInventory));
     }
     
     protected override void AfterStart()
     {
-        input.OpenDeepStorageAsPlayer -= Hide;
-        input.OpenDeepStorageAsPlayer += Hide;
     }
     
     public void Show(EntityInventory inventory)
@@ -26,12 +23,13 @@ public class DeepstorageShop : AbstractDeepStorageScreen
         if(mainPanel.activeSelf) return;
         activeInventory = inventory;
         infoPanel.info.text = "Welcome to my shop";
-        input.BlockExcept(InputType.OpenInventory);
         mainPanel.SetActive(true);
         InstantiateItems(activeInventory.storage,OnSelectItem, inventoryGrid.transform);
         buyButton.gameObject.SetActive(true);
         sellButton.gameObject.SetActive(true);
         asShop = true;
+        input.ChangeScheme("UI");
+        input.OnCloseUI += Hide;
         sellButton.onClick.AddListener(SetShopToSellState);
         buyButton.onClick.AddListener(SetShopToBuyState);
         asShopSellState = false;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,16 +13,39 @@ public class InputController : MonoBehaviour
     public Action Select;
     public Action OpenDeepStorageAsPlayer;
     public Action DodgeRoll;
+    public Action OnCloseUI;
+
+    public PlayerInput playerInput;
     
     private float vert, hor = 0;
     private Vector2 directions;
 
     private List<InputCheckData> keyActions;
 
-    private InputType blockExcept;
-
     public bool running;
+    
+    private void Awake()
+    {
+        WorldGraph.Subscribe(this, typeof(InputController));
+    }
+    
+    public void ChangeScheme(string name)
+    {
+        playerInput.SwitchCurrentActionMap(name);
+    }
 
+    public void CloseUI()
+    {
+        OnCloseUI?.Invoke();
+        StartCoroutine(SwitchActionsToPlayer());
+    }
+
+    IEnumerator SwitchActionsToPlayer()
+    {
+        yield return new WaitForEndOfFrame();
+        ChangeScheme("Player");
+    }
+    
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -68,21 +92,6 @@ public class InputController : MonoBehaviour
     {
         if (!ctx.performed) return;
         OpenMenu?.Invoke();
-    }
-    
-    private void Awake()
-    {
-        WorldGraph.Subscribe(this, typeof(InputController));
-    }
-
-    public void BlockExcept(InputType exception)
-    {
-        blockExcept = exception;
-    }
-
-    public void LiftBlockExcept()
-    {
-        blockExcept = InputType.None;
     }
 
     void FixedUpdate()
