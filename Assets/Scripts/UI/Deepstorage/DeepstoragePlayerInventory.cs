@@ -74,6 +74,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
         InstantiateItems(activeInventory.storage, OnSelectItem, inventoryGrid.transform);
         InstantiateItems(secondInventory.storage, OnSecondarySelectItem, secondInventoryGrid.transform);
         SetStorageCap();
+        infoPanel.ResetInfo();
     }
 
     private void SetStorageCap()
@@ -128,7 +129,6 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
                     player.Inventory.RemoveByItem(_item);
                     player.Wearing.AddByItem(_item);
                     RerenderInventory();
-                    infoPanel.ResetInfo();
                     player.statusController.StatusUpdate();
                 }
             };

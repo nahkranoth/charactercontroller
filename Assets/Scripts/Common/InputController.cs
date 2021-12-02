@@ -37,6 +37,7 @@ public class InputController : MonoBehaviour
     public void CloseUI()
     {
         OnCloseUI?.Invoke();
+        //Important! have to do this as coroutine, else I get problems because this is directly called from a inputcontroller
         StartCoroutine(SwitchActionsToPlayer());
     }
 
