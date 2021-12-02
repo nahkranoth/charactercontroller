@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-public class PlayerAttackController: MonoBehaviour
+public class PlayerToolController: MonoBehaviour
 {
     public InputController input;
     public TriggerBox weaponBox;
@@ -10,54 +10,66 @@ public class PlayerAttackController: MonoBehaviour
     public PlayerController player;
     
     public Action<int> UpdateReadyAttack;
-    public Action<Collider2D, Item> OnToolHitSomething;
+    public Action<Collider2D, Item, PlayerToolActionType> OnToolHitSomething;
     
-    private Coroutine attackTiming;
+    private Coroutine toolUseTiming;
     private Coroutine attackReadyTiming;
     [HideInInspector] public bool fullAttackReady = true;
     [HideInInspector] public int charge;
 
     private AudioController audioController;
-
+    private PlayerToolActionType currentToolActionType;
+    
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(PlayerAttackController));
+        WorldGraph.Subscribe(this, typeof(PlayerToolController));
     }
 
     private void Start()
     {
         charge = 100;
-        input.UseTool -= OnAttackSlash;
-        input.UseTool += OnAttackSlash;
+        input.SlashTool -= OnUseToolSlash;
+        input.SlashTool += OnUseToolSlash;
+        input.ApplyTool -= OnUseToolApply;
+        input.ApplyTool += OnUseToolApply;
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
     
     private void OnToolTrigger(Collider2D other)
     {
-        OnToolHitSomething?.Invoke(other, equip.current);
+        OnToolHitSomething?.Invoke(other, equip.current, currentToolActionType);
     }
    
-    private void OnAttackSlash()
+    private void OnUseToolSlash()
     {
         animator.AttackSlash();
         audioController.PlaySound(AudioController.AudioClipName.PlayerSwing);
-        StartAttackTiming();
+        StartToolUse(PlayerToolActionType.Slash);
     }
-
-    public void StartAttackTiming()
+    
+    private void OnUseToolApply()
     {
-        if(attackTiming != null) StopCoroutine(attackTiming);
-        attackTiming = StartCoroutine(AttackTiming());
+        animator.AttackSlash();
+        audioController.PlaySound(AudioController.AudioClipName.CollectItem);
+        StartToolUse(PlayerToolActionType.Apply);
     }
 
-    IEnumerator AttackTiming()
+    public void StartToolUse(PlayerToolActionType type)
+    {
+        if(toolUseTiming != null) StopCoroutine(toolUseTiming);
+        toolUseTiming = StartCoroutine(ToolUseTiming(type));
+    }
+
+    IEnumerator ToolUseTiming(PlayerToolActionType type)
     {
         yield return new WaitForSeconds(0.1f);
         weaponBox.OnTriggerStay -= OnToolTrigger;
         weaponBox.OnTriggerStay += OnToolTrigger;
+        currentToolActionType = type;
         yield return new WaitForSeconds(0.2f);
         weaponBox.OnTriggerStay -= OnToolTrigger;
+        currentToolActionType = PlayerToolActionType.None;
         fullAttackReady = false;
         StartChargeFill();
     }

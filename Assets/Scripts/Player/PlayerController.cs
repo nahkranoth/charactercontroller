@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
    public InputController input;
    public Rigidbody2D rigid;
    public PlayerAnimatorController animator;
-   public PlayerAttackController attackController;
+   public PlayerToolController toolController;
    public PlayerEquipController equipController;
    public Transform spriteHolder;
    public Transform weaponSpriteHolder;
@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
       input.DodgeRoll += DodgeRoll;
       input.DodgeRoll += DodgeRoll;
 
-      attackController.OnToolHitSomething -= OnToolHitSomething;
-      attackController.OnToolHitSomething += OnToolHitSomething;
+      toolController.OnToolHitSomething -= OnToolHitSomething;
+      toolController.OnToolHitSomething += OnToolHitSomething;
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
       itemBehaviourController.ChangeHealth -= statusController.ModifyHealth;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
       equipController.Equip(itm);
    }
    
-   private void OnToolHitSomething(Collider2D collider, Item itm)
+   private void OnToolHitSomething(Collider2D collider, Item itm, PlayerToolActionType type)
    {
       StartCoroutine(ResetDamageState());
    }
@@ -115,13 +115,13 @@ public class PlayerController : MonoBehaviour
 
    private bool canRun()
    {
-      return input.running && attackController.charge > 0;
+      return input.running && toolController.charge > 0;
    }
 
    private void DodgeRoll()
    {
-      if (attackController.charge < 50) return;
-      attackController.SetCharge(attackController.charge - 50);
+      if (toolController.charge < 50) return;
+      toolController.SetCharge(toolController.charge - 50);
       animator.DodgeRoll();
       
       if(dodgeRollApplyForce != null) StopCoroutine(dodgeRollApplyForce);

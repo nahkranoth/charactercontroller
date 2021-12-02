@@ -22,7 +22,7 @@ public class InteractionCollectable : MonoBehaviour
       interaction.OnInteraction += OnCollect;
    }
 
-   private void OnCollect(int force)
+   private void OnCollect(int force, PlayerToolActionType type)
    {
       var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRarity>()) as ItemDescription;
 

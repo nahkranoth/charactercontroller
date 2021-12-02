@@ -31,7 +31,7 @@ public class NPCController : MonoBehaviour
     [HideInInspector] public bool attacking = false;
 
     private PlayerController player;
-    private PlayerAttackController playerAttack;
+    private PlayerToolController playerTool;
     private MetaLevelEntityPlacer metaEntity;
 
     private bool initialized;
@@ -63,15 +63,15 @@ public class NPCController : MonoBehaviour
         charDebug.SetStateText(stateNetwork.GetStartNode());
         
         if(!settings.invincible){
-            damageTaker.OnTakeDamage -= Damage;
-            damageTaker.OnTakeDamage += Damage;
-            damageTaker.OnDamageFinished -= DamageFinished;
-            damageTaker.OnDamageFinished += DamageFinished;
+            damageTaker.OnInteraction -= Damage;
+            damageTaker.OnInteraction += Damage;
+            damageTaker.OnInteractionFinished -= DamageFinished;
+            damageTaker.OnInteractionFinished += DamageFinished;
         }
         else
         {
-            damageTaker.OnTakeDamage -= OnInteraction;
-            damageTaker.OnTakeDamage += OnInteraction;
+            damageTaker.OnInteraction -= OnInteraction;
+            damageTaker.OnInteraction += OnInteraction;
         }
 
         if (inventory != null)
@@ -122,13 +122,14 @@ public class NPCController : MonoBehaviour
         if(characterDebug) charDebug.SetStateText(name);
     }
 
-    private void OnInteraction(int amount)
+    private void OnInteraction(int amount, PlayerToolActionType type)
     {
         stateNetwork.OnTriggerByPlayer();
     }
 
-    private void Damage(int amount)
+    private void Damage(int amount, PlayerToolActionType type)
     {
+        if (type != PlayerToolActionType.Slash) return;
         attacking = false;
         myNpcHealth.Modify(-amount);
         if (myNpcHealth.IsDead())
@@ -149,13 +150,13 @@ public class NPCController : MonoBehaviour
     {
         StopAllCoroutines();
         SetState(stateNetwork.GetDieNode());
-        damageTaker.OnTakeDamage -= Damage;
+        damageTaker.OnInteraction -= Damage;
         Destroy(damageTaker);
     }
 
     public void Destroy()
     {
-        damageTaker.OnDamageFinished -= DamageFinished;
+        damageTaker.OnInteractionFinished -= DamageFinished;
         metaEntity.entityPlacer.GenerateCollectable(dropPool.GetRandom(), transform.localPosition);
         DestroyImmediate(gameObject);
     }

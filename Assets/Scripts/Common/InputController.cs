@@ -8,9 +8,9 @@ public class InputController : MonoBehaviour
 {
     public Action<Vector2> Directions;
     public Action StopDirections;
-    public Action UseTool;
+    public Action SlashTool;
     public Action OpenMenu;
-    public Action Select;
+    public Action ApplyTool;
     public Action OpenDeepStorageAsPlayer;
     public Action DodgeRoll;
     public Action OnCloseUI;
@@ -74,13 +74,13 @@ public class InputController : MonoBehaviour
     public void OnAction(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        UseTool?.Invoke();
+        SlashTool?.Invoke();
     }
     
     public void OnUse(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        Select?.Invoke();
+        ApplyTool?.Invoke();
     }
 
     public void OpenPlayerInventory(InputAction.CallbackContext ctx)

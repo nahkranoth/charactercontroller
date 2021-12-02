@@ -5,8 +5,8 @@ using UnityEngine;
 public class InteractionDamageTaker : MonoBehaviour
 {
     public InteractionDetector interaction;
-    public Action<int> OnTakeDamage;
-    public Action OnDamageFinished;
+    public Action<int, PlayerToolActionType> OnInteraction;
+    public Action OnInteractionFinished;
     public AudioController.AudioClipName damageSound;
     [HideInInspector] public bool damageRecovering = false;
     public float damageRecoveryTime = 2f;
@@ -15,21 +15,22 @@ public class InteractionDamageTaker : MonoBehaviour
     
     private void Start()
     {
-        interaction.OnInteraction -= TakeDamage;
-        interaction.OnInteraction += TakeDamage;
+        interaction.OnInteraction -= TakeInteraction;
+        interaction.OnInteraction += TakeInteraction;
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
     }
 
     private void OnDestroy()
     {
-        interaction.OnInteraction -= TakeDamage;
+        interaction.OnInteraction -= TakeInteraction;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeInteraction(int damage, PlayerToolActionType type)
     {
-        if (damageRecovering) return;
+        OnInteraction?.Invoke(damage, type);
+        //Check if it can take damage
+        if (damageRecovering || type != PlayerToolActionType.Slash) return;
         damageRecovering = true;
-        OnTakeDamage?.Invoke(damage);
         audioController.PlaySound(damageSound);
         StartCoroutine(DamageFinished());
     }
@@ -38,7 +39,7 @@ public class InteractionDamageTaker : MonoBehaviour
     {
         yield return new WaitForSeconds(damageRecoveryTime);
         damageRecovering = false;
-        OnDamageFinished?.Invoke();
+        OnInteractionFinished?.Invoke();
     }
     
 }

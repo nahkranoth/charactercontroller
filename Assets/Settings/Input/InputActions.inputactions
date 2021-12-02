@@ -831,6 +831,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MenuWheel",
+            "id": "22eef28d-6c44-4c0d-9e9e-af06c0460dd5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "bc357da2-ef94-443e-92bc-8a9e3813022d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e730cc37-0948-40ca-9e79-aad3abe3dd6f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

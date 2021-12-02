@@ -10,11 +10,11 @@ public class DamageIndicator : MonoBehaviour
 
     private void Start()
     {
-        damageIndicator.OnTakeDamage -= ShowDamage;
-        damageIndicator.OnTakeDamage += ShowDamage;
+        damageIndicator.OnInteraction -= ShowDamage;
+        damageIndicator.OnInteraction += ShowDamage;
     }
 
-    public void ShowDamage(int damage)
+    public void ShowDamage(int damage, PlayerToolActionType type)
     {
         damageAnimation.SetTrigger("Hit");
         damageText.text = damage.ToString();

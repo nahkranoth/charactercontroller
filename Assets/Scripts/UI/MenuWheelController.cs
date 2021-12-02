@@ -84,8 +84,8 @@ public class MenuWheelController : MonoBehaviour
         Show();
         inputController.Directions -= OnDirections;
         inputController.Directions += OnDirections;
-        inputController.Select -= Select;
-        inputController.Select += Select;
+        inputController.ApplyTool -= Select;
+        inputController.ApplyTool += Select;
         spinStep = 0;
         selectionStep = 0;
         
@@ -97,7 +97,7 @@ public class MenuWheelController : MonoBehaviour
         wheelHolder.gameObject.SetActive(false);
         selectedItemTxt.gameObject.SetActive(false);
         inputController.Directions -= OnDirections;
-        inputController.Select -= Select;
+        inputController.ApplyTool -= Select;
     }
 
     private void SetSpinStep(int dir)
