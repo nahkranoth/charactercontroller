@@ -36,6 +36,8 @@ public class NPCController : MonoBehaviour
 
     private bool initialized;
 
+    private bool triggerOcupied = false;
+
     void Start()
     {
         myNpcHealth.Set(settings.GetHealth());
@@ -65,6 +67,8 @@ public class NPCController : MonoBehaviour
         if(settings.invincible){
             damageTaker.OnInteraction -= OnInteraction;
             damageTaker.OnInteraction += OnInteraction;
+            damageTaker.OnInteractionFinished -= DamageFinished;
+            damageTaker.OnInteractionFinished += DamageFinished;
         }
         else
         {
@@ -124,13 +128,16 @@ public class NPCController : MonoBehaviour
 
     private void OnInteraction(int amount, PlayerToolActionType type)
     {
+        if (triggerOcupied) return;
         stateNetwork.OnTriggerByPlayer(type);
+        triggerOcupied = true;
     }
 
     private void Damage(int amount, PlayerToolActionType type)
     {
-        if (type != PlayerToolActionType.Slash) return;
+        if (type != PlayerToolActionType.Slash || triggerOcupied) return;
         attacking = false;
+        triggerOcupied = true;
         myNpcHealth.Modify(-amount);
         if (myNpcHealth.IsDead())
         {
@@ -144,6 +151,7 @@ public class NPCController : MonoBehaviour
     private void DamageFinished()
     {
         if(!myNpcHealth.IsDead()) SetState(stateNetwork.GetDamageFinishedNode());
+        triggerOcupied = false;
     }
 
     private void Die()

@@ -19,7 +19,6 @@ public class PlayerToolController: MonoBehaviour
 
     private AudioController audioController;
     private PlayerToolActionType currentToolActionType;
-    private bool hitFired = false;
     
     private void Awake()
     {
@@ -41,14 +40,11 @@ public class PlayerToolController: MonoBehaviour
     
     private void OnToolTrigger(Collider2D other)
     {
-        if (hitFired) return;
         OnToolHitSomething?.Invoke(other, equip.current, currentToolActionType);
-        hitFired = true;
     }
     
     private void OnToolExit(Collider2D other)
     {
-        hitFired = false;
     }
    
     private void OnUseToolSlash()
@@ -77,7 +73,7 @@ public class PlayerToolController: MonoBehaviour
         weaponBox.OnTriggerStay -= OnToolTrigger;
         weaponBox.OnTriggerStay += OnToolTrigger;
         currentToolActionType = type;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         weaponBox.OnTriggerStay -= OnToolTrigger;
         currentToolActionType = PlayerToolActionType.None;
         fullAttackReady = false;

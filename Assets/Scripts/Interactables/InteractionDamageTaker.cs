@@ -28,8 +28,7 @@ public class InteractionDamageTaker : MonoBehaviour
     public void TakeInteraction(int damage, PlayerToolActionType type)
     {
         OnInteraction?.Invoke(damage, type);
-        //Check if it can take damage
-        if (damageRecovering || type != PlayerToolActionType.Slash) return;
+        if (damageRecovering) return;
         damageRecovering = true;
         audioController.PlaySound(damageSound);
         StartCoroutine(DamageFinished());
