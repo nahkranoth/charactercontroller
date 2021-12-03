@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Codice.CM.Common.Merge;
-using log4net.Filter;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EntityCollection", menuName = "Custom/EntityCollection", order = 4)]
@@ -10,12 +9,8 @@ public class EntityCollection : ScriptableObject
 
     public GameObject GetRandom()
     {
-        Dictionary<int, float> probMap = new Dictionary<int, float>();
-        for (int i = 0; i < collection.Count; i++)
-        {
-            probMap.Add(i, collection[i].probability);
-        }
-        var id = WeightedRandom.GetRandom(probMap);
-        return collection[id].entity;
+        var rarCandidates = collection.ToList<IRandomWeight>();
+        var res = RaritySelector.GetRandom(rarCandidates) as EntityChance;
+        return res.entity;
     }
 }

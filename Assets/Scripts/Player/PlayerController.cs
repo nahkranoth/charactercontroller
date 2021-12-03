@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
       //Wearables
       // Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));
       Wearing.AddByDescription(itemDescriptions.collection.FindByName("Backpack"));
+      Wearing.AddByDescription(itemDescriptions.collection.FindByName("Amulet"));
       
       statusController.StatusUpdate();
       equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));

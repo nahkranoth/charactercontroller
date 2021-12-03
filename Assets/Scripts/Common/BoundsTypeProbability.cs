@@ -1,8 +1,10 @@
 using System;
 
 [Serializable]
-public class BoundsTypeProbability
+public class BoundsTypeProbability: IRandomWeight
 {
     public BoundsType type;
-    public int probability;
+    public float probability;
+    public float Weight => probability;
+    
 }

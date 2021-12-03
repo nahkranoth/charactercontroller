@@ -15,13 +15,9 @@ public static class BoundsTypeHelper
 {
     public static BoundsType GetRandomBoundsType(List<BoundsTypeProbability> probabilities)
     {
-        Dictionary<int, float> probMap = new Dictionary<int, float>();
-        for (int i = 0; i < probabilities.Count; i++)
-        {
-            probMap.Add(i, probabilities[i].probability);
-        }
-        var id = WeightedRandom.GetRandom(probMap);
-        return probabilities[id].type;
+        var rarCandidates = probabilities.ToList<IRandomWeight>();
+        var res = RaritySelector.GetRandom(rarCandidates) as BoundsTypeProbability;
+        return res.type;
     }
 
     public static Color GetDebugColor(BoundsType type)

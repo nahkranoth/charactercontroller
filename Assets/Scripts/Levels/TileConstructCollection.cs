@@ -15,10 +15,7 @@ public class TileConstructCollection : ScriptableObject
                 x.size.y <= tBounds.bounds.size.y && 
                 x.type == tBounds.type
                 );
-        
-        float total = 0f;
-        candidates.ForEach(x => total += x.Rarity);
-        var rarCandidates = candidates.ToList<IRarity>();
+        var rarCandidates = candidates.ToList<IRandomWeight>();
         return RaritySelector.GetRandom(rarCandidates) as TileConstruct;
     }
 }

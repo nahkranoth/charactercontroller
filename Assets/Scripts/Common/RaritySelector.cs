@@ -4,23 +4,22 @@ using UnityEngine;
 
 public static class RaritySelector
 {
-    public static IRarity GetRandom(List<IRarity> candidates)
+    public static IRandomWeight GetRandom(List<IRandomWeight> candidates)
     {
-        var sum_of_weight = 0;
+        var sum_of_weight = 0f;
         foreach (var candidate in candidates)
         {
-            sum_of_weight += candidate.Rarity;
+            sum_of_weight += candidate.Weight;
         }
         return LookUp(candidates, Random.Range(0, sum_of_weight));
     }
     
-    
-    private static IRarity LookUp(List<IRarity> candidates, int random)
+    private static IRandomWeight LookUp(List<IRandomWeight> candidates, float random)
     {
-        var cummul = 0;
+        var cummul = 0f;
         foreach (var candidate in candidates)
         {
-            cummul += candidate.Rarity;
+            cummul += candidate.Weight;
             if (random < cummul) return candidate;
         }
 

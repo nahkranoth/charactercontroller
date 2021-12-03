@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Serializable]
-public class TileConstruct:ScriptableObject, IRarity
+public class TileConstruct:ScriptableObject, IRandomWeight
 {
     public List<TileWrapper> map;
     public Vector2Int size;
     public BoundsType type;
-    public int rarity;
+    public float randomWeight;
     public Sprite constructSprite;
     public int spray;
     public bool inCenterOfBounds = false;
@@ -28,9 +28,9 @@ public class TileConstruct:ScriptableObject, IRarity
         return map.Find(x => x.tile == tile)?.tile;
     }
     
-    public int Rarity
+    public float Weight
     {
-        get { return rarity;}
-        set { rarity = value; }
+        get { return randomWeight;}
+        set { randomWeight = value; }
     }
 }

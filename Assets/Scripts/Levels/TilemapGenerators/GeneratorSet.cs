@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GeneratorSet", menuName = "Custom/GeneratorSet")]
-public class GeneratorSet:ScriptableObject
+public class GeneratorSet:ScriptableObject, IRandomWeight
 {
     public int bitTreeSearchDepth = 1;
     public int constructDensity = 20;
@@ -24,6 +24,7 @@ public class GeneratorSet:ScriptableObject
 
     public EntityCollection containers;
     public EntityCollection npcs;
+    public float Weight => spawnProbability;
 }
 
 public enum WallType{
