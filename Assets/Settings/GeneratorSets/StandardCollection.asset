@@ -15,5 +15,6 @@ MonoBehaviour:
   startCity: {fileID: 11400000, guid: bc80553d4c56de84bb31f7ed1a73d9ea, type: 2}
   collection:
   - {fileID: 11400000, guid: 354f382cbb0a5304bb6a533d102cdd7f, type: 2}
+  - {fileID: 11400000, guid: f7506d1103f89fc4b87ac9fb4601f66c, type: 2}
   switchMin: 4
   switchMax: 10

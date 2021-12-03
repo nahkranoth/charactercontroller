@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Codice.CM.Common.Merge;
+using log4net.Filter;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EntityCollection", menuName = "Custom/EntityCollection", order = 4)]
@@ -9,26 +10,12 @@ public class EntityCollection : ScriptableObject
 
     public GameObject GetRandom()
     {
-        var fullWeight = 0f;
-        GameObject selectedEntity = null;
-        foreach (var entityC in collection)
+        Dictionary<int, float> probMap = new Dictionary<int, float>();
+        for (int i = 0; i < collection.Count; i++)
         {
-            fullWeight += entityC.probability;
+            probMap.Add(i, collection[i].probability);
         }
-
-        var iR = Random.Range(0, fullWeight);
-        
-        foreach (EntityChance rc in collection)
-        {
-            if (iR < rc.probability)
-            {
-                selectedEntity = rc.entity;
-                break;
-            }
-
-            iR = iR - rc.probability;
-        }
-
-        return selectedEntity;
+        var id = WeightedRandom.GetRandom(probMap);
+        return collection[id].entity;
     }
 }

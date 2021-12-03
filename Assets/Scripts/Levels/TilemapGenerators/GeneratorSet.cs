@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GeneratorSet", menuName = "Custom/GeneratorSet")]
@@ -9,6 +10,7 @@ public class GeneratorSet:ScriptableObject
     public int npcDensity = 4;
     public int containerDensity = 2;
     public bool hasRoad = true;
+    public float spawnProbability = 1f;
     public WallType northWall = WallType.None;
     public WallType southWall = WallType.None;
 

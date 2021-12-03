@@ -15,26 +15,13 @@ public static class BoundsTypeHelper
 {
     public static BoundsType GetRandomBoundsType(List<BoundsTypeProbability> probabilities)
     {
-        var fullWeight = 0;
-        foreach (var prob in probabilities)
+        Dictionary<int, float> probMap = new Dictionary<int, float>();
+        for (int i = 0; i < probabilities.Count; i++)
         {
-            fullWeight += prob.probability;
+            probMap.Add(i, probabilities[i].probability);
         }
-
-        int iR = Random.Range(0, fullWeight);
-
-        BoundsTypeProbability selectedBoundsType = null;
-        foreach (BoundsTypeProbability bt in probabilities)
-        {
-            if (iR < bt.probability)
-            {
-                selectedBoundsType = bt;
-                break;
-            }
-
-            iR = iR - bt.probability;
-        }
-        return selectedBoundsType.type;
+        var id = WeightedRandom.GetRandom(probMap);
+        return probabilities[id].type;
     }
 
     public static Color GetDebugColor(BoundsType type)

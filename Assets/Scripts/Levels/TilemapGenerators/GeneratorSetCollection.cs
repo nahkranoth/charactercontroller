@@ -1,7 +1,11 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Profiling;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 [CreateAssetMenu(fileName = "GeneratorSetCollection", menuName = "Custom/GeneratorSetCollection")]
 public class GeneratorSetCollection:ScriptableObject
@@ -19,8 +23,15 @@ public class GeneratorSetCollection:ScriptableObject
     {
         if (step == 0) return startCity;
         
-        randomIndex = Random.Range(0, collection.Count);
-        resultSet = collection[randomIndex];
+        //Or Random Event Map
+        
+        Dictionary<int, float> probMap = new Dictionary<int, float>();
+        for (int i = 0; i < collection.Count; i++)
+        {
+            probMap.Add(i, collection[i].spawnProbability);
+        }
+        var id = WeightedRandom.GetRandom(probMap);
+        resultSet = collection[id];
         return resultSet;
     }
 }
