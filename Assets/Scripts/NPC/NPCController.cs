@@ -62,16 +62,16 @@ public class NPCController : MonoBehaviour
         SetState(stateNetwork.GetStartNode());
         charDebug.SetStateText(stateNetwork.GetStartNode());
         
-        if(!settings.invincible){
+        if(settings.invincible){
+            damageTaker.OnInteraction -= OnInteraction;
+            damageTaker.OnInteraction += OnInteraction;
+        }
+        else
+        {
             damageTaker.OnInteraction -= Damage;
             damageTaker.OnInteraction += Damage;
             damageTaker.OnInteractionFinished -= DamageFinished;
             damageTaker.OnInteractionFinished += DamageFinished;
-        }
-        else
-        {
-            damageTaker.OnInteraction -= OnInteraction;
-            damageTaker.OnInteraction += OnInteraction;
         }
 
         if (inventory != null)

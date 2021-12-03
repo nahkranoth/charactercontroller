@@ -19,6 +19,7 @@ public class PlayerToolController: MonoBehaviour
 
     private AudioController audioController;
     private PlayerToolActionType currentToolActionType;
+    private bool hitFired = false;
     
     private void Awake()
     {
@@ -32,13 +33,22 @@ public class PlayerToolController: MonoBehaviour
         input.SlashTool += OnUseToolSlash;
         input.ApplyTool -= OnUseToolApply;
         input.ApplyTool += OnUseToolApply;
+        weaponBox.OnTriggerExit -= OnToolExit;
+        weaponBox.OnTriggerExit += OnToolExit;
         audioController = WorldGraph.Retrieve(typeof(AudioController)) as AudioController;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
     
     private void OnToolTrigger(Collider2D other)
     {
+        if (hitFired) return;
         OnToolHitSomething?.Invoke(other, equip.current, currentToolActionType);
+        hitFired = true;
+    }
+    
+    private void OnToolExit(Collider2D other)
+    {
+        hitFired = false;
     }
    
     private void OnUseToolSlash()

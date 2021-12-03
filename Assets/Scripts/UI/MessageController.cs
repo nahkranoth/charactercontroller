@@ -34,7 +34,7 @@ public class MessageController : MonoBehaviour
 
    private void ShowMessage()
    {
-      if(waitTimer == null)
+      if(waitTimer == null && messageQue.Count > 0)
       {
          questionText.text = messageQue[0].question;
          messageBlock.SetActive(true);
