@@ -72,9 +72,7 @@ public class PlayerController : MonoBehaviour
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
       
-      
       //Wearables
-      
       // Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));
       Wearing.AddByDescription(itemDescriptions.collection.FindByName("Backpack"));
       

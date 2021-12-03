@@ -39,6 +39,14 @@ public class DonkeyFollowState: AbstractNPCState
     {
         resetFollowTimer += Time.deltaTime;
         initializePathTimer += Time.deltaTime;
+        
+        //if close enough to player, just go idle
+        if (Helpers.InRange(Parent.transform.position, player.transform.position, .4f))
+        {
+            Parent.SetState("idle");
+            return;
+        }
+        
         //Roam to player target
         if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
         {
