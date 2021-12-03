@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [Serializable]
-public class EntityChance: IRandomWeight
+public class EntityChance: IRandomProbability
 {
     public GameObject entity;
     public float probability;
-    public float Weight => probability;
+    public float Probability => probability;
 }

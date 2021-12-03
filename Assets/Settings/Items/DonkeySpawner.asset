@@ -20,12 +20,12 @@ MonoBehaviour:
     consumable: 1
     equipable: 0
     wearable: 0
+    armor: 0
     wearableModifier:
       maxHealth: 50
       walkSpeed: 14
       runSpeed: 20
-      chargeSpeed: 1
-      chargeWalkSpeed: 3
+      chargeTime: 0
       dodgeRollForce: 4
       maxCarryWeight: 10
     price: 100
@@ -37,4 +37,4 @@ MonoBehaviour:
     weight: 200
     spawnable: {fileID: 683834771004767112, guid: dffaec56c8a70474882d34e2a73de9a9, type: 3}
     amount: 1
-  rarity: 0
+  collectableProbability: 0.1

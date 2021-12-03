@@ -15,7 +15,7 @@ public static class BoundsTypeHelper
 {
     public static BoundsType GetRandomBoundsType(List<BoundsTypeProbability> probabilities)
     {
-        var rarCandidates = probabilities.ToList<IRandomWeight>();
+        var rarCandidates = probabilities.ToList<IRandomProbability>();
         var res = RaritySelector.GetRandom(rarCandidates) as BoundsTypeProbability;
         return res.type;
     }

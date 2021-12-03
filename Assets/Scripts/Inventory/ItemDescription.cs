@@ -1,10 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemSettings", menuName = "Custom/ItemSettings", order = 1)]
-public class ItemDescription : ScriptableObject, IRandomWeight
+public class ItemDescription : ScriptableObject, IRandomProbability
 {
     public Item item;
-    public float spawnProbability;
-    public float Weight => spawnProbability;
+    public float collectableProbability;
+    public float Probability => collectableProbability;
 }
 

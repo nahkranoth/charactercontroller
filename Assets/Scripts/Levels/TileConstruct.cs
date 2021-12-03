@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Serializable]
-public class TileConstruct:ScriptableObject, IRandomWeight
+public class TileConstruct:ScriptableObject, IRandomProbability
 {
     public List<TileWrapper> map;
     public Vector2Int size;
@@ -28,7 +28,7 @@ public class TileConstruct:ScriptableObject, IRandomWeight
         return map.Find(x => x.tile == tile)?.tile;
     }
     
-    public float Weight
+    public float Probability
     {
         get { return randomWeight;}
         set { randomWeight = value; }

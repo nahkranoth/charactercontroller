@@ -73,7 +73,7 @@ public class PlayerToolController: MonoBehaviour
         weaponBox.OnTriggerStay -= OnToolTrigger;
         weaponBox.OnTriggerStay += OnToolTrigger;
         currentToolActionType = type;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         weaponBox.OnTriggerStay -= OnToolTrigger;
         currentToolActionType = PlayerToolActionType.None;
         fullAttackReady = false;

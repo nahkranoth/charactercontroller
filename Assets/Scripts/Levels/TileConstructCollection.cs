@@ -15,7 +15,7 @@ public class TileConstructCollection : ScriptableObject
                 x.size.y <= tBounds.bounds.size.y && 
                 x.type == tBounds.type
                 );
-        var rarCandidates = candidates.ToList<IRandomWeight>();
+        var rarCandidates = candidates.ToList<IRandomProbability>();
         return RaritySelector.GetRandom(rarCandidates) as TileConstruct;
     }
 }

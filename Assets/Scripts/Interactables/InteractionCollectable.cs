@@ -24,7 +24,7 @@ public class InteractionCollectable : MonoBehaviour
 
    private void OnCollect(int force, PlayerToolActionType type)
    {
-      var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRandomWeight>()) as ItemDescription;
+      var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRandomProbability>()) as ItemDescription;
 
       if (!player.statusController.HasCarrySpace(chosen.item.weight))
       {

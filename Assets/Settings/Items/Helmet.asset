@@ -25,8 +25,7 @@ MonoBehaviour:
       maxHealth: 0
       walkSpeed: 0
       runSpeed: 0
-      chargeSpeed: 0
-      chargeWalkSpeed: 0
+      chargeTime: 0
       dodgeRollForce: 0
       maxCarryWeight: 0
     price: 100
@@ -38,4 +37,4 @@ MonoBehaviour:
     weight: 0
     spawnable: {fileID: 0}
     amount: 1
-  rarity: 10
+  collectableProbability: 0.2

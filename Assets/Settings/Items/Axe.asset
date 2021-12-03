@@ -37,4 +37,4 @@ MonoBehaviour:
     weight: 3.2
     spawnable: {fileID: 0}
     amount: 1
-  randomWeight: 0
+  collectableProbability: 0.3

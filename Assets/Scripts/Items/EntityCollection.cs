@@ -9,7 +9,7 @@ public class EntityCollection : ScriptableObject
 
     public GameObject GetRandom()
     {
-        var rarCandidates = collection.ToList<IRandomWeight>();
+        var rarCandidates = collection.ToList<IRandomProbability>();
         var res = RaritySelector.GetRandom(rarCandidates) as EntityChance;
         return res.entity;
     }

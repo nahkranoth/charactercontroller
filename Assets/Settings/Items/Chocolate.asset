@@ -19,6 +19,15 @@ MonoBehaviour:
     behaviour: 1
     consumable: 1
     equipable: 0
+    wearable: 0
+    armor: 0
+    wearableModifier:
+      maxHealth: 0
+      walkSpeed: 0
+      runSpeed: 0
+      chargeTime: 0
+      dodgeRollForce: 0
+      maxCarryWeight: 0
     price: 40
     canChopWood: 0
     damage: 0
@@ -28,4 +37,4 @@ MonoBehaviour:
     weight: 0.3
     spawnable: {fileID: 0}
     amount: 1
-  rarity: 20
+  collectableProbability: 0.4

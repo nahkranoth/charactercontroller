@@ -19,7 +19,7 @@ public class GeneratorSetCollection:ScriptableObject
     {
         if (step == 0) return startCity;
         
-        var rarCandidates = collection.ToList<IRandomWeight>();
+        var rarCandidates = collection.ToList<IRandomProbability>();
         var res = RaritySelector.GetRandom(rarCandidates) as GeneratorSet;
         return res;
     }
