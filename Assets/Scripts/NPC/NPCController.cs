@@ -64,19 +64,10 @@ public class NPCController : MonoBehaviour
         SetState(stateNetwork.GetStartNode());
         charDebug.SetStateText(stateNetwork.GetStartNode());
         
-        if(settings.invincible){
-            damageTaker.OnInteraction -= OnInteraction;
-            damageTaker.OnInteraction += OnInteraction;
-            damageTaker.OnInteractionFinished -= DamageFinished;
-            damageTaker.OnInteractionFinished += DamageFinished;
-        }
-        else
-        {
-            damageTaker.OnInteraction -= Damage;
-            damageTaker.OnInteraction += Damage;
-            damageTaker.OnInteractionFinished -= DamageFinished;
-            damageTaker.OnInteractionFinished += DamageFinished;
-        }
+        damageTaker.OnInteraction -= OnInteraction;
+        damageTaker.OnInteraction += OnInteraction;
+        damageTaker.OnInteractionFinished -= DamageFinished;
+        damageTaker.OnInteractionFinished += DamageFinished;
 
         if (inventory != null)
         {
@@ -129,15 +120,18 @@ public class NPCController : MonoBehaviour
     private void OnInteraction(int amount, PlayerToolActionType type)
     {
         if (triggerOcupied) return;
-        stateNetwork.OnTriggerByPlayer(type);
         triggerOcupied = true;
+        if (type == PlayerToolActionType.Slash && !settings.invincible)
+        {
+            Damage(amount, type);
+            return;
+        }
+        stateNetwork.OnTriggerByPlayer(type);
     }
 
     private void Damage(int amount, PlayerToolActionType type)
     {
-        if (type != PlayerToolActionType.Slash || triggerOcupied) return;
         attacking = false;
-        triggerOcupied = true;
         myNpcHealth.Modify(-amount);
         if (myNpcHealth.IsDead())
         {

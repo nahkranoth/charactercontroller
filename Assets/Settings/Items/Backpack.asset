@@ -27,7 +27,7 @@ MonoBehaviour:
       runSpeed: 0
       chargeTime: 0
       dodgeRollForce: 0
-      maxCarryWeight: 20
+      maxCarryWeight: 300
     price: 50
     canChopWood: 0
     damage: 0

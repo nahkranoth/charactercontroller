@@ -19,6 +19,8 @@ public class PlayerToolController: MonoBehaviour
 
     private AudioController audioController;
     private PlayerToolActionType currentToolActionType;
+
+    private bool triggered = false;
     
     private void Awake()
     {
@@ -40,11 +42,14 @@ public class PlayerToolController: MonoBehaviour
     
     private void OnToolTrigger(Collider2D other)
     {
+        if (triggered) return;
+        triggered = true;
         OnToolHitSomething?.Invoke(other, equip.current, currentToolActionType);
     }
     
     private void OnToolExit(Collider2D other)
     {
+        triggered = false;
     }
    
     private void OnUseToolSlash()
