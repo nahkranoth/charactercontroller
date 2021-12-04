@@ -23,6 +23,10 @@ public class BowlerAngryState: AbstractNPCState
         InitializePath();
     }
 
+    public override void Deactivate()
+    {
+    }
+
     private void InitializePath()
     {
         var newPath = Parent.pathfinding.FindPathToPlayerByWorldPos(Parent.transform.position);

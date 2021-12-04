@@ -23,6 +23,11 @@ public static class Helpers
     {
         return new Vector3Int(Random.Range(-range, range), Random.Range(-range, range), 0);
     }
+    
+    public static Vector3 RandomVector3F(int range) //see no Z!!
+    {
+        return new Vector3(Random.Range(-range, range), Random.Range(-range, range), 0);
+    }
 
     public static int CycleConstraint(int max, int min, int index)
     {

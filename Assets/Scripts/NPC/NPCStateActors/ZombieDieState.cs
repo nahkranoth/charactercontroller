@@ -14,6 +14,10 @@ public class ZombieDieState: AbstractNPCState
         Parent.StartCoroutine(StartRemovalSequence());
     }
 
+    public override void Deactivate()
+    {
+    }
+
     IEnumerator StartRemovalSequence()
     {
         yield return new WaitForSeconds(3f);

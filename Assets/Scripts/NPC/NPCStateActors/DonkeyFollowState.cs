@@ -25,6 +25,10 @@ public class DonkeyFollowState: AbstractNPCState
         InitializePath();
     }
 
+    public override void Deactivate()
+    {
+    }
+
     private void InitializePath()
     {
         if (initializePathTimer < reInitializePathTime) return;

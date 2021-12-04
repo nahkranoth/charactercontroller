@@ -20,7 +20,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
         {
             {"idle", new DonkeyIdleState()},
             {"follow", new DonkeyFollowState(settings)},
-            {"flee", new DonkeyFollowState(settings)},
+            {"flee", new DonkeyFleeState(settings)},
         };
         
         foreach (var abstractEnemyState in dict)
@@ -33,10 +33,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer(PlayerToolActionType type)
     {
-        if (type == PlayerToolActionType.Apply)
-        {
-            deepStorage.Show(parent.inventory.storage);
-        }
+        if (type == PlayerToolActionType.Apply) deepStorage.Show(parent.inventory.storage);
     }
 
     public string GetStartNode()
@@ -46,12 +43,12 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public string GetDamagedNode()
     {
-        return "idle";
+        return "flee";
     }
 
     public string GetDamageFinishedNode()
     {
-        return "idle";
+        return "flee";
     }
 
     public string GetDieNode()

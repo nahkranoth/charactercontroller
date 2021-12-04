@@ -28,6 +28,10 @@ public class RabiteRoamState: AbstractNPCState
         
     }
 
+    public override void Deactivate()
+    {
+    }
+
     public override void Execute()
     {
         if (Vector3.Distance(player.transform.position, Parent.transform.position) < settings.detectDistance)

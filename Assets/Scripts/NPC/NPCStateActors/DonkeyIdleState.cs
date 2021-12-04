@@ -12,6 +12,10 @@ public class DonkeyIdleState:AbstractNPCState
         Parent.animatorController.SetWalk(0, 0);
     }
 
+    public override void Deactivate()
+    {
+    }
+
     public override void Execute()
     {
         currentTime += Time.deltaTime;

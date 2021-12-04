@@ -12,5 +12,6 @@
         parent = _parent;
     }
     public abstract void Activate();
+    public abstract void Deactivate();
     public abstract void Execute();
 }

@@ -11,6 +11,10 @@ public class KnockbackHitState: AbstractNPCState
         Parent.animatorController.SetWalk(0,0);
     }
 
+    public override void Deactivate()
+    {
+    }
+
     public override void Execute()
     {
         Parent.rigidBody.velocity = Vector2.zero;

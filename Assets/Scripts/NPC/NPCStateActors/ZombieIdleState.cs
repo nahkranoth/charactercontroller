@@ -27,6 +27,10 @@ public class ZombieIdleState: AbstractNPCState
         waitingToRoam = true;
     }
 
+    public override void Deactivate()
+    {
+    }
+
     public override void Execute()
     {
         Parent.rigidBody.velocity = Vector2.zero;
