@@ -163,7 +163,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 8c5ea15c6e92b994888b4ddbe7e43060, type: 2}
   size: {x: 10, y: 8}
   type: 0
-  rarity: 30
+  randomWeight: 1
   constructSprite: {fileID: 21300000, guid: f751943cae3e6524aa25232deeb61b0a, type: 3}
   spray: 0
   inCenterOfBounds: 1
@@ -176,3 +176,4 @@ MonoBehaviour:
     npcSpawner: 1
     collectableSpawner: 0
     entity: {fileID: 683834771004767112, guid: 7a825551c96332647941750a70a933dc, type: 3}
+  dropOnDestroy: {fileID: 0}

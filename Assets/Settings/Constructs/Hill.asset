@@ -135,5 +135,13 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: bb6a8618811233142969fbb1f43b35c2, type: 2}
   size: {x: 7, y: 9}
   type: 1
-  rarity: 30
+  randomWeight: 1
   constructSprite: {fileID: 21300000, guid: 192944adf74d7974bbc1e602bbdde7be, type: 3}
+  spray: 0
+  inCenterOfBounds: 0
+  shadowPositionOffset: {x: 0, y: 0, z: 0}
+  shadowScaleOffset: {x: 0, y: 0, z: 0}
+  hasPaths: 0
+  destroyable: 0
+  entities: []
+  dropOnDestroy: {fileID: 0}

@@ -31,7 +31,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2e9d6477aec54c44284af51bc6d43ca3, type: 2}
   size: {x: 2, y: 4}
   type: 1
-  rarity: 60
+  randomWeight: 1
   constructSprite: {fileID: 21300000, guid: f6f018b97a848d74eacfee665ea57b14, type: 3}
   spray: 16
   inCenterOfBounds: 0
