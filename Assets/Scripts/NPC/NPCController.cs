@@ -112,7 +112,7 @@ public class NPCController : MonoBehaviour
 
     public void SetState(string name)
     {
-        activeState.Deactivate();
+        activeState?.Deactivate();
         activeState = stateDictionary[name];
         activeState.Activate();
         if(characterDebug) charDebug.SetStateText(name);

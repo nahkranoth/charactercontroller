@@ -6,6 +6,8 @@ public class DonkeyFleeState: AbstractNPCState
     private PlayerController player;
     private float fleeSpeed = 2f;
     private float calmTimer = 10f;
+    private float calmTimerCountdown = 0f;
+    
     private INPCSettings settings;
     private Vector3 walkDirections;
 
@@ -27,6 +29,11 @@ public class DonkeyFleeState: AbstractNPCState
 
     public override void Execute()
     {
+        calmTimerCountdown += Time.deltaTime;
+        if (calmTimerCountdown >= calmTimer)
+        {
+            Parent.SetState("idle");
+        }
         SetVelocity();
     }
     
@@ -41,7 +48,5 @@ public class DonkeyFleeState: AbstractNPCState
         {
             Parent.animatorController.SetWalk(0,(int)Mathf.Sign(walkDirections.y));
         }
-        
-        
     }
 }
