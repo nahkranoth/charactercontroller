@@ -44,12 +44,12 @@ public class RabiteAngryState: AbstractNPCState
 
         if (attackAllowed)
         {
-            attackTimer += 1f * Time.deltaTime;
+            attackTimer += Time.deltaTime;
             if (attackTimer >= settings.strikeDelayTime && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
             {
                 attackAllowed = false;
                 attackTimer = 0f;
-                Attack();
+                Parent.SetState("attack");
             }
         }
         
@@ -78,24 +78,7 @@ public class RabiteAngryState: AbstractNPCState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.attackWalkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.angryWalkSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
-    }
-    
-    private void Attack()
-    {
-        Parent.animatorController.Attack();
-        currentWalkSpeed = 1f;
-        Parent.StartCoroutine(ResetAttack());
-    }
-
-    IEnumerator ResetAttack()
-    {
-        yield return new WaitForSeconds(.2f);
-        Parent.attacking = true;
-        currentWalkSpeed = settings.roamWalkSpeed;
-        yield return new WaitForSeconds(.5f);
-        Parent.attacking = false;
-        attackAllowed = false;
     }
 }

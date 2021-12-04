@@ -5,7 +5,6 @@ using UnityEngine;
 public class RabiteSettings : INPCSettings
 {
     public float knockbackAmount = .2f;
-    
     public override int GetHealth()
     {
         return health;

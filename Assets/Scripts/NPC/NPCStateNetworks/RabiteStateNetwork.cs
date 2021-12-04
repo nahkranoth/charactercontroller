@@ -17,6 +17,7 @@ public class RabiteStateNetwork:INPCStateNetwork
             {"roam", new RabiteRoamState(settings)},
             {"knockback", new KnockbackHitState(settings.knockbackAmount)},
             {"angry", new RabiteAngryState(settings)},
+            {"attack", new RabiteAttackState(settings)},
             {"die", new ZombieDieState()}
         };
         

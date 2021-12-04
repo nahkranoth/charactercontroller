@@ -82,7 +82,7 @@ public class BowlerAngryState: AbstractNPCState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.attackWalkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.angryWalkSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
     }
     

@@ -1851,6 +1851,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3035164929836117919, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
+      propertyPath: DEBUG
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3035164929836117919, guid: cb3de278151041e459eecf2ca63436b5, type: 3}
       propertyPath: bgGenerator
       value: 
       objectReference: {fileID: 1806286481}

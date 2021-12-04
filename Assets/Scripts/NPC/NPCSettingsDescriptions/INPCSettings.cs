@@ -6,7 +6,8 @@ public abstract class INPCSettings:ScriptableObject
     public int health = 30;
     public int damage = 5;
     public float roamWalkSpeed = 0.1f;
-    public float attackWalkSpeed = 0.4f;
+    public float angryWalkSpeed = 0.4f;
+    public float attackSpeed = 1.4f;
     public float strikeDistance = 0.3f;
     public float strikeDelayTime = 4f;
 
