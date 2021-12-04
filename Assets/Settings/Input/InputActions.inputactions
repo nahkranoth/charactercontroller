@@ -1039,6 +1039,77 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MessageAnswer",
+            "id": "11b11a3b-43c7-4652-9265-6f4e283b1736",
+            "actions": [
+                {
+                    "name": "Answer",
+                    "type": "Button",
+                    "id": "a6c2ee70-3f0b-4329-af85-292b42499b78",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "826958ca-82c6-4f2b-8342-524561e8a99f",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Answer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6ea302a-59ba-49ab-88ab-3365ca5fd777",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Answer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad9e4431-24ff-42eb-9707-2e9a629e4b75",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Answer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8c537a4-aa1c-4d24-bf5f-1d72cc9c4263",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Answer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47001d16-0e05-4c90-8dfd-72a81404d4e9",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Answer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

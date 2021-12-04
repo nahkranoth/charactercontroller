@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
     public Action DodgeRoll;
     public Action OnCloseUI;
     public Action ApplyMenuWheel;
+    public Action<int> ApplyMessageBoxAnswer;
 
     public PlayerInput playerInput;
     
@@ -102,6 +103,12 @@ public class InputController : MonoBehaviour
         ApplyMenuWheel?.Invoke();
     }
 
+    public void OnMessageBoxAnswer(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        ApplyMessageBoxAnswer?.Invoke(Int32.Parse(ctx.control.displayName));
+    }
+    
     void FixedUpdate()
     {
         directions.x = hor;

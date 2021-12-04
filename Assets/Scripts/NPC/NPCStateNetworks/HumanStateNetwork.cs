@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Object = System.Object;
 
 public class HumanStateNetwork:INPCStateNetwork
@@ -38,11 +39,22 @@ public class HumanStateNetwork:INPCStateNetwork
             return;
         }
         
+        var playerController = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        
         if (settings.isHotelOwner)
         {
             //Give option to sleep - and save
-            messageController.QueMessageQuestion("Do you want to sleep here?",
-                new List<(string, Action)> {("Yes", null), ("No", null)});
+            messageController.QueMessageQuestion("Do you want to sleep here? It's 30$",
+                new List<(string, Action)> {("Yes", () =>
+                {
+                    Debug.Log("Sleep");
+                    //TODO; do time thingy
+                    playerController.statusController.ChangeMoney(-30);
+
+                }), ("No", () =>
+                {
+                    messageController.QueMessage("Okay Bye!");
+                })});
             return;
         }
         

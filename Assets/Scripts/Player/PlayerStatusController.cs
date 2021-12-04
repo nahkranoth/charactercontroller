@@ -14,7 +14,6 @@ public class PlayerStatusController:MonoBehaviour
     {
         WorldGraph.Subscribe(this, typeof(PlayerStatusController));
     }
-  
 
     public void ChangeMoney(int amount)
     {
@@ -33,17 +32,9 @@ public class PlayerStatusController:MonoBehaviour
         OnChangeHealth?.Invoke(status.health);
     }
 
-    public int Money
-    {
-        get { return status.money; }
-        set { status.money = value; }
-    }
+    public int Money => status.money;
     
-    public int CurrentHealth
-    {
-        get { return status.health; }
-        set { status.health = value; }
-    }
+    public int CurrentHealth => status.health;
     
     public float Armor
     {
