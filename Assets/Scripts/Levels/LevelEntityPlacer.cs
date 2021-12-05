@@ -9,6 +9,8 @@ public class LevelEntityPlacer : MonoBehaviour
     
     public Dictionary<Vector3Int, GameObject> enemyPool = new Dictionary<Vector3Int, GameObject>();
 
+    public List<ITargetableByEnemy> enemyTargetPool = new List<ITargetableByEnemy>();
+
     private ItemBehaviourController itemBehaviourController;
     private PlayerController player;
 
@@ -22,9 +24,9 @@ public class LevelEntityPlacer : MonoBehaviour
     {
         itemBehaviourController = WorldGraph.Retrieve(typeof(ItemBehaviourController)) as ItemBehaviourController;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-
-        itemBehaviourController.SpawnEntity -= SpawnEntity;
-        itemBehaviourController.SpawnEntity += SpawnEntity;
+        RegisterTargetByEnemy(player);
+        itemBehaviourController.SpawnEntity -= SpawnPlayerRelatedEntity;
+        itemBehaviourController.SpawnEntity += SpawnPlayerRelatedEntity;
     }
 
     //Naive approach; no pooling
@@ -84,9 +86,20 @@ public class LevelEntityPlacer : MonoBehaviour
         enemyPool[position] = container;
     }
 
-    public void SpawnEntity(GameObject obj)
+    public void SpawnPlayerRelatedEntity(GameObject obj)
     {
         var container = Instantiate(obj, transform);
+        RegisterTargetByEnemy(container.GetComponent<ITargetableByEnemy>());
         container.transform.localPosition = Vector3Int.RoundToInt(player.transform.localPosition);
+    }
+
+    public void RegisterTargetByEnemy(ITargetableByEnemy target)
+    {
+        enemyTargetPool.Add(target);
+    }
+    
+    public void RemoveTargetByEnemy(ITargetableByEnemy target)
+    {
+        enemyTargetPool.Remove(target);
     }
 }

@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCController : MonoBehaviour
+public class NPCController : MonoBehaviour, ITargetableByEnemy
 {
     public NPCAnimatorController animatorController;
-    public Collider2D mainCollider;
     public INPCSettings settings;
     public Rigidbody2D rigidBody;
     public CharacterDebugController charDebug;
@@ -36,7 +35,7 @@ public class NPCController : MonoBehaviour
 
     private bool initialized;
 
-    private bool triggerOcupied = false;
+    private bool triggerOcupied;
 
     void Start()
     {
@@ -73,7 +72,6 @@ public class NPCController : MonoBehaviour
         {
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Honey"));
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Water Bottle"));
-   
             inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
         }
 
@@ -160,7 +158,12 @@ public class NPCController : MonoBehaviour
     public void Destroy()
     {
         damageTaker.OnInteractionFinished -= DamageFinished;
-        metaEntity.entityPlacer.GenerateCollectable(dropPool.GetRandom(), transform.localPosition);
-        DestroyImmediate(gameObject);
+        if(dropPool?.collection.Count > 0) metaEntity.entityPlacer.GenerateCollectable(dropPool.GetRandom(), transform.localPosition);
+        Destroy(gameObject);
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
     }
 }

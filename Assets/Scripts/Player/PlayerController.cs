@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ITargetableByEnemy
 {
    public InputController input;
    public Rigidbody2D rigid;
@@ -163,4 +163,8 @@ public class PlayerController : MonoBehaviour
       speed = statusController.WalkSpeed;
    }
 
+   public Transform GetTransform()
+   {
+      return transform;
+   }
 }

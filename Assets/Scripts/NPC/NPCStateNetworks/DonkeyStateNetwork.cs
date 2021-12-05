@@ -21,6 +21,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
             {"idle", new DonkeyIdleState()},
             {"follow", new DonkeyFollowState(settings)},
             {"flee", new DonkeyFleeState(settings)},
+            {"die", new DonkeyDieState()},
         };
         
         foreach (var abstractEnemyState in dict)
@@ -53,7 +54,6 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public string GetDieNode()
     {
-        Debug.Log("Die");
-        return "idle";
+        return "die";
     }
 }
