@@ -21,7 +21,7 @@ public class ZombieDieState: AbstractNPCState
     IEnumerator StartRemovalSequence()
     {
         yield return new WaitForSeconds(3f);
-        Parent.Destroy();
+        Parent.DestroyMe();
     }
     
     public override void Execute()

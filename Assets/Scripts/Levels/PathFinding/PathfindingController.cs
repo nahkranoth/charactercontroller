@@ -93,10 +93,10 @@ public class PathfindingController : MonoBehaviour
         return result;
     }
     
-    public List<CellData> FindPathToPlayerByWorldPos(Vector3 worldPos)
+    public List<CellData> FindPathToTargetByWorldPos(Vector3 worldPos, Vector3 targetPos)
     {
         var startCell = GetFromCellMapByWorldPos(worldPos);
-        var finishCell = GetFromCellMapByWorldPos(player.transform.position);
+        var finishCell = GetFromCellMapByWorldPos(targetPos);
         return FindPath(startCell, finishCell);
     }
     public List<CellData> FindPath(CellData startCell, CellData finishCell)

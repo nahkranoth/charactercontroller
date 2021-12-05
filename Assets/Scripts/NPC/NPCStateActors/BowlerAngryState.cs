@@ -29,7 +29,7 @@ public class BowlerAngryState: AbstractNPCState
 
     private void InitializePath()
     {
-        var newPath = Parent.pathfinding.FindPathToPlayerByWorldPos(Parent.transform.position);
+        var newPath = Parent.pathfinding.FindPathToTargetByWorldPos(Parent.transform.position, Parent.attackTarget.position);
         Parent.npcPathController.InitializePath(newPath);
         Parent.npcPathController.NextNode();
         roamTarget = Parent.npcPathController.GetTarget();

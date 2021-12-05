@@ -33,7 +33,7 @@ public class DonkeyFollowState: AbstractNPCState
     {
         if (initializePathTimer < reInitializePathTime) return;
         initializePathTimer = 0;
-        var newPath = Parent.pathfinding.FindPathToPlayerByWorldPos(Parent.transform.position);
+        var newPath = Parent.pathfinding.FindPathToTargetByWorldPos(Parent.transform.position, player.transform.position);
         Parent.npcPathController.InitializePath(newPath);
         Parent.npcPathController.NextNode();
         roamTarget = Parent.npcPathController.GetTarget();

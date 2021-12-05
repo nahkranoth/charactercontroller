@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 572130593}
   - component: {fileID: 6070785335149153078}
   - component: {fileID: 7745941944118724647}
+  - component: {fileID: 5663862092260105512}
   m_Layer: 0
   m_Name: Rabite
   m_TagString: Untagged
@@ -55,7 +56,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 7627963637988199835}
-  mainCollider: {fileID: 572130593}
   settings: {fileID: 11400000, guid: 1d9d4beea6f828546a64f31192ec9de5, type: 2}
   rigidBody: {fileID: 572130592}
   charDebug: {fileID: 6287317873963529915}
@@ -68,6 +68,8 @@ MonoBehaviour:
   dropPool: {fileID: 11400000, guid: 3e8f9d4a41687a44583a440034700bb3, type: 2}
   myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
+  metaEntity: {fileID: 0}
+  triggerOcupied: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +159,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa76f847dac46d397c6e70d8bdc4f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5663862092260105512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683834771004767112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70029c46abc42c096385d8b260b07fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcController: {fileID: 6236806266579460046}
 --- !u!1 &1770607579523542563
 GameObject:
   m_ObjectHideFlags: 0

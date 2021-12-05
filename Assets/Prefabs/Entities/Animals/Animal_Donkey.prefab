@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6070785335149153078}
   - component: {fileID: 7745941944118724647}
   - component: {fileID: 3349942357779499763}
+  - component: {fileID: 1090654881755478185}
   m_Layer: 0
   m_Name: Animal_Donkey
   m_TagString: Untagged
@@ -56,7 +57,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 7627963637988199835}
-  mainCollider: {fileID: 572130593}
   settings: {fileID: 11400000, guid: 9df270d243a4b0d42a59ea4eb64b4999, type: 2}
   rigidBody: {fileID: 572130592}
   charDebug: {fileID: 6322337321363106242}
@@ -69,6 +69,8 @@ MonoBehaviour:
   dropPool: {fileID: 0}
   myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
+  metaEntity: {fileID: 0}
+  triggerOcupied: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +174,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storage:
     storage: []
+--- !u!114 &1090654881755478185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683834771004767112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70029c46abc42c096385d8b260b07fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcController: {fileID: 6236806266579460046}
 --- !u!1 &1496904689154910621
 GameObject:
   m_ObjectHideFlags: 0

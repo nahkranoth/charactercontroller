@@ -5,7 +5,7 @@
     {
         levelEntityPlacer = WorldGraph.Retrieve(typeof(LevelEntityPlacer)) as LevelEntityPlacer;
         levelEntityPlacer.RemoveTargetByEnemy(Parent);
-        Parent.Destroy();
+        Parent.DestroyMe();
     }
 
     public override void Deactivate()

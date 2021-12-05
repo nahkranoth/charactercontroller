@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RabiteAngryState: AbstractNPCState
 {
-    private PlayerController player;
     private float currentWalkSpeed = 0.1f;
     private bool attackAllowed;
     private float attackTimer = 0f;
@@ -12,14 +11,17 @@ public class RabiteAngryState: AbstractNPCState
     private Vector3 walkDirections;
 
     private bool refindPathAllowed = true;
+
+    private PlayerController player;
+    
     public RabiteAngryState(INPCSettings _settings)
     {
         settings = _settings;
+        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
     
     public override void Activate()
     {
-        player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
         InitializePath();
     }
 
@@ -29,7 +31,7 @@ public class RabiteAngryState: AbstractNPCState
 
     private void InitializePath()
     {
-        var newPath = Parent.pathfinding.FindPathToPlayerByWorldPos(Parent.transform.position);
+        var newPath = Parent.pathfinding.FindPathToTargetByWorldPos(Parent.transform.position, Parent.attackTarget.position);
         Parent.npcPathController.InitializePath(newPath);
         Parent.npcPathController.NextNode();
         roamTarget = Parent.npcPathController.GetTarget();
@@ -37,7 +39,7 @@ public class RabiteAngryState: AbstractNPCState
 
     public override void Execute()
     {
-        if (!attackAllowed && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
+        if (!attackAllowed && Helpers.InRange(Parent.attackTarget.position, Parent.transform.position, settings.strikeDistance))
         {
             attackAllowed = true;
         }
@@ -45,7 +47,7 @@ public class RabiteAngryState: AbstractNPCState
         if (attackAllowed)
         {
             attackTimer += Time.deltaTime;
-            if (attackTimer >= settings.strikeDelayTime && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
+            if (attackTimer >= settings.strikeDelayTime && Helpers.InRange(Parent.attackTarget.position, Parent.transform.position, settings.strikeDistance))
             {
                 attackAllowed = false;
                 attackTimer = 0f;
@@ -53,7 +55,7 @@ public class RabiteAngryState: AbstractNPCState
             }
         }
         
-        if (Vector3.Distance(player.transform.position, Parent.transform.position) > settings.loseDistance)
+        if (Vector3.Distance(Parent.attackTarget.position, Parent.transform.position) > settings.loseDistance)
         {
             Parent.animatorController.SetWalk(0, 0);
             Parent.SetState("idle");

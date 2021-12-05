@@ -11,7 +11,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     public bool characterDebug;
     public TriggerBox hitTrigger;
     
-    private INPCStateNetwork stateNetwork;
+    public INPCStateNetwork stateNetwork;
     private Dictionary<string, AbstractNPCState> stateDictionary;
     private AbstractNPCState activeState;
     private WorldController worldController;
@@ -28,15 +28,20 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     public NPCHealth myNpcHealth;
     
     [HideInInspector] public bool attacking = false;
+    [HideInInspector] public Transform attackTarget;
+
 
     private PlayerController player;
     private PlayerToolController playerTool;
-    private MetaLevelEntityPlacer metaEntity;
+    public MetaLevelEntityPlacer metaEntity;
 
     private bool initialized;
 
-    private bool triggerOcupied;
+    public bool triggerOccupied;
 
+    public Action OnDestroyMe;
+
+    
     void Start()
     {
         myNpcHealth.Set(settings.GetHealth());
@@ -65,8 +70,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
         
         damageTaker.OnInteraction -= OnInteraction;
         damageTaker.OnInteraction += OnInteraction;
-        damageTaker.OnInteractionFinished -= DamageFinished;
-        damageTaker.OnInteractionFinished += DamageFinished;
+        
 
         if (inventory != null)
         {
@@ -97,7 +101,6 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
             return;
         }
 
-          //TODO 4 drawn out of my ass (behavior culling)
         if (!settings.distanceCulling || Vector3.Distance(player.transform.position, transform.position) < 4f) 
         {
             activeState.Execute();
@@ -118,48 +121,15 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
 
     private void OnInteraction(int amount, PlayerToolActionType type)
     {
-        if (triggerOcupied) return;
-        triggerOcupied = true;
-        if (type == PlayerToolActionType.Slash && !settings.invincible)
-        {
-            Damage(amount, type);
-            return;
-        }
+        if (triggerOccupied) return;
+        triggerOccupied = true;
+        if (type == PlayerToolActionType.Slash) return;
         stateNetwork.OnTriggerByPlayer(type);
     }
-
-    private void Damage(int amount, PlayerToolActionType type)
+    
+    public void DestroyMe()
     {
-        attacking = false;
-        myNpcHealth.Modify(-amount);
-        if (myNpcHealth.IsDead())
-        {
-            Die();
-            return;
-        }
-        SetState(stateNetwork.GetDamagedNode());
-        animatorController.Damage();
-    }
-
-    private void DamageFinished()
-    {
-        if(!myNpcHealth.IsDead()) SetState(stateNetwork.GetDamageFinishedNode());
-        triggerOcupied = false;
-    }
-
-    private void Die()
-    {
-        StopAllCoroutines();
-        SetState(stateNetwork.GetDieNode());
-        damageTaker.OnInteraction -= Damage;
-        Destroy(damageTaker);
-    }
-
-    public void Destroy()
-    {
-        damageTaker.OnInteractionFinished -= DamageFinished;
-        if(dropPool?.collection.Count > 0) metaEntity.entityPlacer.GenerateCollectable(dropPool.GetRandom(), transform.localPosition);
-        Destroy(gameObject);
+        OnDestroyMe?.Invoke();
     }
 
     public Transform GetTransform()

@@ -7,6 +7,7 @@ public class RabiteRoamState: AbstractNPCState
     private bool moving = false;
     private Vector3 roamTarget;
     private PlayerController player;
+    private LevelEntityPlacer levelEntityPlacer;
 
     private INPCSettings settings;
     
@@ -14,6 +15,7 @@ public class RabiteRoamState: AbstractNPCState
     {
         settings = _settings;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        levelEntityPlacer = WorldGraph.Retrieve(typeof(LevelEntityPlacer)) as LevelEntityPlacer;
     }
 
     public override void Activate()
@@ -32,12 +34,21 @@ public class RabiteRoamState: AbstractNPCState
     {
     }
 
+    private void IsInTargetDistance()
+    {
+        foreach (var targetable in levelEntityPlacer.enemyTargetPool)
+        {
+            if (Vector3.Distance(targetable.GetTransform().position, Parent.transform.position) < settings.detectDistance)
+            {
+                Parent.attackTarget = targetable.GetTransform();
+                Parent.SetState("angry");
+            }
+        }
+    }
+
     public override void Execute()
     {
-        if (Vector3.Distance(player.transform.position, Parent.transform.position) < settings.detectDistance)
-        {
-            Parent.SetState("angry");
-        }
+        IsInTargetDistance();
         
         if (Helpers.InRange(Parent.transform.position, roamTarget, .2f))
         {
