@@ -8,14 +8,14 @@ public class DonkeyStateNetwork:INPCStateNetwork
     private NPCController parent;
     
     private MessageController messageController;
-    private DeepstorageNPCInventory deepStorage;
+    private DeepstorageEntityInventory deepStorage;
 
     public Dictionary<string, AbstractNPCState> GetStateNetwork(NPCController _parent, Object rawSettings)
     {
         settings = rawSettings as DonkeySettings;
         parent = _parent;
         messageController = WorldGraph.Retrieve(typeof(MessageController)) as MessageController;
-        deepStorage = WorldGraph.Retrieve(typeof(DeepstorageNPCInventory)) as DeepstorageNPCInventory;
+        deepStorage = WorldGraph.Retrieve(typeof(DeepstorageEntityInventory)) as DeepstorageEntityInventory;
         var dict = new Dictionary<string, AbstractNPCState>()
         {
             {"idle", new DonkeyIdleState()},
@@ -34,7 +34,7 @@ public class DonkeyStateNetwork:INPCStateNetwork
 
     public void OnTriggerByPlayer(PlayerToolActionType type)
     {
-        if (type == PlayerToolActionType.Apply) deepStorage.Show(parent.inventory.storage);
+        if (type == PlayerToolActionType.Apply) deepStorage.Show(parent.inventory.storage, parent.myNpcHealth.Amount);
     }
 
     public string GetStartNode()

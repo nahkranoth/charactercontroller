@@ -1,20 +1,19 @@
 using System;
 using UnityEngine;
 
-public class DeepstorageNPCInventory : AbstractDeepStorageScreen
+public class DeepstorageEntityInventory : AbstractDeepStorageScreen
 {
-    
     public GameObject playerInventoryGrid;
     
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(DeepstorageNPCInventory));
+        WorldGraph.Subscribe(this, typeof(DeepstorageEntityInventory));
     }
-    public void Show(EntityInventory inventory)
+    public void Show(EntityInventory inventory, int health)
     {
         if(mainPanel.activeSelf) return;
         activeInventory = inventory;
-        infoPanel.info.text = "NPC inventory";
+        infoPanel.info.text = $"NPC inventory \n Health: {health}";
         mainPanel.SetActive(true);
         input.ChangeScheme("UI");
         input.OnCloseUI += Hide;

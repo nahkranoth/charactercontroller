@@ -121,9 +121,8 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     private void OnInteraction(int amount, PlayerToolActionType type)
     {
         if (triggerOccupied) return;
-        triggerOccupied = true;
-        if (type == PlayerToolActionType.Slash) return;
         stateNetwork.OnTriggerByPlayer(type);
+        triggerOccupied = true;
     }
     
     public void DestroyMe()

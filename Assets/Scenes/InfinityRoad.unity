@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4806305654758057702, guid: c085cf2d20b56f043a7bad4f5e8eaa48, type: 3}
       propertyPath: m_Name
-      value: DeepStorage_NPCInventory
+      value: DeepStorage_EntityInventory
       objectReference: {fileID: 0}
     - target: {fileID: 4806305654758057702, guid: c085cf2d20b56f043a7bad4f5e8eaa48, type: 3}
       propertyPath: m_IsActive

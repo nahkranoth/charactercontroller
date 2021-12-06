@@ -8,8 +8,8 @@ public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
     public Action<int> OnDamage;
     private void Start()
     {
-        npcController.handler.OnInteractionFinished -= DamageFinished;
-        npcController.handler.OnInteractionFinished += DamageFinished;
+        npcController.handler.OnInteractionFinished -= InteractionFinished;
+        npcController.handler.OnInteractionFinished += InteractionFinished;
         npcController.handler.OnInteraction -= OnInteraction;
         npcController.handler.OnInteraction += OnInteraction;
         npcController.OnDestroyMe -= Destroy;
@@ -38,10 +38,11 @@ public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
         npcController.animatorController.Damage();
     }
     
-    private void DamageFinished()
+    private void InteractionFinished(PlayerToolActionType type)
     {
-        if(!npcController.myNpcHealth.IsDead()) npcController.SetState(npcController.stateNetwork.GetDamageFinishedNode());
         npcController.triggerOccupied = false;
+        if (type == PlayerToolActionType.Apply) return;
+        if(!npcController.myNpcHealth.IsDead()) npcController.SetState(npcController.stateNetwork.GetDamageFinishedNode());
     }
 
     private void Die()
@@ -53,7 +54,7 @@ public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
 
     public void Destroy()
     {
-        npcController.handler.OnInteractionFinished -= DamageFinished;
+        npcController.handler.OnInteractionFinished -= InteractionFinished;
         npcController.OnDestroyMe -= Destroy;
         if(npcController.dropPool?.collection.Count > 0) npcController.metaEntity.entityPlacer.GenerateCollectable(npcController.dropPool.GetRandom(), transform.localPosition);
         Destroy(gameObject);

@@ -6,7 +6,7 @@ public class InteractionHandler : MonoBehaviour
 {
     public InteractionDetector interaction;
     public Action<int, PlayerToolActionType> OnInteraction;
-    public Action OnInteractionFinished;
+    public Action<PlayerToolActionType> OnInteractionFinished;
     public AudioController.AudioClipName damageSound;
     [HideInInspector] public bool damageRecovering = false;
     public float damageRecoveryTime = 2f;
@@ -28,17 +28,16 @@ public class InteractionHandler : MonoBehaviour
     public void TakeInteraction(int damage, PlayerToolActionType type)
     {
         OnInteraction?.Invoke(damage, type);
-        if (damageRecovering) return;
-        damageRecovering = true;
+        StartCoroutine(InteractionFinished(type));
+        damageRecovering = true;    
         audioController.PlaySound(damageSound);
-        StartCoroutine(InteractionFinished());
     }
     
-    IEnumerator InteractionFinished()
+    IEnumerator InteractionFinished(PlayerToolActionType type)
     {
         yield return new WaitForSeconds(damageRecoveryTime);
         damageRecovering = false;
-        OnInteractionFinished?.Invoke();
+        OnInteractionFinished?.Invoke(type);
     }
 
 }

@@ -16,6 +16,7 @@ MonoBehaviour:
   infoPanel: {fileID: 5978496016214436590}
   deepStoragePrefab: {fileID: 7863505327213945831, guid: 674c6707db2b5a14c8111e57267076e1, type: 3}
   inventoryGrid: {fileID: 2025824512896315665}
+  secondInventoryGrid: {fileID: 0}
   playerInventoryGrid: {fileID: 6300132613541781779}
 --- !u!1 &6300132613541781779
 GameObject:
@@ -128,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 635375775757875573, guid: 1e419d0e36be75643aa7f7f85bc90768, type: 3}
       propertyPath: m_Name
-      value: DeepStorage_NPCInventory
+      value: DeepStorage_EntityInventory
       objectReference: {fileID: 0}
     - target: {fileID: 635375775757875574, guid: 1e419d0e36be75643aa7f7f85bc90768, type: 3}
       propertyPath: m_Pivot.x

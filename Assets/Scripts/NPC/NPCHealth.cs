@@ -10,6 +10,8 @@ public class NPCHealth:MonoBehaviour
     public Action Die;
     public Action<int> OnChange;
 
+    public int Amount => amount;
+    
     public void Modify(int change)
     {
         amount += change;
