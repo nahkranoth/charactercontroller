@@ -18,7 +18,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     [HideInInspector] public PathfindingController pathfinding;
     public NPCPathfindingController npcPathController;
     
-    public InteractionDamageTaker damageTaker;
+    public InteractionHandler handler;
 
     public ItemCollectionDescription itemCollection;
     public NPCInventory inventory;
@@ -30,7 +30,6 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     [HideInInspector] public bool attacking = false;
     [HideInInspector] public Transform attackTarget;
 
-
     private PlayerController player;
     private PlayerToolController playerTool;
     public MetaLevelEntityPlacer metaEntity;
@@ -41,7 +40,6 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
 
     public Action OnDestroyMe;
 
-    
     void Start()
     {
         myNpcHealth.Set(settings.GetHealth());
@@ -68,10 +66,9 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
         SetState(stateNetwork.GetStartNode());
         charDebug.SetStateText(stateNetwork.GetStartNode());
         
-        damageTaker.OnInteraction -= OnInteraction;
-        damageTaker.OnInteraction += OnInteraction;
+        handler.OnInteraction -= OnInteraction;
+        handler.OnInteraction += OnInteraction;
         
-
         if (inventory != null)
         {
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Honey"));
@@ -84,9 +81,11 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
 
     private void OnHitSomething(Collider2D collider2D)
     {
-        if (attacking && !damageTaker.damageRecovering)//TODO move to stateNetworks
+        if (attacking && !handler.damageRecovering)
         {
-            player.Damage(settings.damage);
+            var dTarget = collider2D.GetComponent<IDamageTarget>();
+            if (dTarget == null) return;
+            dTarget.Damage(settings.damage);
             attacking = false;
         }
     }

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, ITargetableByEnemy
+public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
 {
    public InputController input;
    public Rigidbody2D rigid;

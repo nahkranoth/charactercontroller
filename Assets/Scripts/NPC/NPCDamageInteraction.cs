@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class NPCDamageInteraction:MonoBehaviour
+public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
 {
     public NPCController npcController;
 
+    public Action<int> OnDamage;
     private void Start()
     {
-        npcController.damageTaker.OnInteractionFinished -= DamageFinished;
-        npcController.damageTaker.OnInteractionFinished += DamageFinished;
-        npcController.damageTaker.OnInteraction -= OnInteraction;
-        npcController.damageTaker.OnInteraction += OnInteraction;
+        npcController.handler.OnInteractionFinished -= DamageFinished;
+        npcController.handler.OnInteractionFinished += DamageFinished;
+        npcController.handler.OnInteraction -= OnInteraction;
+        npcController.handler.OnInteraction += OnInteraction;
         npcController.OnDestroyMe -= Destroy;
         npcController.OnDestroyMe += Destroy;
     }
@@ -18,14 +20,15 @@ public class NPCDamageInteraction:MonoBehaviour
     {
         if (type == PlayerToolActionType.Slash && !npcController.settings.invincible)
         {
-            Damage(amount, type);
+            Damage(amount);
         }
     }
     
-    private void Damage(int amount, PlayerToolActionType type)
+    public void Damage(int amount)
     {
         npcController.attacking = false;
         npcController.myNpcHealth.Modify(-amount);
+        OnDamage.Invoke(amount);
         if (npcController.myNpcHealth.IsDead())
         {
             Die();
@@ -34,7 +37,7 @@ public class NPCDamageInteraction:MonoBehaviour
         npcController.SetState(npcController.stateNetwork.GetDamagedNode());
         npcController.animatorController.Damage();
     }
-
+    
     private void DamageFinished()
     {
         if(!npcController.myNpcHealth.IsDead()) npcController.SetState(npcController.stateNetwork.GetDamageFinishedNode());
@@ -45,15 +48,15 @@ public class NPCDamageInteraction:MonoBehaviour
     {
         StopAllCoroutines();
         npcController.SetState(npcController.stateNetwork.GetDieNode());
-        npcController.damageTaker.OnInteraction -= Damage;
-        Destroy(npcController.damageTaker);
+        Destroy(npcController.handler);
     }
 
     public void Destroy()
     {
-        npcController.damageTaker.OnInteractionFinished -= DamageFinished;
+        npcController.handler.OnInteractionFinished -= DamageFinished;
         npcController.OnDestroyMe -= Destroy;
         if(npcController.dropPool?.collection.Count > 0) npcController.metaEntity.entityPlacer.GenerateCollectable(npcController.dropPool.GetRandom(), transform.localPosition);
         Destroy(gameObject);
     }
+
 }

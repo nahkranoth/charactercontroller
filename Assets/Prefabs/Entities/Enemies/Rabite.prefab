@@ -62,14 +62,15 @@ MonoBehaviour:
   characterDebug: 0
   hitTrigger: {fileID: 7893274899369040521}
   pathfinding: {fileID: 0}
-  damageTaker: {fileID: 6070785335149153078}
+  handler: {fileID: 6070785335149153078}
   itemCollection: {fileID: 0}
   inventory: {fileID: 0}
   dropPool: {fileID: 11400000, guid: 3e8f9d4a41687a44583a440034700bb3, type: 2}
   myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
+  attackTarget: {fileID: 0}
   metaEntity: {fileID: 0}
-  triggerOcupied: 0
+  triggerOccupied: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 8254731429186715195}
   damageAnimation: {fileID: 670010830187735605}
-  damageIndicator: {fileID: 6070785335149153078}
+  handler: {fileID: 5663862092260105512}
 --- !u!1 &6848765768067253187
 GameObject:
   m_ObjectHideFlags: 0

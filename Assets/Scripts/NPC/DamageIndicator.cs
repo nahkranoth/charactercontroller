@@ -6,17 +6,17 @@ public class DamageIndicator : MonoBehaviour
     public TextMesh damageText;
     public Animator damageAnimation;
     
-    public InteractionDamageTaker damageIndicator;
+    public NPCDamageInteraction handler;
 
     private void Start()
     {
-        damageIndicator.OnInteraction -= ShowDamage;
-        damageIndicator.OnInteraction += ShowDamage;
+        handler.OnDamage -= ShowDamage;
+        handler.OnDamage += ShowDamage;
     }
 
-    public void ShowDamage(int damage, PlayerToolActionType type)
+    public void ShowDamage(int damage)
     {
-        if (type != PlayerToolActionType.Slash) return;
+        if (damage <= 0) return;
         damageAnimation.SetTrigger("Hit");
         damageText.text = damage.ToString();
     }

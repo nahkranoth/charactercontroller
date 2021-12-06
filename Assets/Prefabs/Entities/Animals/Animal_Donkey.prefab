@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7745941944118724647}
   - component: {fileID: 3349942357779499763}
   - component: {fileID: 1090654881755478185}
+  - component: {fileID: 3855111048016154334}
   m_Layer: 0
   m_Name: Animal_Donkey
   m_TagString: Untagged
@@ -63,14 +64,15 @@ MonoBehaviour:
   characterDebug: 0
   hitTrigger: {fileID: 7893274899369040521}
   pathfinding: {fileID: 0}
-  damageTaker: {fileID: 6070785335149153078}
+  handler: {fileID: 6070785335149153078}
   itemCollection: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
   inventory: {fileID: 3349942357779499763}
   dropPool: {fileID: 0}
   myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
+  attackTarget: {fileID: 0}
   metaEntity: {fileID: 0}
-  triggerOcupied: 0
+  triggerOccupied: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +189,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcController: {fileID: 6236806266579460046}
+--- !u!61 &3855111048016154334
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683834771004767112}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0016664937, y: 0.0016665012}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.28340966, y: 0.44339266}
+  m_EdgeRadius: 0
 --- !u!1 &1496904689154910621
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 3378561376074307441}
   damageAnimation: {fileID: 2299827205244011988}
-  damageIndicator: {fileID: 6070785335149153078}
+  handler: {fileID: 1090654881755478185}
 --- !u!1 &8134410548289839591
 GameObject:
   m_ObjectHideFlags: 0

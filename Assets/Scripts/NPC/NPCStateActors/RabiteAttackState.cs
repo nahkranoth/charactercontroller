@@ -15,7 +15,7 @@ public class RabiteAttackState: AbstractNPCState
     public override void Activate()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        attackDirection = (player.transform.position - Parent.transform.position).normalized;
+        attackDirection = (Parent.attackTarget.position - Parent.transform.position).normalized;
         Attack();
     }
 

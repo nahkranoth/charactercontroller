@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class InteractionDamageTaker : MonoBehaviour
+public class InteractionHandler : MonoBehaviour
 {
     public InteractionDetector interaction;
     public Action<int, PlayerToolActionType> OnInteraction;
@@ -31,14 +31,14 @@ public class InteractionDamageTaker : MonoBehaviour
         if (damageRecovering) return;
         damageRecovering = true;
         audioController.PlaySound(damageSound);
-        StartCoroutine(DamageFinished());
+        StartCoroutine(InteractionFinished());
     }
     
-    IEnumerator DamageFinished()
+    IEnumerator InteractionFinished()
     {
         yield return new WaitForSeconds(damageRecoveryTime);
         damageRecovering = false;
         OnInteractionFinished?.Invoke();
     }
-    
+
 }

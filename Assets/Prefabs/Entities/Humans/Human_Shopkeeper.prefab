@@ -55,19 +55,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 7627963637988199835}
-  mainCollider: {fileID: 572130593}
   settings: {fileID: 11400000, guid: 9accd3b143a886f4f9fe1770a051a799, type: 2}
   rigidBody: {fileID: 572130592}
   charDebug: {fileID: 6322337321363106242}
   characterDebug: 0
   hitTrigger: {fileID: 7893274899369040521}
   pathfinding: {fileID: 0}
-  damageTaker: {fileID: 6070785335149153078}
+  handler: {fileID: 6070785335149153078}
   itemCollection: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
   inventory: {fileID: 7091964223806311742}
   dropPool: {fileID: 0}
   myNpcHealth: {fileID: 7745941944118724647}
   attacking: 0
+  attackTarget: {fileID: 0}
+  metaEntity: {fileID: 0}
+  triggerOccupied: 0
 --- !u!114 &1961102504868892272
 MonoBehaviour:
   m_ObjectHideFlags: 0
