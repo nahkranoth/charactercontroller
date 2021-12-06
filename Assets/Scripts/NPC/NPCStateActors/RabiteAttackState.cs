@@ -45,6 +45,13 @@ public class RabiteAttackState: AbstractNPCState
         Parent.attacking = true;
         yield return new WaitForSeconds(.5f);
         Parent.attacking = false;
-        Parent.SetState("angry");
+        if (Parent.attackTarget == null)//I killed him!
+        {
+            Parent.SetState("roam");
+        }
+        else
+        {
+            Parent.SetState("angry");
+        }
     }
 }

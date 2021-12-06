@@ -27,7 +27,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     
     public NPCHealth myNpcHealth;
     
-    [HideInInspector] public bool attacking = false;
+    [HideInInspector] public bool attacking;
     [HideInInspector] public Transform attackTarget;
 
     private PlayerController player;
@@ -39,7 +39,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     public bool triggerOccupied;
 
     public Action OnDestroyMe;
-
+    
     void Start()
     {
         myNpcHealth.Set(settings.GetHealth());
