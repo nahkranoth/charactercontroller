@@ -756,7 +756,7 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 1528139976}
   collisionTilemap: {fileID: 788604936}
   generatorCollection: {fileID: 11400000, guid: 736f3a8b848f6174b9d08fe7238c50aa, type: 2}
-  startSeed: 0
+  startSeed: 4
 --- !u!114 &1517900160
 MonoBehaviour:
   m_ObjectHideFlags: 0

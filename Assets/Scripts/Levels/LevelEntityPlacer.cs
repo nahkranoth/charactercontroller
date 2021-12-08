@@ -27,7 +27,6 @@ public class LevelEntityPlacer : MonoBehaviour
         RegisterTargetByEnemy(player);
         itemBehaviourController.SpawnEntity -= SpawnPlayerRelatedEntity;
         itemBehaviourController.SpawnEntity += SpawnPlayerRelatedEntity;
-        
         itemBehaviourController.SpawnWorldItem -= SpawnWorldItem;
         itemBehaviourController.SpawnWorldItem += SpawnWorldItem;
     }

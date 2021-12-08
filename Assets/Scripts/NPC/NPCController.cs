@@ -74,6 +74,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Honey"));
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Water Bottle"));
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Donkey"));
+            inventory.storage.AddByDescription(itemCollection.collection.FindByName("Tent"));
         }
 
         initialized = true;
