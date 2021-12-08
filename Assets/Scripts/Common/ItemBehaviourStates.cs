@@ -8,6 +8,7 @@
         Axe,
         Torch,
         Gem,
-        Spawnable
+        Spawnable,
+        Tent
     }
 }

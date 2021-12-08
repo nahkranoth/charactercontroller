@@ -27,6 +27,9 @@ public class LevelEntityPlacer : MonoBehaviour
         RegisterTargetByEnemy(player);
         itemBehaviourController.SpawnEntity -= SpawnPlayerRelatedEntity;
         itemBehaviourController.SpawnEntity += SpawnPlayerRelatedEntity;
+        
+        itemBehaviourController.SpawnWorldItem -= SpawnWorldItem;
+        itemBehaviourController.SpawnWorldItem += SpawnWorldItem;
     }
 
     //Naive approach; no pooling
@@ -90,6 +93,12 @@ public class LevelEntityPlacer : MonoBehaviour
     {
         var container = Instantiate(obj, transform);
         RegisterTargetByEnemy(container.GetComponent<ITargetableByEnemy>());
+        container.transform.localPosition = Vector3Int.RoundToInt(player.transform.localPosition);
+    }
+    
+    public void SpawnWorldItem(GameObject obj)
+    {
+        var container = Instantiate(obj, transform);
         container.transform.localPosition = Vector3Int.RoundToInt(player.transform.localPosition);
     }
 

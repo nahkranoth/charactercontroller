@@ -9,7 +9,9 @@ public class ItemBehaviourController:MonoBehaviour
     public Action<int> ChangeHealth;
     public Action<float> ChangeHunger;
     public Action<float> ChangeThirst;
+    public Action<float> ChangeSleep;
     public Action<GameObject> SpawnEntity;
+    public Action<GameObject> SpawnWorldItem;
     private void Awake()
     {
         behaviourToActionMap = new Dictionary<ItemBehaviourStates.Behaviours, Action<Item>>();
@@ -40,6 +42,13 @@ public class ItemBehaviourController:MonoBehaviour
         behaviourToActionMap[ItemBehaviourStates.Behaviours.Spawnable] = (item) =>
         {
             SpawnEntity?.Invoke(item.spawnable);
+        };
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.Tent] = (item) =>
+        {
+            SpawnWorldItem?.Invoke(item.spawnable);
+            ChangeSleep?.Invoke(1f);
+            var worldTime = WorldGraph.Retrieve(typeof(WorldTimeController)) as WorldTimeController;
+            worldTime.SpeedToMorning();
         };
         
     }

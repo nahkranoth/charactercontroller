@@ -40,6 +40,7 @@ public class HumanStateNetwork:INPCStateNetwork
         }
         
         var playerController = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
+        var worldTimeController = WorldGraph.Retrieve(typeof(WorldTimeController)) as WorldTimeController;
         
         if (settings.isHotelOwner)
         {
@@ -54,6 +55,7 @@ public class HumanStateNetwork:INPCStateNetwork
                     playerController.statusController.status.hunger = 1;
                     playerController.statusController.status.thirst = 1;
                     playerController.statusController.status.sleep = 1;
+                    worldTimeController.SpeedToMorning();
                 }), ("No", () =>
                 {
                     messageController.QueMessage("Okay Bye!");

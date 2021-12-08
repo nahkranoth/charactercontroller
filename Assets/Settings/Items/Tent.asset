@@ -16,7 +16,7 @@ MonoBehaviour:
     menuName: Tent
     menuSprite: {fileID: 21300000, guid: 58d911400d6409b40997d2ba57d3457b, type: 3}
     equipedSprite: {fileID: 21300000, guid: 58d911400d6409b40997d2ba57d3457b, type: 3}
-    behaviour: 6
+    behaviour: 7
     consumable: 1
     equipable: 0
     wearable: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     nourishment: 0
     healing: 0
     thirst: 0
-    weight: 0
+    weight: 10
     spawnable: {fileID: 2612682705166518573, guid: 335598180fd7034458947205007a8203, type: 3}
     amount: 1
   collectableProbability: 0

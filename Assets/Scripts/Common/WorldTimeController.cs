@@ -17,7 +17,8 @@ public class WorldTimeController : MonoBehaviour
     public bool isNight;
 
     public bool timePassing = true;
-    
+
+    private float previousTimeSpeed = 0;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -28,6 +29,12 @@ public class WorldTimeController : MonoBehaviour
     {
         currentTime = startTime;
         sunLight.Rotate(Vector3.right, startTime);
+    }
+
+    public void SpeedToMorning()
+    {
+        previousTimeSpeed = timeSpeed;
+        timeSpeed = 40f;
     }
     
     private float TimeCycled()
@@ -57,6 +64,7 @@ public class WorldTimeController : MonoBehaviour
             isNight = false;
             sunLight.GetComponent<Light>().shadows = LightShadows.Soft;
             OnDayBreak?.Invoke();
+            timeSpeed = previousTimeSpeed;
         }
     }
     

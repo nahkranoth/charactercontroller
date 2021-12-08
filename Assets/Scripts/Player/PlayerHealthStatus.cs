@@ -31,6 +31,8 @@ public class PlayerHealthStatus:MonoBehaviour
         itemBehavior.ChangeHunger += AddHunger;
         itemBehavior.ChangeThirst -= AddThirst;
         itemBehavior.ChangeThirst += AddThirst;
+        itemBehavior.ChangeSleep += AddSleep;
+        itemBehavior.ChangeSleep += AddSleep;
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
     }
 

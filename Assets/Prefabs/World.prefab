@@ -310,7 +310,7 @@ MonoBehaviour:
   timeSpeed: 0.2
   startTime: 0
   nightfallTime: 80
-  dayBreakTime: 290
+  dayBreakTime: 300
   isNight: 0
   timePassing: 1
 --- !u!114 &878049038
@@ -490,7 +490,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1665035447890616189}
         m_TargetAssemblyTypeName: InputController, Common
-        m_MethodName: OpenWheelInventory
+        m_MethodName: ToggleWheelInventoryShow
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -502,6 +502,86 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: df16a45d-75b8-43fc-8977-7308aef0db5e
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1665035447890616189}
+        m_TargetAssemblyTypeName: InputController, Common
+        m_MethodName: CloseUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 395a6bc3-7f71-48f1-99ce-e23eb000fc79
+    m_ActionName: UI/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1665035447890616189}
+        m_TargetAssemblyTypeName: InputController, Common
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 462bf98d-3261-4e97-a3f9-4c8a05ceb295
+    m_ActionName: MenuWheel/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1665035447890616189}
+        m_TargetAssemblyTypeName: InputController, Common
+        m_MethodName: OnMenuWheelUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 66df08af-15ef-4ac4-8999-7a96a7413e24
+    m_ActionName: MenuWheel/Use[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1665035447890616189}
+        m_TargetAssemblyTypeName: InputController, Common
+        m_MethodName: ToggleWheelInventoryShow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5a72831-15fc-4e30-924e-5ecc4cbb800e
+    m_ActionName: MenuWheel/Open Wheel Inventory[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1665035447890616189}
+        m_TargetAssemblyTypeName: InputController, Common
+        m_MethodName: OnMessageBoxAnswer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6c2ee70-3f0b-4329-af85-292b42499b78
+    m_ActionName: MessageAnswer/Answer[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
