@@ -37,11 +37,11 @@ public class ItemBehaviourController:MonoBehaviour
         {
             Equip?.Invoke(ItemBehaviourStates.Behaviours.Torch);
         };
-        behaviourToActionMap[ItemBehaviourStates.Behaviours.DonkeySpawner] = (item) =>
+        behaviourToActionMap[ItemBehaviourStates.Behaviours.Spawnable] = (item) =>
         {
             SpawnEntity?.Invoke(item.spawnable);
         };
-       
+        
     }
 
     public void Execute(Item item)

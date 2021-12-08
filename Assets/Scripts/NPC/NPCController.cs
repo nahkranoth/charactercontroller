@@ -73,7 +73,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
         {
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Honey"));
             inventory.storage.AddByDescription(itemCollection.collection.FindByName("Water Bottle"));
-            inventory.storage.AddByDescription(itemCollection.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
+            inventory.storage.AddByDescription(itemCollection.collection.FindByName("Donkey"));
         }
 
         initialized = true;

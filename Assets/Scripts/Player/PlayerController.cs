@@ -70,7 +70,8 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.SimpleFood));
       // Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Axe));
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Torch));
-      Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.DonkeySpawner));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByName("Donkey"));
+      Inventory.AddByDescription(itemDescriptions.collection.FindByName("Tent"));
       
       //Wearables
       // Wearing.AddByDescription(itemDescriptions.collection.FindByName("Shoes"));

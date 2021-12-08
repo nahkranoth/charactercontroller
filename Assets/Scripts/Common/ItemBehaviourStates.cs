@@ -8,6 +8,6 @@
         Axe,
         Torch,
         Gem,
-        DonkeySpawner,
+        Spawnable
     }
 }

@@ -9,7 +9,7 @@ public class PlayerStatus
     public float hunger = 1f;
     public float thirst = 1f;
     public float sleep = 1f;
-
+    
     public int money;
     public bool alive;
 

@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c02ca61c164b54a3e339891a32c5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirstTick: 10
-  hungerTick: 20
-  sleepTick: 60
+  thirstTick: 40
+  hungerTick: 80
+  sleepTick: 140
 --- !u!114 &2877498420544819789
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,7 +50,10 @@ public class HumanStateNetwork:INPCStateNetwork
                     Debug.Log("Sleep");
                     //TODO; do time thingy
                     playerController.statusController.ChangeMoney(-30);
-
+                    playerController.statusController.SetHealth(playerController.statusController.MaxHealth);
+                    playerController.statusController.status.hunger = 1;
+                    playerController.statusController.status.thirst = 1;
+                    playerController.statusController.status.sleep = 1;
                 }), ("No", () =>
                 {
                     messageController.QueMessage("Okay Bye!");

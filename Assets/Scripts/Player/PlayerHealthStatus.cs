@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PlayerHealthStatus:MonoBehaviour
 {
-    public float thirstTick = 4f;
+    public float thirstTick = 20f;
     private float currentThirstTick = 0f;
     
-    public float hungerTick = 10f;
+    public float hungerTick = 40f;
     private float currentHungerTick = 0f;
     
-    public float sleepTick = 30f;
+    public float sleepTick = 120f;
     private float currenSleepTick = 0f;
 
     private ItemBehaviourController itemBehavior;

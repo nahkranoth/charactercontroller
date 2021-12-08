@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2aa6be2e21b68c49b432674b1557d7f, type: 3}
-  m_Name: DonkeySpawner
+  m_Name: Tent
   m_EditorClassIdentifier: 
   item:
-    menuName: Donkey
-    menuSprite: {fileID: 1498735017976769781, guid: 2e4c058140cf6b04685530f708d1c7ef, type: 3}
-    equipedSprite: {fileID: 1498735017976769781, guid: 2e4c058140cf6b04685530f708d1c7ef, type: 3}
+    menuName: Tent
+    menuSprite: {fileID: 21300000, guid: 58d911400d6409b40997d2ba57d3457b, type: 3}
+    equipedSprite: {fileID: 21300000, guid: 58d911400d6409b40997d2ba57d3457b, type: 3}
     behaviour: 6
     consumable: 1
     equipable: 0
     wearable: 0
     armor: 0
     wearableModifier:
-      maxHealth: 50
-      walkSpeed: 14
-      runSpeed: 20
+      maxHealth: 0
+      walkSpeed: 0
+      runSpeed: 0
       chargeTime: 0
-      dodgeRollForce: 4
-      maxCarryWeight: 10
+      dodgeRollForce: 0
+      maxCarryWeight: 0
     price: 100
     canChopWood: 0
     damage: 0
     nourishment: 0
     healing: 0
     thirst: 0
-    weight: 200
-    spawnable: {fileID: 683834771004767112, guid: dffaec56c8a70474882d34e2a73de9a9, type: 3}
+    weight: 0
+    spawnable: {fileID: 2612682705166518573, guid: 335598180fd7034458947205007a8203, type: 3}
     amount: 1
-  collectableProbability: 0.1
+  collectableProbability: 0
