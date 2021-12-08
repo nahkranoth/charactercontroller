@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class gitItem
+public class Item
 {
     public string menuName;
     public Sprite menuSprite;
