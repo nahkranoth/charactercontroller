@@ -86,7 +86,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
         {
             var dTarget = collider2D.GetComponent<IDamageTarget>();
             if (dTarget == null) return;
-            dTarget.Damage(settings.damage);
+            dTarget.Damage(settings.attackDamage);
             attacking = false;
         }
     }

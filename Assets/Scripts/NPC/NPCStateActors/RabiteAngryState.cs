@@ -47,7 +47,7 @@ public class RabiteAngryState: AbstractNPCState
         if (attackAllowed)
         {
             attackTimer += Time.deltaTime;
-            if (attackTimer >= settings.strikeDelayTime && Helpers.InRange(Parent.attackTarget.position, Parent.transform.position, settings.strikeDistance))
+            if (attackTimer >= settings.ChargeTime && Helpers.InRange(Parent.attackTarget.position, Parent.transform.position, settings.strikeDistance))
             {
                 attackAllowed = false;
                 attackTimer = 0f;
@@ -80,7 +80,7 @@ public class RabiteAngryState: AbstractNPCState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.angryWalkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.RunSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
     }
 }

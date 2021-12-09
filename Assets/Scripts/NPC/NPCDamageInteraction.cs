@@ -18,7 +18,7 @@ public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
     
     private void OnInteraction(int amount, PlayerToolActionType type)
     {
-        if (type == PlayerToolActionType.Slash && !npcController.settings.invincible)
+        if (type == PlayerToolActionType.Slash && !npcController.settings.Invincible)
         {
             Damage(amount);
         }

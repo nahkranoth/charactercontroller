@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerStatus
 {
-    public EntityModifiers modifiers;
+    public EntityBodyState bodyState;
     
     public int money;
     public bool alive;

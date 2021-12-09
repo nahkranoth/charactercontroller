@@ -85,7 +85,7 @@ public class DonkeyFollowState: AbstractNPCState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.roamWalkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.WalkSpeed;
         
         if (Mathf.Abs(walkDirections.x) > Mathf.Abs(walkDirections.y))
         {

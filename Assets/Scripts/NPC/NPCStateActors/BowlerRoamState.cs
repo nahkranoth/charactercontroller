@@ -59,7 +59,7 @@ public class BowlerRoamState: AbstractNPCState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.roamWalkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.WalkSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
     }
     

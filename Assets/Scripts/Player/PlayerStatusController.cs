@@ -36,26 +36,26 @@ public class PlayerStatusController:MonoBehaviour
 
     public int CurrentHealth
     {
-        get{return status.modifiers.health;}
-        set{status.modifiers.health=value;}
+        get{return status.bodyState.health;}
+        set{status.bodyState.health=value;}
     }
     
     public float Hunger
     {
-        get{return status.modifiers.hunger;}
-        set{status.modifiers.hunger=value;}
+        get{return status.bodyState.hunger;}
+        set{status.bodyState.hunger=value;}
     }
     
     public float Thirst
     {
-        get{return status.modifiers.thirst;}
-        set{status.modifiers.thirst=value;}
+        get{return status.bodyState.thirst;}
+        set{status.bodyState.thirst=value;}
     }
     
     public float Sleep
     {
-        get{return status.modifiers.sleep;}
-        set{status.modifiers.sleep=value;}
+        get{return status.bodyState.sleep;}
+        set{status.bodyState.sleep=value;}
     }
     
     public float Armor
@@ -73,8 +73,8 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableModifier.walkSpeed);
-            return sum + status.modifiers.walkSpeed;
+            var sum = result.Sum(x => x.wearableBodyState.walkSpeed);
+            return sum + status.bodyState.walkSpeed;
         }
     }
     
@@ -83,8 +83,8 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableModifier.maxHealth);
-            return sum + status.modifiers.maxHealth;
+            var sum = result.Sum(x => x.wearableBodyState.maxHealth);
+            return sum + status.bodyState.maxHealth;
         }
     }
 
@@ -93,8 +93,8 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableModifier.runSpeed);
-            return sum + status.modifiers.runSpeed;
+            var sum = result.Sum(x => x.wearableBodyState.runSpeed);
+            return sum + status.bodyState.runSpeed;
         }
     }
 
@@ -103,8 +103,8 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableModifier.chargeTime);
-            return Mathf.Max(0.1f, status.modifiers.chargeTime + sum);
+            var sum = result.Sum(x => x.wearableBodyState.chargeTime);
+            return Mathf.Max(0.1f, status.bodyState.chargeTime + sum);
         }
     }
 
@@ -113,8 +113,8 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableModifier.dodgeRollForce);
-            return status.modifiers.dodgeRollForce + sum;
+            var sum = result.Sum(x => x.wearableBodyState.dodgeRollForce);
+            return status.bodyState.dodgeRollForce + sum;
         }
     }
 
@@ -123,8 +123,8 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableModifier.maxCarryWeight);
-            return status.modifiers.maxCarryWeight + sum;
+            var sum = result.Sum(x => x.wearableBodyState.maxCarryWeight);
+            return status.bodyState.maxCarryWeight + sum;
         }
     }
     

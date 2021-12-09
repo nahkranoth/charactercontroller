@@ -12,16 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231455bfc82dd9f4987e2915c884c201, type: 3}
   m_Name: DonkeySettings
   m_EditorClassIdentifier: 
-  health: 1
-  damage: 5
-  roamWalkSpeed: 1.3
-  angryWalkSpeed: 0.4
+  bodyState:
+    health: 32
+    maxHealth: 32
+    walkSpeed: 0.2
+    runSpeed: 0.6
+    chargeTime: 0
+    dodgeRollForce: 0
+    maxCarryWeight: 400
+    hunger: 1
+    thirst: 1
+    sleep: 1
+    invincible: 0
+  attackDamage: 5
   attackSpeed: 1.4
   strikeDistance: 0.3
-  strikeDelayTime: 4
   roamChance: {x: 1, y: 20}
   detectDistance: 1
   loseDistance: 1.4
   maxRoam: 20
-  invincible: 0
   distanceCulling: 0

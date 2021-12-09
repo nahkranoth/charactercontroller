@@ -7,12 +7,12 @@ public class RabiteSettings : INPCSettings
     public float knockbackAmount = .2f;
     public override int GetHealth()
     {
-        return health;
+        return bodyState.health;
     }
 
     public override int GetDamage()
     {
-        return damage;
+        return attackDamage;
     }
 
     public override Type GetStateNetworkType()

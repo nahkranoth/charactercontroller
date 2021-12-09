@@ -45,7 +45,7 @@ public class BowlerAngryState: AbstractNPCState
         if (attackingAllowed)
         {
             attackTimer += 1f * Time.deltaTime;
-            if (attackTimer >= settings.strikeDelayTime && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
+            if (attackTimer >= settings.ChargeTime && Helpers.InRange(player.transform.position, Parent.transform.position, settings.strikeDistance))
             {
                 attackingAllowed = false;
                 attackTimer = 0f;
@@ -82,7 +82,7 @@ public class BowlerAngryState: AbstractNPCState
     private void SetVelocity()
     {
         var walkDirections = Parent.npcPathController.FindDeltaVecOfCurrentNode(Parent.transform.position);
-        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.angryWalkSpeed;
+        Parent.rigidBody.velocity = Vector3.Normalize(walkDirections) * settings.RunSpeed;
         Parent.animatorController.SetWalk((int)Mathf.Sign(-walkDirections.x), (int)Mathf.Sign(-walkDirections.y));
     }
     
@@ -97,7 +97,7 @@ public class BowlerAngryState: AbstractNPCState
     {
         yield return new WaitForSeconds(.2f);
         Parent.attacking = true;
-        currentWalkSpeed = settings.roamWalkSpeed;
+        currentWalkSpeed = settings.WalkSpeed;
         yield return new WaitForSeconds(1f);
         Parent.attacking = false;
         attackingAllowed = false;
