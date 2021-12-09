@@ -21,7 +21,7 @@ MonoBehaviour:
       chargeTime: 2
       dodgeRollForce: 20
       maxCarryWeight: 100
-      hunger: 1
+      hunger: 0.2
       thirst: 1
       sleep: 1
       invincible: 0

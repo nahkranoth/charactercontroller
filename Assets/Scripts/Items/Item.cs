@@ -13,7 +13,7 @@ public class Item
     public bool equipable;
     public bool wearable;
     public float armor;
-    public EntityBodyState wearableBodyState;
+    public EntityBodyState bodySettings;
 
     public int price;
     

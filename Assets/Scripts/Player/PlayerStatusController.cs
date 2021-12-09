@@ -73,7 +73,7 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableBodyState.walkSpeed);
+            var sum = result.Sum(x => x.bodySettings.walkSpeed);
             return sum + status.bodyState.walkSpeed;
         }
     }
@@ -83,7 +83,7 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableBodyState.maxHealth);
+            var sum = result.Sum(x => x.bodySettings.maxHealth);
             return sum + status.bodyState.maxHealth;
         }
     }
@@ -93,7 +93,7 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableBodyState.runSpeed);
+            var sum = result.Sum(x => x.bodySettings.runSpeed);
             return sum + status.bodyState.runSpeed;
         }
     }
@@ -103,7 +103,7 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableBodyState.chargeTime);
+            var sum = result.Sum(x => x.bodySettings.chargeTime);
             return Mathf.Max(0.1f, status.bodyState.chargeTime + sum);
         }
     }
@@ -113,7 +113,7 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableBodyState.dodgeRollForce);
+            var sum = result.Sum(x => x.bodySettings.dodgeRollForce);
             return status.bodyState.dodgeRollForce + sum;
         }
     }
@@ -123,7 +123,7 @@ public class PlayerStatusController:MonoBehaviour
         get
         {
             var result = status.wearing.storage;
-            var sum = result.Sum(x => x.wearableBodyState.maxCarryWeight);
+            var sum = result.Sum(x => x.bodySettings.maxCarryWeight);
             return status.bodyState.maxCarryWeight + sum;
         }
     }

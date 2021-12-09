@@ -21,13 +21,18 @@ MonoBehaviour:
     equipable: 0
     wearable: 1
     armor: 0
-    wearableModifier:
-      maxHealth: 0
+    bodySettings:
+      health: 0
+      maxHealth: 20
       walkSpeed: 0
       runSpeed: 0
-      chargeTime: -1
+      chargeTime: 0
       dodgeRollForce: 0
       maxCarryWeight: 0
+      hunger: 0
+      thirst: 0
+      sleep: 0
+      invincible: 0
     price: 200
     canChopWood: 0
     damage: 0
