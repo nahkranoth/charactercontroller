@@ -42,20 +42,20 @@ public class PlayerStateController:MonoBehaviour
     
     public float Hunger
     {
-        get{return status.bodyState.hunger;}
-        set{status.bodyState.hunger=value;}
+        get{return status.activeBodyState.hunger;}
+        set{status.activeBodyState.hunger=value;}
     }
     
     public float Thirst
     {
-        get{return status.bodyState.thirst;}
-        set{status.bodyState.thirst=value;}
+        get{return status.activeBodyState.thirst;}
+        set{status.activeBodyState.thirst=value;}
     }
     
     public float Sleep
     {
-        get{return status.bodyState.sleep;}
-        set{status.bodyState.sleep=value;}
+        get{return status.activeBodyState.sleep;}
+        set{status.activeBodyState.sleep=value;}
     }
     
     public float Armor

@@ -12,8 +12,6 @@ public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
         npcController.handler.OnInteractionFinished += InteractionFinished;
         npcController.handler.OnInteraction -= OnInteraction;
         npcController.handler.OnInteraction += OnInteraction;
-        npcController.OnDestroyMe -= Destroy;
-        npcController.OnDestroyMe += Destroy;
     }
     
     private void OnInteraction(int amount, PlayerToolActionType type)
@@ -52,12 +50,9 @@ public class NPCDamageInteraction:MonoBehaviour, IDamageTarget
         Destroy(npcController.handler);
     }
 
-    public void Destroy()
+    public void OnDestroy()
     {
-        npcController.handler.OnInteractionFinished -= InteractionFinished;
-        npcController.OnDestroyMe -= Destroy;
         if(npcController.dropPool?.collection.Count > 0) npcController.metaEntity.entityPlacer.GenerateCollectable(npcController.dropPool.GetRandom(), transform.localPosition);
-        Destroy(gameObject);
     }
 
 }

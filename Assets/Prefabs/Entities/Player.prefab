@@ -103,7 +103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1655262374592594938}
   - component: {fileID: 722555852}
-  - component: {fileID: 7482345195232766880}
   - component: {fileID: 6946515414908163401}
   - component: {fileID: 2877498420544819789}
   - component: {fileID: 3490643704792580732}
@@ -148,7 +147,7 @@ MonoBehaviour:
   input: {fileID: 0}
   rigid: {fileID: 3490643704792580732}
   animator: {fileID: 3995198645062540489}
-  toolController: {fileID: 7482345195232766880}
+  toolController: {fileID: 7046328995238998715}
   equipController: {fileID: 2106564544172682518}
   spriteHolder: {fileID: 7224929123394807414}
   weaponSpriteHolder: {fileID: 553563042785767798}
@@ -156,25 +155,6 @@ MonoBehaviour:
   itemDescriptions: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
   stateController: {fileID: 2877498420544819789}
   playerBodyStateController: {fileID: 6946515414908163401}
---- !u!114 &7482345195232766880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655262374592594940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8180488b0bf74476b2ff8e19e0d9a166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 0}
-  weaponBox: {fileID: 2884925537351346267}
-  animator: {fileID: 3995198645062540489}
-  equip: {fileID: 2106564544172682518}
-  player: {fileID: 722555852}
-  fullAttackReady: 1
-  charge: 0
 --- !u!114 &6946515414908163401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,9 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c02ca61c164b54a3e339891a32c5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirstTick: 40
-  hungerTick: 80
-  sleepTick: 140
   bodyStateModifier: {fileID: 2152303575000466038}
 --- !u!114 &2877498420544819789
 MonoBehaviour:
@@ -212,6 +189,7 @@ MonoBehaviour:
       chargeTime: 0
       dodgeRollForce: 0
       maxCarryWeight: 0
+    activeBodyState:
       hunger: 0
       thirst: 0
       sleep: 0
@@ -300,7 +278,7 @@ GameObject:
   - component: {fileID: 2004432606}
   - component: {fileID: 2884925537351346267}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: Tool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -518,8 +496,9 @@ GameObject:
   m_Component:
   - component: {fileID: 553563042785767798}
   - component: {fileID: 2106564544172682518}
+  - component: {fileID: 7046328995238998715}
   m_Layer: 0
-  m_Name: WeaponContainer
+  m_Name: ToolContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,10 +550,6 @@ MonoBehaviour:
       chargeTime: 0
       dodgeRollForce: 0
       maxCarryWeight: 0
-      hunger: 0
-      thirst: 0
-      sleep: 0
-      invincible: 0
     price: 0
     canChopWood: 0
     damage: 0
@@ -585,6 +560,24 @@ MonoBehaviour:
     spawnable: {fileID: 0}
     amount: 1
   sword: {fileID: 1098179606456428539, guid: a1759f6c1b364334d8c40f0837088a1d, type: 3}
+--- !u!114 &7046328995238998715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925690600163187873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8180488b0bf74476b2ff8e19e0d9a166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponBox: {fileID: 2884925537351346267}
+  animator: {fileID: 3995198645062540489}
+  equip: {fileID: 2106564544172682518}
+  player: {fileID: 722555852}
+  fullAttackReady: 1
+  charge: 0
 --- !u!1 &5891043133381511318
 GameObject:
   m_ObjectHideFlags: 0

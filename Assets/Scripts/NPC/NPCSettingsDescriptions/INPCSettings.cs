@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class INPCSettings:ScriptableObject
 {
     public SentientBodyState bodyState;
+    public ActiveSentientBodyState activeBodyState;
     
     public int attackDamage = 5;
     public float attackSpeed = 1.4f;
@@ -24,7 +25,6 @@ public abstract class INPCSettings:ScriptableObject
     public float WalkSpeed => bodyState.walkSpeed;
     public float RunSpeed => bodyState.runSpeed;
     public float ChargeTime => bodyState.chargeTime;
-    public bool Invincible => bodyState.invincible;
-
+    public bool Invincible => activeBodyState.invincible;
 
 }

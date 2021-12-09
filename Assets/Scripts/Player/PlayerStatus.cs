@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatus
 {
     public SentientBodyState bodyState;
+    public ActiveSentientBodyState activeBodyState;
     
     public int money;
     public bool alive;

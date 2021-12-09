@@ -38,8 +38,6 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
 
     public bool triggerOccupied;
 
-    public Action OnDestroyMe;
-    
     void Start()
     {
         myNpcHealth.Set(settings.GetHealth());
@@ -128,7 +126,7 @@ public class NPCController : MonoBehaviour, ITargetableByEnemy
     
     public void DestroyMe()
     {
-        OnDestroyMe?.Invoke();
+        Destroy(gameObject);
     }
 
     public Transform GetTransform()

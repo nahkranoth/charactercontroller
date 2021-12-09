@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 public class PlayerToolController: MonoBehaviour
 {
-    public InputController input;
     public TriggerBox weaponBox;
     public PlayerAnimatorController animator;
     public PlayerEquipController equip;
@@ -12,6 +11,7 @@ public class PlayerToolController: MonoBehaviour
     public Action<int> UpdateReadyAttack;
     public Action<Collider2D, Item, PlayerToolActionType> OnToolHitSomething;
     
+    private InputController input;
     private Coroutine toolUseTiming;
     private Coroutine attackReadyTiming;
     [HideInInspector] public bool fullAttackReady = true;
@@ -29,6 +29,7 @@ public class PlayerToolController: MonoBehaviour
 
     private void Start()
     {
+        input = WorldGraph.Retrieve(typeof(InputController)) as InputController;
         charge = 100;
         input.SlashTool -= OnUseToolSlash;
         input.SlashTool += OnUseToolSlash;

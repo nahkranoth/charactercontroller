@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class SentientBodyState
@@ -10,8 +11,4 @@ public class SentientBodyState
     public float chargeTime;
     public float dodgeRollForce;
     public float maxCarryWeight;
-    public float hunger;
-    public float thirst;
-    public float sleep;
-    public bool invincible = false;
 }
