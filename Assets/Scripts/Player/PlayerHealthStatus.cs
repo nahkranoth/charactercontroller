@@ -38,23 +38,23 @@ public class PlayerHealthStatus:MonoBehaviour
 
     public void AddHunger(float amount)
     {
-        player.statusController.status.hunger += amount;//normalize
-        if (player.statusController.status.hunger > 1f) player.statusController.status.hunger = 1f;
-        SetHunger?.Invoke(player.statusController.status.hunger);
+        player.statusController.Hunger += amount;//normalize
+        if (player.statusController.Hunger > 1f) player.statusController.Hunger = 1f;
+        SetHunger?.Invoke(player.statusController.Hunger);
     }
     
     public void AddThirst(float amount)
     {
-        player.statusController.status.thirst += amount;
-        if (player.statusController.status.thirst > 1f) player.statusController.status.thirst = 1f;
-        SetThirst?.Invoke(player.statusController.status.thirst);
+        player.statusController.Thirst += amount;
+        if (player.statusController.Thirst > 1f) player.statusController.Thirst = 1f;
+        SetThirst?.Invoke(player.statusController.Thirst);
     }
     
     public void AddSleep(float amount)
     {
-        player.statusController.status.sleep += amount;
-        if (player.statusController.status.sleep > 1f) player.statusController.status.sleep = 1f;
-        SetSleep?.Invoke(player.statusController.status.sleep);
+        player.statusController.Sleep += amount;
+        if (player.statusController.Sleep > 1f) player.statusController.Sleep = 1f;
+        SetSleep?.Invoke(player.statusController.Sleep);
     }
 
     private void FixedUpdate()
@@ -62,25 +62,25 @@ public class PlayerHealthStatus:MonoBehaviour
         currentThirstTick += 1f * Time.deltaTime;
         if (currentThirstTick > thirstTick)
         {
-            player.statusController.status.thirst -= 0.1f;
+            player.statusController.Thirst -= 0.1f;
             currentThirstTick = 0f;
-            SetThirst?.Invoke(player.statusController.status.thirst);
+            SetThirst?.Invoke(player.statusController.Thirst);
         }
         
         currentHungerTick += 1f * Time.deltaTime;
         if (currentHungerTick > hungerTick)
         {
-            player.statusController.status.hunger -= 0.1f;
+            player.statusController.Hunger -= 0.1f;
             currentHungerTick = 0f;
-            SetHunger?.Invoke(player.statusController.status.hunger);
+            SetHunger?.Invoke(player.statusController.Hunger);
         }
         
         currenSleepTick += 1f * Time.deltaTime;
         if (currenSleepTick > sleepTick)
         {
-            player.statusController.status.sleep -= 0.1f;
+            player.statusController.Sleep -= 0.1f;
             currenSleepTick = 0f;
-            SetSleep?.Invoke(player.statusController.status.sleep);
+            SetSleep?.Invoke(player.statusController.Sleep);
         }
     }
 }

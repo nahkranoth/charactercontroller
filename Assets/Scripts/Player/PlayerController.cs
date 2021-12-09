@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
       
       PlayerSettings clone = Instantiate(settings);
       statusController.status = clone.status;
-      statusController.SetHealth(statusController.status.health);
+      statusController.SetHealth(statusController.CurrentHealth);
    }
 
    private void Start()

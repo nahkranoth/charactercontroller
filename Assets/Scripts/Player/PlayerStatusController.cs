@@ -29,12 +29,34 @@ public class PlayerStatusController:MonoBehaviour
     public void StatusUpdate()
     {
         OnMoneyChange?.Invoke(status.money);
-        OnChangeHealth?.Invoke(status.health);
+        OnChangeHealth?.Invoke(CurrentHealth);
     }
 
     public int Money => status.money;
+
+    public int CurrentHealth
+    {
+        get{return status.modifiers.health;}
+        set{status.modifiers.health=value;}
+    }
     
-    public int CurrentHealth => status.health;
+    public float Hunger
+    {
+        get{return status.modifiers.hunger;}
+        set{status.modifiers.hunger=value;}
+    }
+    
+    public float Thirst
+    {
+        get{return status.modifiers.thirst;}
+        set{status.modifiers.thirst=value;}
+    }
+    
+    public float Sleep
+    {
+        get{return status.modifiers.sleep;}
+        set{status.modifiers.sleep=value;}
+    }
     
     public float Armor
     {
@@ -114,20 +136,20 @@ public class PlayerStatusController:MonoBehaviour
             // change = Math.Min(change, 0);
         }
         
-        status.health += change;
-        if (status.health <= 0)
+        CurrentHealth += change;
+        if (CurrentHealth <= 0)
         {
             status.alive = false;
         }
-        if (status.health > MaxHealth) status.health = MaxHealth;
-        if (status.alive) OnChangeHealth?.Invoke(status.health);
+        if (CurrentHealth > MaxHealth) CurrentHealth = MaxHealth;
+        if (status.alive) OnChangeHealth?.Invoke(CurrentHealth);
     }
 
     public void SetHealth(int set)
     {
-        status.health = set;
+        CurrentHealth = set;
         status.alive = true;
-        if (status.health <= 0) status.alive = false;
+        if (CurrentHealth <= 0) status.alive = false;
     }
 
     public bool IsDead()
