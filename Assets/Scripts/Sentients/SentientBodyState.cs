@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class EntityBodyState
+public class SentientBodyState
 {
     public int health;
     public int maxHealth;

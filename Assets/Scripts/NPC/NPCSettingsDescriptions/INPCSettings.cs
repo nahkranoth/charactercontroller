@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class INPCSettings:ScriptableObject
 {
-    public EntityBodyState bodyState;
+    public SentientBodyState bodyState;
     
     public int attackDamage = 5;
     public float attackSpeed = 1.4f;

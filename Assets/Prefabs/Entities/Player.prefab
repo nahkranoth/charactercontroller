@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 2877498420544819789}
   - component: {fileID: 3490643704792580732}
   - component: {fileID: 9058590136681751550}
+  - component: {fileID: 2152303575000466038}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -152,9 +153,9 @@ MonoBehaviour:
   spriteHolder: {fileID: 7224929123394807414}
   weaponSpriteHolder: {fileID: 553563042785767798}
   settings: {fileID: 11400000, guid: 5dcbb97dac4cdfc4ea93d93fd5e70059, type: 2}
-  playerHealthStatus: {fileID: 6946515414908163401}
   itemDescriptions: {fileID: 11400000, guid: efd92ef449ec87d49b5d4d5aca666d06, type: 2}
-  statusController: {fileID: 2877498420544819789}
+  stateController: {fileID: 2877498420544819789}
+  playerBodyStateController: {fileID: 6946515414908163401}
 --- !u!114 &7482345195232766880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +190,7 @@ MonoBehaviour:
   thirstTick: 40
   hungerTick: 80
   sleepTick: 140
+  bodyStateModifier: {fileID: 2152303575000466038}
 --- !u!114 &2877498420544819789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,17 +204,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status:
-    health: 50
-    modifiers:
+    bodyState:
+      health: 0
       maxHealth: 0
       walkSpeed: 0
       runSpeed: 0
       chargeTime: 0
       dodgeRollForce: 0
       maxCarryWeight: 0
-    hunger: 1
-    thirst: 1
-    sleep: 1
+      hunger: 0
+      thirst: 0
+      sleep: 0
+      invincible: 0
     money: 0
     alive: 0
     inventory:
@@ -269,6 +272,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18402189, y: 0.31033564}
   m_EdgeRadius: 0
+--- !u!114 &2152303575000466038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655262374592594940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2395f38a78674aa6a50513c8f1f4ed22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirstTick: 10
+  hungerTick: 20
+  sleepTick: 60
 --- !u!1 &4097235929450552897
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,13 +563,18 @@ MonoBehaviour:
     equipable: 0
     wearable: 0
     armor: 0
-    wearableModifier:
+    bodySettings:
+      health: 0
       maxHealth: 0
       walkSpeed: 0
       runSpeed: 0
       chargeTime: 0
       dodgeRollForce: 0
       maxCarryWeight: 0
+      hunger: 0
+      thirst: 0
+      sleep: 0
+      invincible: 0
     price: 0
     canChopWood: 0
     damage: 0

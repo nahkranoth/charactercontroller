@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class PlayerStatusController:MonoBehaviour
+public class PlayerStateController:MonoBehaviour
 {
     public PlayerStatus status;
     
@@ -12,7 +12,7 @@ public class PlayerStatusController:MonoBehaviour
 
     private void Awake()
     {
-        WorldGraph.Subscribe(this, typeof(PlayerStatusController));
+        WorldGraph.Subscribe(this, typeof(PlayerStateController));
     }
 
     public void ChangeMoney(int amount)

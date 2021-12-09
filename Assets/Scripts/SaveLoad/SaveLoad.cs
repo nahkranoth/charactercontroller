@@ -16,8 +16,8 @@ public class SaveLoad:MonoBehaviour
 
     public void Save()
     { 
-        player.statusController.status.position = player.transform.localPosition;
-        string playerSaveData = JsonUtility.ToJson(player.statusController.status);
+        player.stateController.status.position = player.transform.localPosition;
+        string playerSaveData = JsonUtility.ToJson(player.stateController.status);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/saveData.json", playerSaveData);
     }
 

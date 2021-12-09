@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
    public Transform spriteHolder;
    public Transform weaponSpriteHolder;
    public PlayerSettings settings;
-   public PlayerHealthStatus playerHealthStatus;
    
    private Vector3 myScale = new Vector3(1, 1, 1);
 
@@ -27,14 +26,15 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
 
    public ItemCollectionDescription itemDescriptions;
 
-   public PlayerStatusController statusController;
+   public PlayerStateController stateController;
+   public PlayerBodyStateController playerBodyStateController;
    
    private Coroutine dodgeRollApplyForce;
    
    public Vector2 Directions => directions;
 
-   public EntityInventory Inventory => statusController.status.inventory;
-   public EntityInventory Wearing => statusController.status.wearing;
+   public EntityInventory Inventory => stateController.status.inventory;
+   public EntityInventory Wearing => stateController.status.wearing;
 
    
    private void Awake()
@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
       WorldGraph.Subscribe(this, typeof(PlayerController));
       
       PlayerSettings clone = Instantiate(settings);
-      statusController.status = clone.status;
-      statusController.SetHealth(statusController.CurrentHealth);
+      stateController.status = clone.status;
+      stateController.SetHealth(stateController.CurrentHealth);
    }
 
    private void Start()
@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
       toolController.OnToolHitSomething += OnToolHitSomething;
       itemBehaviourController.Equip -= EquipItem;
       itemBehaviourController.Equip += EquipItem;
-      itemBehaviourController.ChangeHealth -= statusController.ModifyHealth;
-      itemBehaviourController.ChangeHealth += statusController.ModifyHealth;
+      itemBehaviourController.ChangeHealth -= stateController.ModifyHealth;
+      itemBehaviourController.ChangeHealth += stateController.ModifyHealth;
       
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.Sword));
       Inventory.AddByDescription(itemDescriptions.collection.FindByBehaviours(ItemBehaviourStates.Behaviours.SimpleFood));
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
       Wearing.AddByDescription(itemDescriptions.collection.FindByName("Backpack"));
       Wearing.AddByDescription(itemDescriptions.collection.FindByName("Amulet"));
       
-      statusController.StatusUpdate();
+      stateController.StatusUpdate();
       equipController.Equip(Inventory.FindByBehaviour(ItemBehaviourStates.Behaviours.Sword));
    }
 
@@ -102,8 +102,8 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
          return;
       }
 
-      speed = statusController.WalkSpeed;
-      if (canRun()) speed = statusController.RunSpeed;
+      speed = stateController.WalkSpeed;
+      if (canRun()) speed = stateController.RunSpeed;
       
       rigid.AddForce(directions * speed);
       myScale.x = directions.x == 0 ? 1 : Mathf.Sign(directions.x);
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
       while (cntr < 20)
       {
          yield return new WaitForFixedUpdate();
-         rigid.AddForce(Directions * statusController.DodgeRollForce, ForceMode2D.Force);
+         rigid.AddForce(Directions * stateController.DodgeRollForce, ForceMode2D.Force);
          cntr++;
       }
       invincible = false;
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
    {
       if (invincible) return;
       audioController.PlaySound(AudioController.AudioClipName.PlayerHurt);
-      statusController.ModifyHealth(-damage);
+      stateController.ModifyHealth(-damage);
       animator.SetDamage();
       speed = 0;
       invincible = true;
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour, ITargetableByEnemy, IDamageTarget
    {
       yield return new WaitForSeconds(1f);
       invincible = false;
-      speed = statusController.WalkSpeed;
+      speed = stateController.WalkSpeed;
    }
 
    public Transform GetTransform()

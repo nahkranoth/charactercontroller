@@ -26,7 +26,7 @@ public class InteractionCollectable : MonoBehaviour
    {
       var chosen = RaritySelector.GetRandom(collectableItems.collection.descriptions.ToList<IRandomProbability>()) as ItemDescription;
 
-      if (!player.statusController.HasCarrySpace(chosen.item.weight))
+      if (!player.stateController.HasCarrySpace(chosen.item.weight))
       {
          message.QueMessage("Not enough space to carry");
          return;

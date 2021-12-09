@@ -9,14 +9,14 @@ public class HealthBarController : MonoBehaviour
     private void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        SetHealth(player.statusController.CurrentHealth, player.statusController.MaxHealth);
-        player.statusController.OnChangeHealth -= SetHealth;
-        player.statusController.OnChangeHealth += SetHealth;
+        SetHealth(player.stateController.CurrentHealth, player.stateController.MaxHealth);
+        player.stateController.OnChangeHealth -= SetHealth;
+        player.stateController.OnChangeHealth += SetHealth;
     }
 
     private void SetHealth(int amount)
     {
-        SetHealth(amount, player.statusController.MaxHealth);
+        SetHealth(amount, player.stateController.MaxHealth);
     }
     
     public void SetHealth(int currentHealth, int maxHealth)

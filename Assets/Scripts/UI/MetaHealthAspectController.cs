@@ -10,21 +10,21 @@ public class MetaHealthAspectController:MonoBehaviour
     public TextMeshProUGUI moneyText;
     
     private PlayerController player;
-    private PlayerHealthStatus playerHealthStatus;
+    private PlayerBodyStateController playerBodyStateController;
     private EntityInventory playerInventory;
     
     private void Start()
     {
         player = WorldGraph.Retrieve(typeof(PlayerController)) as PlayerController;
-        player.playerHealthStatus.SetThirst -= OnSetThirst;
-        player.playerHealthStatus.SetThirst += OnSetThirst;
-        player.playerHealthStatus.SetSleep -= OnSetSleep;
-        player.playerHealthStatus.SetSleep += OnSetSleep;
-        player.playerHealthStatus.SetHunger -= OnSetHunger;
-        player.playerHealthStatus.SetHunger += OnSetHunger;
+        player.playerBodyStateController.SetThirst -= OnSetThirst;
+        player.playerBodyStateController.SetThirst += OnSetThirst;
+        player.playerBodyStateController.SetSleep -= OnSetSleep;
+        player.playerBodyStateController.SetSleep += OnSetSleep;
+        player.playerBodyStateController.SetHunger -= OnSetHunger;
+        player.playerBodyStateController.SetHunger += OnSetHunger;
 
-        player.statusController.OnMoneyChange -= SetMoney;
-        player.statusController.OnMoneyChange += SetMoney;
+        player.stateController.OnMoneyChange -= SetMoney;
+        player.stateController.OnMoneyChange += SetMoney;
     }
 
     private void SetMoney(int amount)

@@ -2,7 +2,8 @@
     "name": "Items",
     "rootNamespace": "",
     "references": [
-        "GUID:ec6d75381ad11a447936c5a252c62d43"
+        "GUID:ec6d75381ad11a447936c5a252c62d43",
+        "GUID:2ec9c89eb028a0d4098ed10d82f9a311"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

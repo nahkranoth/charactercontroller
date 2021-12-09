@@ -37,7 +37,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
     private void LoadClicked()
     {
         var playerStatus = saveLoad.Load();
-        player.statusController.OverrideStatus(playerStatus); 
+        player.stateController.OverrideStatus(playerStatus); 
         activeInventory = player.Inventory;
         RerenderInventory();
     }
@@ -79,7 +79,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
 
     private void SetStorageCap()
     {
-        storageCapText.text = $"{activeInventory.TotalItemWeight()}/{player.statusController.MaxCarryWeight}";
+        storageCapText.text = $"{activeInventory.TotalItemWeight()}/{player.stateController.MaxCarryWeight}";
     }
 
     private void OnSecondarySelectItem(Item _item)
@@ -98,7 +98,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
                         player.Wearing.RemoveByItem(_item);
                         RerenderInventory();
                         infoPanel.ResetInfo();
-                        player.statusController.StatusUpdate();
+                        player.stateController.StatusUpdate();
                     }
                 }
             });
@@ -129,7 +129,7 @@ public class DeepstoragePlayerInventory : AbstractDeepStorageScreen
                     player.Inventory.RemoveByItem(_item);
                     player.Wearing.AddByItem(_item);
                     RerenderInventory();
-                    player.statusController.StatusUpdate();
+                    player.stateController.StatusUpdate();
                 }
             };
         }

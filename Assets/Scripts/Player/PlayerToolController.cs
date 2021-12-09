@@ -106,7 +106,7 @@ public class PlayerToolController: MonoBehaviour
 
     IEnumerator AttackDone()
     {
-        var chargeTime = player.statusController.ChargeTime / 100;
+        var chargeTime = player.stateController.ChargeTime / 100;
         for (charge = 0; charge <= 100; charge++)
         {
             yield return new WaitForSeconds(chargeTime);

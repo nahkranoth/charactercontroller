@@ -68,20 +68,20 @@ public class DeepstorageShopInventory : AbstractDeepStorageScreen
     
     private void OnBuy(Item item)
     {
-        if (player.statusController.Money < item.price) return;
-        if (!player.statusController.HasCarrySpace(item.weight))
+        if (player.stateController.Money < item.price) return;
+        if (!player.stateController.HasCarrySpace(item.weight))
         {
             infoPanel.info.text = "No space in inventory";
             return;
         }
-        player.statusController.ChangeMoney(-item.price);
+        player.stateController.ChangeMoney(-item.price);
         player.Inventory.AddByItem(item.DeepCopy());
     }
     
     private void OnSell(Item item)
     {
         if (!player.Inventory.Exists(item)) return;
-        player.statusController.ChangeMoney(item.price);
+        player.stateController.ChangeMoney(item.price);
         player.Inventory.RemoveByItem(item);
         RerenderInventory();
     }
